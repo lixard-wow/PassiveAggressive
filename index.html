@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span> – WoW Guild</title>
+  <title>PassiveAggressive – WoW Guild</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
@@ -14,7 +14,7 @@
     <div class="nav-inner">
       <div class="nav-logo">
         <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
-        <span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span>
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
       </div>
       <ul class="nav-links">
         <li><a href="index.html" class="nav-active">Home</a></li>
@@ -44,7 +44,7 @@
     <div class="hero-content">
       <img src="logo.png" alt="PassiveAggressive Logo" class="hero-logo" />
       <p class="hero-realm">Now Recruiting — US-Area 52</p>
-      <h1 class="hero-title"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></h1>
+      <h1 class="hero-title"><span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span></h1>
       <p class="hero-tagline">Fresh guild. Serious raiders. Day one starts now.</p>
       <div class="hero-buttons">
         <a href="apply.html" class="btn btn-primary">Apply to Join</a>
@@ -73,7 +73,7 @@
     <div class="container footer-inner">
       <div class="footer-logo">
         <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
-        <span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span>
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
       </div>
       <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
       <div class="footer-links">
@@ -85,7 +85,7 @@
         <a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a>
         <a href="apply.html">Apply</a>
       </div>
-      <p class="footer-copy">&copy; 2026 <span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span>. Not affiliated with Blizzard Entertainment.</p>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
     </div>
   </footer>
 
@@ -104,7 +104,7 @@
     const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
     const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
 
-    const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=<span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span>&fields=raid_progression')
+    const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression')
       .then(r => r.json())
       .then(data => {
         let total = 0;
