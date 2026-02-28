@@ -233,7 +233,7 @@
         if (entry.isIntersecting) {
           animateCount(document.getElementById('statMembers'), membersTotal ?? 30);
           animateCount(document.getElementById('statBosses'), bossesTotal ?? 187);
-          animateCount(document.getElementById('statYears'), 5);
+          animateCount(document.getElementById('statYears'), new Date().getFullYear() - 2020);
           statsObserver.disconnect();
         }
       });
