@@ -437,74 +437,48 @@
         <div class="form-row">
           <div class="form-group">
             <label for="classSpec">Class & Spec</label>
-            <select id="classSpec" required>
-              <option value="">Select class & spec</option>
-              <optgroup label="Death Knight">
-                <option>Blood Death Knight</option>
-                <option>Frost Death Knight</option>
-                <option>Unholy Death Knight</option>
-              </optgroup>
-              <optgroup label="Demon Hunter">
-                <option>Havoc Demon Hunter</option>
-                <option>Vengeance Demon Hunter</option>
-              </optgroup>
-              <optgroup label="Druid">
-                <option>Balance Druid</option>
-                <option>Feral Druid</option>
-                <option>Guardian Druid</option>
-                <option>Restoration Druid</option>
-              </optgroup>
-              <optgroup label="Evoker">
-                <option>Devastation Evoker</option>
-                <option>Preservation Evoker</option>
-                <option>Augmentation Evoker</option>
-              </optgroup>
-              <optgroup label="Hunter">
-                <option>Beast Mastery Hunter</option>
-                <option>Marksmanship Hunter</option>
-                <option>Survival Hunter</option>
-              </optgroup>
-              <optgroup label="Mage">
-                <option>Arcane Mage</option>
-                <option>Fire Mage</option>
-                <option>Frost Mage</option>
-              </optgroup>
-              <optgroup label="Monk">
-                <option>Brewmaster Monk</option>
-                <option>Mistweaver Monk</option>
-                <option>Windwalker Monk</option>
-              </optgroup>
-              <optgroup label="Paladin">
-                <option>Holy Paladin</option>
-                <option>Protection Paladin</option>
-                <option>Retribution Paladin</option>
-              </optgroup>
-              <optgroup label="Priest">
-                <option>Discipline Priest</option>
-                <option>Holy Priest</option>
-                <option>Shadow Priest</option>
-              </optgroup>
-              <optgroup label="Rogue">
-                <option>Assassination Rogue</option>
-                <option>Outlaw Rogue</option>
-                <option>Subtlety Rogue</option>
-              </optgroup>
-              <optgroup label="Shaman">
-                <option>Elemental Shaman</option>
-                <option>Enhancement Shaman</option>
-                <option>Restoration Shaman</option>
-              </optgroup>
-              <optgroup label="Warlock">
-                <option>Affliction Warlock</option>
-                <option>Demonology Warlock</option>
-                <option>Destruction Warlock</option>
-              </optgroup>
-              <optgroup label="Warrior">
-                <option>Arms Warrior</option>
-                <option>Fury Warrior</option>
-                <option>Protection Warrior</option>
-              </optgroup>
-            </select>
+            <input type="text" id="classSpec" list="classSpecList" placeholder="Type to search class & spec..." autocomplete="off" required />
+            <datalist id="classSpecList">
+              <option>Blood Death Knight</option>
+              <option>Frost Death Knight</option>
+              <option>Unholy Death Knight</option>
+              <option>Havoc Demon Hunter</option>
+              <option>Vengeance Demon Hunter</option>
+              <option>Balance Druid</option>
+              <option>Feral Druid</option>
+              <option>Guardian Druid</option>
+              <option>Restoration Druid</option>
+              <option>Devastation Evoker</option>
+              <option>Preservation Evoker</option>
+              <option>Augmentation Evoker</option>
+              <option>Beast Mastery Hunter</option>
+              <option>Marksmanship Hunter</option>
+              <option>Survival Hunter</option>
+              <option>Arcane Mage</option>
+              <option>Fire Mage</option>
+              <option>Frost Mage</option>
+              <option>Brewmaster Monk</option>
+              <option>Mistweaver Monk</option>
+              <option>Windwalker Monk</option>
+              <option>Holy Paladin</option>
+              <option>Protection Paladin</option>
+              <option>Retribution Paladin</option>
+              <option>Discipline Priest</option>
+              <option>Holy Priest</option>
+              <option>Shadow Priest</option>
+              <option>Assassination Rogue</option>
+              <option>Outlaw Rogue</option>
+              <option>Subtlety Rogue</option>
+              <option>Elemental Shaman</option>
+              <option>Enhancement Shaman</option>
+              <option>Restoration Shaman</option>
+              <option>Affliction Warlock</option>
+              <option>Demonology Warlock</option>
+              <option>Destruction Warlock</option>
+              <option>Arms Warrior</option>
+              <option>Fury Warrior</option>
+              <option>Protection Warrior</option>
+            </datalist>
           </div>
           <div class="form-group">
             <label for="role">Role</label>
