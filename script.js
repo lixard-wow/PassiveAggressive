@@ -48,6 +48,7 @@ const RANK_LABELS = { 0: 'Guild Master' };
 let liveRoster = [];
 let currentFilter = 'all';
 let currentRankFilter = 'all';
+let currentSort = 'rank';
 const thumbnailCache = {};
 const statsCache = {};
 
@@ -103,6 +104,12 @@ function buildRoster(filter = currentFilter) {
 
   let filtered = filter === 'all' ? liveRoster : liveRoster.filter(m => m.role === filter);
   if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
+
+  filtered = [...filtered].sort((a, b) =>
+    currentSort === 'rank'
+      ? a.rank !== b.rank ? a.rank - b.rank : a.name.localeCompare(b.name)
+      : a.name.localeCompare(b.name)
+  );
 
   const counter = document.getElementById('rosterCounter');
   if (counter) counter.textContent = `${filtered.length} member${filtered.length !== 1 ? 's' : ''}`;
@@ -290,13 +297,22 @@ async function fetchRoster() {
 }
 
 // =====================
-// FILTER BUTTONS
+// FILTER & SORT BUTTONS
 // =====================
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     buildRoster(btn.dataset.filter);
+  });
+});
+
+document.querySelectorAll('.sort-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSort = btn.dataset.sort;
+    buildRoster();
   });
 });
 
