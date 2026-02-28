@@ -98,11 +98,10 @@
         if (start >= target) clearInterval(timer);
       }, 16);
     }
-    let bossesTotal = null;
-    let membersTotal = null;
+    const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
+    const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
 
-    // Raid progression from Raider.io
-    fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression')
+    const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression')
       .then(r => r.json())
       .then(data => {
         let total = 0;
@@ -113,14 +112,11 @@
                    + (raid.mythic_bosses_killed || 0);
           }
         }
-        bossesTotal = total || 187;
+        return total || null;
       })
-      .catch(() => { bossesTotal = 187; });
+      .catch(() => null);
 
-    // Member count from Blizzard API
-    const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
-    const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
-    fetch('https://oauth.battle.net/token', {
+    const blizzPromise = fetch('https://oauth.battle.net/token', {
       method: 'POST',
       headers: {
         'Authorization': `Basic ${btoa(`${BLIZZ_CLIENT_ID}:${BLIZZ_CLIENT_SECRET}`)}`,
@@ -134,20 +130,14 @@
         { headers: { 'Authorization': `Bearer ${access_token}` } }
       ))
       .then(r => r.json())
-      .then(data => { membersTotal = data.members?.length || 30; })
-      .catch(() => { membersTotal = 30; });
+      .then(data => data.members?.length || null)
+      .catch(() => null);
 
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCount(document.getElementById('statMembers'), membersTotal ?? 30);
-          animateCount(document.getElementById('statBosses'), bossesTotal ?? 187);
-          animateCount(document.getElementById('statYears'), new Date().getFullYear() - 2020);
-          statsObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.5 });
-    statsObserver.observe(document.querySelector('.hero-stats'));
+    Promise.all([rioPromise, blizzPromise]).then(([bosses, members]) => {
+      animateCount(document.getElementById('statMembers'), members ?? 30);
+      animateCount(document.getElementById('statBosses'), bosses ?? 187);
+      animateCount(document.getElementById('statYears'), new Date().getFullYear() - 2020);
+    });
   </script>
 </body>
 </html>
