@@ -1,38 +1,114 @@
 // =====================
-// ROSTER DATA
+// CLASS CONFIG
 // =====================
-const roster = [
-  { name: 'Thalindra',  class: 'Protection Warrior', role: 'Tank',    icon: '🛡️', color: '#4a90d9' },
-  { name: 'Kragmor',    class: 'Blood Death Knight', role: 'Tank',    icon: '⚔️', color: '#4a90d9' },
-  { name: 'Elyssara',   class: 'Holy Paladin',       role: 'Healer',  icon: '✨', color: '#52b788' },
-  { name: 'Windwhispr', class: 'Resto Druid',        role: 'Healer',  icon: '🌿', color: '#52b788' },
-  { name: 'Vex',        class: 'Discipline Priest',  role: 'Healer',  icon: '☀️', color: '#52b788' },
-  { name: 'Pyraxis',    class: 'Fire Mage',          role: 'DPS',     icon: '🔥', color: '#e63946' },
-  { name: 'Shadowstep', class: 'Subtlety Rogue',     role: 'DPS',     icon: '🗡️', color: '#e63946' },
-  { name: 'Grimbolt',   class: 'Fury Warrior',       role: 'DPS',     icon: '💀', color: '#e63946' },
-  { name: 'Zephyrix',   class: 'Balance Druid',      role: 'DPS',     icon: '🌙', color: '#e63946' },
-  { name: 'Arcanis',    class: 'Arcane Mage',        role: 'DPS',     icon: '💫', color: '#e63946' },
-  { name: 'Thornveil',  class: 'Beast Master Hunter',role: 'DPS',     icon: '🏹', color: '#e63946' },
-  { name: 'Solarflare', class: 'Enhancement Shaman', role: 'DPS',     icon: '⚡', color: '#e63946' },
-];
+const CLASS_CONFIG = {
+  'Death Knight':  { icon: '💀', color: '#C41E3A' },
+  'Demon Hunter':  { icon: '🦇', color: '#A330C9' },
+  'Druid':         { icon: '🌿', color: '#FF7C0A' },
+  'Evoker':        { icon: '🐉', color: '#33937F' },
+  'Hunter':        { icon: '🏹', color: '#AAD372' },
+  'Mage':          { icon: '❄️', color: '#3FC7EB' },
+  'Monk':          { icon: '🥋', color: '#00FF98' },
+  'Paladin':       { icon: '✨', color: '#F48CBA' },
+  'Priest':        { icon: '☀️', color: '#FFFFFF' },
+  'Rogue':         { icon: '🗡️', color: '#FFF468' },
+  'Shaman':        { icon: '⚡', color: '#0070DD' },
+  'Warlock':       { icon: '🔮', color: '#8788EE' },
+  'Warrior':       { icon: '⚔️', color: '#C69B3A' },
+};
 
-function buildRoster(filter = 'all') {
+const RANK_LABELS = {
+  0: 'Guild Master',
+  1: 'Officer',
+  2: 'Officer Alt',
+};
+
+// =====================
+// ROSTER STATE
+// =====================
+let liveRoster = [];
+let currentFilter = 'all';
+
+function normalizeRole(role) {
+  if (!role) return 'DPS';
+  const r = role.toUpperCase();
+  if (r === 'TANK') return 'Tank';
+  if (r === 'HEALER' || r === 'HEALING') return 'Healer';
+  return 'DPS';
+}
+
+function buildRoster(filter = currentFilter) {
+  currentFilter = filter;
   const grid = document.getElementById('rosterGrid');
-  const filtered = filter === 'all' ? roster : roster.filter(m => m.role === filter);
+
+  if (liveRoster.length === 0) {
+    grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Loading roster...</p>';
+    return;
+  }
+
+  const filtered = filter === 'all'
+    ? liveRoster
+    : liveRoster.filter(m => m.role === filter);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">No members found.</p>';
+    return;
+  }
 
   grid.innerHTML = filtered.map(member => {
+    const cfg = CLASS_CONFIG[member.class] || { icon: '⚔️', color: '#888' };
     const roleClass = 'role-' + member.role.toLowerCase();
+    const rankLabel = RANK_LABELS[member.rank];
     return `
-      <div class="roster-card" data-role="${member.role}">
-        <div class="roster-avatar" style="background:${member.color}22; border: 1px solid ${member.color}44">
-          ${member.icon}
+      <a class="roster-card" href="${member.profileUrl}" target="_blank" rel="noopener" style="text-decoration:none">
+        <div class="roster-avatar" style="background:${cfg.color}22; border: 1px solid ${cfg.color}44">
+          ${cfg.icon}
         </div>
         <div class="roster-name">${member.name}</div>
-        <div class="roster-class">${member.class}</div>
-        <span class="roster-role ${roleClass}">${member.role}</span>
-      </div>
+        <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
+        ${rankLabel ? `<span class="roster-role role-officer">${rankLabel}</span>` : `<span class="roster-role ${roleClass}">${member.role}</span>`}
+      </a>
     `;
   }).join('');
+}
+
+// =====================
+// FETCH LIVE ROSTER
+// =====================
+async function fetchRoster() {
+  const grid = document.getElementById('rosterGrid');
+  grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Loading roster from Raider.io...</p>';
+
+  try {
+    const res = await fetch(
+      'https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=members'
+    );
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+
+    liveRoster = data.members.map(m => ({
+      name:       m.character.name,
+      class:      m.character.class,
+      spec:       m.character.active_spec_name || '',
+      role:       normalizeRole(m.character.active_spec_role),
+      rank:       m.rank,
+      profileUrl: m.character.profile_url,
+    }));
+
+    // sort: GM → Officers → rest alphabetically
+    liveRoster.sort((a, b) => {
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      return a.name.localeCompare(b.name);
+    });
+
+    // update member count stat
+    const statEl = document.getElementById('statMembers');
+    if (statEl) statEl.textContent = liveRoster.length;
+
+    buildRoster(currentFilter);
+  } catch (err) {
+    grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Could not load roster. Check back later.</p>';
+  }
 }
 
 // =====================
@@ -130,4 +206,4 @@ document.querySelectorAll('.about-card, .roster-card, .news-card').forEach(el =>
 // =====================
 // INIT
 // =====================
-buildRoster();
+fetchRoster();
