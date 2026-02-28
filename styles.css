@@ -56,6 +56,16 @@ body {
   font-size: 1.25rem;
   color: var(--gold);
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 .nav-links {
@@ -620,6 +630,25 @@ footer {
   font-size: 1.4rem;
   color: var(--gold);
   margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.footer-logo-img {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.hero-logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 30px rgba(200,169,110,0.4));
 }
 
 .footer-sub {
