@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roster – PassiveAggressive</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
+        PassiveAggressive
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#raids">Raids</a></li>
+        <li><a href="roster.html" class="nav-active">Roster</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#raids">Raids</a></li>
+      <li><a href="roster.html">Roster</a></li>
+      <li><a href="index.html#news">News</a></li>
+      <li><a href="apply.html">Apply Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- ROSTER -->
+  <section id="roster" class="page-section">
+    <div class="container">
+      <h2 class="section-title">Guild Roster</h2>
+      <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
+      <div class="filter-group">
+        <div class="filter-label">Role</div>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Tank">Tanks</button>
+          <button class="filter-btn" data-filter="Healer">Healers</button>
+          <button class="filter-btn" data-filter="DPS">DPS</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Rank</div>
+        <div class="filter-bar" id="rankFilterBar">
+          <button class="rank-btn active" data-rank="all">All</button>
+        </div>
+      </div>
+      <div class="roster-meta">
+        <span class="roster-counter" id="rosterCounter">— members</span>
+        <div class="sort-bar">
+          <span class="sort-label">Sort:</span>
+          <button class="sort-btn active" data-sort="rank">Rank</button>
+          <button class="sort-btn" data-sort="name">A–Z</button>
+        </div>
+      </div>
+      <div class="roster-grid" id="rosterGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        PassiveAggressive
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2020</p>
+      <div class="footer-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#raids">Raids</a>
+        <a href="roster.html">Roster</a>
+        <a href="index.html#news">News</a>
+        <a href="apply.html">Apply</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="roster.js"></script>
+</body>
+</html>
