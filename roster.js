@@ -343,6 +343,14 @@ async function fetchRoster() {
   }
 
   liveRoster.sort((a, b) => a.rank !== b.rank ? a.rank - b.rank : a.name.localeCompare(b.name));
+
+  // Debug: log rank distribution
+  const rankDist = liveRoster.reduce((acc, m) => {
+    acc[m.rank] = (acc[m.rank] || []);
+    acc[m.rank].push(m.name);
+    return acc;
+  }, {});
+  console.log('[Roster] Rank distribution:', rankDist);
   buildRankButtons();
   buildRoster(currentFilter);
 }
