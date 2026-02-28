@@ -51,6 +51,9 @@ function buildRoster(filter = currentFilter) {
     ? liveRoster
     : liveRoster.filter(m => m.role === filter);
 
+  const counter = document.getElementById('rosterCounter');
+  if (counter) counter.textContent = `${filtered.length} member${filtered.length !== 1 ? 's' : ''}`;
+
   if (filtered.length === 0) {
     grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">No members found.</p>';
     return;
