@@ -190,7 +190,9 @@
       }, 16);
     }
     let bossesTotal = null;
+    let membersTotal = null;
 
+    // Raid progression from Raider.io
     fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression')
       .then(r => r.json())
       .then(data => {
@@ -206,10 +208,30 @@
       })
       .catch(() => { bossesTotal = 187; });
 
+    // Member count from Blizzard API
+    const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
+    const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
+    fetch('https://oauth.battle.net/token', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${btoa(`${BLIZZ_CLIENT_ID}:${BLIZZ_CLIENT_SECRET}`)}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: 'grant_type=client_credentials',
+    })
+      .then(r => r.json())
+      .then(({ access_token }) => fetch(
+        'https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US',
+        { headers: { 'Authorization': `Bearer ${access_token}` } }
+      ))
+      .then(r => r.json())
+      .then(data => { membersTotal = data.members?.length || 30; })
+      .catch(() => { membersTotal = 30; });
+
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          animateCount(document.getElementById('statMembers'), 30);
+          animateCount(document.getElementById('statMembers'), membersTotal ?? 30);
           animateCount(document.getElementById('statBosses'), bossesTotal ?? 187);
           animateCount(document.getElementById('statYears'), 5);
           statsObserver.disconnect();
