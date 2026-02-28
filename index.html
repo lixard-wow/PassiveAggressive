@@ -19,18 +19,18 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#raids">Raids</a></li>
-        <li><a href="#roster">Roster</a></li>
+        <li><a href="roster.html">Roster</a></li>
         <li><a href="#news">News</a></li>
-        <li><a href="#apply" class="btn-apply">Apply Now</a></li>
+        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
       </ul>
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
     <ul class="mobile-menu" id="mobileMenu">
       <li><a href="#about">About</a></li>
       <li><a href="#raids">Raids</a></li>
-      <li><a href="#roster">Roster</a></li>
+      <li><a href="roster.html">Roster</a></li>
       <li><a href="#news">News</a></li>
-      <li><a href="#apply">Apply Now</a></li>
+      <li><a href="apply.html">Apply Now</a></li>
     </ul>
   </nav>
 
@@ -39,11 +39,11 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <img src="logo.png" alt="PassiveAggressive Logo" class="hero-logo" />
-      <p class="hero-realm">Azeroth's Finest — US-[YourRealm]</p>
+      <p class="hero-realm">Azeroth's Finest — US-Area 52</p>
       <h1 class="hero-title">PassiveAggressive</h1>
       <p class="hero-tagline">We'll get to the boss eventually. Probably.</p>
       <div class="hero-buttons">
-        <a href="#apply" class="btn btn-primary">Apply to Join</a>
+        <a href="apply.html" class="btn btn-primary">Apply to Join</a>
         <a href="#about" class="btn btn-secondary">Learn More</a>
       </div>
       <div class="hero-stats">
@@ -128,38 +128,6 @@
     </div>
   </section>
 
-  <!-- ROSTER -->
-  <section id="roster">
-    <div class="container">
-      <h2 class="section-title">Guild Roster</h2>
-      <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
-      <div class="filter-group">
-        <div class="filter-label">Role</div>
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Tank">Tanks</button>
-          <button class="filter-btn" data-filter="Healer">Healers</button>
-          <button class="filter-btn" data-filter="DPS">DPS</button>
-        </div>
-      </div>
-      <div class="filter-group">
-        <div class="filter-label">Rank</div>
-        <div class="filter-bar" id="rankFilterBar">
-          <button class="rank-btn active" data-rank="all">All</button>
-        </div>
-      </div>
-      <div class="roster-meta">
-        <span class="roster-counter" id="rosterCounter">— members</span>
-        <div class="sort-bar">
-          <span class="sort-label">Sort:</span>
-          <button class="sort-btn active" data-sort="rank">Rank</button>
-          <button class="sort-btn" data-sort="name">A–Z</button>
-        </div>
-      </div>
-      <div class="roster-grid" id="rosterGrid"></div>
-    </div>
-  </section>
-
   <!-- NEWS -->
   <section id="news">
     <div class="container">
@@ -187,348 +155,6 @@
     </div>
   </section>
 
-  <!-- APPLY -->
-  <section id="apply">
-    <div class="container">
-      <h2 class="section-title">Apply to Join</h2>
-      <p class="section-sub">Think you have what it takes? Fill out the form below and we'll be in touch within 48 hours.</p>
-      <form class="apply-form" id="applyForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="charName">Character Name</label>
-            <input type="text" id="charName" placeholder="e.g. Thalindra" required />
-          </div>
-          <div class="form-group">
-            <label for="realm">Realm</label>
-            <input type="text" id="realm" list="realmList" placeholder="Type to search realm..." autocomplete="off" required />
-            <datalist id="realmList">
-              <option>Aegwynn</option>
-              <option>Aerie Peak</option>
-              <option>Agamaggan</option>
-              <option>Aggramar</option>
-              <option>Akama</option>
-              <option>Alexstrasza</option>
-              <option>Alleria</option>
-              <option>Altar of Storms</option>
-              <option>Alterac Mountains</option>
-              <option>Aman'Thul</option>
-              <option>Andorhal</option>
-              <option>Anetheron</option>
-              <option>Anub'arak</option>
-              <option>Anvilmar</option>
-              <option>Antonidas</option>
-              <option>Arathor</option>
-              <option>Archimonde</option>
-              <option>Area 52</option>
-              <option>Argent Dawn</option>
-              <option>Arthas</option>
-              <option>Arygos</option>
-              <option>Auchindoun</option>
-              <option>Azgalor</option>
-              <option>Azjol-Nerub</option>
-              <option>Azralon</option>
-              <option>Azshara</option>
-              <option>Azuremyst</option>
-              <option>Baelgun</option>
-              <option>Balnazzar</option>
-              <option>Barthilas</option>
-              <option>Black Dragonflight</option>
-              <option>Blackhand</option>
-              <option>Blackrock</option>
-              <option>Blackwater Raiders</option>
-              <option>Blackwing Lair</option>
-              <option>Blade's Edge</option>
-              <option>Bladefist</option>
-              <option>Bleeding Hollow</option>
-              <option>Blood Furnace</option>
-              <option>Bloodhoof</option>
-              <option>Bloodscalp</option>
-              <option>Bonechewer</option>
-              <option>Borean Tundra</option>
-              <option>Boulderfist</option>
-              <option>Bronzebeard</option>
-              <option>Burning Blade</option>
-              <option>Burning Legion</option>
-              <option>Caelestrasz</option>
-              <option>Cairne</option>
-              <option>Cenarius</option>
-              <option>Cenarion Circle</option>
-              <option>Cho'gall</option>
-              <option>Chromaggus</option>
-              <option>Coilfang</option>
-              <option>Crushridge</option>
-              <option>Daggerspine</option>
-              <option>Dalaran</option>
-              <option>Dalvengyr</option>
-              <option>Dark Iron</option>
-              <option>Darkspear</option>
-              <option>Darrowmere</option>
-              <option>Dath'Remar</option>
-              <option>Dawnbringer</option>
-              <option>Deathwing</option>
-              <option>Demon Soul</option>
-              <option>Dentarg</option>
-              <option>Destromath</option>
-              <option>Dethecus</option>
-              <option>Detheroc</option>
-              <option>Doomhammer</option>
-              <option>Draenor</option>
-              <option>Dragonblight</option>
-              <option>Dragonmaw</option>
-              <option>Drak'Tharon</option>
-              <option>Drak'thul</option>
-              <option>Drakkari</option>
-              <option>Draka</option>
-              <option>Drenden</option>
-              <option>Dreadmaul</option>
-              <option>Dunemaul</option>
-              <option>Durotan</option>
-              <option>Duskwood</option>
-              <option>Earthen Ring</option>
-              <option>Echo Isles</option>
-              <option>Eitrigg</option>
-              <option>Eldre'Thalas</option>
-              <option>Elune</option>
-              <option>Emerald Dream</option>
-              <option>Eonar</option>
-              <option>Eredar</option>
-              <option>Executus</option>
-              <option>Exodar</option>
-              <option>Farstriders</option>
-              <option>Feathermoon</option>
-              <option>Fenris</option>
-              <option>Firetree</option>
-              <option>Fizzcrank</option>
-              <option>Frostmane</option>
-              <option>Frostmourne</option>
-              <option>Frostwolf</option>
-              <option>Galakrond</option>
-              <option>Gallywix</option>
-              <option>Garithos</option>
-              <option>Garona</option>
-              <option>Garrosh</option>
-              <option>Ghostlands</option>
-              <option>Gilneas</option>
-              <option>Gnomeregan</option>
-              <option>Goldrinn</option>
-              <option>Gorefiend</option>
-              <option>Gorgonnash</option>
-              <option>Greymane</option>
-              <option>Grizzly Hills</option>
-              <option>Gul'dan</option>
-              <option>Gundrak</option>
-              <option>Gurubashi</option>
-              <option>Hakkar</option>
-              <option>Haomarush</option>
-              <option>Hellscream</option>
-              <option>Hydraxis</option>
-              <option>Hyjal</option>
-              <option>Icecrown</option>
-              <option>Illidan</option>
-              <option>Jaedenar</option>
-              <option>Jubei'Thos</option>
-              <option>Kael'thas</option>
-              <option>Kalecgos</option>
-              <option>Kargath</option>
-              <option>Kel'Thuzad</option>
-              <option>Khaz Modan</option>
-              <option>Khaz'goroth</option>
-              <option>Khadgar</option>
-              <option>Kil'jaeden</option>
-              <option>Kilrogg</option>
-              <option>Kirin Tor</option>
-              <option>Korgath</option>
-              <option>Korialstrasz</option>
-              <option>Kul Tiras</option>
-              <option>Laughing Skull</option>
-              <option>Lethon</option>
-              <option>Lightbringer</option>
-              <option>Lightning's Blade</option>
-              <option>Lightninghoof</option>
-              <option>Llane</option>
-              <option>Lothar</option>
-              <option>Madoran</option>
-              <option>Maelstrom</option>
-              <option>Maiev</option>
-              <option>Magtheridon</option>
-              <option>Mal'Ganis</option>
-              <option>Malfurion</option>
-              <option>Malorne</option>
-              <option>Malygos</option>
-              <option>Mannoroth</option>
-              <option>Medivh</option>
-              <option>Misha</option>
-              <option>Mok'Nathal</option>
-              <option>Moon Guard</option>
-              <option>Moonrunner</option>
-              <option>Mug'thol</option>
-              <option>Muradin</option>
-              <option>Nagrand</option>
-              <option>Nathrezim</option>
-              <option>Nazgrel</option>
-              <option>Nazjatar</option>
-              <option>Nemesis</option>
-              <option>Nesingwary</option>
-              <option>Ner'zhul</option>
-              <option>Nordrassil</option>
-              <option>Norgannon</option>
-              <option>Onyxia</option>
-              <option>Perenolde</option>
-              <option>Proudmoore</option>
-              <option>Quel'Thalas</option>
-              <option>Quel'dorei</option>
-              <option>Ragnaros</option>
-              <option>Ravencrest</option>
-              <option>Ravenholdt</option>
-              <option>Rexxar</option>
-              <option>Rivendare</option>
-              <option>Runetotem</option>
-              <option>Sargeras</option>
-              <option>Saurfang</option>
-              <option>Scarlet Crusade</option>
-              <option>Scilla</option>
-              <option>Sen'jin</option>
-              <option>Sentinels</option>
-              <option>Shadow Council</option>
-              <option>Shadowmoon</option>
-              <option>Shadowsong</option>
-              <option>Shandris</option>
-              <option>Shattered Halls</option>
-              <option>Shattered Hand</option>
-              <option>Shu'halo</option>
-              <option>Silver Hand</option>
-              <option>Silvermoon</option>
-              <option>Sisters of Elune</option>
-              <option>Skullcrusher</option>
-              <option>Skywall</option>
-              <option>Smolderthorn</option>
-              <option>Spirestone</option>
-              <option>Spinebreaker</option>
-              <option>Staghelm</option>
-              <option>Steamwheedle Cartel</option>
-              <option>Stonemaul</option>
-              <option>Stormrage</option>
-              <option>Stormreaver</option>
-              <option>Stormscale</option>
-              <option>Suramar</option>
-              <option>Tanaris</option>
-              <option>Terenas</option>
-              <option>Terokkar</option>
-              <option>Thaurissan</option>
-              <option>The Forgotten Coast</option>
-              <option>The Scryers</option>
-              <option>The Underbog</option>
-              <option>The Venture Co</option>
-              <option>Thorium Brotherhood</option>
-              <option>Thrall</option>
-              <option>Thunderhorn</option>
-              <option>Thunderlord</option>
-              <option>Tichondrius</option>
-              <option>Tol Barad</option>
-              <option>Tortheldrin</option>
-              <option>Trollbane</option>
-              <option>Turalyon</option>
-              <option>Twisting Nether</option>
-              <option>Uldum</option>
-              <option>Uldaman</option>
-              <option>Undermine</option>
-              <option>Ursin</option>
-              <option>Uther</option>
-              <option>Vashj</option>
-              <option>Vek'nilash</option>
-              <option>Velen</option>
-              <option>Warsong</option>
-              <option>Whisperwind</option>
-              <option>Wildhammer</option>
-              <option>Windrunner</option>
-              <option>Winterhoof</option>
-              <option>Wyrmrest Accord</option>
-              <option>Ysera</option>
-              <option>Ysondre</option>
-              <option>Zangarmarsh</option>
-              <option>Zul'jin</option>
-              <option>Zuluhed</option>
-            </datalist>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="classSpec">Class & Spec</label>
-            <input type="text" id="classSpec" list="classSpecList" placeholder="Type to search class & spec..." autocomplete="off" required />
-            <datalist id="classSpecList">
-              <option>Blood Death Knight</option>
-              <option>Frost Death Knight</option>
-              <option>Unholy Death Knight</option>
-              <option>Havoc Demon Hunter</option>
-              <option>Vengeance Demon Hunter</option>
-              <option>Balance Druid</option>
-              <option>Feral Druid</option>
-              <option>Guardian Druid</option>
-              <option>Restoration Druid</option>
-              <option>Devastation Evoker</option>
-              <option>Preservation Evoker</option>
-              <option>Augmentation Evoker</option>
-              <option>Beast Mastery Hunter</option>
-              <option>Marksmanship Hunter</option>
-              <option>Survival Hunter</option>
-              <option>Arcane Mage</option>
-              <option>Fire Mage</option>
-              <option>Frost Mage</option>
-              <option>Brewmaster Monk</option>
-              <option>Mistweaver Monk</option>
-              <option>Windwalker Monk</option>
-              <option>Holy Paladin</option>
-              <option>Protection Paladin</option>
-              <option>Retribution Paladin</option>
-              <option>Discipline Priest</option>
-              <option>Holy Priest</option>
-              <option>Shadow Priest</option>
-              <option>Assassination Rogue</option>
-              <option>Outlaw Rogue</option>
-              <option>Subtlety Rogue</option>
-              <option>Elemental Shaman</option>
-              <option>Enhancement Shaman</option>
-              <option>Restoration Shaman</option>
-              <option>Affliction Warlock</option>
-              <option>Demonology Warlock</option>
-              <option>Destruction Warlock</option>
-              <option>Arms Warrior</option>
-              <option>Fury Warrior</option>
-              <option>Protection Warrior</option>
-            </datalist>
-          </div>
-          <div class="form-group">
-            <label for="role">Role</label>
-            <select id="role" required>
-              <option value="">Select a role</option>
-              <option>Tank</option>
-              <option>Healer</option>
-              <option>DPS</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="experience">Raiding Experience</label>
-          <textarea id="experience" rows="3" placeholder="Tell us about your raiding history, current progression, etc." required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="about">About You</label>
-          <textarea id="about" rows="3" placeholder="Why do you want to join PassiveAggressive? What do you bring to the team?" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="discord">Discord Tag</label>
-          <input type="text" id="discord" placeholder="e.g. username#0000" required />
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Submit Application</button>
-      </form>
-      <div class="apply-success" id="applySuccess">
-        <div class="success-icon">&#10003;</div>
-        <h3>Application Received!</h3>
-        <p>Thanks for applying to PassiveAggressive. An officer will review your application and reach out via Discord within 48 hours. Good luck!</p>
-      </div>
-    </div>
-  </section>
-
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
@@ -540,13 +166,37 @@
       <div class="footer-links">
         <a href="#about">About</a>
         <a href="#raids">Raids</a>
-        <a href="#roster">Roster</a>
-        <a href="#apply">Apply</a>
+        <a href="roster.html">Roster</a>
+        <a href="#news">News</a>
+        <a href="apply.html">Apply</a>
       </div>
       <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Hero stat counter
+    function animateCount(el, target, duration = 1800) {
+      let start = 0;
+      const step = Math.ceil(target / (duration / 16));
+      const timer = setInterval(() => {
+        start = Math.min(start + step, target);
+        el.textContent = start;
+        if (start >= target) clearInterval(timer);
+      }, 16);
+    }
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(document.getElementById('statMembers'), 30);
+          animateCount(document.getElementById('statBosses'), 187);
+          animateCount(document.getElementById('statYears'), 5);
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    statsObserver.observe(document.querySelector('.hero-stats'));
+  </script>
 </body>
 </html>

@@ -279,6 +279,12 @@ body {
    ===================== */
 section { padding: 6rem 1.5rem; }
 
+/* Full page sections (roster, apply) with nav offset */
+.page-section { padding-top: 8rem; min-height: calc(100vh - 200px); }
+
+/* Active nav link */
+.nav-active { color: var(--gold-lt) !important; }
+
 #raids, #news { background: var(--dark2); }
 
 .container { max-width: 1100px; margin: 0 auto; }
