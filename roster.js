@@ -51,6 +51,17 @@ const RANK_LABELS = {
   7: 'Fresh Prospect',
 };
 
+const RANK_DESCRIPTIONS = {
+  0: 'Guild Master',
+  1: 'Officer (Co-GM)',
+  2: 'Officer',
+  3: 'Officer',
+  4: 'Veteran / Raider',
+  5: 'Member',
+  6: 'Social / Casual Member',
+  7: 'Initiate / New Recruit',
+};
+
 // =====================
 // ROSTER STATE
 // =====================
@@ -138,7 +149,8 @@ function buildRoster(filter = currentFilter) {
   grid.innerHTML = filtered.map(member => {
     const cfg = CLASS_CONFIG[member.class] || { icon: '⚔️', color: '#888' };
     const roleClass = 'role-' + member.role.toLowerCase();
-    const rankLabel = RANK_LABELS[member.rank];
+    const rankLabel = RANK_LABELS[member.rank] ?? `Rank ${member.rank}`;
+    const rankDesc  = RANK_DESCRIPTIONS[member.rank] ?? '';
     const thumb = thumbnailCache[member.name];
     const stats = statsCache[member.name];
 
@@ -176,7 +188,7 @@ function buildRoster(filter = currentFilter) {
         <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
         <div class="roster-badges">
           <span class="roster-role ${roleClass}">${member.role}</span>
-          <span class="roster-rank">${rankLabel ?? `Rank ${member.rank}`}</span>
+          <span class="roster-rank" title="${rankDesc}">${rankLabel}</span>
         </div>
         ${statsHtml}
       </a>`;
