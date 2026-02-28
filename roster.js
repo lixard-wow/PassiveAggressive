@@ -49,6 +49,7 @@ let liveRoster = [];
 let currentFilter = 'all';
 let currentRankFilter = 'all';
 let currentSort = 'rank';
+let blizzToken = null;
 const thumbnailCache = {};
 const statsCache = {};
 
@@ -188,27 +189,42 @@ const thumbObserver = new IntersectionObserver((entries) => {
 
     thumbObserver.unobserve(card);
 
-    fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=${realm}&name=${encodeURIComponent(name)}&fields=thumbnail_url,mythic_plus_scores_by_season:current,raid_progression`)
-      .then(r => r.json())
-      .then(data => {
-        if (data.thumbnail_url) {
-          thumbnailCache[name] = data.thumbnail_url;
-          const avatarDiv = card.querySelector('.roster-avatar');
-          if (avatarDiv) avatarDiv.innerHTML = `<img src="${data.thumbnail_url}" alt="${name}" class="roster-avatar-img" />`;
-        }
+    // Blizzard: portrait
+    if (blizzToken && !thumbnailCache[name]) {
+      fetch(
+        `https://us.api.blizzard.com/profile/wow/character/${realm}/${encodeURIComponent(name.toLowerCase())}/character-media?namespace=profile-us&locale=en_US`,
+        { headers: { 'Authorization': `Bearer ${blizzToken}` } }
+      )
+        .then(r => r.json())
+        .then(data => {
+          const avatar = data.assets?.find(a => a.key === 'avatar')?.value;
+          if (avatar) {
+            thumbnailCache[name] = avatar;
+            const avatarDiv = card.querySelector('.roster-avatar');
+            if (avatarDiv) avatarDiv.innerHTML = `<img src="${avatar}" alt="${name}" class="roster-avatar-img" />`;
+          }
+        })
+        .catch(() => {});
+    }
 
-        const season = data.mythic_plus_scores_by_season?.[0];
-        const mpScore = season?.scores?.all ?? null;
-        const mpColor = season?.segments?.all?.color ?? '#888';
-        statsCache[name] = { mpScore, mpColor, progression: data.raid_progression ?? null };
+    // Raider.io: stats only
+    if (!statsCache[name]) {
+      fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=${realm}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season:current,raid_progression`)
+        .then(r => r.json())
+        .then(data => {
+          const season = data.mythic_plus_scores_by_season?.[0];
+          const mpScore = season?.scores?.all ?? null;
+          const mpColor = season?.segments?.all?.color ?? '#888';
+          statsCache[name] = { mpScore, mpColor, progression: data.raid_progression ?? null };
 
-        const raid = raidSummary(statsCache[name].progression);
-        const scoreEl = card.querySelector('.rs-score');
-        const raidEl  = card.querySelector('.rs-raid');
-        if (scoreEl) { scoreEl.textContent = mpScore !== null ? Math.round(mpScore) : '—'; scoreEl.style.color = mpScore ? mpColor : '#555'; }
-        if (raidEl)  { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
-      })
-      .catch(() => {});
+          const raid = raidSummary(statsCache[name].progression);
+          const scoreEl = card.querySelector('.rs-score');
+          const raidEl  = card.querySelector('.rs-raid');
+          if (scoreEl) { scoreEl.textContent = mpScore !== null ? Math.round(mpScore) : '—'; scoreEl.style.color = mpScore ? mpColor : '#555'; }
+          if (raidEl)  { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
+        })
+        .catch(() => {});
+    }
   });
 }, { rootMargin: '100px' });
 
@@ -251,10 +267,10 @@ async function fetchRoster() {
   // Try Blizzard for full roster
   let useBlizzard = false;
   try {
-    const token = await getBlizzardToken();
+    blizzToken = await getBlizzardToken();
     const blizzRes = await fetch(
       'https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US',
-      { headers: { 'Authorization': `Bearer ${token}` } }
+      { headers: { 'Authorization': `Bearer ${blizzToken}` } }
     );
     if (blizzRes.ok) {
       const blizzData = await blizzRes.json();
