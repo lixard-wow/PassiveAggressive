@@ -215,8 +215,42 @@
 
   <script src="script.js"></script>
   <script>
-    document.getElementById('applyForm').addEventListener('submit', (e) => {
+    document.getElementById('applyForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      const charName   = document.getElementById('charName').value;
+      const realm      = document.getElementById('realm').value;
+      const classSpec  = document.getElementById('classSpec').value;
+      const role       = document.getElementById('role').value;
+      const experience = document.getElementById('experience').value;
+      const about      = document.getElementById('about').value;
+      const discord    = document.getElementById('discord').value;
+
+      const payload = {
+        embeds: [{
+          title: `New Application — ${charName} (${realm})`,
+          color: 0xC8A96E,
+          fields: [
+            { name: 'Class & Spec', value: classSpec, inline: true },
+            { name: 'Role',         value: role,      inline: true },
+            { name: 'Discord',      value: discord,   inline: true },
+            { name: 'Raiding Experience', value: experience },
+            { name: 'About',              value: about },
+          ],
+          timestamp: new Date().toISOString(),
+        }]
+      };
+
+      try {
+        await fetch('https://discord.com/api/webhooks/1477170859977212058/ldeo9QGlYBd1VJAKKKbe2fYHP_XJt9_jUrrYvq5pPDi9o7ApCkPYvmV6qOYTfp2p0eQ6', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } catch (err) {
+        console.error('Failed to send application to Discord:', err);
+      }
+
       document.getElementById('applyForm').style.display = 'none';
       document.getElementById('applySuccess').classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
