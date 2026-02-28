@@ -518,6 +518,24 @@ section { padding: 6rem 1.5rem; }
 .role-dps     { background: rgba(230,57,70,0.2); color: #e67e85; border: 1px solid rgba(230,57,70,0.4); }
 .role-officer { background: rgba(200,169,110,0.15); color: var(--gold); border: 1px solid rgba(200,169,110,0.4); }
 
+.roster-badges {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.1rem;
+}
+
+.roster-rank {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  color: #888;
+  border: 1px solid var(--border);
+}
+
 /* =====================
    NEWS
    ===================== */

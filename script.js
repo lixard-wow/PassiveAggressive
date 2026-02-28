@@ -40,11 +40,7 @@ const CLASS_CONFIG = {
   'Warrior':       { icon: '⚔️', color: '#C69B3A' },
 };
 
-const RANK_LABELS = {
-  0: 'Guild Master',
-  1: 'Officer',
-  2: 'Officer Alt',
-};
+const RANK_LABELS = { 0: 'Guild Master' };
 
 // =====================
 // ROSTER STATE
@@ -135,7 +131,10 @@ function buildRoster(filter = currentFilter) {
         </div>
         <div class="roster-name">${member.name}</div>
         <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
-        ${rankLabel ? `<span class="roster-role role-officer">${rankLabel}</span>` : `<span class="roster-role ${roleClass}">${member.role}</span>`}
+        <div class="roster-badges">
+          <span class="roster-role ${roleClass}">${member.role}</span>
+          <span class="roster-rank">${rankLabel ?? `Rank ${member.rank}`}</span>
+        </div>
         ${statsHtml}
       </a>
     `;
