@@ -415,6 +415,13 @@ section { padding: 6rem 1.5rem; }
   border-color: var(--gold);
 }
 
+.roster-counter {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #666;
+  align-self: center;
+}
+
 .roster-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
