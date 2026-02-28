@@ -106,7 +106,7 @@ function buildRoster(filter = currentFilter) {
 
     return `
       <a class="roster-card" href="${member.profileUrl}" target="_blank" rel="noopener"
-         style="text-decoration:none" data-name="${member.name}" data-color="${cfg.color}">
+         style="text-decoration:none" data-name="${member.name}" data-realm="${member.realm}" data-color="${cfg.color}">
         <div class="roster-avatar" style="background:${cfg.color}22; border: 1px solid ${cfg.color}44">
           ${avatarContent}
         </div>
@@ -130,11 +130,12 @@ const thumbObserver = new IntersectionObserver((entries) => {
     if (!entry.isIntersecting) return;
     const card = entry.target;
     const name = card.dataset.name;
+    const realm = (card.dataset.realm || 'Area 52').toLowerCase().replace(/\s+/g, '-').replace(/'/g, '');
     if (!name || (thumbnailCache[name] && statsCache[name])) return;
 
     thumbObserver.unobserve(card);
 
-    fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=area-52&name=${encodeURIComponent(name)}&fields=thumbnail_url,mythic_plus_scores_by_season:current,raid_progression`)
+    fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=${realm}&name=${encodeURIComponent(name)}&fields=thumbnail_url,mythic_plus_scores_by_season:current,raid_progression`)
       .then(r => r.json())
       .then(data => {
         // avatar
@@ -197,6 +198,7 @@ async function fetchRoster() {
       spec:       m.character.active_spec_name || '',
       role:       normalizeRole(m.character.active_spec_role),
       rank:       m.rank,
+      realm:      m.character.realm,
       profileUrl: m.character.profile_url,
     }));
 
