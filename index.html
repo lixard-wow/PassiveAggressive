@@ -73,7 +73,7 @@
         <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
         PassiveAggressive
       </div>
-      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2006</p>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -136,8 +136,8 @@
     Promise.all([rioPromise, blizzPromise]).then(([bosses, members]) => {
       animateCount(document.getElementById('statMembers'), members ?? 30);
       animateCount(document.getElementById('statBosses'), bosses ?? 187);
-      const founded = new Date('2006-02-25');
-      const years = Math.floor((Date.now() - founded) / (365.25 * 24 * 60 * 60 * 1000));
+      const founded = new Date('2026-02-25');
+      const years = Math.max(1, Math.floor((Date.now() - founded) / (365.25 * 24 * 60 * 60 * 1000)));
       animateCount(document.getElementById('statYears'), years);
     });
   </script>
