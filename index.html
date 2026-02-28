@@ -189,11 +189,28 @@
         if (start >= target) clearInterval(timer);
       }, 16);
     }
+    let bossesTotal = null;
+
+    fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression')
+      .then(r => r.json())
+      .then(data => {
+        let total = 0;
+        if (data.raid_progression) {
+          for (const raid of Object.values(data.raid_progression)) {
+            total += (raid.normal_bosses_killed || 0)
+                   + (raid.heroic_bosses_killed || 0)
+                   + (raid.mythic_bosses_killed || 0);
+          }
+        }
+        bossesTotal = total || 187;
+      })
+      .catch(() => { bossesTotal = 187; });
+
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCount(document.getElementById('statMembers'), 30);
-          animateCount(document.getElementById('statBosses'), 187);
+          animateCount(document.getElementById('statBosses'), bossesTotal ?? 187);
           animateCount(document.getElementById('statYears'), 5);
           statsObserver.disconnect();
         }
