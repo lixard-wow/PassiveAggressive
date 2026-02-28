@@ -248,7 +248,7 @@ async function fetchRoster() {
         role:       rio?.role  || 'DPS',
         rank:       m.rank,
         realmSlug,
-        profileUrl: rio?.profileUrl || `https://raider.io/characters/us/${realmSlug}/${name}`,
+        profileUrl: rio?.profileUrl || `https://worldofwarcraft.blizzard.com/en-us/character/us/${realmSlug}/${encodeURIComponent(name)}`,
       };
     });
 
