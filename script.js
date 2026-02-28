@@ -28,6 +28,7 @@ const RANK_LABELS = {
 // =====================
 let liveRoster = [];
 let currentFilter = 'all';
+const thumbnailCache = {};
 
 function normalizeRole(role) {
   if (!role) return 'DPS';
@@ -59,10 +60,16 @@ function buildRoster(filter = currentFilter) {
     const cfg = CLASS_CONFIG[member.class] || { icon: '⚔️', color: '#888' };
     const roleClass = 'role-' + member.role.toLowerCase();
     const rankLabel = RANK_LABELS[member.rank];
+    const thumb = thumbnailCache[member.name];
+    const avatarContent = thumb
+      ? `<img src="${thumb}" alt="${member.name}" class="roster-avatar-img" />`
+      : `<span class="roster-avatar-icon">${cfg.icon}</span>`;
+
     return `
-      <a class="roster-card" href="${member.profileUrl}" target="_blank" rel="noopener" style="text-decoration:none">
+      <a class="roster-card" href="${member.profileUrl}" target="_blank" rel="noopener"
+         style="text-decoration:none" data-name="${member.name}" data-color="${cfg.color}">
         <div class="roster-avatar" style="background:${cfg.color}22; border: 1px solid ${cfg.color}44">
-          ${cfg.icon}
+          ${avatarContent}
         </div>
         <div class="roster-name">${member.name}</div>
         <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
@@ -70,6 +77,43 @@ function buildRoster(filter = currentFilter) {
       </a>
     `;
   }).join('');
+
+  // lazy-load thumbnails for visible cards
+  observeRosterCards();
+}
+
+// =====================
+// LAZY THUMBNAIL LOADING
+// =====================
+const thumbObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const card = entry.target;
+    const name = card.dataset.name;
+    if (!name || thumbnailCache[name]) return;
+
+    thumbObserver.unobserve(card);
+
+    fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=area-52&name=${encodeURIComponent(name)}&fields=thumbnail_url`)
+      .then(r => r.json())
+      .then(data => {
+        if (!data.thumbnail_url) return;
+        thumbnailCache[name] = data.thumbnail_url;
+        const avatarDiv = card.querySelector('.roster-avatar');
+        if (avatarDiv) {
+          avatarDiv.innerHTML = `<img src="${data.thumbnail_url}" alt="${name}" class="roster-avatar-img" />`;
+        }
+      })
+      .catch(() => {});
+  });
+}, { rootMargin: '100px' });
+
+function observeRosterCards() {
+  document.querySelectorAll('.roster-card[data-name]').forEach(card => {
+    if (!thumbnailCache[card.dataset.name]) {
+      thumbObserver.observe(card);
+    }
+  });
 }
 
 // =====================
