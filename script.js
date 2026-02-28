@@ -29,6 +29,19 @@ const RANK_LABELS = {
 let liveRoster = [];
 let currentFilter = 'all';
 const thumbnailCache = {};
+const statsCache = {};
+
+const CURRENT_RAID = 'liberation-of-undermine';
+const CURRENT_RAID_LABEL = 'Liberation of Undermine';
+
+function raidSummary(progression) {
+  if (!progression || !progression[CURRENT_RAID]) return null;
+  const r = progression[CURRENT_RAID];
+  if (r.mythic_bosses_killed > 0)  return { text: `${r.mythic_bosses_killed}/${r.total_bosses} M`, color: '#e8a836' };
+  if (r.heroic_bosses_killed > 0)  return { text: `${r.heroic_bosses_killed}/${r.total_bosses} H`, color: '#a335ee' };
+  if (r.normal_bosses_killed > 0)  return { text: `${r.normal_bosses_killed}/${r.total_bosses} N`, color: '#1eff00' };
+  return { text: `0/${r.total_bosses}`, color: '#888' };
+}
 
 function normalizeRole(role) {
   if (!role) return 'DPS';
@@ -64,9 +77,32 @@ function buildRoster(filter = currentFilter) {
     const roleClass = 'role-' + member.role.toLowerCase();
     const rankLabel = RANK_LABELS[member.rank];
     const thumb = thumbnailCache[member.name];
+    const stats = statsCache[member.name];
+
     const avatarContent = thumb
       ? `<img src="${thumb}" alt="${member.name}" class="roster-avatar-img" />`
       : `<span class="roster-avatar-icon">${cfg.icon}</span>`;
+
+    const mpScore = stats ? stats.mpScore : null;
+    const mpColor = stats ? stats.mpColor : '#888';
+    const raid    = stats ? raidSummary(stats.progression) : null;
+
+    const statsHtml = `
+      <div class="roster-stats">
+        <span class="roster-stat" title="M+ Score">
+          <span class="stat-icon">⚡</span>
+          <span class="rs-score" style="color:${mpScore !== null ? mpColor : '#555'}">
+            ${mpScore !== null ? Math.round(mpScore) : '—'}
+          </span>
+        </span>
+        <span class="roster-stat" title="${CURRENT_RAID_LABEL}">
+          <span class="stat-icon">⚔</span>
+          <span class="rs-raid" style="color:${raid ? raid.color : '#555'}">
+            ${raid ? raid.text : '—'}
+          </span>
+        </span>
+      </div>
+    `;
 
     return `
       <a class="roster-card" href="${member.profileUrl}" target="_blank" rel="noopener"
@@ -77,6 +113,7 @@ function buildRoster(filter = currentFilter) {
         <div class="roster-name">${member.name}</div>
         <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
         ${rankLabel ? `<span class="roster-role role-officer">${rankLabel}</span>` : `<span class="roster-role ${roleClass}">${member.role}</span>`}
+        ${statsHtml}
       </a>
     `;
   }).join('');
@@ -93,18 +130,38 @@ const thumbObserver = new IntersectionObserver((entries) => {
     if (!entry.isIntersecting) return;
     const card = entry.target;
     const name = card.dataset.name;
-    if (!name || thumbnailCache[name]) return;
+    if (!name || (thumbnailCache[name] && statsCache[name])) return;
 
     thumbObserver.unobserve(card);
 
-    fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=area-52&name=${encodeURIComponent(name)}&fields=thumbnail_url`)
+    fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=area-52&name=${encodeURIComponent(name)}&fields=thumbnail_url,mythic_plus_scores_by_season:current,raid_progression`)
       .then(r => r.json())
       .then(data => {
-        if (!data.thumbnail_url) return;
-        thumbnailCache[name] = data.thumbnail_url;
-        const avatarDiv = card.querySelector('.roster-avatar');
-        if (avatarDiv) {
-          avatarDiv.innerHTML = `<img src="${data.thumbnail_url}" alt="${name}" class="roster-avatar-img" />`;
+        // avatar
+        if (data.thumbnail_url) {
+          thumbnailCache[name] = data.thumbnail_url;
+          const avatarDiv = card.querySelector('.roster-avatar');
+          if (avatarDiv) avatarDiv.innerHTML = `<img src="${data.thumbnail_url}" alt="${name}" class="roster-avatar-img" />`;
+        }
+
+        // stats
+        const season = data.mythic_plus_scores_by_season?.[0];
+        const mpScore = season?.scores?.all ?? null;
+        const mpColor = season?.segments?.all?.color ?? '#888';
+        const progression = data.raid_progression ?? null;
+
+        statsCache[name] = { mpScore, mpColor, progression };
+
+        const raid = raidSummary(progression);
+        const scoreEl = card.querySelector('.rs-score');
+        const raidEl  = card.querySelector('.rs-raid');
+        if (scoreEl) {
+          scoreEl.textContent = mpScore !== null ? Math.round(mpScore) : '—';
+          scoreEl.style.color = mpScore ? mpColor : '#555';
+        }
+        if (raidEl) {
+          raidEl.textContent = raid ? raid.text : '—';
+          raidEl.style.color = raid ? raid.color : '#555';
         }
       })
       .catch(() => {});
@@ -113,7 +170,8 @@ const thumbObserver = new IntersectionObserver((entries) => {
 
 function observeRosterCards() {
   document.querySelectorAll('.roster-card[data-name]').forEach(card => {
-    if (!thumbnailCache[card.dataset.name]) {
+    const name = card.dataset.name;
+    if (!thumbnailCache[name] || !statsCache[name]) {
       thumbObserver.observe(card);
     }
   });
