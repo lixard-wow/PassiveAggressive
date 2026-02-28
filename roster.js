@@ -227,55 +227,77 @@ async function fetchRoster() {
   const grid = document.getElementById('rosterGrid');
   grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Loading roster...</p>';
 
-  try {
-    const [token, rioRes] = await Promise.all([
-      getBlizzardToken(),
-      fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=members'),
-    ]);
+  // Always fetch Raider.io (fallback + enrichment)
+  const rioRes = await fetch(
+    'https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=members'
+  ).catch(() => null);
 
+  const rioMap = {};
+  const rioMembers = [];
+  if (rioRes?.ok) {
+    const rioData = await rioRes.json();
+    for (const m of rioData.members) {
+      const key = m.character.name.toLowerCase();
+      rioMap[key] = {
+        spec:       m.character.active_spec_name || '',
+        role:       normalizeRole(m.character.active_spec_role),
+        profileUrl: m.character.profile_url,
+        realmSlug:  m.character.realm.toLowerCase().replace(/\s+/g, '-').replace(/'/g, ''),
+      };
+      rioMembers.push(m);
+    }
+  }
+
+  // Try Blizzard for full roster
+  let useBlizzard = false;
+  try {
+    const token = await getBlizzardToken();
     const blizzRes = await fetch(
       'https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US',
       { headers: { 'Authorization': `Bearer ${token}` } }
     );
-
-    if (!blizzRes.ok) throw new Error('Blizzard API error');
-    const blizzData = await blizzRes.json();
-
-    const rioMap = {};
-    if (rioRes.ok) {
-      const rioData = await rioRes.json();
-      for (const m of rioData.members) {
-        rioMap[m.character.name.toLowerCase()] = {
-          spec:       m.character.active_spec_name || '',
-          role:       normalizeRole(m.character.active_spec_role),
-          profileUrl: m.character.profile_url,
+    if (blizzRes.ok) {
+      const blizzData = await blizzRes.json();
+      liveRoster = blizzData.members.map(m => {
+        const name      = m.character.name;
+        const realmSlug = m.character.realm.slug;
+        const rio       = rioMap[name.toLowerCase()];
+        return {
+          name,
+          class:      BLIZZ_CLASS_MAP[m.character.playable_class.id] || 'Unknown',
+          spec:       rio?.spec  || '',
+          role:       rio?.role  || 'DPS',
+          rank:       m.rank,
+          realmSlug,
+          profileUrl: rio?.profileUrl || `https://worldofwarcraft.blizzard.com/en-us/character/us/${realmSlug}/${encodeURIComponent(name)}`,
         };
-      }
+      });
+      useBlizzard = true;
     }
-
-    liveRoster = blizzData.members.map(m => {
-      const name      = m.character.name;
-      const realmSlug = m.character.realm.slug;
-      const rio       = rioMap[name.toLowerCase()];
-      return {
-        name,
-        class:      BLIZZ_CLASS_MAP[m.character.playable_class.id] || 'Unknown',
-        spec:       rio?.spec  || '',
-        role:       rio?.role  || 'DPS',
-        rank:       m.rank,
-        realmSlug,
-        profileUrl: rio?.profileUrl || `https://worldofwarcraft.blizzard.com/en-us/character/us/${realmSlug}/${encodeURIComponent(name)}`,
-      };
-    });
-
-    liveRoster.sort((a, b) => a.rank !== b.rank ? a.rank - b.rank : a.name.localeCompare(b.name));
-
-    buildRankButtons();
-    buildRoster(currentFilter);
   } catch (err) {
-    document.getElementById('rosterGrid').innerHTML =
-      '<p style="color:#888;text-align:center;grid-column:1/-1">Could not load roster. Check back later.</p>';
+    console.warn('Blizzard API unavailable, falling back to Raider.io:', err);
   }
+
+  // Fallback: use Raider.io members only
+  if (!useBlizzard) {
+    if (rioMembers.length === 0) {
+      grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Could not load roster. Check back later.</p>';
+      return;
+    }
+    liveRoster = rioMembers.map(m => ({
+      name:       m.character.name,
+      class:      m.character.class,
+      spec:       m.character.active_spec_name || '',
+      role:       normalizeRole(m.character.active_spec_role),
+      rank:       m.rank,
+      realmSlug:  m.character.realm.toLowerCase().replace(/\s+/g, '-').replace(/'/g, ''),
+      profileUrl: m.character.profile_url,
+    }));
+  }
+
+  liveRoster.sort((a, b) => a.rank !== b.rank ? a.rank - b.rank : a.name.localeCompare(b.name));
+  buildRankButtons();
+  buildRoster(currentFilter);
 }
 
 // =====================

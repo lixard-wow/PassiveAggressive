@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roster – PassiveAggressive</title>
+  <title>News – PassiveAggressive</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
@@ -20,8 +20,8 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="raids.html">Raids</a></li>
-        <li><a href="roster.html" class="nav-active">Roster</a></li>
-        <li><a href="news.html">News</a></li>
+        <li><a href="roster.html">Roster</a></li>
+        <li><a href="news.html" class="nav-active">News</a></li>
         <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
       </ul>
       <button class="hamburger" id="hamburger">&#9776;</button>
@@ -36,35 +36,30 @@
     </ul>
   </nav>
 
-  <!-- ROSTER -->
-  <section id="roster" class="page-section">
+  <!-- NEWS -->
+  <section id="news" class="page-section">
     <div class="container">
-      <h2 class="section-title">Guild Roster</h2>
-      <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
-      <div class="filter-group">
-        <div class="filter-label">Role</div>
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Tank">Tanks</button>
-          <button class="filter-btn" data-filter="Healer">Healers</button>
-          <button class="filter-btn" data-filter="DPS">DPS</button>
-        </div>
+      <h2 class="section-title">Guild News</h2>
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="news-date">Feb 20, 2026</div>
+          <h3>Heroic Progression Update</h3>
+          <p>Great work this week — we pushed through three new heroic bosses and are looking strong for the rest of the tier. Keep those consumables stocked and stay sharp.</p>
+          <span class="news-tag">Progression</span>
+        </article>
+        <article class="news-card">
+          <div class="news-date">Feb 14, 2026</div>
+          <h3>Recruitment Open for Healers</h3>
+          <p>We're actively recruiting one skilled healer (Resto Druid or Holy Priest preferred). If you know someone who's reliable and can keep people alive, send them our way.</p>
+          <span class="news-tag">Recruitment</span>
+        </article>
+        <article class="news-card">
+          <div class="news-date">Feb 5, 2026</div>
+          <h3>Alt Run Starting Sunday</h3>
+          <p>Starting this Sunday we'll run a relaxed alt/normal run at 7 PM ST. All are welcome — sign up in Discord. This is a no-stress, gear-up opportunity for everyone.</p>
+          <span class="news-tag">Events</span>
+        </article>
       </div>
-      <div class="filter-group">
-        <div class="filter-label">Rank</div>
-        <div class="filter-bar" id="rankFilterBar">
-          <button class="rank-btn active" data-rank="all">All</button>
-        </div>
-      </div>
-      <div class="roster-meta">
-        <span class="roster-counter" id="rosterCounter">— members</span>
-        <div class="sort-bar">
-          <span class="sort-label">Sort:</span>
-          <button class="sort-btn active" data-sort="rank">Rank</button>
-          <button class="sort-btn" data-sort="name">A–Z</button>
-        </div>
-      </div>
-      <div class="roster-grid" id="rosterGrid"></div>
     </div>
   </section>
 
@@ -89,6 +84,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="roster.js"></script>
 </body>
 </html>

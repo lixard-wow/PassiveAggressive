@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roster – PassiveAggressive</title>
+  <title>Raids – PassiveAggressive</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
@@ -19,8 +19,8 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="raids.html">Raids</a></li>
-        <li><a href="roster.html" class="nav-active">Roster</a></li>
+        <li><a href="raids.html" class="nav-active">Raids</a></li>
+        <li><a href="roster.html">Roster</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
       </ul>
@@ -36,35 +36,43 @@
     </ul>
   </nav>
 
-  <!-- ROSTER -->
-  <section id="roster" class="page-section">
+  <!-- RAIDS -->
+  <section id="raids" class="page-section">
     <div class="container">
-      <h2 class="section-title">Guild Roster</h2>
-      <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
-      <div class="filter-group">
-        <div class="filter-label">Role</div>
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Tank">Tanks</button>
-          <button class="filter-btn" data-filter="Healer">Healers</button>
-          <button class="filter-btn" data-filter="DPS">DPS</button>
-        </div>
+      <h2 class="section-title">Raid Schedule</h2>
+      <p class="section-sub">All times are Server Time (ST). Be online and ready 15 minutes early.</p>
+      <div class="raid-table-wrap">
+        <table class="raid-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Instance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tuesday</td>
+              <td>8:00 PM – 11:00 PM</td>
+              <td><span class="tag tag-prog">Progression</span></td>
+              <td>Current Tier</td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td>8:00 PM – 11:00 PM</td>
+              <td><span class="tag tag-prog">Progression</span></td>
+              <td>Current Tier</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>7:00 PM – 10:00 PM</td>
+              <td><span class="tag tag-farm">Farm / Alt</span></td>
+              <td>Normal / Alt Run</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="filter-group">
-        <div class="filter-label">Rank</div>
-        <div class="filter-bar" id="rankFilterBar">
-          <button class="rank-btn active" data-rank="all">All</button>
-        </div>
-      </div>
-      <div class="roster-meta">
-        <span class="roster-counter" id="rosterCounter">— members</span>
-        <div class="sort-bar">
-          <span class="sort-label">Sort:</span>
-          <button class="sort-btn active" data-sort="rank">Rank</button>
-          <button class="sort-btn" data-sort="name">A–Z</button>
-        </div>
-      </div>
-      <div class="roster-grid" id="rosterGrid"></div>
     </div>
   </section>
 
@@ -89,6 +97,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="roster.js"></script>
 </body>
 </html>

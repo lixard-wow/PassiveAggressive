@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roster – PassiveAggressive</title>
+  <title>About – PassiveAggressive</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
@@ -18,9 +18,9 @@
       </div>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="about.html" class="nav-active">About</a></li>
         <li><a href="raids.html">Raids</a></li>
-        <li><a href="roster.html" class="nav-active">Roster</a></li>
+        <li><a href="roster.html">Roster</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
       </ul>
@@ -36,35 +36,27 @@
     </ul>
   </nav>
 
-  <!-- ROSTER -->
-  <section id="roster" class="page-section">
+  <!-- ABOUT -->
+  <section id="about" class="page-section">
     <div class="container">
-      <h2 class="section-title">Guild Roster</h2>
-      <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
-      <div class="filter-group">
-        <div class="filter-label">Role</div>
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Tank">Tanks</button>
-          <button class="filter-btn" data-filter="Healer">Healers</button>
-          <button class="filter-btn" data-filter="DPS">DPS</button>
+      <h2 class="section-title">About the Guild</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">&#9876;</div>
+          <h3>Who We Are</h3>
+          <p>PassiveAggressive is a tight-knit raiding guild of adults who take the game seriously — just not ourselves. We clear content, we have fun, and we occasionally agree on loot.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128337;</div>
+          <h3>Raid Philosophy</h3>
+          <p>We run a structured two-night progression schedule. We expect preparation, attendance, and a positive attitude. Complaining in raid chat counts as a donation to the repair fund.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#127942;</div>
+          <h3>What We Offer</h3>
+          <p>Consistent progression, a drama-free environment, consumables for mains, helpful senior members, and a Discord that's 60% memes and 40% strategy.</p>
         </div>
       </div>
-      <div class="filter-group">
-        <div class="filter-label">Rank</div>
-        <div class="filter-bar" id="rankFilterBar">
-          <button class="rank-btn active" data-rank="all">All</button>
-        </div>
-      </div>
-      <div class="roster-meta">
-        <span class="roster-counter" id="rosterCounter">— members</span>
-        <div class="sort-bar">
-          <span class="sort-label">Sort:</span>
-          <button class="sort-btn active" data-sort="rank">Rank</button>
-          <button class="sort-btn" data-sort="name">A–Z</button>
-        </div>
-      </div>
-      <div class="roster-grid" id="rosterGrid"></div>
     </div>
   </section>
 
@@ -89,6 +81,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="roster.js"></script>
 </body>
 </html>
