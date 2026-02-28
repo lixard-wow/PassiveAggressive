@@ -189,22 +189,32 @@ const thumbObserver = new IntersectionObserver((entries) => {
 
     thumbObserver.unobserve(card);
 
-    // Blizzard: portrait
-    if (blizzToken && !thumbnailCache[name]) {
-      fetch(
-        `https://us.api.blizzard.com/profile/wow/character/${realm}/${encodeURIComponent(name.toLowerCase())}/character-media?namespace=profile-us&locale=en_US`,
-        { headers: { 'Authorization': `Bearer ${blizzToken}` } }
-      )
-        .then(r => r.json())
-        .then(data => {
-          const avatar = data.assets?.find(a => a.key === 'avatar')?.value;
-          if (avatar) {
-            thumbnailCache[name] = avatar;
-            const avatarDiv = card.querySelector('.roster-avatar');
-            if (avatarDiv) avatarDiv.innerHTML = `<img src="${avatar}" alt="${name}" class="roster-avatar-img" />`;
-          }
-        })
-        .catch(() => {});
+    // Blizzard: portrait (fall back to Raider.io if unavailable)
+    if (!thumbnailCache[name]) {
+      const setAvatar = (url) => {
+        thumbnailCache[name] = url;
+        const avatarDiv = card.querySelector('.roster-avatar');
+        if (avatarDiv) avatarDiv.innerHTML = `<img src="${url}" alt="${name}" class="roster-avatar-img" />`;
+      };
+
+      const blizzMediaPromise = blizzToken
+        ? fetch(
+            `https://us.api.blizzard.com/profile/wow/character/${realm}/${encodeURIComponent(name.toLowerCase())}/character-media?namespace=profile-us&locale=en_US`,
+            { headers: { 'Authorization': `Bearer ${blizzToken}` } }
+          )
+            .then(r => r.json())
+            .then(data => data.assets?.find(a => a.key === 'avatar')?.value || null)
+            .catch(() => null)
+        : Promise.resolve(null);
+
+      blizzMediaPromise.then(avatar => {
+        if (avatar) { setAvatar(avatar); return; }
+        // Raider.io fallback for portrait
+        fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=${realm}&name=${encodeURIComponent(name)}&fields=thumbnail_url`)
+          .then(r => r.json())
+          .then(data => { if (data.thumbnail_url) setAvatar(data.thumbnail_url); })
+          .catch(() => {});
+      });
     }
 
     // Raider.io: stats only
