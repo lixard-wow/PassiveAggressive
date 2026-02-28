@@ -430,6 +430,8 @@ section { padding: 6rem 1.5rem; }
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  color: inherit;
+  cursor: pointer;
 }
 
 .roster-card:hover {
