@@ -1,4 +1,27 @@
 // =====================
+// BLIZZARD API CONFIG
+// =====================
+const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
+const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
+
+const BLIZZ_CLASS_MAP = {
+  1: 'Warrior', 2: 'Paladin', 3: 'Hunter', 4: 'Rogue',
+  5: 'Priest', 6: 'Death Knight', 7: 'Shaman', 8: 'Mage',
+  9: 'Warlock', 10: 'Monk', 11: 'Druid', 12: 'Demon Hunter', 13: 'Evoker',
+};
+
+async function getBlizzardToken() {
+  const creds = btoa(`${BLIZZ_CLIENT_ID}:${BLIZZ_CLIENT_SECRET}`);
+  const res = await fetch('https://oauth.battle.net/token', {
+    method: 'POST',
+    headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'grant_type=client_credentials',
+  });
+  const data = await res.json();
+  return data.access_token;
+}
+
+// =====================
 // CLASS CONFIG
 // =====================
 const CLASS_CONFIG = {
@@ -106,7 +129,7 @@ function buildRoster(filter = currentFilter) {
 
     return `
       <a class="roster-card" href="${member.profileUrl}" target="_blank" rel="noopener"
-         style="text-decoration:none" data-name="${member.name}" data-realm="${member.realm}" data-color="${cfg.color}">
+         style="text-decoration:none" data-name="${member.name}" data-realm="${member.realmSlug}" data-color="${cfg.color}">
         <div class="roster-avatar" style="background:${cfg.color}22; border: 1px solid ${cfg.color}44">
           ${avatarContent}
         </div>
@@ -130,7 +153,7 @@ const thumbObserver = new IntersectionObserver((entries) => {
     if (!entry.isIntersecting) return;
     const card = entry.target;
     const name = card.dataset.name;
-    const realm = (card.dataset.realm || 'Area 52').toLowerCase().replace(/\s+/g, '-').replace(/'/g, '');
+    const realm = card.dataset.realm || 'area-52';
     if (!name || (thumbnailCache[name] && statsCache[name])) return;
 
     thumbObserver.unobserve(card);
@@ -183,32 +206,59 @@ function observeRosterCards() {
 // =====================
 async function fetchRoster() {
   const grid = document.getElementById('rosterGrid');
-  grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Loading roster from Raider.io...</p>';
+  grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Loading roster...</p>';
 
   try {
-    const res = await fetch(
-      'https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=members'
+    // Fetch Blizzard (full roster) + Raider.io (roles/specs) in parallel
+    const [token, rioRes] = await Promise.all([
+      getBlizzardToken(),
+      fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=members'),
+    ]);
+
+    const blizzRes = await fetch(
+      'https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US',
+      { headers: { 'Authorization': `Bearer ${token}` } }
     );
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
 
-    liveRoster = data.members.map(m => ({
-      name:       m.character.name,
-      class:      m.character.class,
-      spec:       m.character.active_spec_name || '',
-      role:       normalizeRole(m.character.active_spec_role),
-      rank:       m.rank,
-      realm:      m.character.realm,
-      profileUrl: m.character.profile_url,
-    }));
+    if (!blizzRes.ok) throw new Error('Blizzard API error');
+    const blizzData = await blizzRes.json();
 
-    // sort: GM → Officers → rest alphabetically
+    // Build Raider.io lookup map (name → {spec, role, profileUrl, realm})
+    const rioMap = {};
+    if (rioRes.ok) {
+      const rioData = await rioRes.json();
+      for (const m of rioData.members) {
+        rioMap[m.character.name.toLowerCase()] = {
+          spec:       m.character.active_spec_name || '',
+          role:       normalizeRole(m.character.active_spec_role),
+          profileUrl: m.character.profile_url,
+          realm:      m.character.realm,
+        };
+      }
+    }
+
+    // Merge: Blizzard is source of truth for membership
+    liveRoster = blizzData.members.map(m => {
+      const name      = m.character.name;
+      const realmSlug = m.character.realm.slug;
+      const rio       = rioMap[name.toLowerCase()];
+      return {
+        name,
+        class:      BLIZZ_CLASS_MAP[m.character.playable_class.id] || 'Unknown',
+        spec:       rio?.spec  || '',
+        role:       rio?.role  || 'DPS',
+        rank:       m.rank,
+        realmSlug,
+        profileUrl: rio?.profileUrl || `https://raider.io/characters/us/${realmSlug}/${name}`,
+      };
+    });
+
+    // Sort: GM → Officers → rest alphabetically
     liveRoster.sort((a, b) => {
       if (a.rank !== b.rank) return a.rank - b.rank;
       return a.name.localeCompare(b.name);
     });
 
-    // update member count stat
     const statEl = document.getElementById('statMembers');
     if (statEl) statEl.textContent = liveRoster.length;
 
@@ -245,7 +295,7 @@ function animateCount(el, target, duration = 1800) {
 const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      animateCount(document.getElementById('statMembers'), 42);
+      animateCount(document.getElementById('statMembers'), liveRoster.length || 30);
       animateCount(document.getElementById('statBosses'), 187);
       animateCount(document.getElementById('statYears'),  5);
       statsObserver.disconnect();
