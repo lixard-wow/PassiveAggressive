@@ -40,7 +40,16 @@ const CLASS_CONFIG = {
   'Warrior':       { icon: '⚔️', color: '#C69B3A' },
 };
 
-const RANK_LABELS = { 0: 'Guild Master' };
+const RANK_LABELS = {
+  0: 'Guild Master',
+  1: 'Doc Jesus',
+  2: 'Calm Direction',
+  3: 'Subtle Pressure',
+  4: 'Firm Suggestion',
+  5: 'Learning Curve',
+  6: "It's Fine",
+  7: 'Fresh Prospect',
+};
 
 // =====================
 // ROSTER STATE
