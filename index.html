@@ -133,11 +133,22 @@
     <div class="container">
       <h2 class="section-title">Guild Roster</h2>
       <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="Tank">Tanks</button>
-        <button class="filter-btn" data-filter="Healer">Healers</button>
-        <button class="filter-btn" data-filter="DPS">DPS</button>
+      <div class="filter-group">
+        <div class="filter-label">Role</div>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Tank">Tanks</button>
+          <button class="filter-btn" data-filter="Healer">Healers</button>
+          <button class="filter-btn" data-filter="DPS">DPS</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Rank</div>
+        <div class="filter-bar" id="rankFilterBar">
+          <button class="rank-btn active" data-rank="all">All</button>
+        </div>
+      </div>
+      <div class="roster-meta">
         <span class="roster-counter" id="rosterCounter">— members</span>
       </div>
       <div class="roster-grid" id="rosterGrid"></div>

@@ -47,6 +47,7 @@ const RANK_LABELS = { 0: 'Guild Master' };
 // =====================
 let liveRoster = [];
 let currentFilter = 'all';
+let currentRankFilter = 'all';
 const thumbnailCache = {};
 const statsCache = {};
 
@@ -70,6 +71,27 @@ function normalizeRole(role) {
   return 'DPS';
 }
 
+function buildRankButtons() {
+  const bar = document.getElementById('rankFilterBar');
+  if (!bar) return;
+  const ranks = [...new Set(liveRoster.map(m => m.rank))].sort((a, b) => a - b);
+  const allBtn = `<button class="rank-btn active" data-rank="all">All</button>`;
+  const rankBtns = ranks.map(r => {
+    const label = RANK_LABELS[r] ?? `Rank ${r}`;
+    return `<button class="rank-btn" data-rank="${r}">${label}</button>`;
+  }).join('');
+  bar.innerHTML = allBtn + rankBtns;
+
+  bar.querySelectorAll('.rank-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.rank-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRankFilter = btn.dataset.rank === 'all' ? 'all' : parseInt(btn.dataset.rank);
+      buildRoster();
+    });
+  });
+}
+
 function buildRoster(filter = currentFilter) {
   currentFilter = filter;
   const grid = document.getElementById('rosterGrid');
@@ -79,9 +101,8 @@ function buildRoster(filter = currentFilter) {
     return;
   }
 
-  const filtered = filter === 'all'
-    ? liveRoster
-    : liveRoster.filter(m => m.role === filter);
+  let filtered = filter === 'all' ? liveRoster : liveRoster.filter(m => m.role === filter);
+  if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
 
   const counter = document.getElementById('rosterCounter');
   if (counter) counter.textContent = `${filtered.length} member${filtered.length !== 1 ? 's' : ''}`;
@@ -261,6 +282,7 @@ async function fetchRoster() {
     const statEl = document.getElementById('statMembers');
     if (statEl) statEl.textContent = liveRoster.length;
 
+    buildRankButtons();
     buildRoster(currentFilter);
   } catch (err) {
     grid.innerHTML = '<p style="color:#888;text-align:center;grid-column:1/-1">Could not load roster. Check back later.</p>';
