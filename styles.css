@@ -94,6 +94,16 @@ body {
 }
 .btn-apply:hover { background: var(--gold-lt) !important; }
 
+.btn-discord {
+  background: #5865F2;
+  color: #fff !important;
+  padding: 0.45rem 1.1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background 0.2s !important;
+}
+.btn-discord:hover { background: #4752c4 !important; }
+
 .hamburger {
   display: none;
   background: none;
