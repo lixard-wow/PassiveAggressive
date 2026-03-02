@@ -308,11 +308,19 @@ function parseStats(data) {
 function fetchStats(name, realmSlug) {
   if (statsCache[name]) return Promise.resolve();
   if (statsPending[name]) return statsPending[name];
-  const p = fetch(
-    `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season:current,mythic_plus_scores_by_season:previous,raid_progression`
-  )
-    .then(r => r.json())
-    .then(data => { statsCache[name] = parseStats(data); })
+  const base = `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}`;
+  const p = Promise.all([
+    fetch(`${base}&fields=mythic_plus_scores_by_season:current,raid_progression`).then(r => r.json()).catch(() => null),
+    fetch(`${base}&fields=mythic_plus_scores_by_season:previous`).then(r => r.json()).catch(() => null),
+  ])
+    .then(([curr, prev]) => {
+      const currSeasons = curr?.mythic_plus_scores_by_season ?? [];
+      const prevSeasons = prev?.mythic_plus_scores_by_season ?? [];
+      statsCache[name] = parseStats({
+        mythic_plus_scores_by_season: [...currSeasons, ...prevSeasons],
+        raid_progression: curr?.raid_progression ?? null,
+      });
+    })
     .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, progression: null }; })
     .finally(() => { delete statsPending[name]; });
   statsPending[name] = p;
