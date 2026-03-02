@@ -82,6 +82,14 @@ const statsCache = {};
 const CURRENT_RAID = 'liberation-of-undermine';
 const CURRENT_RAID_LABEL = 'Liberation of Undermine';
 
+function raidSortValue(progression) {
+  if (!progression || !progression[CURRENT_RAID]) return -1;
+  const r = progression[CURRENT_RAID];
+  return (r.mythic_bosses_killed  || 0) * 10000
+       + (r.heroic_bosses_killed  || 0) * 100
+       + (r.normal_bosses_killed  || 0);
+}
+
 function raidSummary(progression) {
   if (!progression || !progression[CURRENT_RAID]) return null;
   const r = progression[CURRENT_RAID];
@@ -132,11 +140,26 @@ function buildRoster(filter = currentFilter) {
   let filtered = filter === 'all' ? liveRoster : liveRoster.filter(m => m.role === filter);
   if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
 
-  filtered = [...filtered].sort((a, b) =>
-    currentSort === 'rank'
-      ? a.rank !== b.rank ? a.rank - b.rank : a.name.localeCompare(b.name)
-      : a.name.localeCompare(b.name)
-  );
+  filtered = [...filtered].sort((a, b) => {
+    const sa = statsCache[a.name];
+    const sb = statsCache[b.name];
+    switch (currentSort) {
+      case 'name-asc':  return a.name.localeCompare(b.name);
+      case 'name-desc': return b.name.localeCompare(a.name);
+      case 'score': {
+        const va = sa?.mpScore ?? -1;
+        const vb = sb?.mpScore ?? -1;
+        return vb - va || a.name.localeCompare(b.name);
+      }
+      case 'raid': {
+        const va = raidSortValue(sa?.progression);
+        const vb = raidSortValue(sb?.progression);
+        return vb - va || a.name.localeCompare(b.name);
+      }
+      default: // rank
+        return a.rank !== b.rank ? a.rank - b.rank : a.name.localeCompare(b.name);
+    }
+  });
 
   const counter = document.getElementById('rosterCounter');
   if (counter) counter.textContent = `${filtered.length} member${filtered.length !== 1 ? 's' : ''}`;
@@ -361,13 +384,9 @@ document.getElementById('rankFilter')?.addEventListener('change', e => {
   buildRoster(currentFilter);
 });
 
-document.querySelectorAll('.sort-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentSort = btn.dataset.sort;
-    buildRoster();
-  });
+document.getElementById('sortSelect')?.addEventListener('change', e => {
+  currentSort = e.target.value;
+  buildRoster(currentFilter);
 });
 
 // =====================

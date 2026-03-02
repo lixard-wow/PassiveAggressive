@@ -68,8 +68,13 @@
         <span class="roster-counter" id="rosterCounter">— members</span>
         <div class="sort-bar">
           <span class="sort-label">Sort:</span>
-          <button class="sort-btn active" data-sort="rank">Rank</button>
-          <button class="sort-btn" data-sort="name">A–Z</button>
+          <select class="filter-select" id="sortSelect">
+            <option value="rank">Rank</option>
+            <option value="name-asc">A → Z</option>
+            <option value="name-desc">Z → A</option>
+            <option value="score">M+ Score</option>
+            <option value="raid">Raid Progress</option>
+          </select>
         </div>
       </div>
       <div class="roster-grid" id="rosterGrid"></div>
