@@ -80,18 +80,9 @@ const thumbnailCache = {};
 const statsCache = {};
 const statsPending = {};
 
-// Seasons listed newest → oldest.
-const SEASON_ORDER = [
-  'season-tww-3',
-  'season-tww-2',
-  'season-tww-1',
-  'season-df-3',
-  'season-df-2',
-  'season-df-1',
-];
-
 function seasonLabel(slug) {
-  const m = slug?.match(/-(\d+)$/);
+  if (!slug) return '';
+  const m = slug.match(/-(\d+)$/);
   return m ? 'S' + m[1] : '';
 }
 
@@ -237,8 +228,8 @@ function buildRoster(filter = currentFilter) {
         <span class="roster-stat" title="Current Season M+">
           <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_challengemode_gold.jpg" alt="M+" />
           <span class="rs-season-label rs-curr-label">${mpScoreSlug ? seasonLabel(mpScoreSlug) : ''}</span>
-          <span class="rs-score" style="color:${mpScore !== null ? mpColor : '#555'}">
-            ${mpScore !== null ? Math.round(mpScore) : '—'}
+          <span class="rs-score" style="color:${mpScore ? mpColor : '#555'}">
+            ${mpScore !== null ? Math.round(mpScore) : '0'}
           </span>
         </span>
         <span class="roster-stat" title="Previous Season M+">
@@ -284,20 +275,18 @@ function getBestScore(season) {
     const s = season?.scores?.[k] ?? 0;
     if (s > best) { best = s; bestColor = season?.segments?.[k]?.color ?? '#888'; }
   }
-  return { score: best > 0 ? best : null, color: bestColor, slug: season?.season ?? null };
+  return { score: best, color: bestColor, slug: season?.season ?? null };
 }
 
 function parseStats(data) {
   if (!data || data.statusCode || data.error) {
     return { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, progression: null };
   }
-  const seasons = [...(data.mythic_plus_scores_by_season ?? [])].sort((a, b) => {
-    const ai = SEASON_ORDER.indexOf(a.season);
-    const bi = SEASON_ORDER.indexOf(b.season);
-    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-  });
-  const curr = seasons[0] ? getBestScore(seasons[0]) : { score: null, color: '#888', slug: null };
-  const prev = seasons[1] ? getBestScore(seasons[1]) : { score: null, color: '#888', slug: null };
+  const seasons = data.mythic_plus_scores_by_season ?? [];
+  const currentSeason  = seasons.find(s => s._source === 'current');
+  const previousSeason = seasons.find(s => s._source === 'previous');
+  const curr = currentSeason  ? getBestScore(currentSeason)  : { score: 0, color: '#888', slug: null };
+  const prev = previousSeason ? getBestScore(previousSeason) : { score: null, color: '#888', slug: null };
   return {
     mpScore: curr.score, mpColor: curr.color, mpScoreSlug: curr.slug,
     mpPrev:  prev.score, mpPrevColor: prev.color, mpPrevSlug: prev.slug,
@@ -314,8 +303,8 @@ function fetchStats(name, realmSlug) {
     fetch(`${base}&fields=mythic_plus_scores_by_season:previous`).then(r => r.json()).catch(() => null),
   ])
     .then(([curr, prev]) => {
-      const currSeasons = curr?.mythic_plus_scores_by_season ?? [];
-      const prevSeasons = prev?.mythic_plus_scores_by_season ?? [];
+      const currSeasons = (curr?.mythic_plus_scores_by_season ?? []).map(s => ({ ...s, _source: 'current' }));
+      const prevSeasons = (prev?.mythic_plus_scores_by_season ?? []).map(s => ({ ...s, _source: 'previous' }));
       statsCache[name] = parseStats({
         mythic_plus_scores_by_season: [...currSeasons, ...prevSeasons],
         raid_progression: curr?.raid_progression ?? null,
@@ -387,7 +376,7 @@ const thumbObserver = new IntersectionObserver((entries) => {
         const prevEl      = card.querySelector('.rs-prev-score');
         const raidEl      = card.querySelector('.rs-raid');
         if (currLabelEl) currLabelEl.textContent = s.mpScoreSlug ? seasonLabel(s.mpScoreSlug) : '';
-        if (scoreEl)     { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '—'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
+        if (scoreEl)     { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '0'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
         if (prevLabelEl) prevLabelEl.textContent = s.mpPrevSlug ? seasonLabel(s.mpPrevSlug) : '';
         if (prevEl)      { prevEl.textContent = s.mpPrev !== null ? Math.round(s.mpPrev) : '—'; prevEl.style.color = s.mpPrev ? s.mpPrevColor : '#555'; }
         if (raidEl)      { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
