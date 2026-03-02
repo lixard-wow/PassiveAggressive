@@ -224,6 +224,37 @@ function buildRoster(filter = currentFilter) {
 }
 
 // =====================
+// STATS HELPERS
+// =====================
+function parseStats(data) {
+  const season = data.mythic_plus_scores_by_season?.[0];
+  const scores = season?.scores ?? {};
+  const segs   = season?.segments ?? {};
+  let mpScore = null, mpColor = '#888';
+  for (const k of ['all', 'dps', 'healer', 'tank']) {
+    if ((scores[k] || 0) > (mpScore || 0)) {
+      mpScore = scores[k];
+      mpColor = segs[k]?.color ?? '#888';
+    }
+  }
+  return { mpScore, mpColor, progression: data.raid_progression ?? null };
+}
+
+function fetchStats(name, realmSlug) {
+  if (statsCache[name]) return Promise.resolve();
+  return fetch(
+    `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season:current,raid_progression`
+  )
+    .then(r => r.json())
+    .then(data => { statsCache[name] = parseStats(data); })
+    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', progression: null }; });
+}
+
+async function fetchAllStats() {
+  await Promise.all(liveRoster.map(m => fetchStats(m.name, m.realmSlug)));
+}
+
+// =====================
 // LAZY THUMBNAIL & STATS
 // =====================
 const thumbObserver = new IntersectionObserver((entries) => {
@@ -266,31 +297,15 @@ const thumbObserver = new IntersectionObserver((entries) => {
 
     // Raider.io: stats only
     if (!statsCache[name]) {
-      fetch(`https://raider.io/api/v1/characters/profile?region=us&realm=${realm}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season:current,raid_progression`)
-        .then(r => r.json())
-        .then(data => {
-          const season = data.mythic_plus_scores_by_season?.[0];
-          // Best score across all roles
-          const scores = season?.scores ?? {};
-          const segs   = season?.segments ?? {};
-          const roleKeys = ['all', 'dps', 'healer', 'tank'];
-          let mpScore = null, mpColor = '#888';
-          for (const k of roleKeys) {
-            if ((scores[k] || 0) > (mpScore || 0)) {
-              mpScore = scores[k];
-              mpColor = segs[k]?.color ?? '#888';
-            }
-          }
-          const prog = data.raid_progression ?? null;
-          statsCache[name] = { mpScore, mpColor, progression: prog };
-
-          const raid = raidSummary(statsCache[name].progression);
-          const scoreEl = card.querySelector('.rs-score');
-          const raidEl  = card.querySelector('.rs-raid');
-          if (scoreEl) { scoreEl.textContent = mpScore !== null ? Math.round(mpScore) : '—'; scoreEl.style.color = mpScore ? mpColor : '#555'; }
-          if (raidEl)  { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
-        })
-        .catch(() => {});
+      fetchStats(name, realm).then(() => {
+        const s = statsCache[name];
+        if (!s) return;
+        const raid = raidSummary(s.progression);
+        const scoreEl = card.querySelector('.rs-score');
+        const raidEl  = card.querySelector('.rs-raid');
+        if (scoreEl) { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '—'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
+        if (raidEl)  { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
+      });
     }
   });
 }, { rootMargin: '100px' });
@@ -397,8 +412,11 @@ document.getElementById('rankFilter')?.addEventListener('change', e => {
   buildRoster(currentFilter);
 });
 
-document.getElementById('sortSelect')?.addEventListener('change', e => {
+document.getElementById('sortSelect')?.addEventListener('change', async e => {
   currentSort = e.target.value;
+  if (currentSort === 'score' || currentSort === 'raid') {
+    await fetchAllStats();
+  }
   buildRoster(currentFilter);
 });
 
