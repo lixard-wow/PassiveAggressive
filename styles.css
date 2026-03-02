@@ -592,7 +592,13 @@ section { padding: 6rem 1.5rem; }
   padding: 0.15rem 0.45rem;
 }
 
-.stat-icon { font-size: 0.7rem; opacity: 0.6; }
+.stat-icon-img {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  display: block;
+  flex-shrink: 0;
+}
 
 .rs-score, .rs-raid {
   font-weight: 600;
