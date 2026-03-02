@@ -40,6 +40,12 @@ const CLASS_CONFIG = {
   'Warrior':       { icon: '⚔️', color: '#C69B3A' },
 };
 
+const ROLE_ICONS = {
+  Tank:   'https://wow.zamimg.com/images/wow/icons/small/ability_warrior_defensivestance.jpg',
+  Healer: 'https://wow.zamimg.com/images/wow/icons/small/spell_holy_flashheal.jpg',
+  DPS:    'https://wow.zamimg.com/images/wow/icons/small/ability_dualwield.jpg',
+};
+
 const RANK_LABELS = {
   0: 'Guild Master',
   1: 'Doc Jesus',
@@ -187,7 +193,7 @@ function buildRoster(filter = currentFilter) {
         <div class="roster-name">${member.name}</div>
         <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
         <div class="roster-badges">
-          <span class="roster-role ${roleClass}">${member.role}</span>
+          <span class="roster-role ${roleClass}" title="${member.role}"><img src="${ROLE_ICONS[member.role]}" class="role-icon" alt="${member.role}" /></span>
           <span class="roster-rank" title="${rankDesc}">${rankLabel}</span>
         </div>
         ${statsHtml}
