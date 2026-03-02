@@ -79,14 +79,14 @@ let blizzToken = null;
 const thumbnailCache = {};
 const statsCache = {};
 
-const CURRENT_RAID = 'liberation-of-undermine';
-const CURRENT_RAID_LABEL = 'Liberation of Undermine';
+function latestRaid(progression) {
+  if (!progression) return null;
+  const keys = Object.keys(progression);
+  return keys.length ? progression[keys[keys.length - 1]] : null;
+}
 
 function raidSortValue(progression) {
-  if (!progression) return -1;
-  const keys = Object.keys(progression);
-  if (!keys.length) return -1;
-  const r = progression[CURRENT_RAID] ?? progression[keys[keys.length - 1]];
+  const r = latestRaid(progression);
   if (!r) return -1;
   return (r.mythic_bosses_killed || 0) * 10000
        + (r.heroic_bosses_killed || 0) * 100
@@ -94,11 +94,7 @@ function raidSortValue(progression) {
 }
 
 function raidSummary(progression) {
-  if (!progression) return null;
-  const keys = Object.keys(progression);
-  if (!keys.length) return null;
-  // Prefer current raid slug, fall back to last raid in the object
-  const r = progression[CURRENT_RAID] ?? progression[keys[keys.length - 1]];
+  const r = latestRaid(progression);
   if (!r) return null;
   const mythic = r.mythic_bosses_killed || 0;
   const heroic = r.heroic_bosses_killed || 0;
@@ -200,7 +196,7 @@ function buildRoster(filter = currentFilter) {
             ${mpScore !== null ? Math.round(mpScore) : '—'}
           </span>
         </span>
-        <span class="roster-stat" title="${CURRENT_RAID_LABEL}">
+        <span class="roster-stat" title="Raid Progress">
           <span class="stat-icon">⚔</span>
           <span class="rs-raid" style="color:${raid ? raid.color : '#555'}">
             ${raid ? raid.text : '—'}
@@ -286,7 +282,6 @@ const thumbObserver = new IntersectionObserver((entries) => {
             }
           }
           const prog = data.raid_progression ?? null;
-          if (prog) console.log(`[RIO:${name}] raid keys:`, Object.keys(prog), '| slug match:', !!prog[CURRENT_RAID]);
           statsCache[name] = { mpScore, mpColor, progression: prog };
 
           const raid = raidSummary(statsCache[name].progression);
