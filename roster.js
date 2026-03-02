@@ -104,27 +104,15 @@ function normalizeRole(role) {
 }
 
 // =====================
-// BUILD RANK BUTTONS
+// BUILD RANK DROPDOWN
 // =====================
 function buildRankButtons() {
-  const bar = document.getElementById('rankFilterBar');
-  if (!bar) return;
+  const sel = document.getElementById('rankFilter');
+  if (!sel) return;
   const ranks = [...new Set(liveRoster.map(m => m.rank))].sort((a, b) => a - b);
-  const allBtn = `<button class="rank-btn active" data-rank="all">All</button>`;
-  const rankBtns = ranks.map(r => {
-    const label = RANK_LABELS[r] ?? `Rank ${r}`;
-    return `<button class="rank-btn" data-rank="${r}">${label}</button>`;
-  }).join('');
-  bar.innerHTML = allBtn + rankBtns;
-
-  bar.querySelectorAll('.rank-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      bar.querySelectorAll('.rank-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentRankFilter = btn.dataset.rank === 'all' ? 'all' : parseInt(btn.dataset.rank);
-      buildRoster();
-    });
-  });
+  sel.innerHTML = `<option value="all">All Ranks</option>` +
+    ranks.map(r => `<option value="${r}">${RANK_LABELS[r] ?? `Rank ${r}`}</option>`).join('');
+  sel.value = currentRankFilter === 'all' ? 'all' : String(currentRankFilter);
 }
 
 // =====================
@@ -359,14 +347,16 @@ async function fetchRoster() {
 }
 
 // =====================
-// FILTER & SORT BUTTONS
+// FILTER & SORT
 // =====================
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    buildRoster(btn.dataset.filter);
-  });
+document.getElementById('roleFilter')?.addEventListener('change', e => {
+  currentFilter = e.target.value;
+  buildRoster();
+});
+
+document.getElementById('rankFilter')?.addEventListener('change', e => {
+  currentRankFilter = e.target.value === 'all' ? 'all' : parseInt(e.target.value);
+  buildRoster();
 });
 
 document.querySelectorAll('.sort-btn').forEach(btn => {
