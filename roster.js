@@ -109,9 +109,11 @@ function normalizeRole(role) {
 function buildRankButtons() {
   const sel = document.getElementById('rankFilter');
   if (!sel) return;
-  const ranks = [...new Set(liveRoster.map(m => m.rank))].sort((a, b) => a - b);
   sel.innerHTML = `<option value="all">All Ranks</option>` +
-    ranks.map(r => `<option value="${r}">${RANK_LABELS[r] ?? `Rank ${r}`}</option>`).join('');
+    Object.keys(RANK_LABELS)
+      .sort((a, b) => Number(a) - Number(b))
+      .map(r => `<option value="${r}">${RANK_LABELS[r]}</option>`)
+      .join('');
   sel.value = currentRankFilter === 'all' ? 'all' : String(currentRankFilter);
 }
 
@@ -351,12 +353,12 @@ async function fetchRoster() {
 // =====================
 document.getElementById('roleFilter')?.addEventListener('change', e => {
   currentFilter = e.target.value;
-  buildRoster();
+  buildRoster(currentFilter);
 });
 
 document.getElementById('rankFilter')?.addEventListener('change', e => {
   currentRankFilter = e.target.value === 'all' ? 'all' : parseInt(e.target.value);
-  buildRoster();
+  buildRoster(currentFilter);
 });
 
 document.querySelectorAll('.sort-btn').forEach(btn => {
