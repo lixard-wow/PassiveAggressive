@@ -156,10 +156,13 @@ function normalizeRole(role) {
 // =====================
 // BUILD RANK DROPDOWN
 // =====================
+const MAIN_RANKS = new Set([0, 1, 2, 3]);
+
 function buildRankButtons() {
   const sel = document.getElementById('rankFilter');
   if (!sel) return;
   sel.innerHTML = `<option value="all">All Ranks</option>` +
+    `<option value="mains">Mains Only</option>` +
     Object.keys(RANK_LABELS)
       .sort((a, b) => Number(a) - Number(b))
       .map(r => `<option value="${r}">${RANK_LABELS[r]}</option>`)
@@ -180,7 +183,8 @@ function buildRoster(filter = currentFilter) {
   }
 
   let filtered = filter === 'all' ? liveRoster : liveRoster.filter(m => m.role === filter);
-  if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
+  if (currentRankFilter === 'mains') filtered = filtered.filter(m => MAIN_RANKS.has(m.rank));
+  else if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
 
   filtered = [...filtered].sort((a, b) => {
     const sa = statsCache[a.name];
@@ -511,7 +515,8 @@ document.getElementById('roleFilter')?.addEventListener('change', e => {
 });
 
 document.getElementById('rankFilter')?.addEventListener('change', e => {
-  currentRankFilter = e.target.value === 'all' ? 'all' : parseInt(e.target.value);
+  const v = e.target.value;
+  currentRankFilter = (v === 'all' || v === 'mains') ? v : parseInt(v);
   buildRoster(currentFilter);
 });
 
