@@ -47,19 +47,21 @@
     <div class="container">
       <h2 class="section-title">Guild Roster</h2>
       <p class="section-sub">The brave (and occasionally punctual) adventurers of PassiveAggressive.</p>
-      <div class="filter-group">
-        <div class="filter-label">Role</div>
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Tank">Tanks</button>
-          <button class="filter-btn" data-filter="Healer">Healers</button>
-          <button class="filter-btn" data-filter="DPS">DPS</button>
+      <div class="filter-row">
+        <div class="filter-group">
+          <div class="filter-label">Role</div>
+          <select class="filter-select" id="roleFilter">
+            <option value="all">All Roles</option>
+            <option value="Tank">Tank</option>
+            <option value="Healer">Healer</option>
+            <option value="DPS">DPS</option>
+          </select>
         </div>
-      </div>
-      <div class="filter-group">
-        <div class="filter-label">Rank</div>
-        <div class="filter-bar" id="rankFilterBar">
-          <button class="rank-btn active" data-rank="all">All</button>
+        <div class="filter-group">
+          <div class="filter-label">Rank</div>
+          <select class="filter-select" id="rankFilter">
+            <option value="all">All Ranks</option>
+          </select>
         </div>
       </div>
       <div class="roster-meta">
