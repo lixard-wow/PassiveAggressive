@@ -191,13 +191,13 @@ function buildRoster(filter = currentFilter) {
     const statsHtml = `
       <div class="roster-stats">
         <span class="roster-stat" title="M+ Score">
-          <span class="stat-icon">⚡</span>
+          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_challengemode_gold.jpg" alt="M+" />
           <span class="rs-score" style="color:${mpScore !== null ? mpColor : '#555'}">
             ${mpScore !== null ? Math.round(mpScore) : '—'}
           </span>
         </span>
         <span class="roster-stat" title="Raid Progress">
-          <span class="stat-icon">⚔</span>
+          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_boss_archimonde.jpg" alt="Raid" />
           <span class="rs-raid" style="color:${raid ? raid.color : '#555'}">
             ${raid ? raid.text : '—'}
           </span>
