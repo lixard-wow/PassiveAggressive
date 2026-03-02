@@ -83,22 +83,28 @@ const CURRENT_RAID = 'liberation-of-undermine';
 const CURRENT_RAID_LABEL = 'Liberation of Undermine';
 
 function raidSortValue(progression) {
-  if (!progression || !progression[CURRENT_RAID]) return -1;
-  const r = progression[CURRENT_RAID];
-  return (r.mythic_bosses_killed  || 0) * 10000
-       + (r.heroic_bosses_killed  || 0) * 100
-       + (r.normal_bosses_killed  || 0);
+  if (!progression) return -1;
+  const keys = Object.keys(progression);
+  if (!keys.length) return -1;
+  const r = progression[CURRENT_RAID] ?? progression[keys[keys.length - 1]];
+  if (!r) return -1;
+  return (r.mythic_bosses_killed || 0) * 10000
+       + (r.heroic_bosses_killed || 0) * 100
+       + (r.normal_bosses_killed || 0);
 }
 
 function raidSummary(progression) {
-  if (!progression || !progression[CURRENT_RAID]) return null;
-  const r = progression[CURRENT_RAID];
-  // Use individual kill counts for colour (most reliable)
+  if (!progression) return null;
+  const keys = Object.keys(progression);
+  if (!keys.length) return null;
+  // Prefer current raid slug, fall back to last raid in the object
+  const r = progression[CURRENT_RAID] ?? progression[keys[keys.length - 1]];
+  if (!r) return null;
   const mythic = r.mythic_bosses_killed || 0;
   const heroic = r.heroic_bosses_killed || 0;
   const normal = r.normal_bosses_killed || 0;
   const total  = r.total_bosses || 8;
-  if (mythic === 0 && heroic === 0 && normal === 0) return null;
+  if (!mythic && !heroic && !normal) return null;
   if (mythic > 0) return { text: `${mythic}/${total} M`, color: '#e8a836' };
   if (heroic > 0) return { text: `${heroic}/${total} H`, color: '#a335ee' };
   return { text: `${normal}/${total} N`, color: '#1eff00' };
@@ -268,10 +274,19 @@ const thumbObserver = new IntersectionObserver((entries) => {
         .then(r => r.json())
         .then(data => {
           const season = data.mythic_plus_scores_by_season?.[0];
-          const mpScore = season?.scores?.all ?? null;
-          const mpColor = season?.segments?.all?.color ?? '#888';
+          // Best score across all roles
+          const scores = season?.scores ?? {};
+          const segs   = season?.segments ?? {};
+          const roleKeys = ['all', 'dps', 'healer', 'tank'];
+          let mpScore = null, mpColor = '#888';
+          for (const k of roleKeys) {
+            if ((scores[k] || 0) > (mpScore || 0)) {
+              mpScore = scores[k];
+              mpColor = segs[k]?.color ?? '#888';
+            }
+          }
           const prog = data.raid_progression ?? null;
-          if (prog) console.log(`[RIO:${name}] raid keys:`, Object.keys(prog), '| current:', prog[CURRENT_RAID]);
+          if (prog) console.log(`[RIO:${name}] raid keys:`, Object.keys(prog), '| slug match:', !!prog[CURRENT_RAID]);
           statsCache[name] = { mpScore, mpColor, progression: prog };
 
           const raid = raidSummary(statsCache[name].progression);
