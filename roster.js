@@ -86,55 +86,63 @@ function seasonLabel(slug) {
   return m ? 'S' + m[1] : '';
 }
 
-// Raids listed newest → oldest. Add new raid slugs to the front when a new tier releases.
-const RAID_ORDER = [
-  'manaforge-omega',
-  'blackrock-depths',
-  'liberation-of-undermine',
-  'nerubar-palace',
-  'nerub-ar-palace',
-  'amirdrassil-the-dreams-hope',
-  'aberrus-the-shadowed-crucible',
-  'vault-of-the-incarnates',
-];
-
-function latestRaid(progression) {
-  if (!progression) return null;
-  // Try each raid newest-first; prefer one where the player has kills
-  for (const slug of RAID_ORDER) {
-    const r = progression[slug];
-    if (r && (r.mythic_bosses_killed || r.heroic_bosses_killed || r.normal_bosses_killed)) {
-      return r;
-    }
-  }
-  // No kills found — return first recognised raid (for "0/8" display)
-  for (const slug of RAID_ORDER) {
-    if (progression[slug]) return progression[slug];
-  }
-  // Ultimate fallback: last key in the object
-  const keys = Object.keys(progression);
-  return keys.length ? progression[keys[keys.length - 1]] : null;
+// Short label for a raid slug — auto-generates from initials.
+function raidShortName(slug) {
+  if (!slug) return '';
+  const skip = new Set(['the', 'of', 'and']);
+  return slug.split('-').filter(w => !skip.has(w)).map(w => w[0].toUpperCase()).join('');
 }
 
-function raidSortValue(progression) {
-  const r = latestRaid(progression);
-  if (!r) return -1;
-  return (r.mythic_bosses_killed || 0) * 10000
-       + (r.heroic_bosses_killed || 0) * 100
-       + (r.normal_bosses_killed || 0);
-}
-
-function raidSummary(progression) {
-  const r = latestRaid(progression);
+// Format a single raid entry into display text + color.
+function raidText(r) {
   if (!r) return null;
   const mythic = r.mythic_bosses_killed || 0;
   const heroic = r.heroic_bosses_killed || 0;
   const normal = r.normal_bosses_killed || 0;
   const total  = r.total_bosses || 8;
-  if (!mythic && !heroic && !normal) return null;
   if (mythic > 0) return { text: `${mythic}/${total} M`, color: '#e8a836' };
   if (heroic > 0) return { text: `${heroic}/${total} H`, color: '#a335ee' };
-  return { text: `${normal}/${total} N`, color: '#1eff00' };
+  if (normal > 0) return { text: `${normal}/${total} N`, color: '#1eff00' };
+  return { text: `0/${total}`, color: '#555' };
+}
+
+// Auto-detect current (first key = newest tier) and previous (first older raid with kills).
+function parseRaidProgress(progression) {
+  if (!progression) return { raidCurr: null, raidPrev: null };
+  const slugs = Object.keys(progression);
+  if (slugs.length === 0) return { raidCurr: null, raidPrev: null };
+
+  const currSlug = slugs[0];
+  const currResult = raidText(progression[currSlug]);
+
+  let prevResult = null, prevSlug = null;
+  for (let i = 1; i < slugs.length; i++) {
+    const r = progression[slugs[i]];
+    if (r && (r.mythic_bosses_killed || r.heroic_bosses_killed || r.normal_bosses_killed)) {
+      prevResult = raidText(r);
+      prevSlug = slugs[i];
+      break;
+    }
+  }
+
+  return {
+    raidCurr: currResult ? { ...currResult, slug: currSlug } : null,
+    raidPrev: prevResult ? { ...prevResult, slug: prevSlug } : null,
+  };
+}
+
+function raidSortValue(progression) {
+  if (!progression) return -1;
+  let best = 0;
+  for (const slug of Object.keys(progression)) {
+    const r = progression[slug];
+    if (!r) continue;
+    const val = (r.mythic_bosses_killed || 0) * 10000
+              + (r.heroic_bosses_killed || 0) * 100
+              + (r.normal_bosses_killed || 0);
+    if (val > best) best = val;
+  }
+  return best;
 }
 
 function normalizeRole(role) {
@@ -221,30 +229,41 @@ function buildRoster(filter = currentFilter) {
     const mpPrev      = stats ? stats.mpPrev      : null;
     const mpPrevColor = stats ? stats.mpPrevColor : '#888';
     const mpPrevSlug  = stats ? stats.mpPrevSlug  : null;
-    const raid        = stats ? raidSummary(stats.progression) : null;
+    const raidCurr    = stats ? stats.raidCurr    : null;
+    const raidPrev    = stats ? stats.raidPrev    : null;
 
     const statsHtml = `
       <div class="roster-stats">
-        <span class="roster-stat" title="Current Season M+">
-          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_challengemode_gold.jpg" alt="M+" />
-          <span class="rs-season-label rs-curr-label">${mpScoreSlug ? seasonLabel(mpScoreSlug) : ''}</span>
-          <span class="rs-score" style="color:${mpScore ? mpColor : '#555'}">
-            ${mpScore !== null ? Math.round(mpScore) : '0'}
+        <div class="roster-stats-row">
+          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/inv_relics_hourglass.jpg" alt="M+" />
+          <span class="roster-stat" title="Current Season M+">
+            <span class="rs-season-label rs-curr-label">${mpScoreSlug ? seasonLabel(mpScoreSlug) : ''}</span>
+            <span class="rs-score" style="color:${mpScore ? mpColor : '#555'}">
+              ${mpScore !== null ? Math.round(mpScore) : '0'}
+            </span>
           </span>
-        </span>
-        <span class="roster-stat" title="Previous Season M+">
-          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_challengemode_gold.jpg" alt="M+" />
-          <span class="rs-season-label rs-prev-label">${mpPrevSlug ? seasonLabel(mpPrevSlug) : ''}</span>
-          <span class="rs-prev-score" style="color:${mpPrev !== null ? mpPrevColor : '#555'}">
-            ${mpPrev !== null ? Math.round(mpPrev) : '—'}
+          <span class="roster-stat" title="Previous Season M+">
+            <span class="rs-season-label rs-prev-label">${mpPrevSlug ? seasonLabel(mpPrevSlug) : ''}</span>
+            <span class="rs-prev-score" style="color:${mpPrev !== null ? mpPrevColor : '#555'}">
+              ${mpPrev !== null ? Math.round(mpPrev) : '—'}
+            </span>
           </span>
-        </span>
-        <span class="roster-stat" title="Raid Progress">
-          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_boss_archimonde.jpg" alt="Raid" />
-          <span class="rs-raid" style="color:${raid ? raid.color : '#555'}">
-            ${raid ? raid.text : '—'}
+        </div>
+        <div class="roster-stats-row">
+          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/inv_misc_head_dragon_black.jpg" alt="Raid" />
+          <span class="roster-stat" title="Current Raid">
+            <span class="rs-season-label rs-raid-curr-label">${raidCurr ? raidShortName(raidCurr.slug) : ''}</span>
+            <span class="rs-raid" style="color:${raidCurr ? raidCurr.color : '#555'}">
+              ${raidCurr ? raidCurr.text : '—'}
+            </span>
           </span>
-        </span>
+          <span class="roster-stat" title="Previous Raid">
+            <span class="rs-season-label rs-raid-prev-label">${raidPrev ? raidShortName(raidPrev.slug) : ''}</span>
+            <span class="rs-prev-score rs-raid-prev" style="color:${raidPrev ? raidPrev.color : '#555'}">
+              ${raidPrev ? raidPrev.text : '—'}
+            </span>
+          </span>
+        </div>
       </div>`;
 
     return `
@@ -279,17 +298,18 @@ function getBestScore(season) {
 }
 
 function parseStats(data) {
-  if (!data || data.statusCode || data.error) {
-    return { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, progression: null };
-  }
+  const empty = { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, raidCurr: null, raidPrev: null, progression: null };
+  if (!data || data.statusCode || data.error) return empty;
   const seasons = data.mythic_plus_scores_by_season ?? [];
   const currentSeason  = seasons.find(s => s._source === 'current');
   const previousSeason = seasons.find(s => s._source === 'previous');
   const curr = currentSeason  ? getBestScore(currentSeason)  : { score: 0, color: '#888', slug: null };
   const prev = previousSeason ? getBestScore(previousSeason) : { score: null, color: '#888', slug: null };
+  const raids = parseRaidProgress(data.raid_progression);
   return {
     mpScore: curr.score, mpColor: curr.color, mpScoreSlug: curr.slug,
     mpPrev:  prev.score, mpPrevColor: prev.color, mpPrevSlug: prev.slug,
+    raidCurr: raids.raidCurr, raidPrev: raids.raidPrev,
     progression: data.raid_progression ?? null,
   };
 }
@@ -310,7 +330,7 @@ function fetchStats(name, realmSlug) {
         raid_progression: curr?.raid_progression ?? null,
       });
     })
-    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, progression: null }; })
+    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, raidCurr: null, raidPrev: null, progression: null }; })
     .finally(() => { delete statsPending[name]; });
   statsPending[name] = p;
   return p;
@@ -369,17 +389,22 @@ const thumbObserver = new IntersectionObserver((entries) => {
       fetchStats(name, realm).then(() => {
         const s = statsCache[name];
         if (!s) return;
-        const raid        = raidSummary(s.progression);
-        const currLabelEl = card.querySelector('.rs-curr-label');
-        const scoreEl     = card.querySelector('.rs-score');
-        const prevLabelEl = card.querySelector('.rs-prev-label');
-        const prevEl      = card.querySelector('.rs-prev-score');
-        const raidEl      = card.querySelector('.rs-raid');
-        if (currLabelEl) currLabelEl.textContent = s.mpScoreSlug ? seasonLabel(s.mpScoreSlug) : '';
-        if (scoreEl)     { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '0'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
-        if (prevLabelEl) prevLabelEl.textContent = s.mpPrevSlug ? seasonLabel(s.mpPrevSlug) : '';
-        if (prevEl)      { prevEl.textContent = s.mpPrev !== null ? Math.round(s.mpPrev) : '—'; prevEl.style.color = s.mpPrev ? s.mpPrevColor : '#555'; }
-        if (raidEl)      { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
+        const currLabelEl    = card.querySelector('.rs-curr-label');
+        const scoreEl        = card.querySelector('.rs-score');
+        const prevLabelEl    = card.querySelector('.rs-prev-label');
+        const prevEl         = card.querySelector('.rs-prev-score');
+        const raidCurrLabel  = card.querySelector('.rs-raid-curr-label');
+        const raidEl         = card.querySelector('.rs-raid');
+        const raidPrevLabel  = card.querySelector('.rs-raid-prev-label');
+        const raidPrevEl     = card.querySelector('.rs-raid-prev');
+        if (currLabelEl)   currLabelEl.textContent = s.mpScoreSlug ? seasonLabel(s.mpScoreSlug) : '';
+        if (scoreEl)       { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '0'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
+        if (prevLabelEl)   prevLabelEl.textContent = s.mpPrevSlug ? seasonLabel(s.mpPrevSlug) : '';
+        if (prevEl)        { prevEl.textContent = s.mpPrev !== null ? Math.round(s.mpPrev) : '—'; prevEl.style.color = s.mpPrev ? s.mpPrevColor : '#555'; }
+        if (raidCurrLabel) raidCurrLabel.textContent = s.raidCurr ? raidShortName(s.raidCurr.slug) : '';
+        if (raidEl)        { raidEl.textContent = s.raidCurr ? s.raidCurr.text : '—'; raidEl.style.color = s.raidCurr ? s.raidCurr.color : '#555'; }
+        if (raidPrevLabel) raidPrevLabel.textContent = s.raidPrev ? raidShortName(s.raidPrev.slug) : '';
+        if (raidPrevEl)    { raidPrevEl.textContent = s.raidPrev ? s.raidPrev.text : '—'; raidPrevEl.style.color = s.raidPrev ? s.raidPrev.color : '#555'; }
       });
     }
   });
