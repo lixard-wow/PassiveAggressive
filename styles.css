@@ -576,9 +576,15 @@ section { padding: 6rem 1.5rem; }
 
 .roster-stats {
   display: flex;
-  gap: 0.6rem;
+  flex-direction: column;
+  gap: 0.3rem;
   margin-top: 0.4rem;
-  flex-wrap: wrap;
+}
+
+.roster-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .roster-stat {
@@ -593,8 +599,8 @@ section { padding: 6rem 1.5rem; }
 }
 
 .stat-icon-img {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 2px;
   display: block;
   flex-shrink: 0;
