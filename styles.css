@@ -719,6 +719,20 @@ section { padding: 6rem 1.5rem; }
   border: 1px solid var(--border);
 }
 
+.roster-main-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.4rem;
+  border-radius: 20px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(168, 85, 247, 0.15);
+  color: #A855F7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
 .role-icon-plus {
   font-size: 15px;
   font-weight: 900;
