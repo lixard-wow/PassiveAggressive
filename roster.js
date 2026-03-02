@@ -78,9 +78,31 @@ let currentSort = 'rank';
 let blizzToken = null;
 const thumbnailCache = {};
 const statsCache = {};
+const statsPending = {};
+
+// Raids listed newest → oldest. Add new raid slugs to the front when a new tier releases.
+const RAID_ORDER = [
+  'liberation-of-undermine',
+  'nerub-ar-palace',
+  'amirdrassil-the-dreams-hope',
+  'aberrus-the-shadowed-crucible',
+  'vault-of-the-incarnates',
+];
 
 function latestRaid(progression) {
   if (!progression) return null;
+  // Try each raid newest-first; prefer one where the player has kills
+  for (const slug of RAID_ORDER) {
+    const r = progression[slug];
+    if (r && (r.mythic_bosses_killed || r.heroic_bosses_killed || r.normal_bosses_killed)) {
+      return r;
+    }
+  }
+  // No kills found — return first recognised raid (for "0/8" display)
+  for (const slug of RAID_ORDER) {
+    if (progression[slug]) return progression[slug];
+  }
+  // Ultimate fallback: last key in the object
   const keys = Object.keys(progression);
   return keys.length ? progression[keys[keys.length - 1]] : null;
 }
@@ -142,8 +164,6 @@ function buildRoster(filter = currentFilter) {
 
   let filtered = filter === 'all' ? liveRoster : liveRoster.filter(m => m.role === filter);
   if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
-
-  if (currentSort === 'score') console.log('[sort:score] pre-sort scores:', filtered.map(m => `${m.name}:${statsCache[m.name]?.mpScore ?? 'null'}`));
 
   filtered = [...filtered].sort((a, b) => {
     const sa = statsCache[a.name];
@@ -229,9 +249,11 @@ function buildRoster(filter = currentFilter) {
 // STATS HELPERS
 // =====================
 function parseStats(data) {
+  if (!data || data.statusCode || data.error) {
+    return { mpScore: null, mpColor: '#888', progression: null };
+  }
   const seasons = data.mythic_plus_scores_by_season ?? [];
   let mpScore = 0, mpColor = '#888';
-  // Iterate all returned seasons, take the highest score across all role keys
   for (const season of seasons) {
     for (const k of ['all', 'dps', 'healer', 'tank']) {
       const s = season?.scores?.[k] ?? 0;
@@ -241,22 +263,28 @@ function parseStats(data) {
       }
     }
   }
-  console.log(`[score] ${data.name ?? '?'}: ${mpScore}`);
   return { mpScore: mpScore > 0 ? mpScore : null, mpColor, progression: data.raid_progression ?? null };
 }
 
 function fetchStats(name, realmSlug) {
   if (statsCache[name]) return Promise.resolve();
-  return fetch(
-    `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season:current,raid_progression`
+  if (statsPending[name]) return statsPending[name];
+  const p = fetch(
+    `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season,raid_progression`
   )
     .then(r => r.json())
     .then(data => { statsCache[name] = parseStats(data); })
-    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', progression: null }; });
+    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', progression: null }; })
+    .finally(() => { delete statsPending[name]; });
+  statsPending[name] = p;
+  return p;
 }
 
 async function fetchAllStats() {
+  const grid = document.getElementById('rosterGrid');
+  if (grid) grid.style.opacity = '0.5';
   await Promise.all(liveRoster.map(m => fetchStats(m.name, m.realmSlug)));
+  if (grid) grid.style.opacity = '';
 }
 
 // =====================
