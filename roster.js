@@ -143,6 +143,8 @@ function buildRoster(filter = currentFilter) {
   let filtered = filter === 'all' ? liveRoster : liveRoster.filter(m => m.role === filter);
   if (currentRankFilter !== 'all') filtered = filtered.filter(m => m.rank === currentRankFilter);
 
+  if (currentSort === 'score') console.log('[sort:score] pre-sort scores:', filtered.map(m => `${m.name}:${statsCache[m.name]?.mpScore ?? 'null'}`));
+
   filtered = [...filtered].sort((a, b) => {
     const sa = statsCache[a.name];
     const sb = statsCache[b.name];
@@ -150,8 +152,8 @@ function buildRoster(filter = currentFilter) {
       case 'name-asc':  return a.name.localeCompare(b.name);
       case 'name-desc': return b.name.localeCompare(a.name);
       case 'score': {
-        const va = sa?.mpScore ?? -1;
-        const vb = sb?.mpScore ?? -1;
+        const va = sa?.mpScore ?? 0;
+        const vb = sb?.mpScore ?? 0;
         return vb - va || a.name.localeCompare(b.name);
       }
       case 'raid': {
@@ -227,17 +229,20 @@ function buildRoster(filter = currentFilter) {
 // STATS HELPERS
 // =====================
 function parseStats(data) {
-  const season = data.mythic_plus_scores_by_season?.[0];
-  const scores = season?.scores ?? {};
-  const segs   = season?.segments ?? {};
-  let mpScore = null, mpColor = '#888';
-  for (const k of ['all', 'dps', 'healer', 'tank']) {
-    if ((scores[k] || 0) > (mpScore || 0)) {
-      mpScore = scores[k];
-      mpColor = segs[k]?.color ?? '#888';
+  const seasons = data.mythic_plus_scores_by_season ?? [];
+  let mpScore = 0, mpColor = '#888';
+  // Iterate all returned seasons, take the highest score across all role keys
+  for (const season of seasons) {
+    for (const k of ['all', 'dps', 'healer', 'tank']) {
+      const s = season?.scores?.[k] ?? 0;
+      if (s > mpScore) {
+        mpScore = s;
+        mpColor = season?.segments?.[k]?.color ?? '#888';
+      }
     }
   }
-  return { mpScore, mpColor, progression: data.raid_progression ?? null };
+  console.log(`[score] ${data.name ?? '?'}: ${mpScore}`);
+  return { mpScore: mpScore > 0 ? mpScore : null, mpColor, progression: data.raid_progression ?? null };
 }
 
 function fetchStats(name, realmSlug) {
