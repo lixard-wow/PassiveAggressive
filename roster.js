@@ -93,14 +93,15 @@ function raidSortValue(progression) {
 function raidSummary(progression) {
   if (!progression || !progression[CURRENT_RAID]) return null;
   const r = progression[CURRENT_RAID];
-  const summary = r.summary;
-  if (!summary) return null;
-  const killed = (r.mythic_bosses_killed || 0) + (r.heroic_bosses_killed || 0) + (r.normal_bosses_killed || 0);
-  if (killed === 0) return { text: `0/${r.total_bosses}`, color: '#888' };
-  let color = '#1eff00';
-  if (summary.includes(' M')) color = '#e8a836';
-  else if (summary.includes(' H')) color = '#a335ee';
-  return { text: summary, color };
+  // Use individual kill counts for colour (most reliable)
+  const mythic = r.mythic_bosses_killed || 0;
+  const heroic = r.heroic_bosses_killed || 0;
+  const normal = r.normal_bosses_killed || 0;
+  const total  = r.total_bosses || 8;
+  if (mythic === 0 && heroic === 0 && normal === 0) return null;
+  if (mythic > 0) return { text: `${mythic}/${total} M`, color: '#e8a836' };
+  if (heroic > 0) return { text: `${heroic}/${total} H`, color: '#a335ee' };
+  return { text: `${normal}/${total} N`, color: '#1eff00' };
 }
 
 function normalizeRole(role) {
@@ -269,7 +270,9 @@ const thumbObserver = new IntersectionObserver((entries) => {
           const season = data.mythic_plus_scores_by_season?.[0];
           const mpScore = season?.scores?.all ?? null;
           const mpColor = season?.segments?.all?.color ?? '#888';
-          statsCache[name] = { mpScore, mpColor, progression: data.raid_progression ?? null };
+          const prog = data.raid_progression ?? null;
+          if (prog) console.log(`[RIO:${name}] raid keys:`, Object.keys(prog), '| current:', prog[CURRENT_RAID]);
+          statsCache[name] = { mpScore, mpColor, progression: prog };
 
           const raid = raidSummary(statsCache[name].progression);
           const scoreEl = card.querySelector('.rs-score');
