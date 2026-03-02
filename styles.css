@@ -272,6 +272,61 @@ body {
   color: #888;
 }
 
+.countdown-banner {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.countdown-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #A855F7;
+  margin-bottom: 0.6rem;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.2rem;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+}
+
+.cd-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.cd-label {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  margin-top: 0.15rem;
+}
+
+.cd-sep {
+  font-size: 1.4rem;
+  color: #555;
+  font-weight: 700;
+  padding-bottom: 0.8rem;
+}
+
 .scroll-hint {
   position: absolute;
   bottom: 2rem;
