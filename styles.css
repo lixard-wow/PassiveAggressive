@@ -466,32 +466,15 @@ section { padding: 6rem 1.5rem; }
 .sort-bar {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .sort-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: #555;
-}
-
-.sort-btn {
-  background: var(--dark4);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: all 0.2s;
-}
-
-.sort-btn.active,
-.sort-btn:hover {
-  background: #3a3a55;
-  color: #c8c8ff;
-  border-color: #5555aa;
+  white-space: nowrap;
 }
 
 .filter-btn {
