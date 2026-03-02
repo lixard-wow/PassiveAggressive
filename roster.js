@@ -80,9 +80,27 @@ const thumbnailCache = {};
 const statsCache = {};
 const statsPending = {};
 
+// Seasons listed newest → oldest.
+const SEASON_ORDER = [
+  'season-tww-3',
+  'season-tww-2',
+  'season-tww-1',
+  'season-df-3',
+  'season-df-2',
+  'season-df-1',
+];
+
+function seasonLabel(slug) {
+  const m = slug?.match(/-(\d+)$/);
+  return m ? 'S' + m[1] : '';
+}
+
 // Raids listed newest → oldest. Add new raid slugs to the front when a new tier releases.
 const RAID_ORDER = [
+  'manaforge-omega',
+  'blackrock-depths',
   'liberation-of-undermine',
+  'nerubar-palace',
   'nerub-ar-palace',
   'amirdrassil-the-dreams-hope',
   'aberrus-the-shadowed-crucible',
@@ -172,8 +190,8 @@ function buildRoster(filter = currentFilter) {
       case 'name-asc':  return a.name.localeCompare(b.name);
       case 'name-desc': return b.name.localeCompare(a.name);
       case 'score': {
-        const va = sa?.mpScore ?? 0;
-        const vb = sb?.mpScore ?? 0;
+        const va = Math.max(sa?.mpScore ?? 0, sa?.mpPrev ?? 0);
+        const vb = Math.max(sb?.mpScore ?? 0, sb?.mpPrev ?? 0);
         return vb - va || a.name.localeCompare(b.name);
       }
       case 'raid': {
@@ -206,16 +224,28 @@ function buildRoster(filter = currentFilter) {
       ? `<img src="${thumb}" alt="${member.name}" class="roster-avatar-img" />`
       : `<span class="roster-avatar-icon">${cfg.icon}</span>`;
 
-    const mpScore = stats ? stats.mpScore : null;
-    const mpColor = stats ? stats.mpColor : '#888';
-    const raid    = stats ? raidSummary(stats.progression) : null;
+    const mpScore     = stats ? stats.mpScore     : null;
+    const mpColor     = stats ? stats.mpColor     : '#888';
+    const mpScoreSlug = stats ? stats.mpScoreSlug : null;
+    const mpPrev      = stats ? stats.mpPrev      : null;
+    const mpPrevColor = stats ? stats.mpPrevColor : '#888';
+    const mpPrevSlug  = stats ? stats.mpPrevSlug  : null;
+    const raid        = stats ? raidSummary(stats.progression) : null;
 
     const statsHtml = `
       <div class="roster-stats">
-        <span class="roster-stat" title="M+ Score">
+        <span class="roster-stat" title="Current Season M+">
           <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_challengemode_gold.jpg" alt="M+" />
+          <span class="rs-season-label rs-curr-label">${mpScoreSlug ? seasonLabel(mpScoreSlug) : ''}</span>
           <span class="rs-score" style="color:${mpScore !== null ? mpColor : '#555'}">
             ${mpScore !== null ? Math.round(mpScore) : '—'}
+          </span>
+        </span>
+        <span class="roster-stat" title="Previous Season M+">
+          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/achievement_challengemode_gold.jpg" alt="M+" />
+          <span class="rs-season-label rs-prev-label">${mpPrevSlug ? seasonLabel(mpPrevSlug) : ''}</span>
+          <span class="rs-prev-score" style="color:${mpPrev !== null ? mpPrevColor : '#555'}">
+            ${mpPrev !== null ? Math.round(mpPrev) : '—'}
           </span>
         </span>
         <span class="roster-stat" title="Raid Progress">
@@ -248,33 +278,42 @@ function buildRoster(filter = currentFilter) {
 // =====================
 // STATS HELPERS
 // =====================
+function getBestScore(season) {
+  let best = 0, bestColor = '#888';
+  for (const k of ['all', 'dps', 'healer', 'tank']) {
+    const s = season?.scores?.[k] ?? 0;
+    if (s > best) { best = s; bestColor = season?.segments?.[k]?.color ?? '#888'; }
+  }
+  return { score: best > 0 ? best : null, color: bestColor, slug: season?.season ?? null };
+}
+
 function parseStats(data) {
   if (!data || data.statusCode || data.error) {
-    return { mpScore: null, mpColor: '#888', progression: null };
+    return { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, progression: null };
   }
-  const seasons = data.mythic_plus_scores_by_season ?? [];
-  let mpScore = 0, mpColor = '#888';
-  for (const season of seasons) {
-    for (const k of ['all', 'dps', 'healer', 'tank']) {
-      const s = season?.scores?.[k] ?? 0;
-      if (s > mpScore) {
-        mpScore = s;
-        mpColor = season?.segments?.[k]?.color ?? '#888';
-      }
-    }
-  }
-  return { mpScore: mpScore > 0 ? mpScore : null, mpColor, progression: data.raid_progression ?? null };
+  const seasons = [...(data.mythic_plus_scores_by_season ?? [])].sort((a, b) => {
+    const ai = SEASON_ORDER.indexOf(a.season);
+    const bi = SEASON_ORDER.indexOf(b.season);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
+  const curr = seasons[0] ? getBestScore(seasons[0]) : { score: null, color: '#888', slug: null };
+  const prev = seasons[1] ? getBestScore(seasons[1]) : { score: null, color: '#888', slug: null };
+  return {
+    mpScore: curr.score, mpColor: curr.color, mpScoreSlug: curr.slug,
+    mpPrev:  prev.score, mpPrevColor: prev.color, mpPrevSlug: prev.slug,
+    progression: data.raid_progression ?? null,
+  };
 }
 
 function fetchStats(name, realmSlug) {
   if (statsCache[name]) return Promise.resolve();
   if (statsPending[name]) return statsPending[name];
   const p = fetch(
-    `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season,raid_progression`
+    `https://raider.io/api/v1/characters/profile?region=us&realm=${realmSlug}&name=${encodeURIComponent(name)}&fields=mythic_plus_scores_by_season:current,mythic_plus_scores_by_season:previous,raid_progression`
   )
     .then(r => r.json())
     .then(data => { statsCache[name] = parseStats(data); })
-    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', progression: null }; })
+    .catch(() => { statsCache[name] = { mpScore: null, mpColor: '#888', mpScoreSlug: null, mpPrev: null, mpPrevColor: '#888', mpPrevSlug: null, progression: null }; })
     .finally(() => { delete statsPending[name]; });
   statsPending[name] = p;
   return p;
@@ -333,11 +372,17 @@ const thumbObserver = new IntersectionObserver((entries) => {
       fetchStats(name, realm).then(() => {
         const s = statsCache[name];
         if (!s) return;
-        const raid = raidSummary(s.progression);
-        const scoreEl = card.querySelector('.rs-score');
-        const raidEl  = card.querySelector('.rs-raid');
-        if (scoreEl) { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '—'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
-        if (raidEl)  { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
+        const raid        = raidSummary(s.progression);
+        const currLabelEl = card.querySelector('.rs-curr-label');
+        const scoreEl     = card.querySelector('.rs-score');
+        const prevLabelEl = card.querySelector('.rs-prev-label');
+        const prevEl      = card.querySelector('.rs-prev-score');
+        const raidEl      = card.querySelector('.rs-raid');
+        if (currLabelEl) currLabelEl.textContent = s.mpScoreSlug ? seasonLabel(s.mpScoreSlug) : '';
+        if (scoreEl)     { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '—'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
+        if (prevLabelEl) prevLabelEl.textContent = s.mpPrevSlug ? seasonLabel(s.mpPrevSlug) : '';
+        if (prevEl)      { prevEl.textContent = s.mpPrev !== null ? Math.round(s.mpPrev) : '—'; prevEl.style.color = s.mpPrev ? s.mpPrevColor : '#555'; }
+        if (raidEl)      { raidEl.textContent = raid ? raid.text : '—'; raidEl.style.color = raid ? raid.color : '#555'; }
       });
     }
   });
@@ -430,6 +475,9 @@ async function fetchRoster() {
 
   buildRankButtons();
   buildRoster(currentFilter);
+
+  // Eagerly fetch all stats then re-render so scores show without needing to scroll
+  fetchAllStats().then(() => buildRoster(currentFilter));
 }
 
 // =====================

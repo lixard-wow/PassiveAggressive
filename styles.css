@@ -600,9 +600,20 @@ section { padding: 6rem 1.5rem; }
   flex-shrink: 0;
 }
 
-.rs-score, .rs-raid {
+.rs-score, .rs-prev-score, .rs-raid {
   font-weight: 600;
   font-size: 0.78rem;
+}
+
+.rs-prev-score {
+  opacity: 0.7;
+}
+
+.rs-season-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: #666;
+  min-width: 1.2em;
 }
 
 .roster-role {
