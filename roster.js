@@ -85,10 +85,14 @@ const CURRENT_RAID_LABEL = 'Liberation of Undermine';
 function raidSummary(progression) {
   if (!progression || !progression[CURRENT_RAID]) return null;
   const r = progression[CURRENT_RAID];
-  if (r.mythic_bosses_killed > 0)  return { text: `${r.mythic_bosses_killed}/${r.total_bosses} M`, color: '#e8a836' };
-  if (r.heroic_bosses_killed > 0)  return { text: `${r.heroic_bosses_killed}/${r.total_bosses} H`, color: '#a335ee' };
-  if (r.normal_bosses_killed > 0)  return { text: `${r.normal_bosses_killed}/${r.total_bosses} N`, color: '#1eff00' };
-  return { text: `0/${r.total_bosses}`, color: '#888' };
+  const summary = r.summary;
+  if (!summary) return null;
+  const killed = (r.mythic_bosses_killed || 0) + (r.heroic_bosses_killed || 0) + (r.normal_bosses_killed || 0);
+  if (killed === 0) return { text: `0/${r.total_bosses}`, color: '#888' };
+  let color = '#1eff00';
+  if (summary.includes(' M')) color = '#e8a836';
+  else if (summary.includes(' H')) color = '#a335ee';
+  return { text: summary, color };
 }
 
 function normalizeRole(role) {
