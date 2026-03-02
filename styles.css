@@ -621,7 +621,8 @@ section { padding: 6rem 1.5rem; }
 }
 
 .roster-rank {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 0.1rem 0.4rem;
   border-radius: 20px;
   font-size: 0.62rem;
@@ -629,6 +630,13 @@ section { padding: 6rem 1.5rem; }
   background: rgba(255,255,255,0.05);
   color: #888;
   border: 1px solid var(--border);
+}
+
+.role-icon-plus {
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--green);
 }
 
 /* =====================
