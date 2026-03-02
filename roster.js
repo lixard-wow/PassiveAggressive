@@ -272,8 +272,8 @@ function buildRoster(filter = currentFilter) {
         <div class="roster-avatar" style="background:${cfg.color}22; border: 1px solid ${cfg.color}44">
           ${avatarContent}
         </div>
-        <div class="roster-name">${member.name}</div>
-        <div class="roster-class">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
+        <div class="roster-name" style="color:${cfg.color}">${member.name}</div>
+        <div class="roster-class" style="color:${cfg.color}">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
         <div class="roster-badges">
           <span class="roster-role ${roleClass}" title="${member.role}">${ROLE_ICONS[member.role] ? `<img src="${ROLE_ICONS[member.role]}" class="role-icon" alt="${member.role}" />` : `<span class="role-icon-plus">✚</span>`}</span>
           <span class="roster-rank" title="${rankDesc}">${rankLabel}</span>
