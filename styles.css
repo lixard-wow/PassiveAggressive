@@ -59,7 +59,11 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
 }
+
+.nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
   height: 40px;
