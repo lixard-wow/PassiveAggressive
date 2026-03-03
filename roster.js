@@ -156,8 +156,6 @@ function normalizeRole(role) {
 // =====================
 // BUILD RANK DROPDOWN
 // =====================
-const MAIN_RANKS = new Set([0, 1, 2, 3]);
-
 function buildRankButtons() {
   const sel = document.getElementById('rankFilter');
   if (!sel) return;
@@ -279,7 +277,6 @@ function buildRoster(filter = currentFilter) {
         <div class="roster-badges">
           <span class="roster-role ${roleClass}" title="${member.role}">${ROLE_ICONS[member.role] ? `<img src="${ROLE_ICONS[member.role]}" class="role-icon" alt="${member.role}" />` : `<span class="role-icon-plus">✚</span>`}</span>
           <span class="roster-rank" title="${rankDesc}">${rankLabel}</span>
-          ${MAIN_RANKS.has(member.rank) ? '<span class="roster-main-tag">Main</span>' : ''}
         </div>
         ${statsHtml}
       </a>`;
