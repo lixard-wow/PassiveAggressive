@@ -24,15 +24,16 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 });
 
 // =====================
-// DIFFICULTY TABS
+// DIFFICULTY TOGGLE
 // =====================
 document.querySelectorAll('.diff-tab').forEach(btn => {
   btn.addEventListener('click', () => {
-    const section = btn.closest('.boss-section');
-    section.querySelectorAll('.diff-tab').forEach(t => t.classList.remove('active'));
-    section.querySelectorAll('.diff-panel').forEach(p => p.classList.remove('active'));
+    const diff = btn.dataset.diff;
+    document.querySelectorAll('.diff-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
-    section.querySelector(`.diff-panel[data-diff="${btn.dataset.diff}"]`).classList.add('active');
+    document.querySelectorAll('.diff-panel').forEach(p => {
+      p.classList.toggle('active', p.dataset.diff === diff);
+    });
   });
 });
 
