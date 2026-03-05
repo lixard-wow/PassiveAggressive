@@ -62,38 +62,111 @@
           <h2>Chimaerus the Undreamt God</h2>
           <p class="boss-tagline">The fight is won or lost on add control. Every Manifestation that reaches the boss permanently empowers it. Three stacks and the fight becomes unwinnable.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Position Chimaerus centrally &mdash; Manifestations spawn from the arena's edges and converge inward.</li>
-                <li>Intercept Manifestations entering Reality by standing in their path to briefly slow their advance.</li>
-                <li>Taunt any Manifestation that slips past DPS &mdash; prevent it from reaching Chimaerus at all costs.</li>
-                <li>Use defensives after each intermission &mdash; the boss's melee damage scales with every Cannibalized Essence stack.</li>
-                <li>Face Chimaerus away from the raid &mdash; frontal Phlegm Glob salvos spread in a wide arc.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Position Chimaerus centrally &mdash; Manifestations spawn from the arena's edges and converge inward.</li>
+                  <li>Intercept Manifestations entering Reality by standing in their path to briefly slow their advance.</li>
+                  <li>Taunt any Manifestation that slips past DPS &mdash; prevent it from reaching Chimaerus at all costs.</li>
+                  <li>Use defensives after each intermission &mdash; the boss's melee damage scales with every Cannibalized Essence stack.</li>
+                  <li>Face Chimaerus away from the raid &mdash; frontal Phlegm Glob salvos spread in a wide arc.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Rift Sickness deals sustained Nature damage to all players every second &mdash; this is a throughput fight, not a reactive one.</li>
+                  <li>Heal proactively and maintain steady output throughout &mdash; do not wait for health bar spikes.</li>
+                  <li>Time cooldowns for when multiple Manifestations are vulnerable simultaneously (peak DPS window = peak incoming damage).</li>
+                  <li>After each intermission, top the tank immediately &mdash; Chimaerus resets aggro and opens with heavy melee.</li>
+                  <li>Split the raid into two equal groups (1 Tank / 2 Healers / 7 DPS each) before the pull for efficient Manifestation coverage.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li><strong>You cannot damage Manifestations without Alnsight &mdash; gain the buff before engaging adds.</strong></li>
+                  <li>Clear Manifestations in strict priority order: the type closest to Chimaerus always dies first.</li>
+                  <li>Every Manifestation consumed by Chimaerus adds a permanent +50% damage stack to the boss.</li>
+                  <li>After 3&ndash;4 Cannibalized Essence stacks the fight becomes mathematically unwinnable &mdash; zero tolerance for missed adds.</li>
+                  <li>Save AoE burst cooldowns for windows when multiple Manifestations become vulnerable simultaneously.</li>
+                  <li>Avoid standing in front of Chimaerus during Phlegm Glob &mdash; the cone hits anyone near the frontal arc.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>Rift Sickness deals sustained Nature damage to all players every second &mdash; this is a throughput fight, not a reactive one.</li>
-                <li>Heal proactively and maintain steady output throughout &mdash; do not wait for health bar spikes.</li>
-                <li>Time cooldowns for when multiple Manifestations are vulnerable simultaneously (peak DPS window = peak incoming damage).</li>
-                <li>After each intermission, top the tank immediately &mdash; Chimaerus resets aggro and opens with heavy melee.</li>
-                <li>Split the raid into two equal groups (1 Tank / 2 Healers / 7 DPS each) before the pull for efficient Manifestation coverage.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Chimaerus gains Cannibalized Essence 50% faster &mdash; each add must die within 8 seconds of spawn or the spiral begins.</li>
+                  <li>Manifestations on Heroic move faster toward the boss &mdash; tank interceptions must happen earlier in their path, not near the center.</li>
+                  <li>Melee damage after intermissions scales more steeply with each Essence stack &mdash; rotate defensives more conservatively.</li>
+                  <li>Pre-position for each new wave's entry point &mdash; reaction intercepts are too slow on Heroic spawn speeds.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Rift Sickness ticks every 0.75 seconds instead of every 1 second &mdash; sustained throughput requirement increases by 25%.</li>
+                  <li>Reserve a second major cooldown specifically for the mid-fight intermission &mdash; Normal-tier cooldown rotation is insufficient on Heroic.</li>
+                  <li>Peak DPS windows for adds on Heroic are shorter &mdash; coordinate cooldown timing more precisely with DPS.</li>
+                  <li>The raid takes increased damage during AoE add windows &mdash; do not drop throughput during these moments even if you're moving.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>A 4th Manifestation type appears on Heroic &mdash; the <strong>Void Shard</strong> &mdash; which reflects damage back to any melee attacker. Assign ranged DPS exclusively to Void Shard duty.</li>
+                  <li>Void Shards must be called out immediately on spawn &mdash; melee DPS must avoid engaging them completely.</li>
+                  <li>Three Manifestation types now active simultaneously in later waves &mdash; kill priority is: closest to boss first, Void Shard second (ranged only), then furthest.</li>
+                  <li>Alnsight uptime is more critical &mdash; losing the buff mid-wave on Heroic causes a missed Manifestation that accelerates the loss spiral.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li><strong>You cannot damage Manifestations without Alnsight &mdash; gain the buff before engaging adds.</strong></li>
-                <li>Clear Manifestations in strict priority order: the type closest to Chimaerus always dies first.</li>
-                <li>Every Manifestation consumed by Chimaerus adds a permanent +50% damage stack to the boss.</li>
-                <li>After 3&ndash;4 Cannibalized Essence stacks the fight becomes mathematically unwinnable &mdash; zero tolerance for missed adds.</li>
-                <li>Save AoE burst cooldowns for windows when multiple Manifestations become vulnerable simultaneously.</li>
-                <li>Avoid standing in front of Chimaerus during Phlegm Glob &mdash; the cone hits anyone near the frontal arc.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Dream Collapse at 50% and 25% HP</strong> physically shrinks the arena ring. Players outside the new boundary after 3 seconds are killed instantly.</li>
+                  <li>Communicate Dream Collapse the moment it begins &mdash; the visual indicator is subtle and easy to miss mid-fight.</li>
+                  <li>After each collapse, reposition Chimaerus to the new center &mdash; the boss must remain at the center of the reduced arena.</li>
+                  <li>Post-collapse melee damage spikes significantly due to the reduced space and continued Essence scaling &mdash; use defensives immediately after boundary forms.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Dream Collapse locks all healing cooldowns for 15 seconds &mdash; your major cooldowns go on extended lockout after each collapse. Plan throughput around these forced dead windows.</li>
+                  <li>Pre-top the entire raid before each expected collapse &mdash; anyone below 50% HP entering the boundary change is at high risk of dying to the arena damage tick.</li>
+                  <li>Two Dream Collapses means two 15-second lockout windows &mdash; map your full cooldown roster to the timeline before the pull.</li>
+                  <li>Rift Sickness damage does not pause during collapse &mdash; maintain throughput even while repositioning in the shrinking arena.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>During Dream Collapse, Manifestations spawn at triple the normal rate for 10 seconds. Pre-assign a 3-person dedicated add kill team that does nothing else during this window.</li>
+                  <li>The add kill team must maintain Alnsight through the collapse transition &mdash; losing the buff during triple-spawn is an unrecoverable cascade.</li>
+                  <li>The reduced arena after each collapse limits movement paths &mdash; pre-plan Manifestation intercept angles for the smaller space.</li>
+                  <li>Use Heroism/Lust immediately after the first Dream Collapse resolves &mdash; the subsequent triple-spawn window plus higher damage environment is the fight's peak pressure point.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

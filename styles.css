@@ -1427,9 +1427,46 @@ footer {
   background: var(--border);
 }
 
+/* =====================
+   DIFFICULTY TABS
+   ===================== */
+.diff-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+  padding: 0 1.5rem;
+}
+
+.diff-tab {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  color: #555;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.77rem;
+  font-weight: 700;
+  padding: 0.65rem 1.1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.diff-tab:hover { color: var(--text); }
+
+.diff-tab.active[data-diff="normal"] { color: var(--blue);  border-bottom-color: var(--blue); }
+.diff-tab.active[data-diff="heroic"] { color: var(--gold);  border-bottom-color: var(--gold); }
+.diff-tab.active[data-diff="mythic"] { color: #a855f7;      border-bottom-color: #a855f7; }
+
+.diff-panel { display: none; }
+.diff-panel.active { display: block; }
+
 @media (max-width: 720px) {
   .guide-card-art { height: 100px; }
   .boss-header { padding: 1.25rem 1.25rem; }
   .boss-body { padding: 1.1rem 1.25rem 1.5rem; }
   .role-grid { grid-template-columns: 1fr; }
+  .diff-tabs { padding: 0 0.75rem; }
+  .diff-tab { padding: 0.6rem 0.75rem; font-size: 0.72rem; }
 }
