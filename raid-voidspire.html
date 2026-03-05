@@ -62,34 +62,107 @@
           <h2>Imperator Averzian</h2>
           <p class="boss-tagline">The opener. A grid-control encounter where positioning decides everything.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Position Averzian away from Dark Tears at all times to prevent Imperator's Glory empowerment.</li>
-                <li>Rotate defensive cooldowns for Blackening Wounds stacks &mdash; swap tanks at 3&ndash;4 stacks.</li>
-                <li>Face boss toward the center of unused grid squares to control his grid claiming movement.</li>
-                <li>When Averzian claims a square, reposition immediately to prevent a line-of-three from forming.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Position Averzian away from Dark Tears at all times to prevent Imperator's Glory empowerment.</li>
+                  <li>Rotate defensive cooldowns for Blackening Wounds stacks &mdash; swap tanks at 3&ndash;4 stacks.</li>
+                  <li>Face boss toward the center of unused grid squares to control his grid claiming movement.</li>
+                  <li>When Averzian claims a square, reposition immediately to prevent a line-of-three from forming.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Expect steady raid-wide damage from Dark Upheaval &mdash; ramp healing before each cast.</li>
+                  <li>Track Umbral Collapse soak assignments; prepare throughput cooldowns when soak headcount is low.</li>
+                  <li>Damage intensity increases as the arena fills with claimed squares &mdash; save a major cooldown for late phase.</li>
+                  <li>Keep everyone topped during Voidshaper kill windows when the raid briefly clusters.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Split into two kill teams (melee/ranged or odd/even) and destroy assigned Voidshapers simultaneously.</li>
+                  <li>Void Grid: never allow Averzian to complete a line of three claimed squares &mdash; reposition him when needed.</li>
+                  <li>Voidshapers are the absolute priority over boss DPS &mdash; uninterrupted, they empower Averzian.</li>
+                  <li>Spread positioning to minimize splash from Umbral Collapse soaks.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>Expect steady raid-wide damage from Dark Upheaval &mdash; ramp healing before each cast.</li>
-                <li>Track Umbral Collapse soak assignments; prepare throughput cooldowns when soak headcount is low.</li>
-                <li>Damage intensity increases as the arena fills with claimed squares &mdash; save a major cooldown for late phase.</li>
-                <li>Keep everyone topped during Voidshaper kill windows when the raid briefly clusters.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Blackening Wounds stacks now apply twice as fast &mdash; swap at 2 stacks, not 3. Rotate defensives more aggressively.</li>
+                  <li>Dark Tears spawn intervals shortened by 40% &mdash; constant repositioning required without losing boss control.</li>
+                  <li>Communicate every reposition to the raid immediately &mdash; surprise tank movement disrupts soak assignments.</li>
+                  <li>Pre-position near grid center at all times to give yourself maximum reaction distance to new Tear spawns.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Dark Upheaval fires every 20 seconds instead of 30 &mdash; assign a healing cooldown to every other cast with no gaps.</li>
+                  <li>Umbral Collapse soak damage increased substantially &mdash; under-healed soaks kill squishier players.</li>
+                  <li>Pre-position near soak zones before each Collapse cast &mdash; reaction time is now too short to improvise.</li>
+                  <li>Keep the raid above 80% entering each Upheaval cast &mdash; the damage amp punishes low health significantly.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>A third Voidshaper type spawns mid-grid with a Void Shield &mdash; break the shield first before dealing damage.</li>
+                  <li>Grid completion now happens significantly faster &mdash; mispositioned boss causes enrage-equivalent damage spikes.</li>
+                  <li>Assign a dedicated watcher to call grid line-of-three threats &mdash; DPS tunnel vision causes fast wipes here.</li>
+                  <li>Do not slow Voidshaper kills to preserve uptime on boss &mdash; empowered Averzian kills the raid faster than DPS loss.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li>Split into two kill teams (melee/ranged or odd/even) and destroy assigned Voidshapers simultaneously.</li>
-                <li>Void Grid: never allow Averzian to complete a line of three claimed squares &mdash; reposition him when needed.</li>
-                <li>Voidshapers are the absolute priority over boss DPS &mdash; uninterrupted, they empower Averzian.</li>
-                <li>Spread positioning to minimize splash from Umbral Collapse soaks.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Void Fracture at 70% HP</strong> splits Averzian into a shadow copy &mdash; tank both copies in opposite arena halves simultaneously.</li>
+                  <li>The two copies cannot share a quadrant &mdash; if they converge they merge and wipe the group instantly.</li>
+                  <li>Communicate copy positions constantly via voice &mdash; the off-tank's repositioning must never push their copy toward yours.</li>
+                  <li>Defensives must be split between both tanks independently &mdash; no shared cooldown windows after the fracture.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Both copies deal full melee damage to their respective tanks &mdash; two healing cooldowns must be staggered at the split, not combined on one tank.</li>
+                  <li>Split healer assignments per copy at the Void Fracture &mdash; one healer per tank group, no overlap.</li>
+                  <li>Umbral Collapse soaks continue during the fracture phase &mdash; assign soak coverage per arena half.</li>
+                  <li>Collapse both copies before they reach 25% individually or the surviving copy enrages permanently.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Both copies must die within 5 seconds of each other &mdash; the survivor gains Void Ascendance (+300% damage per second) until it falls.</li>
+                  <li>Assign DPS kill teams per copy before the pull. Do not swap mid-fight unless your copy is far ahead on HP.</li>
+                  <li>Designate one HP caller per group to communicate the gap &mdash; start slowing your copy when the gap hits 8%.</li>
+                  <li>Use Heroism/Lust at the Void Fracture &mdash; this is the maximum window for synchronized simultaneous damage.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -102,34 +175,107 @@
           <h2>Vorasius</h2>
           <p class="boss-tagline">A colossal predator. Healer throughput and movement execution check.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Taunt swap when your Devour stack reaches 3 to prevent lethal damage amplification.</li>
-                <li>Face Vorasius away from the raid at all times &mdash; frontal cleave hits anyone in the arc.</li>
-                <li>Kite boss to the arena's edge during Feeding Frenzy; use defensives before the opening Slam.</li>
-                <li>Reposition quickly after Vorasius leaps &mdash; never let the raid get cleaved by his landing orientation.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Taunt swap when your Devour stack reaches 3 to prevent lethal damage amplification.</li>
+                  <li>Face Vorasius away from the raid at all times &mdash; frontal cleave hits anyone in the arc.</li>
+                  <li>Kite boss to the arena's edge during Feeding Frenzy; use defensives before the opening Slam.</li>
+                  <li>Reposition quickly after Vorasius leaps &mdash; never let the raid get cleaved by his landing orientation.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Sustained raid damage runs the entire fight &mdash; this is a throughput check, not a reaction check.</li>
+                  <li>Use healing ramp cooldowns during Feeding Frenzy when Vorasius gains Bloodrage stacks.</li>
+                  <li>Devour targets need immediate top-up between stacks; do not let the tank sit below 70%.</li>
+                  <li>Keep the whole raid above 70% &mdash; Vorasius checks player health thresholds on key abilities.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Spread at max distance during Void Geyser telegraphs &mdash; they target random players.</li>
+                  <li>Dodge Carnage ground pools &mdash; they persist and overlap with each other over time.</li>
+                  <li>During Feeding Frenzy, Vorasius is stationary &mdash; minimize movement and maximize uptime.</li>
+                  <li>Bloodrage phases are your DPS burst windows &mdash; use on-use trinkets and major cooldowns.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>Sustained raid damage runs the entire fight &mdash; this is a throughput check, not a reaction check.</li>
-                <li>Use healing ramp cooldowns during Feeding Frenzy when Vorasius gains Bloodrage stacks.</li>
-                <li>Devour targets need immediate top-up between stacks; do not let the tank sit below 70%.</li>
-                <li>Keep the whole raid above 70% &mdash; Vorasius checks player health thresholds on key abilities.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Devour now leaves a 15-second bleed after taunt swap &mdash; immediately call the swap so healers can pre-top the off-tank before the bleed ticks.</li>
+                  <li>Feeding Frenzy activates 10 seconds earlier in each cycle &mdash; be at the arena edge before it begins, not during it.</li>
+                  <li>Taunt swap window is now shorter &mdash; the incoming tank must have defensives ready before taunting, not after.</li>
+                  <li>Never delay repositioning after Vorasius leaps &mdash; the landing cleave window is smaller and faster on Heroic.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Void Geyser now splashes to players within 5 yards of the target &mdash; clustered players take 60% of the full hit. Enforce strict spread.</li>
+                  <li>Save an additional minor cooldown for mid-fight when Bloodrage stacks reach 4+ on Vorasius.</li>
+                  <li>Bleed from Devour on the off-tank is the primary death cause &mdash; top them immediately after every taunt swap.</li>
+                  <li>Keep the raid above 75% instead of 70% &mdash; health check thresholds are tighter on Heroic.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>A second Feeding Frenzy add spawns at 50% HP &mdash; both adds must die simultaneously or the survivor heals Vorasius for 10% HP.</li>
+                  <li>Assign cleave responsibility for both adds before the pull &mdash; improvised targeting loses the kill window.</li>
+                  <li>Bloodrage stacks carry between phases on Heroic &mdash; never allow more than 5 stacks going into Feeding Frenzy.</li>
+                  <li>Spread strictly for Void Geyser even in heavy AoE phases &mdash; splash clusters can one-shot squishier DPS.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li>Spread at max distance during Void Geyser telegraphs &mdash; they target random players.</li>
-                <li>Dodge Carnage ground pools &mdash; they persist and overlap with each other over time.</li>
-                <li>During Feeding Frenzy, Vorasius is stationary &mdash; minimize movement and maximize uptime.</li>
-                <li>Bloodrage phases are your DPS burst windows &mdash; use on-use trinkets and major cooldowns.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Maw Pull at 60% HP</strong> drags both tanks to the arena center for 6 seconds &mdash; no movement possible. Stack all remaining defensives before it resolves.</li>
+                  <li>Pre-position centrally as Vorasius approaches 65% so Maw Pull doesn't yank you through ground pools.</li>
+                  <li>After Maw Pull ends, immediately return to facing Vorasius away from the raid &mdash; he will cleave in whatever direction he was facing at release.</li>
+                  <li>Communicate Maw Pull timing to healers 5 seconds early &mdash; they need to front-load cooldowns before movement is locked.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Maw Pull prevents all player movement &mdash; front-load your entire cooldown window before it resolves, not during it.</li>
+                  <li>Any player below 40% HP when Maw Pull ends is killed instantly &mdash; raid must be above 40% before Vorasius hits 65% HP.</li>
+                  <li>Save your largest single healing cooldown exclusively for Maw Pull &mdash; it cannot be used for anything else.</li>
+                  <li>After Maw Pull, you have 4 seconds of normal play before Feeding Frenzy activates &mdash; use this window to top the tanks urgently.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Maw Pull also locks DPS movement &mdash; finish any positioning commitments before Vorasius hits 65% HP.</li>
+                  <li>During Maw Pull, continue dealing damage to Vorasius &mdash; he does not become immune. Maximize the window.</li>
+                  <li>After Maw Pull, pivot to second Feeding Frenzy add immediately &mdash; the timer overlaps with Maw Pull recovery.</li>
+                  <li>Use Heroism/Lust at Maw Pull release &mdash; Vorasius is stationary and both tanks are repositioning, creating maximum uptime.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -142,34 +288,107 @@
           <h2>Fallen-King Salhadaar</h2>
           <p class="boss-tagline">A significant complexity spike. Add control, orb management, and constant movement.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Disrupt energy conduits connecting Salhadaar to the Riftlabs machinery &mdash; they empower him.</li>
-                <li>Taunt swap when Salhadaar casts Empowered Strike &mdash; incoming tank must have defensives ready.</li>
-                <li>Stay near disrupted conduits and reposition frequently as the arena's energy grid shifts.</li>
-                <li>Kite Riftbound Constructs away from the raid during each add wave.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Disrupt energy conduits connecting Salhadaar to the Riftlabs machinery &mdash; they empower him.</li>
+                  <li>Taunt swap when Salhadaar casts Empowered Strike &mdash; incoming tank must have defensives ready.</li>
+                  <li>Stay near disrupted conduits and reposition frequently as the arena's energy grid shifts.</li>
+                  <li>Kite Riftbound Constructs away from the raid during each add wave.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>High throughput fight &mdash; sustained pressure with no real downtime.</li>
+                  <li>Ensure assigned players grab their orbs; missed orbs cause heavy raid-wide damage spikes.</li>
+                  <li>Pre-heal the raid before each add wave; burst healing required immediately after Rift Surge.</li>
+                  <li>Save a major cooldown for Phase 2 when Salhadaar reaches full energy and casts Kingfall.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Assign clear kill targets per add wave; coordinate AoE to burn Riftbound Constructs fast.</li>
+                  <li>Orb mechanic: grab only your assigned color &mdash; wrong color applies a stagger debuff and damage.</li>
+                  <li>Interrupt Riftblast casts on Constructs; each uninterrupted cast stacks raid damage.</li>
+                  <li>Maintain high mobility &mdash; Salhadaar shifts the energy grid frequently, forcing constant repositioning.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>High throughput fight &mdash; sustained pressure with no real downtime.</li>
-                <li>Ensure assigned players grab their orbs; missed orbs cause heavy raid-wide damage spikes.</li>
-                <li>Pre-heal the raid before each add wave; burst healing required immediately after Rift Surge.</li>
-                <li>Save a major cooldown for Phase 2 when Salhadaar reaches full energy and casts Kingfall.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Riftbound Constructs now apply Rift Burn on every melee hit to the active tank &mdash; dispel within 4 seconds or it stacks uncontrollably.</li>
+                  <li>Assign one healer to monitor tank debuff status and call dispels &mdash; do not rely on tanks to self-report.</li>
+                  <li>Empowered Strike now also applies a 6-second silence to the tank &mdash; taunt timing must account for silence duration.</li>
+                  <li>Hold Riftbound Constructs away from the healer group &mdash; burn debuffs can chain-splash on Heroic.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Kingfall now targets the highest HP player &mdash; that player must stand in the designated zone or raid damage doubles.</li>
+                  <li>Track who has the highest HP at all times and communicate &mdash; this changes as players take damage during the fight.</li>
+                  <li>Rift Burn dispels are time-sensitive &mdash; prioritize them over throughput healing if the tank is above 60%.</li>
+                  <li>Double cooldowns for Kingfall on add wave overlaps &mdash; this is the hardest simultaneous pressure in the fight.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Orb color assignments now switch mid-phase without announcement &mdash; watch the indicator above your head, not the last verbal call.</li>
+                  <li>Absorbing the wrong orb on Heroic applies an 8-second stagger debuff plus 20% damage taken increase &mdash; zero margin for error.</li>
+                  <li>Interrupt Riftblast on Constructs immediately &mdash; on Heroic each uninterrupted cast applies a stacking AoE bleed to the raid, not just a single hit.</li>
+                  <li>During Kingfall, the highest HP player must stop DPS to move to the zone &mdash; communicate and let them disengage cleanly.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li>Assign clear kill targets per add wave; coordinate AoE to burn Riftbound Constructs fast.</li>
-                <li>Orb mechanic: grab only your assigned color &mdash; wrong color applies a stagger debuff and damage.</li>
-                <li>Interrupt Riftblast casts on Constructs; each uninterrupted cast stacks raid damage.</li>
-                <li>Maintain high mobility &mdash; Salhadaar shifts the energy grid frequently, forcing constant repositioning.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Mirror Conduit activates at 50% HP</strong>, creating a duplicate energy grid offset 90 degrees. Both tanks split to control conduits on each grid simultaneously.</li>
+                  <li>Coordinate with your co-tank via voice constantly &mdash; a conduit empowering on either grid affects both tanks.</li>
+                  <li>Riftbound Constructs spawn on both grids during Mirror Conduit &mdash; each tank kites their own wave without crossing grids.</li>
+                  <li>Use defensives independently &mdash; no shared cooldown timing is possible when tanks are on opposite grids.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Rift Surge pulses every 4 seconds during Mirror Conduit phase &mdash; chain healing cooldowns with zero gaps between them.</li>
+                  <li>Split healer assignments per grid at Mirror Conduit activation &mdash; each grid's tank must have dedicated healing coverage.</li>
+                  <li>Both grids generate Rift Burn stacks simultaneously &mdash; two dispellers working independently are required.</li>
+                  <li>Kingfall during Mirror Conduit phase targets the highest HP player on each grid independently &mdash; both zones must be covered.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Three orb types active simultaneously during Mirror Conduit. A grey Null Orb must be hit by exactly 3 players at the same time &mdash; too few or too many detonates the raid.</li>
+                  <li>Pre-assign 3 players as Null Orb team before the pull &mdash; do not improvise this mechanic.</li>
+                  <li>DPS split 50/50 between both grids at Mirror Conduit &mdash; one group handles boss, one group handles conduits and Constructs.</li>
+                  <li>Use Heroism/Lust at Mirror Conduit activation &mdash; this is the highest simultaneous pressure window and the DPS check of the fight.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -182,34 +401,107 @@
           <h2>Lightblinded Vanguard</h2>
           <p class="boss-tagline">Three simultaneous targets &mdash; Lightblood, Bellamy, and Senn. Each with independent energy.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Assign one tank to Lightblood (execution strikes) &mdash; never drop guard on this target.</li>
-                <li>Off-tank takes Bellamy; rotate taunts when Bellamy applies Volley Suppression to the active tank.</li>
-                <li>Pre-position the raid so Senn's Mounted Charge path is clear and predictable.</li>
-                <li>All three targets have independent energy bars &mdash; watch all three simultaneously.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Assign one tank to Lightblood (execution strikes) &mdash; never drop guard on this target.</li>
+                  <li>Off-tank takes Bellamy; rotate taunts when Bellamy applies Volley Suppression to the active tank.</li>
+                  <li>Pre-position the raid so Senn's Mounted Charge path is clear and predictable.</li>
+                  <li>All three targets have independent energy bars &mdash; watch all three simultaneously.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Senn's absorb stacks compound quickly &mdash; cleanse them before they overwhelm your throughput.</li>
+                  <li>Bellamy's Silence makes proactive pre-healing critical; you cannot react when silenced.</li>
+                  <li>Assign healers per group if split raiding &mdash; coordinate dispels for Senn's channeled damage.</li>
+                  <li>Stagger healing cooldowns across the fight &mdash; the trio regenerates pressure constantly.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Kill order: Bellamy first (removes raid silence), then Lightblood (removes execution risk), Senn last.</li>
+                  <li>Interrupt Bellamy's Holy Volley every cast &mdash; one uninterrupted chain hits every player.</li>
+                  <li>Assign dedicated interrupters per target and rotate &mdash; never rely on a single person.</li>
+                  <li>Don't tunnel one target; Lightblood and Senn will overwhelm tanks if left unattended.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>Senn's absorb stacks compound quickly &mdash; cleanse them before they overwhelm your throughput.</li>
-                <li>Bellamy's Silence makes proactive pre-healing critical; you cannot react when silenced.</li>
-                <li>Assign healers per group if split raiding &mdash; coordinate dispels for Senn's channeled damage.</li>
-                <li>Stagger healing cooldowns across the fight &mdash; the trio regenerates pressure constantly.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Bellamy's Volley Suppression now silences both tanks simultaneously &mdash; pre-taunt before the silence lands to prevent a threat gap.</li>
+                  <li>Senn's Mounted Charge path must be explicitly called out before each cast &mdash; the charge angle changes per cast on Heroic.</li>
+                  <li>Lightblood gains faster energy generation &mdash; watch the energy bar more frequently and call DPS when it approaches 80%.</li>
+                  <li>Both tanks silenced simultaneously creates a window where neither can communicate &mdash; pre-agree on positioning before each Suppression.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Senn's absorb stacks now regenerate if not fully cleansed &mdash; dispels must fully clear all stacks, not partially reduce them.</li>
+                  <li>Bellamy silencing both tanks simultaneously removes your two best communicators &mdash; pre-call next positioning before the silence resolves.</li>
+                  <li>Add a second healer to Senn dispel rotation &mdash; one dispeller is not fast enough to clear full regenerating stacks.</li>
+                  <li>Stagger both major cooldowns at least 30 seconds apart &mdash; the trio's pressure waves now overlap more frequently on Heroic.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Lightblood gains a Conviction shield every 45 seconds &mdash; designated DPS must burst through it within 8 seconds or Lightblood begins executing random raid members.</li>
+                  <li>Assign a dedicated 3-person shield-break team on Lightblood &mdash; do not pull them off Bellamy unless the shield is active.</li>
+                  <li>Bellamy chains Holy Volley faster on Heroic &mdash; interrupt rotation needs 4 dedicated players, not 3.</li>
+                  <li>Kill order remains the same but Bellamy now requires twice as many interrupt assignments to hold down cleanly.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li>Kill order: Bellamy first (removes raid silence), then Lightblood (removes execution risk), Senn last.</li>
-                <li>Interrupt Bellamy's Holy Volley every cast &mdash; one uninterrupted chain hits every player.</li>
-                <li>Assign dedicated interrupters per target and rotate &mdash; never rely on a single person.</li>
-                <li>Don't tunnel one target; Lightblood and Senn will overwhelm tanks if left unattended.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Synchronized Surge</strong> triggers when any two targets' energy bars hit 100 simultaneously &mdash; the resulting combined ability wipes the group.</li>
+                  <li>Tanks must manipulate threat and positioning to stagger energy generation &mdash; actively slow one target's energy by breaking contact briefly.</li>
+                  <li>Call energy percentages continuously via voice &mdash; at 85% on any target, the other tank must force a gap to avoid synchronization.</li>
+                  <li>Prioritize energy staggering over damage optimization &mdash; a clean kill beats a fast wipe every time.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Synchronized Surge cannot be healed through &mdash; it requires damage mitigation. Pre-assign 2 DPS to defensive cooldowns exclusively for this window.</li>
+                  <li>Communicate Surge risk windows to the assigned defensive DPS at 80% energy on any two targets simultaneously.</li>
+                  <li>During intentional energy staggering, the raid takes increased sustained damage &mdash; maintain throughput even during lower-intensity phases.</li>
+                  <li>Keep a cooldown available at all times in case energy staggering fails and a surprise Surge occurs.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Bellamy now channels Holy Volley twice consecutively with no recovery time &mdash; 4 dedicated interrupters required rotating every single cast.</li>
+                  <li>Two DPS must hold a defensive cooldown on standby exclusively for Synchronized Surge &mdash; do not use them offensively.</li>
+                  <li>Kill order still Bellamy &rarr; Lightblood &rarr; Senn, but Bellamy's interrupt demand means fewer DPS available for Lightblood shield breaking.</li>
+                  <li>Communicate loudly when your energy staggering assignment is near the cap &mdash; everyone needs to know before a Surge window opens.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -222,34 +514,107 @@
           <h2>Vaelgor &amp; Ezzorak</h2>
           <p class="boss-tagline">Twin draconic siblings. If their HP gap exceeds ~10%, they enrage. No exceptions.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Two tanks required &mdash; one per dragon, kept separated but visible to each other.</li>
-                <li>If HP gap exceeds ~10%, both dragons enrage &mdash; call DPS swaps constantly via voice.</li>
-                <li>Coordinate tank swaps during aerial phases; the grounded dragon's melee damage ramps rapidly.</li>
-                <li>Stack defensives for the combined burn window when both dragons land together.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Two tanks required &mdash; one per dragon, kept separated but visible to each other.</li>
+                  <li>If HP gap exceeds ~10%, both dragons enrage &mdash; call DPS swaps constantly via voice.</li>
+                  <li>Coordinate tank swaps during aerial phases; the grounded dragon's melee damage ramps rapidly.</li>
+                  <li>Stack defensives for the combined burn window when both dragons land together.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>The airborne dragon bombards the raid with Gloomfields &mdash; keep everyone topped between drops.</li>
+                  <li>Nullzone patches drain heals from players standing in them &mdash; call them out immediately.</li>
+                  <li>Combined burn phase brings heavy raid-wide damage &mdash; have a major cooldown ready.</li>
+                  <li>Dispel Void Corruption on priority targets (tanks first, then anyone with 2+ stacks).</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li><strong>Most critical mechanic:</strong> keep Vaelgor and Ezzorak within ~10% HP at all times.</li>
+                  <li>Assign a dedicated HP caller &mdash; DPS must swap targets immediately when the gap opens.</li>
+                  <li>During aerial phases, DPS the grounded dragon &mdash; the airborne one cannot be targeted.</li>
+                  <li>Save major cooldowns for the combined burn &mdash; both dragons take amplified damage when landed together.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>The airborne dragon bombards the raid with Gloomfields &mdash; keep everyone topped between drops.</li>
-                <li>Nullzone patches drain heals from players standing in them &mdash; call them out immediately.</li>
-                <li>Combined burn phase brings heavy raid-wide damage &mdash; have a major cooldown ready.</li>
-                <li>Dispel Void Corruption on priority targets (tanks first, then anyone with 2+ stacks).</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>HP sync threshold drops from ~10% to 6% &mdash; DPS must respond to gap calls with zero delay. Any hesitation risks a double enrage.</li>
+                  <li>Tank swaps during aerial phases now have a 2-second window instead of 4 &mdash; pre-position for the swap before the aerial phase begins.</li>
+                  <li>Gloomfield volume increases during aerial phases &mdash; plan movement paths to avoid clusters.</li>
+                  <li>Combined burn window now overlaps with Nullzone spawns &mdash; clear Nullzone patches before the burn begins.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>During aerial phases, the grounded dragon now pulses Void Corruption to all raid members &mdash; sustained throughput required even during the "low damage" window.</li>
+                  <li>Nullzone patches now persist until dispelled rather than fading &mdash; call them out immediately and ensure someone clears each one.</li>
+                  <li>Combined burn phase brings higher damage per second &mdash; major cooldown must be pre-cast before the window opens, not during it.</li>
+                  <li>Void Corruption stacks faster &mdash; dispel at 1 stack on tanks, 2 stacks on DPS rather than the Normal thresholds.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>HP gap threshold is 6% &mdash; the HP caller must announce swaps at 5% gap, not after the enrage triggers.</li>
+                  <li>At 40% HP, Vaelgor and Ezzorak tether &mdash; they share a health pool and cannot be separated. Pivot to unified burn immediately.</li>
+                  <li>Aerial phase void corruption pulses mean you cannot simply stand still &mdash; dodge Gloomfields while maintaining DPS on the grounded target.</li>
+                  <li>Save major cooldowns for the tether at 40% &mdash; the shared health pool makes every burst cooldown double-effective.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li><strong>Most critical mechanic:</strong> keep Vaelgor and Ezzorak within ~10% HP at all times.</li>
-                <li>Assign a dedicated HP caller &mdash; DPS must swap targets immediately when the gap opens.</li>
-                <li>During aerial phases, DPS the grounded dragon &mdash; the airborne one cannot be targeted.</li>
-                <li>Save major cooldowns for the combined burn &mdash; both dragons take amplified damage when landed together.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Draconic Bond at 30% HP</strong> fuses both dragons into a single entity for 12 seconds. Face the fused form away from the raid and use all remaining defensives immediately.</li>
+                  <li>The fused dragon's melee damage equals both dragons combined &mdash; this is the most dangerous tank window of the entire fight.</li>
+                  <li>After the bond breaks, both dragons reappear at 30% HP independently &mdash; taunt your assigned dragon instantly on reappearance.</li>
+                  <li>HP sync rules still apply at 30% on both independent dragons after the bond breaks &mdash; return to gap-calling immediately.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Draconic Bond pulses 100% max HP damage to the raid over 12 seconds &mdash; two major cooldowns required, staggered at 4 seconds and 8 seconds into the bond.</li>
+                  <li>Save both cooldowns exclusively for the bond &mdash; do not use either during any phase before 30% HP.</li>
+                  <li>After the bond breaks, both tanks take simultaneous full melee damage from two separate dragons &mdash; burst-heal both tanks before DPS re-engage.</li>
+                  <li>Void Corruption dispels must continue throughout the bond &mdash; do not let stacks sit while focusing on the bond cooldowns.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>When the Draconic Bond breaks, both dragons emerge at 30% HP. They must die within 4 seconds of each other or the survivor enrages permanently.</li>
+                  <li>Pre-plan final burst per target before the bond forms &mdash; assign kill team A and kill team B, one per dragon.</li>
+                  <li>Use Heroism/Lust at the Draconic Bond formation &mdash; the fused form takes amplified damage during the entire 12-second window.</li>
+                  <li>The HP caller role becomes critical in the final 4 seconds after bond breaks &mdash; communicate gap instantly and swap if needed.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -262,34 +627,107 @@
           <h2>Crown of the Cosmos</h2>
           <p class="boss-tagline">Alleria Windrunner in full Void descent. Multi-phase, heavy movement, coordinated cooldown distribution.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Phase 1: Position Alleria center &mdash; strafe to dodge Void Beam sweeps, never run backward.</li>
-                <li>Phase 2 (Void Surge): Taunt immediately after the surge resets aggro &mdash; she also resets positioning.</li>
-                <li>Phase 3 (full Void): Heavy damage amp &mdash; rotate all tank defensives, never let stacks cap.</li>
-                <li>At each phase transition, reposition immediately &mdash; the arena geometry shifts significantly.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Phase 1: Position Alleria center &mdash; strafe to dodge Void Beam sweeps, never run backward.</li>
+                  <li>Phase 2 (Void Surge): Taunt immediately after the surge resets aggro &mdash; she also resets positioning.</li>
+                  <li>Phase 3 (full Void): Heavy damage amp &mdash; rotate all tank defensives, never let stacks cap.</li>
+                  <li>At each phase transition, reposition immediately &mdash; the arena geometry shifts significantly.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Phase 1 is manageable; Phase 2 ramps hard &mdash; save at least two major cooldowns for P3.</li>
+                  <li>Void Cascade in Phase 3 hits everyone simultaneously &mdash; pre-place your cooldown ~5 seconds early.</li>
+                  <li>Assign one healer to watch Void Sickness on tanks &mdash; it stacks silently and spikes fast.</li>
+                  <li>Keep the raid above 60% HP entering each Surge &mdash; Alleria checks health at transitions.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Phase 1: Clean execution practice &mdash; dodge beams, avoid Void Zones, maximize uptime.</li>
+                  <li>Phase 2: When Alleria channels Void Ascendance, immediately destroy Void Rifts spawning on edges.</li>
+                  <li>Phase 3: Pure DPS race &mdash; she gains damage stacks per second. Use Heroism/Lust here.</li>
+                  <li>Final burn: she is briefly vulnerable &mdash; maximize all burst cooldowns with clean positioning.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>Phase 1 is manageable; Phase 2 ramps hard &mdash; save at least two major cooldowns for P3.</li>
-                <li>Void Cascade in Phase 3 hits everyone simultaneously &mdash; pre-place your cooldown ~5 seconds early.</li>
-                <li>Assign one healer to watch Void Sickness on tanks &mdash; it stacks silently and spikes fast.</li>
-                <li>Keep the raid above 60% HP entering each Surge &mdash; Alleria checks health at transitions.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Phase 3 introduces a third Void Beam orientation that rotates counter-clockwise &mdash; memorize all three patterns. Strafe without losing boss positioning.</li>
+                  <li>Void Surge resets occur more frequently &mdash; the incoming tank must be ready to taunt on every Surge transition, not just the first.</li>
+                  <li>Void Sickness stacks faster on Heroic &mdash; communicate to healers at 2 stacks, not 3, to allow dispel time.</li>
+                  <li>Phase transitions are faster &mdash; defensive pre-casting before each transition is mandatory, not optional.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Void Cascade in Phase 3 targets only the 5 lowest HP players instead of the full raid &mdash; identify and pre-heal those players before the cast resolves.</li>
+                  <li>Track the 5 lowest HP at all times in Phase 3 &mdash; they are the primary healing priority during Cascade windows.</li>
+                  <li>Keep 3 major cooldowns available for Phase 3 instead of 2 &mdash; Heroic Phase 3 is significantly longer.</li>
+                  <li>Health check entering each Surge is 65% on Heroic instead of 60% &mdash; keep the raid topped more aggressively.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Void Rifts in Phase 2 now require 2 players to destroy simultaneously &mdash; a solo DPS cannot kill them. Assign pairs per rift.</li>
+                  <li>Void Rifts spawn faster on Heroic &mdash; rift pairs must pre-assign positions before Phase 2 begins.</li>
+                  <li>Phase 3 damage stacks apply twice as fast &mdash; the DPS race is significantly tighter. Use Heroism/Lust immediately at Phase 3 entry.</li>
+                  <li>Third Void Beam pattern in Phase 3 requires two directional dodge movements &mdash; practice the counter-clockwise pattern specifically.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li>Phase 1: Clean execution practice &mdash; dodge beams, avoid Void Zones, maximize uptime.</li>
-                <li>Phase 2: When Alleria channels Void Ascendance, immediately destroy Void Rifts spawning on edges.</li>
-                <li>Phase 3: Pure DPS race &mdash; she gains damage stacks per second. Use Heroism/Lust here.</li>
-                <li>Final burn: she is briefly vulnerable &mdash; maximize all burst cooldowns with clean positioning.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Void Echo spawns at 40% HP</strong> &mdash; a shadow copy of Alleria dealing 60% of her melee damage. Tank the echo into the original for 10 seconds to collapse them.</li>
+                  <li>During the 10-second overlap both copies take +100% damage &mdash; this is the maximum DPS window of the entire fight.</li>
+                  <li>Face both Alleria and the Echo away from the raid simultaneously during the overlap &mdash; both frontal attacks are active.</li>
+                  <li>After the Echo collapses, Alleria continues at full speed &mdash; immediately return to standard Phase 3 positioning.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Void Echo cannot be slowed, gripped, or dispelled &mdash; pure throughput required during the 10-second overlap window.</li>
+                  <li>Reserve your single largest healing cooldown exclusively for the Echo overlap &mdash; the combined melee damage from both copies on the tank is lethal without it.</li>
+                  <li>Do not pre-cast your major cooldown for Phase 3 entry if the Echo is imminent &mdash; wait and save it.</li>
+                  <li>After the Echo collapses, Void Cascade frequency increases &mdash; immediately rotate to the next cooldown with no downtime.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Use Heroism/Lust at the Void Echo collapse window &mdash; both Alleria and the Echo take +100% damage during the 10-second overlap.</li>
+                  <li>All major DPS cooldowns must be held until the Echo appears at 40% HP &mdash; nothing used before this point.</li>
+                  <li>Continue destroying Void Rifts in pairs during the Echo phase &mdash; they do not pause. Pre-assign rift pairs before 40% HP.</li>
+                  <li>After the Echo collapses, Phase 3 damage stacks resume at maximum speed &mdash; the kill must happen in the post-Echo window or the enrage timer catches you.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

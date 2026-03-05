@@ -62,37 +62,110 @@
           <h2>Belo'ren, Child of Al'ar</h2>
           <p class="boss-tagline">A phoenix raised to guard the Sunwell. Alternates between Light-dominant and Void-dominant phases. The fight doesn't end when his health drops to zero.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>Position the phoenix away from the raid during grounded phases &mdash; wing slam cleaves a wide frontal.</li>
-                <li>When Belo'ren retreats into the Ashen Egg at 0 HP, maintain threat on the egg and pop a defensive.</li>
-                <li>Coordinate positioning with healers during Voidlight Convergence &mdash; tanks absorb the highest burst.</li>
-                <li>After Belo'ren resurrects from the egg, taunt immediately &mdash; he resets to full energy on rebirth.</li>
-                <li>During Light phases, stand in Light zones; during Void phases, stand in Void zones to reduce personal damage.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Position the phoenix away from the raid during grounded phases &mdash; wing slam cleaves a wide frontal.</li>
+                  <li>When Belo'ren retreats into the Ashen Egg at 0 HP, maintain threat on the egg and pop a defensive.</li>
+                  <li>Coordinate positioning with healers during Voidlight Convergence &mdash; tanks absorb the highest burst.</li>
+                  <li>After Belo'ren resurrects from the egg, taunt immediately &mdash; he resets to full energy on rebirth.</li>
+                  <li>During Light phases, stand in Light zones; during Void phases, stand in Void zones to reduce personal damage.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>A strong dispel bench is mandatory &mdash; Voidlight Convergence misaligns players; dispel wrong assignments fast.</li>
+                  <li>Light phase: holy burst damage incoming. Void phase: sustained shadow damage. Switch your healing focus accordingly.</li>
+                  <li>During the Ashen Egg phase, top everyone off &mdash; Rebirth triggers a full raid burst on reemergence.</li>
+                  <li>Mass Dispel (Priest) is ideal for clearing multiple misaligned players simultaneously.</li>
+                  <li>Assign dispel priority list before the pull &mdash; tanks first, then DPS with wrong color alignment.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li><strong>Strictly follow color assignments</strong> &mdash; absorb only the feather matching your assigned element (Light or Void).</li>
+                  <li>Designate one caller before the pull to announce color assignments each phase; confusion here causes instant wipes.</li>
+                  <li>When Belo'ren reaches 0 HP, pivot ALL damage to the Ashen Egg within 3 seconds.</li>
+                  <li>Destroy the egg fast enough to reduce Immortal Flame stacks before Rebirth &mdash; too slow equals a full reset.</li>
+                  <li>If Belo'ren resurrects, re-establish color assignments before re-engaging.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li>A strong dispel bench is mandatory &mdash; Voidlight Convergence misaligns players; dispel wrong assignments fast.</li>
-                <li>Light phase: holy burst damage incoming. Void phase: sustained shadow damage. Switch your healing focus accordingly.</li>
-                <li>During the Ashen Egg phase, top everyone off &mdash; Rebirth triggers a full raid burst on reemergence.</li>
-                <li>Mass Dispel (Priest) is ideal for clearing multiple misaligned players simultaneously.</li>
-                <li>Assign dispel priority list before the pull &mdash; tanks first, then DPS with wrong color alignment.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Wing Slam now applies a 6-second bleed to the active tank &mdash; taunt timing must account for bleed duration, not just direct exposure.</li>
+                  <li>Voidlight Convergence hits the tank for 40% more than on Normal &mdash; defensive must be active when it lands, not after.</li>
+                  <li>Ashen Egg phase is shorter &mdash; repositioning for Rebirth must begin immediately when the egg forms, not after you finish healing.</li>
+                  <li>Belo'ren resets to full energy faster on Heroic after Rebirth &mdash; taunt within 1 second of reemergence or he charges a random player.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Color phase switches happen every 45 seconds instead of 60 &mdash; dispel windows are shorter and require faster reaction.</li>
+                  <li>Light phase burst damage now hits multiple players simultaneously &mdash; AoE healing cooldowns are more effective than single-target on Heroic.</li>
+                  <li>Ashen Egg phase is your only real downtime &mdash; use it to top the raid fully and pre-position for Rebirth.</li>
+                  <li>Assign a second dispeller specifically for Voidlight Convergence misalignment &mdash; one dispeller cannot keep up with the increased frequency on Heroic.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>The Ashen Egg gains a Sunfire Shield on Heroic that must be burst through before egg damage can land &mdash; assign your 3 highest burst DPS to this window exclusively.</li>
+                  <li>Egg destruction time window is tighter &mdash; DPS must pivot within 2 seconds of Belo'ren hitting 0 HP, not 3.</li>
+                  <li>Color switch frequency is higher &mdash; the phase caller must announce every switch immediately; delayed calls cause mass misalignment.</li>
+                  <li>Absorbing the wrong feather on Heroic applies a 12-second damage-taken debuff rather than just damage &mdash; it cascades through the rest of the phase.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li><strong>Strictly follow color assignments</strong> &mdash; absorb only the feather matching your assigned element (Light or Void).</li>
-                <li>Designate one caller before the pull to announce color assignments each phase; confusion here causes instant wipes.</li>
-                <li>When Belo'ren reaches 0 HP, pivot ALL damage to the Ashen Egg within 3 seconds.</li>
-                <li>Destroy the egg fast enough to reduce Immortal Flame stacks before Rebirth &mdash; too slow equals a full reset.</li>
-                <li>If Belo'ren resurrects, re-establish color assignments before re-engaging.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Eternal Flame on Mythic</strong>: Belo'ren resurrects from the egg with a rotating fire line sweeping the arena. Both tanks must anchor at opposite ends to keep the path predictable.</li>
+                  <li>The fire line rotates continuously for 20 seconds after Rebirth &mdash; maintain your anchor position for the full duration, do not chase the boss.</li>
+                  <li>After Eternal Flame ends, Belo'ren enrages briefly &mdash; defensives must be stacked for the first 5 seconds post-flame.</li>
+                  <li>Pre-position at your anchor point before the egg phase begins &mdash; reacting to Eternal Flame's start is too slow.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Eternal Flame deals 20% max HP per second to anyone in its rotating path &mdash; zero tolerance for mispositioned players. Pre-position the raid strictly before the egg forms.</li>
+                  <li>The raid cannot spread freely during Eternal Flame due to the sweeping fire &mdash; position healers at the anchor points alongside the tanks.</li>
+                  <li>Healing cooldowns used during the egg phase cannot be available for Eternal Flame &mdash; save one major cooldown specifically for the post-Rebirth window.</li>
+                  <li>After Eternal Flame ends, resume standard phase healing immediately &mdash; Belo'ren re-enters combat with high energy and color switches resume instantly.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>On Mythic, destroying the egg does not reduce Immortal Flame stacks. Instead, egg damage charges a Sunwell Surge meter &mdash; fill it fully before Rebirth or the resurrection wipes the group.</li>
+                  <li>The Sunwell Surge meter requires more total damage than the egg has HP on lower difficulties &mdash; burst DPS assignment to the egg is mandatory, not optional.</li>
+                  <li>During Eternal Flame, DPS must navigate the sweeping fire while maintaining damage on Belo'ren &mdash; use the safe zones between anchor points to maintain uptime.</li>
+                  <li>Use Heroism/Lust at the Sunwell Surge meter activation &mdash; amplified damage during egg phase fills the meter faster and reduces Eternal Flame duration.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -105,37 +178,110 @@
           <h2>Midnight Falls</h2>
           <p class="boss-tagline">The hardest encounter of Midnight Season 1. Escalating chaos with no ceiling. The Light &amp; Void system from Belo'ren carries forward &mdash; come in knowing your assignment. Required utilities: Priest Mass Dispel, interrupt coverage on Termination Prism, and a designated Void/Light caller.</p>
         </div>
-        <div class="boss-body">
-          <div class="role-grid">
-            <div class="role-card tank">
-              <div class="role-card-title">&#128737; Tank</div>
-              <ul>
-                <li>The most mechanically demanding tank fight of Season 1 &mdash; positioning rotates constantly as zones shift.</li>
-                <li>Assign one tank to Light phases, one to Void phases &mdash; coordinate transitions cleanly.</li>
-                <li>Stack defensives on every Midnight Surge &mdash; each one hits harder than the last as damage amps stack.</li>
-                <li>Off-tank takes doubled damage during their phase element &mdash; communicate spike windows to healers.</li>
-                <li>When adds spawn during Surge windows, hold them immediately &mdash; loose adds wipe the group.</li>
-              </ul>
+        <div class="diff-tabs">
+          <button class="diff-tab active" data-diff="normal">Normal</button>
+          <button class="diff-tab" data-diff="heroic">Heroic</button>
+          <button class="diff-tab" data-diff="mythic">Mythic</button>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>The most mechanically demanding tank fight of Season 1 &mdash; positioning rotates constantly as zones shift.</li>
+                  <li>Assign one tank to Light phases, one to Void phases &mdash; coordinate transitions cleanly.</li>
+                  <li>Stack defensives on every Midnight Surge &mdash; each one hits harder than the last as damage amps stack.</li>
+                  <li>Off-tank takes doubled damage during their phase element &mdash; communicate spike windows to healers.</li>
+                  <li>When adds spawn during Surge windows, hold them immediately &mdash; loose adds wipe the group.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li><strong>Mandatory:</strong> bring at least one Priest. Mass Dispel is required for Termination Prism debuff cleanse.</li>
+                  <li>Pre-assign interrupt rotations between healers for Termination Prism &mdash; do not rely on DPS alone.</li>
+                  <li>Use major cooldowns at fixed phase intervals &mdash; do not save them. Chaos phases can last minutes.</li>
+                  <li>Assign one healer to monitor the off-tank continuously &mdash; Void phase doubles their incoming damage.</li>
+                  <li>Keep the raid above 75% entering each Surge &mdash; Midnight Falls checks group health at detonation.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li><strong>Interrupt Termination Prism at all costs</strong> &mdash; it applies a lethal stacking debuff to the entire raid.</li>
+                  <li>Assign interrupts by cooldown rotation, not volunteers &mdash; there is no margin for human error here.</li>
+                  <li>Maintain your Light/Void alignment from the Belo'ren fight &mdash; it carries over and affects damage taken.</li>
+                  <li>Save Heroism/Lust for the final phase when Midnight's damage amp reaches maximum stacks.</li>
+                  <li>During Surge windows, pivot to priority adds immediately before returning to boss &mdash; adds left up wipe the group.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card healer">
-              <div class="role-card-title">&#10010; Healer</div>
-              <ul>
-                <li><strong>Mandatory:</strong> bring at least one Priest. Mass Dispel is required for Termination Prism debuff cleanse.</li>
-                <li>Pre-assign interrupt rotations between healers for Termination Prism &mdash; do not rely on DPS alone.</li>
-                <li>Use major cooldowns at fixed phase intervals &mdash; do not save them. Chaos phases can last minutes.</li>
-                <li>Assign one healer to monitor the off-tank continuously &mdash; Void phase doubles their incoming damage.</li>
-                <li>Keep the raid above 75% entering each Surge &mdash; Midnight Falls checks group health at detonation.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Midnight Surge now strikes 3 times in quick succession &mdash; 3 separate defensive cooldowns required per Surge window, not one.</li>
+                  <li>Coordinate with your co-tank to never overlap defensive windows &mdash; at least one tank must have a defensive available at all times during Surge.</li>
+                  <li>Adds spawning during Surge windows are more numerous on Heroic &mdash; AoE taunt immediately rather than picking them up individually.</li>
+                  <li>Phase transition timing is faster &mdash; both tanks must call and execute alignment swaps within 2 seconds of each transition.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Termination Prism now applies to 3 players simultaneously instead of 1 &mdash; Mass Dispel becomes mandatory, not just recommended.</li>
+                  <li>3-target Termination Prism means the Priest must be held in reserve for this dispel exclusively during Prism windows.</li>
+                  <li>Triple Midnight Surge means 3 cooldowns consumed per Surge &mdash; map out your full cooldown roster before the pull.</li>
+                  <li>Off-tank damage during Void phase is extreme on Heroic &mdash; assign a dedicated healer to them for the duration of each Void phase.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Adds during Surge windows now spawn with a Void Shield &mdash; burst through it within 6 seconds or the add permanently links to Midnight and increases her damage dealt.</li>
+                  <li>Assign 2 DPS exclusively to add Void Shield breaking during Surge windows; they drop boss immediately when adds spawn.</li>
+                  <li>Interrupt rotation for Termination Prism must account for 3 simultaneous dispels &mdash; interrupters and the Priest must coordinate without stepping on each other.</li>
+                  <li>Light/Void alignment carries harder penalties on Heroic &mdash; being in the wrong zone during a Surge amplifies the damage taken by 40%.</li>
+                </ul>
+              </div>
             </div>
-            <div class="role-card dps">
-              <div class="role-card-title">&#9876; DPS</div>
-              <ul>
-                <li><strong>Interrupt Termination Prism at all costs</strong> &mdash; it applies a lethal stacking debuff to the entire raid.</li>
-                <li>Assign interrupts by cooldown rotation, not volunteers &mdash; there is no margin for human error here.</li>
-                <li>Maintain your Light/Void alignment from the Belo'ren fight &mdash; it carries over and affects damage taken.</li>
-                <li>Save Heroism/Lust for the final phase when Midnight's damage amp reaches maximum stacks.</li>
-                <li>During Surge windows, pivot to priority adds immediately before returning to boss &mdash; adds left up wipe the group.</li>
-              </ul>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Eclipse Collapse at 30% HP</strong> forces both tanks into their opposite alignment for the remainder of the fight. All defensive strategies built around your original element must be rebuilt immediately.</li>
+                  <li>The Light tank becomes Void-aligned and the Void tank becomes Light-aligned &mdash; both now take increased damage from their new element. Communicate immediately and swap all positioning assumptions.</li>
+                  <li>Eclipse Collapse also resets all phase assignments &mdash; the caller must re-announce zone assignments for every player within 5 seconds of the collapse.</li>
+                  <li>After Eclipse Collapse, Midnight Surge fires at double frequency &mdash; defensive cooldown management becomes critical for the final burn.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Eclipse Collapse applies Termination Prism to 8 players simultaneously &mdash; hold the Priest's Mass Dispel exclusively for this moment. Do not use it for anything else before 30% HP.</li>
+                  <li>After Eclipse Collapse, both tanks take increased damage from their new element &mdash; double the healing attention on both tanks during the realignment window.</li>
+                  <li>Healing cooldowns must be available for Eclipse Collapse &mdash; plan the entire cooldown roster backward from the 30% HP trigger point.</li>
+                  <li>Post-collapse Midnight Surge frequency doubles &mdash; you will burn through cooldowns rapidly. Communicate cooldown availability loudly and continuously.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>After Eclipse Collapse, all DPS alignment assignments flip as well &mdash; every player is now in the wrong zone. The caller must immediately re-announce all assignments.</li>
+                  <li>Use Heroism/Lust within the first 10 seconds of Eclipse Collapse &mdash; misalignment debuffs compound over time and the fight becomes unwinnable if the kill does not happen quickly.</li>
+                  <li>Shield-breaking DPS on adds must continue through the Eclipse Collapse transition without pausing &mdash; adds do not stop spawning during the alignment flip.</li>
+                  <li>The 30% HP kill window is the defining execution challenge of the tier &mdash; every major cooldown must be held for the Eclipse Collapse and used within 15 seconds of it triggering.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
