@@ -75,14 +75,14 @@ body {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 }
 
 .nav-links a {
   color: var(--text);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   transition: color 0.2s;
 }
 
@@ -1131,4 +1131,305 @@ footer {
   .news-admin-bar {
     justify-content: center;
   }
+}
+
+/* =====================
+   GUIDE HUB PAGES
+   ===================== */
+.guide-hub-section {
+  padding-top: 8rem;
+  min-height: calc(100vh - 200px);
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.guide-card {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s;
+  cursor: pointer;
+}
+
+.guide-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.guide-card-art {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-card-art-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+  text-align: center;
+  line-height: 1.8;
+  padding: 0 1rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.guide-card-art-label {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.75rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  font-family: 'Cinzel', serif;
+}
+
+.guide-card-info {
+  padding: 1.1rem 1.25rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.guide-card-info h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-lt);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.guide-card-info p {
+  font-size: 0.83rem;
+  color: #888;
+  margin: 0;
+}
+
+.guide-card-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+/* Raid / dungeon art gradients */
+.art-voidspire   { background: linear-gradient(135deg, #1a0a30 0%, #0d0520 100%); }
+.art-dreamrift   { background: linear-gradient(135deg, #051a2e 0%, #041020 100%); }
+.art-queldanas   { background: linear-gradient(135deg, #2e1200 0%, #1a0800 100%); }
+.art-maisara     { background: linear-gradient(135deg, #071a07 0%, #040e04 100%); }
+.art-windrunner  { background: linear-gradient(135deg, #10102a 0%, #08081a 100%); }
+.art-nexus       { background: linear-gradient(135deg, #140020 0%, #0a0012 100%); }
+.art-murderrow   { background: linear-gradient(135deg, #200808 0%, #120404 100%); }
+.art-magisters   { background: linear-gradient(135deg, #2a0a18 0%, #180610 100%); }
+.art-saron       { background: linear-gradient(135deg, #081420 0%, #040c14 100%); }
+.art-triumvirate { background: linear-gradient(135deg, #181400 0%, #0e0c00 100%); }
+.art-skyreach    { background: linear-gradient(135deg, #081800 0%, #040e00 100%); }
+
+/* =====================
+   GUIDE DETAIL PAGES
+   ===================== */
+.guide-detail-section {
+  padding-top: 5.5rem;
+  padding-bottom: 4rem;
+  min-height: calc(100vh - 200px);
+}
+
+.guide-detail-header {
+  margin-bottom: 2.5rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.83rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.75rem;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 4px;
+  transition: all 0.2s;
+  background: rgba(200,169,110,0.06);
+  width: fit-content;
+}
+
+.back-btn:hover {
+  background: rgba(200,169,110,0.15);
+  border-color: var(--gold);
+}
+
+.guide-detail-header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--gold-lt);
+  margin-bottom: 0.4rem;
+}
+
+.guide-detail-header p {
+  color: #888;
+  font-size: 0.93rem;
+}
+
+/* Boss section card */
+.boss-section {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.boss-header {
+  padding: 1.75rem 2rem;
+  position: relative;
+}
+
+.boss-number {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.3rem;
+  font-family: 'Cinzel', serif;
+}
+
+.boss-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin-bottom: 0.35rem;
+}
+
+.boss-tagline {
+  font-size: 0.87rem;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+}
+
+.boss-body {
+  padding: 1.5rem 2rem 2rem;
+}
+
+/* Role cards */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.role-card {
+  background: var(--dark4);
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem 1.25rem;
+  border-top: 3px solid transparent;
+}
+
+.role-card.tank   { border-top-color: var(--blue); }
+.role-card.healer { border-top-color: var(--green); }
+.role-card.dps    { border-top-color: var(--red); }
+
+.role-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.role-card.tank   .role-card-title { color: var(--blue); }
+.role-card.healer .role-card-title { color: var(--green); }
+.role-card.dps    .role-card-title { color: #e67e85; }
+
+.role-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.role-card ul li {
+  font-size: 0.85rem;
+  color: var(--text);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.55;
+}
+
+.role-card ul li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.role-card.tank   ul li::before { color: rgba(74,144,217,0.8); }
+.role-card.healer ul li::before { color: rgba(82,183,136,0.8); }
+.role-card.dps    ul li::before { color: rgba(230,57,70,0.8); }
+
+/* Boss header gradients */
+.bh-void    { background: linear-gradient(135deg, #1a0a30, #0d0520); }
+.bh-void2   { background: linear-gradient(135deg, #140828, #090318); }
+.bh-void3   { background: linear-gradient(135deg, #200a38, #100420); }
+.bh-dream   { background: linear-gradient(135deg, #051a2e, #041020); }
+.bh-phoenix { background: linear-gradient(135deg, #2e1200, #1a0800); }
+.bh-final   { background: linear-gradient(135deg, #180020, #0c0010); }
+.bh-troll   { background: linear-gradient(135deg, #071a07, #040e04); }
+.bh-elven   { background: linear-gradient(135deg, #10102a, #08081a); }
+.bh-ethereal{ background: linear-gradient(135deg, #140020, #0a0012); }
+.bh-blood   { background: linear-gradient(135deg, #200808, #120404); }
+.bh-bloodelf{ background: linear-gradient(135deg, #2a0a18, #180610); }
+.bh-ice     { background: linear-gradient(135deg, #081420, #040c14); }
+.bh-naaru   { background: linear-gradient(135deg, #181400, #0e0c00); }
+.bh-arakkoa { background: linear-gradient(135deg, #081800, #040e00); }
+
+/* Guide section divider for multiple raids on hub */
+.guide-section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #555;
+  margin: 2.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.guide-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+@media (max-width: 720px) {
+  .guide-card-art { height: 100px; }
+  .boss-header { padding: 1.25rem 1.25rem; }
+  .boss-body { padding: 1.1rem 1.25rem 1.5rem; }
+  .role-grid { grid-template-columns: 1fr; }
 }

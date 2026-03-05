@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magister's Terrace – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="shortcut icon" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="roster.html">Roster</a></li>
+        <li><a href="raids.html">M+</a></li>
+        <li><a href="mplus-guides.html" class="nav-active">M+ Guides</a></li>
+        <li><a href="raid.html">Raid</a></li>
+        <li><a href="raid-guides.html">Raid Guides</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://discord.gg/XM22YH5Y" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>
+        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="roster.html">Roster</a></li>
+      <li><a href="raids.html">M+</a></li>
+      <li><a href="mplus-guides.html">M+ Guides</a></li>
+      <li><a href="raid.html">Raid</a></li>
+      <li><a href="raid-guides.html">Raid Guides</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a></li>
+      <li><a href="apply.html">Apply Now</a></li>
+    </ul>
+  </nav>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="mplus-guides.html">&#8592; Back to M+ Guides</a>
+
+      <div class="guide-detail-header">
+        <h1>Magister's Terrace</h1>
+        <p>4 Bosses &bull; Isle of Quel'Danas &bull; Kael'thas Sunstrider's opulent sanctum above the Sunwell Plateau. Returning dungeon featuring arcane energy, add management, Gravity Lapse, and a Phoenix that resurrects if you don't destroy the egg.</p>
+      </div>
+
+      <!-- Boss 1 -->
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 1 of 4</div>
+          <h2>Selin Fireheart</h2>
+          <p class="boss-tagline">Selin empowers himself by absorbing Fel Crystals. The trick: only destroy crystals when he's channeling them &mdash; not before.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Rotate defensives for Drain Life &mdash; it drains your health while dealing heavy simultaneous damage.</li>
+                <li>After each Drain Life, Selin moves to absorb Fel Crystals &mdash; position him away from remaining crystals.</li>
+                <li>If he channels Energy Feedback (absorbing a crystal), interrupt where possible or use a defensive immediately.</li>
+                <li>Face Selin away from the raid &mdash; Mana Rage shadow blasts hit anyone in the frontal arc.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Drain Life is actually your best healing window &mdash; top the tank while the cast drains HP steadily.</li>
+                <li>After crystal absorption, Selin's damage dramatically increases &mdash; cooldown ready before he re-engages.</li>
+                <li>Fel Explosions from destroyed crystals deal AoE raid damage &mdash; keep everyone spread.</li>
+                <li>Tank-focused fight &mdash; sustained direct heals on the tank throughout.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li><strong>Only destroy Fel Crystals during Selin's Energy Feedback channel</strong> &mdash; early crystal kills are wasted and don't prevent empowerment.</li>
+                <li>All DPS pivot to crystals the instant Energy Feedback begins &mdash; destroy all of them immediately.</li>
+                <li>Interrupt Mana Rage when available &mdash; the shadow blast volley hits the whole group for significant damage.</li>
+                <li>After all crystals are destroyed, Selin has no empowerment source &mdash; the fight ends quickly from this point.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 2 -->
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 2 of 4</div>
+          <h2>Vexallus</h2>
+          <p class="boss-tagline">Pure Energy adds must die before they reach Vexallus &mdash; each one that connects heals him. A DPS-prioritization fight.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Position Vexallus in the room's center &mdash; Pure Energy adds spawn from the edges and converge inward.</li>
+                <li>Stay in melee range to absorb Overload chain charges, reducing party-wide damage.</li>
+                <li>Face Vexallus away from the group &mdash; Chain Lightning leaps to nearby players.</li>
+                <li>When Pure Energy adds spawn, briefly chase them to maintain threat and keep them from reaching Vexallus.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Chain Lightning is the primary healing check &mdash; spread the group to limit how many jumps it takes.</li>
+                <li>Damage escalates as the fight progresses (each absorbed Overload increases Vexallus's damage by 20%).</li>
+                <li>Save a major cooldown for sub-20% HP when Vexallus enters pure energy form and damage spikes.</li>
+                <li>Purge magical buffs Vexallus gains from any uncaptured Pure Energy adds.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Kill Pure Energy adds the instant they spawn &mdash; each one that reaches Vexallus heals him significantly.</li>
+                <li>AoE them down quickly &mdash; they cluster and are all susceptible to group AoE damage.</li>
+                <li>Spread to avoid Chain Lightning chains bouncing through clustered players.</li>
+                <li>At 20% HP: Vexallus shifts to pure energy form &mdash; save Heroism/Lust and major cooldowns for this burn window.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 3 -->
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 3 of 4</div>
+          <h2>Priestess Delrissa</h2>
+          <p class="boss-tagline">Delrissa comes with four random adds. Do not engage her until the adds are controlled. Strict CC and kill order or this fight becomes chaos.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Crowd control ALL four adds before engaging Delrissa &mdash; use every CC available.</li>
+                <li>Assign one player to hold Delrissa, everyone else helps manage add control.</li>
+                <li>Watch for Blind from the rogue add &mdash; call it out immediately so a backup player can taunt.</li>
+                <li>Kill order determines success: Warlock &rarr; Mage &rarr; Rogue &rarr; Hunter &rarr; Delrissa last.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Dispel priority: Polymorph (Mage add), Fear (Warlock add), Blind (Rogue add) &mdash; in that order.</li>
+                <li>Pre-position away from the rogue add &mdash; its abilities chain through nearby players.</li>
+                <li>Expect to be a primary CC target &mdash; communicate immediately when incapacitated.</li>
+                <li>Cooldowns when Delrissa activates her 30% HP self-heal &mdash; interrupt it and burst her down.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Strict kill order: Warlock add (remove Fear) &rarr; Mage add (remove Poly) &rarr; Rogue &rarr; Hunter &rarr; Delrissa.</li>
+                <li>Use CC on every add not currently being killed &mdash; chain sheep, hex, trap, and stun freely.</li>
+                <li>Do not break CC accidentally with AoE &mdash; target individually when needed.</li>
+                <li>Interrupt Delrissa's Flash Heal the moment it casts &mdash; she will undo 20% HP of progress if it lands.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 4 -->
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 4 of 4 &mdash; Final</div>
+          <h2>Kael'thas Sunstrider</h2>
+          <p class="boss-tagline">Gravity Lapse lifts everyone. The Phoenix resurrects if you don't destroy the egg. Pyroblast one-shots players in the open. Stay behind pillars.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Kael'thas teleports frequently &mdash; taunt immediately each time he resets position.</li>
+                <li>Hide behind a pillar during Pyroblast cast &mdash; it one-shots anyone standing in the open.</li>
+                <li>Taunt the Phoenix add when it spawns and keep it occupied &mdash; at full energy it cleaves the entire group.</li>
+                <li>During Gravity Lapse (everyone floats), position above Kael's likely post-lapse landing.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Gravity Lapse is the primary kill window &mdash; everyone floats and takes sustained arcane damage simultaneously.</li>
+                <li>Dispel Arcane Disruption immediately on any player &mdash; it stacks and rapidly kills without dispel.</li>
+                <li>Arcane Spheres float toward players during Gravity Lapse &mdash; you cannot avoid them on the ground, dodge while floating.</li>
+                <li>Save a cooldown for Phase 2 burn when Kael's damage amp stacks peak.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li><strong>Most critical:</strong> when the Phoenix dies, immediately destroy the Egg before it hatches and resurrects the Phoenix.</li>
+                <li>Arcane Spheres during Gravity Lapse deal lethal damage on contact &mdash; dodge while airborne, not from the ground.</li>
+                <li>Interrupt Fireball Volley &mdash; it deals significant AoE fire damage to the whole party.</li>
+                <li>On high keys: assign one player permanently to Phoenix add duty the instant it spawns each time.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="raids.html">M+</a>
+        <a href="mplus-guides.html">M+ Guides</a>
+        <a href="raid.html">Raid</a>
+        <a href="raid-guides.html">Raid Guides</a>
+        <a href="roster.html">Roster</a>
+        <a href="news.html">News</a>
+        <a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a>
+        <a href="apply.html">Apply</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
