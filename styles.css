@@ -1172,6 +1172,8 @@ footer {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
 .guide-card-art-text {
@@ -1327,6 +1329,23 @@ footer {
 
 .boss-body {
   padding: 1.5rem 2rem 2rem;
+}
+
+.boss-portrait {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 88px;
+  height: 88px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.12);
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+@media (max-width: 560px) {
+  .boss-portrait { display: none; }
 }
 
 /* Role cards */
