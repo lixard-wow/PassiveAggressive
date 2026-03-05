@@ -1428,36 +1428,38 @@ footer {
 }
 
 /* =====================
-   DIFFICULTY TABS
+   DIFFICULTY TOGGLE
    ===================== */
-.diff-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--border);
-  background: rgba(0,0,0,0.2);
-  padding: 0 1.5rem;
+.diff-toggle {
+  display: inline-flex;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
 .diff-tab {
   background: none;
   border: none;
-  border-bottom: 3px solid transparent;
-  margin-bottom: -1px;
+  border-right: 1px solid var(--border);
   color: #555;
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.77rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 0.65rem 1.1rem;
+  padding: 0.6rem 1.4rem;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, background 0.2s;
 }
 
+.diff-tab:last-child { border-right: none; }
 .diff-tab:hover { color: var(--text); }
 
-.diff-tab.active[data-diff="normal"] { color: var(--blue);  border-bottom-color: var(--blue); }
-.diff-tab.active[data-diff="heroic"] { color: var(--gold);  border-bottom-color: var(--gold); }
-.diff-tab.active[data-diff="mythic"] { color: #a855f7;      border-bottom-color: #a855f7; }
+.diff-tab.active[data-diff="normal"] { color: var(--blue);  background: rgba(74,144,217,0.12); }
+.diff-tab.active[data-diff="heroic"] { color: var(--gold);  background: rgba(200,169,110,0.12); }
+.diff-tab.active[data-diff="mythic"] { color: #a855f7;      background: rgba(168,85,247,0.12); }
 
 .diff-panel { display: none; }
 .diff-panel.active { display: block; }
@@ -1467,6 +1469,5 @@ footer {
   .boss-header { padding: 1.25rem 1.25rem; }
   .boss-body { padding: 1.1rem 1.25rem 1.5rem; }
   .role-grid { grid-template-columns: 1fr; }
-  .diff-tabs { padding: 0 0.75rem; }
-  .diff-tab { padding: 0.6rem 0.75rem; font-size: 0.72rem; }
+  .diff-tab { padding: 0.55rem 0.9rem; font-size: 0.72rem; }
 }
