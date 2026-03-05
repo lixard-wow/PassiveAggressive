@@ -24,6 +24,19 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 });
 
 // =====================
+// DIFFICULTY TABS
+// =====================
+document.querySelectorAll('.diff-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const section = btn.closest('.boss-section');
+    section.querySelectorAll('.diff-tab').forEach(t => t.classList.remove('active'));
+    section.querySelectorAll('.diff-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    section.querySelector(`.diff-panel[data-diff="${btn.dataset.diff}"]`).classList.add('active');
+  });
+});
+
+// =====================
 // SCROLL REVEAL
 // =====================
 const revealObserver = new IntersectionObserver((entries) => {
