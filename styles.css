@@ -1490,3 +1490,57 @@ footer {
   .role-grid { grid-template-columns: 1fr; }
   .diff-tab { padding: 0.55rem 0.9rem; font-size: 0.72rem; }
 }
+
+/* =====================
+   TRASH PULL SECTION
+   ===================== */
+.trash-section {
+  background: var(--dark3);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.trash-section h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 1.2rem 0;
+}
+.trash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+.trash-card {
+  background: var(--dark4);
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+}
+.trash-card-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.6rem;
+}
+.trash-card-title.priority { color: #f87171; }
+.trash-card-title.kick     { color: var(--gold); }
+.trash-card-title.cc       { color: #7dd3fc; }
+.trash-card-title.util     { color: #86efac; }
+.trash-card ul {
+  margin: 0;
+  padding: 0 0 0 1.1rem;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: #bbb;
+}
+.trash-card ul li { margin-bottom: 0.15rem; }
+@media (max-width: 700px) {
+  .trash-section { padding: 1.1rem 1.1rem; }
+  .trash-grid { grid-template-columns: 1fr; }
+}
