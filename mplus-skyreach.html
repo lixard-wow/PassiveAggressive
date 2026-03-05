@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skyreach – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="shortcut icon" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="roster.html">Roster</a></li>
+        <li><a href="raids.html">M+</a></li>
+        <li><a href="mplus-guides.html" class="nav-active">M+ Guides</a></li>
+        <li><a href="raid.html">Raid</a></li>
+        <li><a href="raid-guides.html">Raid Guides</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://discord.gg/XM22YH5Y" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>
+        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="roster.html">Roster</a></li>
+      <li><a href="raids.html">M+</a></li>
+      <li><a href="mplus-guides.html">M+ Guides</a></li>
+      <li><a href="raid.html">Raid</a></li>
+      <li><a href="raid-guides.html">Raid Guides</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a></li>
+      <li><a href="apply.html">Apply Now</a></li>
+    </ul>
+  </nav>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="mplus-guides.html">&#8592; Back to M+ Guides</a>
+
+      <div class="guide-detail-header">
+        <h1>Skyreach</h1>
+        <p>4 Bosses &bull; Spires of Arak &bull; The arakkoa's sky fortress. Features pillar-based Four Winds avoidance, Solar Construct add management, and Lens Flare interrupt checks on the final boss &mdash; one of the highest interrupt-demand finales in the pool.</p>
+      </div>
+
+      <!-- Boss 1 -->
+      <div class="boss-section">
+        <div class="boss-header bh-arakkoa">
+          <div class="boss-number">Boss 1 of 4</div>
+          <h2>Ranjit</h2>
+          <p class="boss-tagline">Ranjit is not a traditional tank fight. He flies and periodically lands. Four Winds spinning blade rings kill anyone not behind a pillar. Know your pillar before the pull.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>When Ranjit lands, immediately pull him behind the nearest pillar to break Four Winds line-of-sight.</li>
+                <li>When airborne, hide behind a pillar and stay still &mdash; the blade rings clear pillar zones.</li>
+                <li>Only taunt when Ranjit is grounded &mdash; taunting while airborne causes unpredictable movement.</li>
+                <li>Do not move the boss away from pillar cover during Four Winds &mdash; even a few feet of exposure is fatal.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Four Winds blade rings are the primary kill condition &mdash; stay behind pillars and do not heal from exposed positions.</li>
+                <li>Sky Piercer deals targeted AoE on a random player &mdash; top them as the cast animation begins.</li>
+                <li>During aerial phases there is reduced tank damage &mdash; use this time to top the group off.</li>
+                <li>Cooldowns for Phase 2 when Ranjit's blade patterns overlap with any raid damage abilities.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Know your assigned pillar before the pull &mdash; reacting in the moment during Four Winds is too slow.</li>
+                <li>Interrupt Sky Piercer when Ranjit is grounded &mdash; airborne casts cannot be interrupted.</li>
+                <li>Destroy Disruption Crystals when they spawn &mdash; they grant Ranjit a damage-absorbing shield.</li>
+                <li>Save cooldowns for grounded phases &mdash; Ranjit takes significantly reduced damage while airborne.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 2 -->
+      <div class="boss-section">
+        <div class="boss-header bh-arakkoa">
+          <div class="boss-number">Boss 2 of 4</div>
+          <h2>Araknath</h2>
+          <p class="boss-tagline">Solar Flare stacks increase fire damage taken on the tank. Kill Solar Construct adds before they reach Araknath &mdash; each one heals him. Haywire is the primary wipe condition if uninterrupted.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Solar Flare stacks amplify fire damage taken &mdash; use defensives at 3 stacks minimum on high keys.</li>
+                <li>Face Araknath toward an empty wall area &mdash; Solarflare pools persist and fill the room over time.</li>
+                <li>When Solar Constructs spawn, briefly grab aggro on them to prevent them from pathing to Araknath.</li>
+                <li>Taunt swap every 4 Solar Flare stacks &mdash; letting stacks uncap in the empowerment window is lethal.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Haywire is the primary cooldown dump &mdash; the whole group takes simultaneous burst fire damage.</li>
+                <li>Kill Solar Constructs in designated areas to control where explosion AoE hits.</li>
+                <li>Sustained fire ticks from Solarflare pools require constant raid throughput &mdash; no real downtime.</li>
+                <li>Dispel Primal Fury if applicable &mdash; the enrage effect can spread in some variants of the fight.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Interrupt Haywire every single cast &mdash; uninterrupted Haywire deals platform-wide fire AoE plus an enrage buff.</li>
+                <li>Solar Constructs are your priority add &mdash; kill them before they reach Araknath and heal him.</li>
+                <li>Spread slightly to avoid Solar Construct explosion chains clipping through clustered players.</li>
+                <li>Araknath's Empowered phase: his defenses drop significantly &mdash; use your major damage cooldowns here.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 3 -->
+      <div class="boss-section">
+        <div class="boss-header bh-arakkoa">
+          <div class="boss-number">Boss 3 of 4</div>
+          <h2>Rukhran</h2>
+          <p class="boss-tagline">A giant eagle with Skyreach Disciple adds and periodic dive-bomb charges. Position at platform edges to collect adds predictably.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Position Rukhran at the edge of the platform &mdash; eagle adds collected at edges are easier to group.</li>
+                <li>Face away from the raid for Screech &mdash; it targets highest threat (usually tank) and cones the frontal arc.</li>
+                <li>When Rukhran takes flight and summons Skyreach Disciples, quickly regroup to intercept eagle dives.</li>
+                <li>No traditional taunt swap needed &mdash; focus on controlling Disciple positioning near platform edges.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Dispatch Feathers deal moderate pierce damage on random players &mdash; steady throughput required.</li>
+                <li>Sacred Blade channels deal periodic healing checks &mdash; pre-cast before the channel animation completes.</li>
+                <li>Eagle adds can briefly fixate on healers &mdash; communicate when you are being dive-bombed.</li>
+                <li>Cooldowns for Phase 2 when Rukhran activates Holy Avenger and begins repeated charging sequences.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Kill Skyreach Disciples and eagle adds quickly &mdash; they don't have much HP but deal consistent AoE to the group.</li>
+                <li>Interrupt Sacred Blade Volley &mdash; it deals sustained holy damage to all players plus applies a movement slow.</li>
+                <li>Dodge Rukhran's dive-bomb attacks &mdash; a visible shadow telegraphs the landing location before impact.</li>
+                <li>Use platform edges to force eagle adds into predictable dive paths that DPS can intercept cleanly.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 4 -->
+      <div class="boss-section">
+        <div class="boss-header bh-arakkoa">
+          <div class="boss-number">Boss 4 of 4 &mdash; Final</div>
+          <h2>High Sage Viryx</h2>
+          <p class="boss-tagline">Lens Flare blinds multiple players simultaneously and is the primary wipe condition. Assign 3 interrupters on strict rotation before the pull. Skyreach Initiates must die within 8 seconds of spawn or they permanently empower Viryx.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Viryx casts more than she melees &mdash; interrupt rotation is more valuable than tank positioning here.</li>
+                <li>Lens Flare blinds multiple players including potentially you &mdash; use AoE taunt during the blind window to maintain threat.</li>
+                <li>Watch for Viryx's Lens Flare pre-indicator &mdash; use it to pre-emptively reposition before the cast resolves.</li>
+                <li>Defensives for Solar Storm phase when Viryx channels solar energy &mdash; physical damage spikes.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Lens Flare blinds multiple players at once, possibly including you &mdash; announce immediately when blinded.</li>
+                <li>Burst window after each Lens Flare: several players need simultaneous topping &mdash; cooldown ready.</li>
+                <li>Solar Beam sweeps the platform &mdash; move the group toward the designated safe zone during Wind Phase.</li>
+                <li>Cooldowns for Final Phase when Viryx reaches full Sky Power and activates Skyreach Ascendance.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li><strong>Interrupt Lens Flare every cast</strong> &mdash; it blinds multiple players and is the primary group death mechanic.</li>
+                <li>Assign 3 interrupters on strict rotation before the pull &mdash; Lens Flare has a fast cast time with no forgiveness.</li>
+                <li>Kill Skyreach Initiates within 8 seconds of spawn &mdash; they permanently empower Viryx if not killed in time.</li>
+                <li>Use Heroism/Lust during Viryx's empowered vulnerable state &mdash; she takes amplified damage in this window.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="raids.html">M+</a>
+        <a href="mplus-guides.html">M+ Guides</a>
+        <a href="raid.html">Raid</a>
+        <a href="raid-guides.html">Raid Guides</a>
+        <a href="roster.html">Roster</a>
+        <a href="news.html">News</a>
+        <a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a>
+        <a href="apply.html">Apply</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
