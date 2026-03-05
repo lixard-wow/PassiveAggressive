@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="logo.png" />
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script type="module" src="news.js" defer></script>
 </head>
 <body>
 
@@ -22,7 +23,9 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="roster.html">Roster</a></li>
         <li><a href="raids.html">M+</a></li>
+        <li><a href="mplus-guides.html">M+ Guides</a></li>
         <li><a href="raid.html">Raid</a></li>
+        <li><a href="raid-guides.html">Raid Guides</a></li>
         <li><a href="news.html" class="nav-active">News</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="https://discord.gg/XM22YH5Y" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>
@@ -34,7 +37,9 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="roster.html">Roster</a></li>
       <li><a href="raids.html">M+</a></li>
+      <li><a href="mplus-guides.html">M+ Guides</a></li>
       <li><a href="raid.html">Raid</a></li>
+      <li><a href="raid-guides.html">Raid Guides</a></li>
       <li><a href="news.html">News</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a></li>
@@ -46,28 +51,67 @@
   <section id="news" class="page-section">
     <div class="container">
       <h2 class="section-title">Guild News</h2>
-      <div class="news-grid">
-        <article class="news-card">
-          <div class="news-date">Feb 27, 2026</div>
-          <h3>Push Schedule is Live</h3>
-          <p>We're running keys Monday through Friday 6–10 PM ST/EST, and all day Saturday and Sunday. Plenty of time to find a group and get runs in no matter your schedule. Jump in Discord to link up.</p>
-          <span class="news-tag">Events</span>
-        </article>
-        <article class="news-card">
-          <div class="news-date">Feb 26, 2026</div>
-          <h3>Recruiting All Roles for M+ Teams</h3>
-          <p>We're building out our core key pushing groups and need tanks, healers, and DPS. We're looking for players who know their class, communicate well, and want to push high keys consistently. Apply on the site or hit us up on Discord.</p>
-          <span class="news-tag">Recruitment</span>
-        </article>
-        <article class="news-card">
-          <div class="news-date">Feb 25, 2026</div>
-          <h3>PassiveAggressive is Live!</h3>
-          <p>We're officially open. The guild is formed, the Discord is up, and we're ready to start pushing keys. If you've been looking for a dedicated M+ group to run with consistently — this is it. Welcome aboard.</p>
-          <span class="news-tag">Announcement</span>
-        </article>
+
+      <!-- Admin Bar (hidden until logged in) -->
+      <div class="news-admin-bar" id="adminBar" style="display:none">
+        <button class="btn btn-primary" id="btnNewPost">+ New Post</button>
+        <button class="btn btn-secondary" id="btnLogout">Logout</button>
       </div>
+
+      <!-- Login Button (visible when logged out) -->
+      <div class="news-admin-bar" id="loginBar">
+        <button class="btn btn-secondary" id="btnShowLogin">Officer Login</button>
+      </div>
+
+      <!-- Login Form (hidden by default) -->
+      <div class="news-login-form" id="loginForm" style="display:none">
+        <input type="email" id="loginEmail" placeholder="Email" autocomplete="email" />
+        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
+        <button class="btn btn-primary" id="btnLogin">Sign In</button>
+        <button class="btn btn-secondary" id="btnCancelLogin">Cancel</button>
+        <p class="login-error" id="loginError"></p>
+      </div>
+
+      <!-- News Feed -->
+      <div id="newsFeed" class="news-grid"></div>
+
+      <!-- Empty State -->
+      <p class="news-empty" id="newsEmpty" style="display:none">No news posts yet. Check back soon!</p>
     </div>
   </section>
+
+  <!-- Create/Edit Modal -->
+  <div class="news-modal-overlay" id="newsModal" style="display:none">
+    <div class="news-modal">
+      <h3 id="modalTitle">New Post</h3>
+      <input type="hidden" id="editPostId" />
+      <div class="form-group">
+        <label for="postTitle">Title</label>
+        <input type="text" id="postTitle" placeholder="Post title" />
+      </div>
+      <div class="form-group">
+        <label for="postContent">Content</label>
+        <textarea id="postContent" rows="5" placeholder="Write your news post..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="postTag">Tag</label>
+        <select id="postTag" class="filter-select">
+          <option value="Announcement">Announcement</option>
+          <option value="Events">Events</option>
+          <option value="Recruitment">Recruitment</option>
+          <option value="Update">Update</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="postDate">Date</label>
+        <input type="date" id="postDate" />
+      </div>
+      <div class="news-modal-actions">
+        <button class="btn btn-primary" id="btnSavePost">Save</button>
+        <button class="btn btn-secondary" id="btnCancelPost">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -81,7 +125,9 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="raids.html">M+</a>
+        <a href="mplus-guides.html">M+ Guides</a>
         <a href="raid.html">Raid</a>
+        <a href="raid-guides.html">Raid Guides</a>
         <a href="roster.html">Roster</a>
         <a href="news.html">News</a>
         <a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a>

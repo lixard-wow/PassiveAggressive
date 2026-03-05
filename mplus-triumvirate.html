@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seat of the Triumvirate – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="shortcut icon" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="roster.html">Roster</a></li>
+        <li><a href="raids.html">M+</a></li>
+        <li><a href="mplus-guides.html" class="nav-active">M+ Guides</a></li>
+        <li><a href="raid.html">Raid</a></li>
+        <li><a href="raid-guides.html">Raid Guides</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://discord.gg/XM22YH5Y" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>
+        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="roster.html">Roster</a></li>
+      <li><a href="raids.html">M+</a></li>
+      <li><a href="mplus-guides.html">M+ Guides</a></li>
+      <li><a href="raid.html">Raid</a></li>
+      <li><a href="raid-guides.html">Raid Guides</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a></li>
+      <li><a href="apply.html">Apply Now</a></li>
+    </ul>
+  </nav>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="mplus-guides.html">&#8592; Back to M+ Guides</a>
+
+      <div class="guide-detail-header">
+        <h1>Seat of the Triumvirate</h1>
+        <p>4 Bosses &bull; Mac'Aree, Argus &bull; A draenei sacred city corrupted by the Void. Featuring void pool management, extensive dispel requirements, Void Tendrils, and L'ura as one of the most punishing final bosses in the rotation.</p>
+      </div>
+
+      <!-- Boss 1 -->
+      <div class="boss-section">
+        <div class="boss-header bh-naaru">
+          <div class="boss-number">Boss 1 of 4</div>
+          <h2>Zuraal the Ascended</h2>
+          <p class="boss-tagline">Void pools expand and cover the floor over time. Interrupt Shadow Word: Agony or it stacks damage on a random player. Zuraal goes untargetable during Void Ascendance &mdash; kill adds quickly.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Face Zuraal away from the raid &mdash; Void Slash cleaves anyone directly behind the target.</li>
+                <li>When Zuraal Ascends (void form), he becomes untargetable &mdash; hold position and wait for his return.</li>
+                <li>Position near room center to avoid Void Pulse knockback into wall hazards.</li>
+                <li>Swap at 4 stacks of Void Corruption &mdash; uncapped stacks dramatically amplify void damage taken.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Void Pulse deals AoE shadow damage to all players &mdash; steady throughput throughout the fight.</li>
+                <li>During Void Ascendance, the fight briefly calms &mdash; use this window to top everyone off.</li>
+                <li>Void Tendrils root random players &mdash; dispel them immediately; rooted players take amplified damage.</li>
+                <li>Cooldowns for Phase 2 when Zuraal combines Ascendance timing with Void Pulse overlaps.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Interrupt Shadow Word: Agony every cast &mdash; uninterrupted, it stacks heavy damage on a single player.</li>
+                <li>During Void Ascendance, kill void adds in this order: Void Tendril &rarr; Darkened Void &rarr; Zuraal's Echo.</li>
+                <li>Avoid Void Pool puddles &mdash; they expand over time and eventually eliminate most of the room.</li>
+                <li>Burst Zuraal hard after Ascendance ends &mdash; he has a brief vulnerability window on reappearance.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 2 -->
+      <div class="boss-section">
+        <div class="boss-header bh-naaru">
+          <div class="boss-number">Boss 2 of 4</div>
+          <h2>Saprish</h2>
+          <p class="boss-tagline">Saprish shadowsteps if you move too far &mdash; keep him close. His shadow hound Darkfang fixates on the tank. Kill Shadow Hound adds or they fixate on the healer.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Never move too far from Saprish &mdash; he shadowsteps and resets threat if you increase the distance too much.</li>
+                <li>Keep Saprish and Darkfang stacked for efficient cleave damage if your group can.</li>
+                <li>When Saprish vanishes via Shadow Stalk, face the direction of his reappearance indicator to taunt immediately.</li>
+                <li>Pick up all spawned Shadow Hound adds via AoE threat &mdash; they fixate on healers if not taunted.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Voidtouched debuff drains healing received on the afflicted player &mdash; dispel it immediately.</li>
+                <li>Multiple Shadow Hound adds and boss simultaneously create a chaotic damage environment.</li>
+                <li>Saprish's Shadow Leap lands on a random player for heavy burst &mdash; pre-heal if you see the cast animating.</li>
+                <li>Cooldowns when Darkfang Phase activates &mdash; area-pulsing damage around the tank spikes their HP.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Kill Shadow Hound adds quickly &mdash; each uncontrolled hound fixates the healer and applies bleed stacks.</li>
+                <li>Interrupt Void Leech on Saprish &mdash; it heals him and applies a healing debuff to the target.</li>
+                <li>Spread slightly to avoid Saprish's Void Ambush chain-triggering between clustered players.</li>
+                <li>Darkfang is a priority secondary target &mdash; cleave it with Saprish whenever your spec allows.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 3 -->
+      <div class="boss-section">
+        <div class="boss-header bh-naaru">
+          <div class="boss-number">Boss 3 of 4</div>
+          <h2>Viceroy Nezhar</h2>
+          <p class="boss-tagline">Umbral Tentacles deal pulsing AoE while alive and cannot be ignored. Oblivion's Call is a party-wide stacking debuff &mdash; assign 2 interrupters on strict rotation.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Nezhar's Tentacle of the Old Gods fixates on the tank &mdash; drag it away from the main group.</li>
+                <li>Void Lash stack mechanic: taunt swap at 3 stacks &mdash; uncapped Void Lash is instant death.</li>
+                <li>Pre-position near the room's edge so Tentacles spawn at predictable locations for DPS control.</li>
+                <li>Use defensives for Nezhar's Oblivion Bolt &mdash; it deals percentage-based HP damage regardless of armor.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Echoes of Oblivion create null-healing zones where heals partially fail &mdash; reposition out of them immediately.</li>
+                <li>Oblivion's Call applies a stackable shadow debuff &mdash; dispel on any player above 2 stacks.</li>
+                <li>Umbral Tentacles deal AoE damage while alive &mdash; DPS must kill them but raid health will drop during the delay.</li>
+                <li>Save a cooldown for Phase 2 when Nezhar channels Void Submission &mdash; raid-wide shadow burst.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Kill Umbral Tentacles immediately when they spawn &mdash; pulsing AoE damage cannot be healed through long-term.</li>
+                <li>Interrupt Oblivion's Call &mdash; uninterrupted, it applies a 3-stack debuff simultaneously to the whole party.</li>
+                <li>Assign 2 dedicated interrupters for Oblivion's Call and rotate &mdash; do not rely on volunteers.</li>
+                <li>Phase 2 vulnerability window: use all major cooldowns when Nezhar briefly takes amplified damage.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 4 -->
+      <div class="boss-section">
+        <div class="boss-header bh-naaru">
+          <div class="boss-number">Boss 4 of 4 &mdash; Final</div>
+          <h2>L'ura</h2>
+          <p class="boss-tagline">A fallen Naaru. Surging Darkness is the primary cooldown-dump moment. Void Orbs float toward L'ura &mdash; intercept them by running through their path or she is healed. Void Madness can CC players mid-fight &mdash; dispel it fast.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Shadow Slash stacks on the active tank &mdash; swap at 3&ndash;4 stacks to allow debuff falloff.</li>
+                <li>Position in the Path of the Void Surge when it spawns &mdash; this soak mechanic requires tank participation.</li>
+                <li>Face L'ura away from Void Surge paths when soaks are not active &mdash; her cleave pattern changes.</li>
+                <li>Stack defensives when Void Surge overlaps with high Shadow Slash stacks &mdash; this is the primary lethality window.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Surging Darkness deals massive raid-wide shadow damage &mdash; pre-cast your healing setup before it hits.</li>
+                <li>Do not wait until Surging Darkness resolves to react &mdash; by then it is too late for the squishier players.</li>
+                <li>Void Madness applies a mind-control-style debuff &mdash; dispel before affected players act against the group.</li>
+                <li>Keep the raid above 75% entering each Surging Darkness &mdash; L'ura checks group health at detonation.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Naaru energy beam sweeps the arena in a rotating pattern &mdash; memorize the rotation direction, do not guess.</li>
+                <li>Interrupt Void Madness &mdash; one uninterrupted cast can CC a player during a critical mechanic window.</li>
+                <li>Void Orbs float toward L'ura &mdash; intercept them by running through their path before they reach her.</li>
+                <li>Use Heroism/Lust after the first Surging Darkness resolves &mdash; do not save it for a late-fight emergency.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="raids.html">M+</a>
+        <a href="mplus-guides.html">M+ Guides</a>
+        <a href="raid.html">Raid</a>
+        <a href="raid-guides.html">Raid Guides</a>
+        <a href="roster.html">Roster</a>
+        <a href="news.html">News</a>
+        <a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a>
+        <a href="apply.html">Apply</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

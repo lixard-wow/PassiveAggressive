@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pit of Saron – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="shortcut icon" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="roster.html">Roster</a></li>
+        <li><a href="raids.html">M+</a></li>
+        <li><a href="mplus-guides.html" class="nav-active">M+ Guides</a></li>
+        <li><a href="raid.html">Raid</a></li>
+        <li><a href="raid-guides.html">Raid Guides</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://discord.gg/XM22YH5Y" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>
+        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+    <ul class="mobile-menu" id="mobileMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="roster.html">Roster</a></li>
+      <li><a href="raids.html">M+</a></li>
+      <li><a href="mplus-guides.html">M+ Guides</a></li>
+      <li><a href="raid.html">Raid</a></li>
+      <li><a href="raid-guides.html">Raid Guides</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a></li>
+      <li><a href="apply.html">Apply Now</a></li>
+    </ul>
+  </nav>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="mplus-guides.html">&#8592; Back to M+ Guides</a>
+
+      <div class="guide-detail-header">
+        <h1>Pit of Saron</h1>
+        <p>3 Bosses &bull; Icecrown &bull; The Scourge's frozen industrial forge. Features Permafrost stack management via boulders, one of the most chaotic kiting encounters in M+, and a straight DPS race against escalating stacks.</p>
+      </div>
+
+      <!-- Boss 1 -->
+      <div class="boss-section">
+        <div class="boss-header bh-ice">
+          <div class="boss-number">Boss 1 of 3</div>
+          <h2>Forgemaster Garfrost</h2>
+          <p class="boss-tagline">Permafrost stacks increase the frost damage you take. Walk through boulders to reset them. Pre-position near a boulder before stacks get dangerous.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Permafrost stacks increase incoming frost damage &mdash; walk through a boulder to reset stacks before reaching 5.</li>
+                <li>Pre-position near a boulder before stacks climb &mdash; do not wait until you are already at dangerous levels.</li>
+                <li>Face Garfrost away from the raid &mdash; Stomp AoE craters the ground directly beneath him.</li>
+                <li>Rotate cooldowns for Throw Saronite &mdash; it targets random players but hits anyone standing in its arc.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Tank spikes dramatically at 4&ndash;5 Permafrost stacks &mdash; watch the debuff count and be ready to spam-heal.</li>
+                <li>During boulder resets the tank briefly takes a gap in coverage &mdash; maintain heals through the movement.</li>
+                <li>Frozen Blows in Phase 2 reduces healing received on random players &mdash; prioritize affected targets.</li>
+                <li>Save a cooldown for the final phase when Garfrost enters empowered Smash mode.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Help your tank by staying near boulders &mdash; your proximity gives the tank a natural reset angle.</li>
+                <li>Dodge Throw Saronite AoE telegraphs &mdash; standing in them applies frost debuffs to DPS as well.</li>
+                <li>Stay mobile &mdash; Garfrost's ground stomps leave persistent ice patches that slow movement speed.</li>
+                <li>Phase 2 vulnerability window: Garfrost's armor value drops &mdash; this is your burst DPS opportunity.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 2 -->
+      <div class="boss-section">
+        <div class="boss-header bh-ice">
+          <div class="boss-number">Boss 2 of 3</div>
+          <h2>Ick &amp; Krick</h2>
+          <p class="boss-tagline">Kite Ick continuously. Never stand still or you get Toxic Waste puddles under your feet. Krick is immune while riding Ick &mdash; kill Krick after Ick dies.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Kite Ick continuously around the room &mdash; never stand still or Toxic Waste puddles form under you.</li>
+                <li>Move at moderate pace &mdash; too fast and Ick enrages; too slow and puddles accumulate.</li>
+                <li>When Ick charges (Pursuit), use a major defensive immediately before impact.</li>
+                <li>Do not attack Krick &mdash; he is immune while riding Ick. Kill Krick after Ick dies.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Keep everyone above 80% HP at all times &mdash; Poison Nova hits all players simultaneously and chains kill low-HP targets.</li>
+                <li>Spread players before Ick's energy caps to reduce Poison Nova chain deaths.</li>
+                <li>The Pursuit target takes heavy burst damage &mdash; top them immediately when targeted.</li>
+                <li>Remind DPS to move out of Toxic Waste puddles &mdash; they deal persistent damage to anyone standing in them.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Spread out to avoid Poison Nova chaining between clustered players.</li>
+                <li>Dodge Explosive Barrage targeted AoE &mdash; the bomb clusters chain-detonate and overlap.</li>
+                <li>Never stand in Toxic Waste puddles &mdash; they persist and eventually fill much of the room.</li>
+                <li>After Ick dies: kill Krick immediately before his RP dialogue begins &mdash; Krick himself has no combat abilities.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss 3 -->
+      <div class="boss-section">
+        <div class="boss-header bh-ice">
+          <div class="boss-number">Boss 3 of 3 &mdash; Final</div>
+          <h2>Scourgelord Tyrannus</h2>
+          <p class="boss-tagline">A DPS race against Unholy Power stacks that make Tyrannus progressively unkillable. Rimefang the drake above assists with ice volleys. Use Lust early &mdash; not when things go wrong.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Obliterate hits very hard &mdash; use a major defensive every 3 casts on high key levels.</li>
+                <li>Position Tyrannus away from Rimefang's ice patches on the ground.</li>
+                <li>When Rimefang casts Hoarfrost fixate on you, activate defensives and do not panic-move the boss.</li>
+                <li>Unholy Power stacks increase Tyrannus's damage over time &mdash; this fight punishes slow kills.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Forceful Smash briefly stuns the tank &mdash; immediately top them during the stun duration.</li>
+                <li>Unholy Power escalates damage continuously &mdash; save nothing after mid-fight.</li>
+                <li>Rimefang above deals frost AoE periodically &mdash; raid-wide healing required simultaneously with tank heals.</li>
+                <li>Save your strongest cooldown for ~50% Tyrannus HP when Unholy Power stacks reach dangerous levels.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>This is a DPS race &mdash; Unholy Power stacks make Tyrannus progressively unkillable the longer he lives.</li>
+                <li>Dodge Rimefang's ice patches and Hoarfrost fixation lines &mdash; they cut across the arena.</li>
+                <li>Cleave Tyrannus and Rimefang simultaneously if your spec allows &mdash; Rimefang has meaningful HP.</li>
+                <li><strong>Use Heroism/Lust at the start of the fight, not at the end</strong> &mdash; front-loading DPS wins this encounter.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <span style="white-space:nowrap"><span style="color:#A855F7">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="raids.html">M+</a>
+        <a href="mplus-guides.html">M+ Guides</a>
+        <a href="raid.html">Raid</a>
+        <a href="raid-guides.html">Raid Guides</a>
+        <a href="roster.html">Roster</a>
+        <a href="news.html">News</a>
+        <a href="https://discord.gg/XM22YH5Y" target="_blank" rel="noopener">Discord</a>
+        <a href="apply.html">Apply</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
