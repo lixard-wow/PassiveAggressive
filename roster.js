@@ -235,7 +235,7 @@ function buildRoster(filter = currentFilter) {
     const statsHtml = `
       <div class="roster-stats">
         <div class="roster-stats-row">
-          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/inv_relics_hourglass.jpg" alt="M+" />
+          <span class="stat-icon-txt stat-icon-mp">M+</span>
           <span class="roster-stat" title="Current Season M+">
             <span class="rs-season-label rs-curr-label">${mpScoreSlug ? seasonLabel(mpScoreSlug) : ''}</span>
             <span class="rs-score" style="color:${mpScore ? mpColor : '#555'}">
@@ -250,7 +250,7 @@ function buildRoster(filter = currentFilter) {
           </span>
         </div>
         <div class="roster-stats-row">
-          <img class="stat-icon-img" src="https://wow.zamimg.com/images/wow/icons/small/inv_misc_head_dragon_black.jpg" alt="Raid" />
+          <span class="stat-icon-txt stat-icon-raid">Raid</span>
           <span class="roster-stat" title="Current Raid">
             <span class="rs-season-label rs-raid-curr-label">${raidCurr ? raidShortName(raidCurr.slug) : ''}</span>
             <span class="rs-raid" style="color:${raidCurr ? raidCurr.color : '#555'}">
