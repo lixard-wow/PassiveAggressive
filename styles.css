@@ -133,7 +133,11 @@ body {
   font-size: 1rem;
 }
 
-.mobile-menu.open { display: flex; }
+.mobile-menu.open { display: none; }
+
+@media (max-width: 720px) {
+  .mobile-menu.open { display: flex; }
+}
 
 @media (max-width: 720px) {
   .nav-links { display: none; }
