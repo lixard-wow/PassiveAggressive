@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="logo.png" />
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
-  <script type="module" src="news.js" defer></script>
+  <script src="news.js" defer></script>
 </head>
 <body>
 
@@ -52,26 +52,6 @@
     <div class="container">
       <h2 class="section-title">Guild News</h2>
 
-      <!-- Admin Bar (hidden until logged in) -->
-      <div class="news-admin-bar" id="adminBar" style="display:none">
-        <button class="btn btn-primary" id="btnNewPost">+ New Post</button>
-        <button class="btn btn-secondary" id="btnLogout">Logout</button>
-      </div>
-
-      <!-- Login Button (visible when logged out) -->
-      <div class="news-admin-bar" id="loginBar">
-        <button class="btn btn-secondary" id="btnShowLogin">Officer Login</button>
-      </div>
-
-      <!-- Login Form (hidden by default) -->
-      <div class="news-login-form" id="loginForm" style="display:none">
-        <input type="email" id="loginEmail" placeholder="Email" autocomplete="email" />
-        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
-        <button class="btn btn-primary" id="btnLogin">Sign In</button>
-        <button class="btn btn-secondary" id="btnCancelLogin">Cancel</button>
-        <p class="login-error" id="loginError"></p>
-      </div>
-
       <!-- News Feed -->
       <div id="newsFeed" class="news-grid"></div>
 
@@ -79,39 +59,6 @@
       <p class="news-empty" id="newsEmpty" style="display:none">No news posts yet. Check back soon!</p>
     </div>
   </section>
-
-  <!-- Create/Edit Modal -->
-  <div class="news-modal-overlay" id="newsModal" style="display:none">
-    <div class="news-modal">
-      <h3 id="modalTitle">New Post</h3>
-      <input type="hidden" id="editPostId" />
-      <div class="form-group">
-        <label for="postTitle">Title</label>
-        <input type="text" id="postTitle" placeholder="Post title" />
-      </div>
-      <div class="form-group">
-        <label for="postContent">Content</label>
-        <textarea id="postContent" rows="5" placeholder="Write your news post..."></textarea>
-      </div>
-      <div class="form-group">
-        <label for="postTag">Tag</label>
-        <select id="postTag" class="filter-select">
-          <option value="Announcement">Announcement</option>
-          <option value="Events">Events</option>
-          <option value="Recruitment">Recruitment</option>
-          <option value="Update">Update</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="postDate">Date</label>
-        <input type="date" id="postDate" />
-      </div>
-      <div class="news-modal-actions">
-        <button class="btn btn-primary" id="btnSavePost">Save</button>
-        <button class="btn btn-secondary" id="btnCancelPost">Cancel</button>
-      </div>
-    </div>
-  </div>
 
   <!-- FOOTER -->
   <footer>
