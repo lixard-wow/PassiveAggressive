@@ -151,7 +151,8 @@ body {
   justify-content: center;
   text-align: center;
   background:
-    linear-gradient(to bottom, rgba(10,10,15,0.3) 0%, rgba(10,10,15,0.7) 60%, var(--dark) 100%),
+    linear-gradient(to bottom, rgba(10,10,15,0.45) 0%, rgba(10,10,15,0.75) 60%, var(--dark) 100%),
+    url('hero-bg.jpg') center/cover no-repeat,
     radial-gradient(ellipse at 50% 30%, #1a1a40 0%, #0a0a0f 70%);
   overflow: hidden;
 }
@@ -209,7 +210,34 @@ body {
   font-size: 1.15rem;
   color: #aaa;
   font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.hero-raid-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  border: 1px solid rgba(200,169,110,0.4);
+  border-radius: 6px;
+  padding: 0.65rem 1.75rem;
   margin-bottom: 2.5rem;
+  background: rgba(10,10,15,0.5);
+}
+
+.hero-raid-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero-raid-time {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-lt);
 }
 
 .hero-buttons {
@@ -936,7 +964,14 @@ footer {
   }
   .hero-tagline {
     font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-raid-badge {
+    padding: 0.5rem 1.25rem;
     margin-bottom: 2rem;
+  }
+  .hero-raid-time {
+    font-size: 0.9rem;
   }
   .hero-content {
     padding: 1rem 1.25rem;
