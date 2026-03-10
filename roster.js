@@ -233,37 +233,9 @@ function buildRoster(filter = currentFilter) {
     const raidPrev    = stats ? stats.raidPrev    : null;
 
     const statsHtml = `
-      <div class="roster-stats">
-        <div class="roster-stats-row">
-          <span class="stat-icon-txt stat-icon-mp">M+</span>
-          <span class="roster-stat" title="Current Season M+">
-            <span class="rs-season-label rs-curr-label">${mpScoreSlug ? seasonLabel(mpScoreSlug) : ''}</span>
-            <span class="rs-score" style="color:${mpScore ? mpColor : '#555'}">
-              ${mpScore !== null ? Math.round(mpScore) : '0'}
-            </span>
-          </span>
-          <span class="roster-stat" title="Previous Season M+">
-            <span class="rs-season-label rs-prev-label">${mpPrevSlug ? seasonLabel(mpPrevSlug) : ''}</span>
-            <span class="rs-prev-score" style="color:${mpPrev !== null ? mpPrevColor : '#555'}">
-              ${mpPrev !== null ? Math.round(mpPrev) : '—'}
-            </span>
-          </span>
-        </div>
-        <div class="roster-stats-row">
-          <span class="stat-icon-txt stat-icon-raid">Raid</span>
-          <span class="roster-stat" title="Current Raid">
-            <span class="rs-season-label rs-raid-curr-label">${raidCurr ? raidShortName(raidCurr.slug) : ''}</span>
-            <span class="rs-raid" style="color:${raidCurr ? raidCurr.color : '#555'}">
-              ${raidCurr ? raidCurr.text : '—'}
-            </span>
-          </span>
-          <span class="roster-stat" title="Previous Raid">
-            <span class="rs-season-label rs-raid-prev-label">${raidPrev ? raidShortName(raidPrev.slug) : ''}</span>
-            <span class="rs-prev-score rs-raid-prev" style="color:${raidPrev ? raidPrev.color : '#555'}">
-              ${raidPrev ? raidPrev.text : '—'}
-            </span>
-          </span>
-        </div>
+      <div class="roster-stat-line">
+        <span class="rs-mp-score" style="color:${mpScore ? mpColor : '#555'}">${mpScore !== null ? Math.round(mpScore) : '0'} M+</span>
+        <span class="rs-raid-part"${!raidCurr ? ' style="display:none"' : ''}> &bull; <span class="rs-raid-text" style="color:${raidCurr ? raidCurr.color : '#555'}">${raidCurr ? raidCurr.text : ''}</span></span>
       </div>`;
 
     return `
@@ -389,22 +361,14 @@ const thumbObserver = new IntersectionObserver((entries) => {
       fetchStats(name, realm).then(() => {
         const s = statsCache[name];
         if (!s) return;
-        const currLabelEl    = card.querySelector('.rs-curr-label');
-        const scoreEl        = card.querySelector('.rs-score');
-        const prevLabelEl    = card.querySelector('.rs-prev-label');
-        const prevEl         = card.querySelector('.rs-prev-score');
-        const raidCurrLabel  = card.querySelector('.rs-raid-curr-label');
-        const raidEl         = card.querySelector('.rs-raid');
-        const raidPrevLabel  = card.querySelector('.rs-raid-prev-label');
-        const raidPrevEl     = card.querySelector('.rs-raid-prev');
-        if (currLabelEl)   currLabelEl.textContent = s.mpScoreSlug ? seasonLabel(s.mpScoreSlug) : '';
-        if (scoreEl)       { scoreEl.textContent = s.mpScore !== null ? Math.round(s.mpScore) : '0'; scoreEl.style.color = s.mpScore ? s.mpColor : '#555'; }
-        if (prevLabelEl)   prevLabelEl.textContent = s.mpPrevSlug ? seasonLabel(s.mpPrevSlug) : '';
-        if (prevEl)        { prevEl.textContent = s.mpPrev !== null ? Math.round(s.mpPrev) : '—'; prevEl.style.color = s.mpPrev ? s.mpPrevColor : '#555'; }
-        if (raidCurrLabel) raidCurrLabel.textContent = s.raidCurr ? raidShortName(s.raidCurr.slug) : '';
-        if (raidEl)        { raidEl.textContent = s.raidCurr ? s.raidCurr.text : '—'; raidEl.style.color = s.raidCurr ? s.raidCurr.color : '#555'; }
-        if (raidPrevLabel) raidPrevLabel.textContent = s.raidPrev ? raidShortName(s.raidPrev.slug) : '';
-        if (raidPrevEl)    { raidPrevEl.textContent = s.raidPrev ? s.raidPrev.text : '—'; raidPrevEl.style.color = s.raidPrev ? s.raidPrev.color : '#555'; }
+        const mpEl       = card.querySelector('.rs-mp-score');
+        const raidPart   = card.querySelector('.rs-raid-part');
+        const raidTextEl = card.querySelector('.rs-raid-text');
+        if (mpEl) { mpEl.textContent = `${s.mpScore !== null ? Math.round(s.mpScore) : '0'} M+`; mpEl.style.color = s.mpScore ? s.mpColor : '#555'; }
+        if (s.raidCurr && raidPart) {
+          raidPart.style.display = '';
+          if (raidTextEl) { raidTextEl.textContent = s.raidCurr.text; raidTextEl.style.color = s.raidCurr.color; }
+        }
       });
     }
   });
