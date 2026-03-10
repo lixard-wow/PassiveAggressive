@@ -1241,6 +1241,14 @@ footer {
   background-size: cover;
   background-position: center;
 }
+.guide-card-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 0;
+}
+.guide-card-art > * { position: relative; z-index: 1; }
 
 .guide-card-art-text {
   font-family: 'Cinzel', serif;
@@ -1297,18 +1305,24 @@ footer {
   margin-top: 0.25rem;
 }
 
-/* Raid / dungeon art gradients */
-.art-voidspire   { background: linear-gradient(135deg, #1a0a30 0%, #0d0520 100%); }
-.art-dreamrift   { background: linear-gradient(135deg, #051a2e 0%, #041020 100%); }
-.art-queldanas   { background: linear-gradient(135deg, #2e1200 0%, #1a0800 100%); }
-.art-maisara     { background: linear-gradient(135deg, #071a07 0%, #040e04 100%); }
-.art-windrunner  { background: linear-gradient(135deg, #10102a 0%, #08081a 100%); }
-.art-nexus       { background: linear-gradient(135deg, #140020 0%, #0a0012 100%); }
-.art-murderrow   { background: linear-gradient(135deg, #200808 0%, #120404 100%); }
-.art-magisters   { background: linear-gradient(135deg, #2a0a18 0%, #180610 100%); }
-.art-saron       { background: linear-gradient(135deg, #081420 0%, #040c14 100%); }
-.art-triumvirate { background: linear-gradient(135deg, #181400 0%, #0e0c00 100%); }
-.art-skyreach    { background: linear-gradient(135deg, #081800 0%, #040e00 100%); }
+/* Raid / dungeon art */
+.art-voidspire, .art-dreamrift, .art-queldanas,
+.art-maisara, .art-windrunner, .art-nexus, .art-murderrow,
+.art-magisters, .art-saron, .art-triumvirate, .art-skyreach {
+  background-size: cover;
+  background-position: center;
+}
+.art-maisara     { background-image: url('https://wow.zamimg.com/uploads/guide/header/0dd06ff24a767e0569f6b1020b5280ce66e38a87.jpg'); }
+.art-windrunner  { background-image: url('https://wow.zamimg.com/uploads/guide/header/163c07f3e57f4a3f9f8c57fc410727b94c6b2529.jpg'); }
+.art-nexus       { background-image: url('https://wow.zamimg.com/uploads/guide/header/87479048e126683e5dca4e3718fb0491e166b14c.jpg'); }
+.art-murderrow   { background-image: url('https://wow.zamimg.com/uploads/guide/header/ca08a478dcdef236f2430780f555774df16920f0.jpg'); }
+.art-magisters   { background-image: url('https://wow.zamimg.com/uploads/guide/header/329e6f9e663421d4c332a2472af7b1761d8e2d53.jpg'); }
+.art-saron       { background-image: url('https://wow.zamimg.com/uploads/guide/header/846efd643647053e4a6f497d98721562be05319e.jpg'); }
+.art-triumvirate { background-image: url('https://wow.zamimg.com/uploads/guide/header/8db06b24e9e63a7c13ab218e36a2a7ba25c3fbf3.jpg'); }
+.art-skyreach    { background-image: url('https://wow.zamimg.com/uploads/guide/header/9fa0dd03a6fd762ead3b4f5af10720d918c9680a.jpg'); }
+.art-voidspire   { background-image: url('https://bnetcmsus-a.akamaihd.net/cms/content_entry_media/5WQPT37K53GU1771476923778.png'); }
+.art-dreamrift   { background-image: url('https://bnetcmsus-a.akamaihd.net/cms/content_entry_media/RW7VFH2WUIJM1771476923759.png'); }
+.art-queldanas   { background-image: url('https://bnetcmsus-a.akamaihd.net/cms/content_entry_media/SQPVX902BR4Q1771476923786.png'); }
 
 /* =====================
    GUIDE DETAIL PAGES
