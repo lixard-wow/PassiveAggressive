@@ -1235,16 +1235,17 @@ footer {
 
 .guide-card-art-text {
   font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.65);
   text-align: center;
-  line-height: 1.8;
+  line-height: 1.9;
   padding: 0 1rem;
   pointer-events: none;
   user-select: none;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
 }
 
 .guide-card-art-label {
@@ -1254,8 +1255,9 @@ footer {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.75);
   font-family: 'Cinzel', serif;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
 }
 
 .guide-card-info {
