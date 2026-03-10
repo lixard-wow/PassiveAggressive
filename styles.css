@@ -491,8 +491,9 @@ section { padding: 6rem 1.5rem; }
   letter-spacing: 0.5px;
 }
 
-.tag-prog { background: rgba(163,90,200,0.2); color: #c984e8; border: 1px solid rgba(163,90,200,0.4); }
-.tag-farm { background: rgba(82,183,136,0.2); color: var(--green); border: 1px solid rgba(82,183,136,0.4); }
+.tag-prog   { background: rgba(163,90,200,0.2);  color: #c984e8;       border: 1px solid rgba(163,90,200,0.4); }
+.tag-farm   { background: rgba(82,183,136,0.2);  color: var(--green);  border: 1px solid rgba(82,183,136,0.4); }
+.tag-return { background: rgba(74,144,217,0.15); color: #7db8e8;       border: 1px solid rgba(74,144,217,0.3); }
 
 /* =====================
    ROSTER
