@@ -44,7 +44,7 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 64px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,7 +53,7 @@ body {
 .nav-logo {
   font-family: 'Cinzel', serif;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   color: var(--gold);
   letter-spacing: 1px;
   display: flex;
@@ -66,8 +66,8 @@ body {
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  height: 40px;
-  width: 40px;
+  height: 44px;
+  width: 44px;
   object-fit: contain;
   border-radius: 6px;
 }
@@ -82,7 +82,7 @@ body {
 .nav-links a {
   color: var(--text);
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   transition: color 0.2s;
 }
 
