@@ -80,6 +80,7 @@ body {
 }
 
 .nav-links a {
+  display: inline-block;
   color: var(--text);
   text-decoration: none;
   font-size: 0.92rem;
@@ -383,7 +384,7 @@ section { padding: 6rem 1.5rem; }
 .page-section { padding-top: 8rem; min-height: calc(100vh - 200px); }
 
 /* Active nav link */
-.nav-active { color: var(--gold-lt) !important; border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+.nav-active { color: var(--gold-lt) !important; border-bottom: 2px solid var(--gold) !important; padding-bottom: 3px; }
 
 #raids, #news { background: var(--dark); }
 
