@@ -65,12 +65,20 @@
     </ul>
   </nav>
 
-  <!-- M+ GUIDES -->
+  <!-- GUIDES -->
   <section class="guide-hub-section">
     <div class="container">
-      <h2 class="section-title">Mythic+ Guides</h2>
-      <p class="section-sub">Midnight Season 1 &mdash; Eight dungeons. These are the guides our group uses to prep for content, improve routes, and stay sharp on mechanics. Click a dungeon for boss-by-boss Tank / Healer / DPS breakdowns.</p>
+      <h2 class="section-title">Guides</h2>
+      <p class="section-sub">Midnight Season 1 &mdash; Boss-by-boss Tank / Healer / DPS breakdowns for every dungeon and raid.</p>
 
+      <!-- TAB BAR -->
+      <div class="guide-tab-bar">
+        <button class="guide-tab-btn active" data-tab="mplus">&#128273; Mythic+</button>
+        <button class="guide-tab-btn" data-tab="raid">&#9876; Raid</button>
+      </div>
+
+      <!-- MYTHIC+ PANEL -->
+      <div class="guide-tab-panel" id="guide-panel-mplus">
       <div class="guide-section-label">New Dungeons</div>
       <div class="guide-grid">
 
@@ -201,9 +209,11 @@
 
       </div>
 
-      <!-- RAID GUIDES -->
-      <h2 class="section-title" style="margin-top:4rem;">Raid Guides</h2>
-      <p class="section-sub">Midnight Season 1 &mdash; Three raids, nine bosses. Tank / Healer / DPS breakdowns for each boss to keep raid nights efficient.</p>
+      </div><!-- end mplus panel -->
+
+      <!-- RAID PANEL -->
+      <div class="guide-tab-panel" id="guide-panel-raid" style="display:none">
+      <p class="section-sub" style="text-align:left;margin-bottom:2rem;margin-top:0;">Three raids, nine bosses. Tank / Healer / DPS breakdowns to keep raid nights efficient.</p>
 
       <div class="guide-grid">
 
@@ -250,8 +260,21 @@
         </a>
 
       </div>
+      </div><!-- end raid panel -->
+
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll('.guide-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.guide-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.guide-tab-panel').forEach(p => p.style.display = 'none');
+        btn.classList.add('active');
+        document.getElementById('guide-panel-' + btn.dataset.tab).style.display = '';
+      });
+    });
+  </script>
 
   <!-- FOOTER -->
   <footer>
