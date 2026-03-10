@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO & Social -->
+  <meta name="description" content="A Mythic+ focused WoW guild on US-Area 52. We push keys all week, run an optional casual raid for gear, and hang out in Discord. Cross-faction welcome." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://passiveaggressive.us/" />
+  <meta property="og:title" content="PassiveAggressive – Mythic+ Guild | US-Area 52" />
+  <meta property="og:description" content="A Mythic+ focused WoW guild on US-Area 52. We push keys all week, run an optional casual raid for gear, and hang out in Discord. Cross-faction welcome." />
+  <meta property="og:image" content="https://passiveaggressive.us/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PassiveAggressive – Mythic+ Guild | US-Area 52" />
+  <meta name="twitter:description" content="A Mythic+ focused WoW guild on US-Area 52. We push keys all week, run an optional casual raid for gear, and hang out in Discord. Cross-faction welcome." />
+  <meta name="twitter:image" content="https://passiveaggressive.us/logo.png" />
   <title>PassiveAggressive – WoW Guild</title>
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="shortcut icon" href="logo.png" />
@@ -59,6 +70,10 @@
         <div class="stat">
           <span class="stat-num" id="statMembers">0</span>
           <span class="stat-label">Members</span>
+        </div>
+        <div class="stat" id="statScoreWrap" style="display:none">
+          <span class="stat-num" id="statScore">0</span>
+          <span class="stat-label">M+ Score</span>
         </div>
         <div class="stat" id="statBossesWrap" style="display:none">
           <span class="stat-num" id="statBosses">0</span>
@@ -155,20 +170,21 @@
     const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
     const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
 
-    const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression')
+    const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression,mythic_plus_scores_by_season:current')
       .then(r => r.json())
       .then(data => {
-        let total = 0;
+        let bosses = 0;
         if (data.raid_progression) {
           for (const raid of Object.values(data.raid_progression)) {
-            total += (raid.normal_bosses_killed || 0)
-                   + (raid.heroic_bosses_killed || 0)
-                   + (raid.mythic_bosses_killed || 0);
+            bosses += (raid.normal_bosses_killed || 0)
+                    + (raid.heroic_bosses_killed || 0)
+                    + (raid.mythic_bosses_killed || 0);
           }
         }
-        return total || null;
+        const score = data.mythic_plus_scores_by_season?.[0]?.scores?.all || null;
+        return { bosses: bosses || null, score };
       })
-      .catch(() => null);
+      .catch(() => ({ bosses: null, score: null }));
 
     const blizzPromise = fetch('https://oauth.battle.net/token', {
       method: 'POST',
@@ -187,11 +203,15 @@
       .then(data => data.members?.length || null)
       .catch(() => null);
 
-    Promise.all([rioPromise, blizzPromise]).then(([bosses, members]) => {
+    Promise.all([rioPromise, blizzPromise]).then(([rio, members]) => {
       animateCount(document.getElementById('statMembers'), members ?? 30);
-      if (bosses && bosses > 0) {
+      if (rio.score && rio.score > 0) {
+        document.getElementById('statScoreWrap').style.display = '';
+        animateCount(document.getElementById('statScore'), Math.round(rio.score));
+      }
+      if (rio.bosses && rio.bosses > 0) {
         document.getElementById('statBossesWrap').style.display = '';
-        animateCount(document.getElementById('statBosses'), bosses);
+        animateCount(document.getElementById('statBosses'), rio.bosses);
       }
     });
 
