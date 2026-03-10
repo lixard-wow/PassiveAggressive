@@ -53,7 +53,7 @@ body {
 .nav-logo {
   font-family: 'Cinzel', serif;
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   color: var(--gold);
   letter-spacing: 1px;
   display: flex;
@@ -66,8 +66,8 @@ body {
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  height: 44px;
-  width: 44px;
+  height: 48px;
+  width: 48px;
   object-fit: contain;
   border-radius: 6px;
 }
