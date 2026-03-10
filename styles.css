@@ -153,37 +153,10 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background:
-    linear-gradient(to bottom, rgba(10,10,15,0.45) 0%, rgba(10,10,15,0.75) 60%, var(--dark) 100%),
-    url('hero-bg.jpg') center/cover no-repeat,
-    var(--dark);
+  background: var(--dark);
   overflow: hidden;
 }
 
-/* Animated star field */
-#hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 10% 15%, rgba(200,169,110,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 40% 30%, rgba(200,169,110,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,0.2) 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 20%, rgba(200,169,110,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 92% 80%, rgba(200,169,110,0.4) 0%, transparent 100%),
-    radial-gradient(2px 2px at 18% 88%, rgba(200,169,110,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 62% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 78% 68%, rgba(200,169,110,0.3) 0%, transparent 100%);
-  pointer-events: none;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: transparent;
-}
 
 .hero-content {
   position: relative;
