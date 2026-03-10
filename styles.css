@@ -460,7 +460,9 @@ section { padding: 6rem 1.5rem; }
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  table-layout: fixed;
 }
+
 
 .raid-table th {
   background: var(--dark4);
