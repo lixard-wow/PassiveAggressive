@@ -1502,16 +1502,11 @@ footer {
   cursor: pointer;
   transition: color 0.2s;
   user-select: none;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
 }
 
 .guide-tab-btn:hover { color: var(--gold-lt); }
 
-.guide-tab-btn.active {
-  color: var(--gold-lt);
-  border-bottom: 2px solid var(--gold);
-}
+.guide-tab-btn.active { color: var(--gold-lt); }
 
 .guide-tab-sep {
   color: #444;
