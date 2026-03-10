@@ -1505,6 +1505,7 @@ footer {
 }
 
 .guide-tab-btn {
+  display: inline-block;
   color: var(--text);
   font-family: 'Open Sans', sans-serif;
   font-size: 0.92rem;
