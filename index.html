@@ -69,6 +69,11 @@
         <div class="countdown-title">Midnight Season 1 M+ Launches</div>
         <div class="countdown-timer" id="countdownTimer"></div>
       </div>
+      <div id="seasonLiveBadge" style="display:none;margin-top:2rem;text-align:center;">
+        <div style="display:inline-block;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.35);border-radius:6px;padding:0.6rem 1.75rem;">
+          <span style="font-family:'Cinzel',serif;font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;color:#A855F7;">Midnight Season 1 &mdash; Now Live</span>
+        </div>
+      </div>
     </div>
     <div class="scroll-hint">&#8595; Scroll</div>
   </section>
@@ -78,18 +83,18 @@
     <div class="container">
       <h2 class="section-title">Who We Are</h2>
       <p class="section-sub">A Mythic+ focused guild on Area 52. We've been pushing keys together since Dragonflight — consistent groups, active Discord, and always a key running.</p>
-      <div class="hero-stats" style="margin-top:2.5rem;">
-        <div class="stat">
-          <span class="stat-num" style="font-size:1.1rem;letter-spacing:1px;">Area 52 (US)</span>
-          <span class="stat-label">Server</span>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;">
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.85rem 1.5rem;text-align:center;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:#666;margin-bottom:0.35rem;">Server</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--gold-lt);">Area 52 (US)</div>
         </div>
-        <div class="stat">
-          <span class="stat-num" style="font-size:1.1rem;letter-spacing:1px;">Cross-Faction</span>
-          <span class="stat-label">Faction</span>
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.85rem 1.5rem;text-align:center;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:#666;margin-bottom:0.35rem;">Faction</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--gold-lt);">Cross-Faction</div>
         </div>
-        <div class="stat">
-          <span class="stat-num" style="font-size:1.1rem;letter-spacing:1px;">Mythic+</span>
-          <span class="stat-label">Focus</span>
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.85rem 1.5rem;text-align:center;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:#666;margin-bottom:0.35rem;">Focus</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--gold-lt);">Mythic+</div>
         </div>
       </div>
       <div style="text-align:center;margin-top:2rem;">
@@ -200,6 +205,7 @@
         const diff = target - Date.now();
         if (diff <= 0) {
           banner.style.display = 'none';
+          document.getElementById('seasonLiveBadge').style.display = '';
           return;
         }
         banner.style.display = '';
