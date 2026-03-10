@@ -1495,10 +1495,6 @@ footer {
 }
 
 .guide-tab-btn {
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
   color: #555;
   font-family: 'Cinzel', serif;
   font-size: 1rem;
@@ -1506,7 +1502,7 @@ footer {
   letter-spacing: 1px;
   cursor: pointer;
   transition: color 0.2s;
-  -webkit-appearance: none;
+  user-select: none;
 }
 
 .guide-tab-btn:hover { color: var(--text); }
