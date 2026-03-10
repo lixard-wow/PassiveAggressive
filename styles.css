@@ -722,10 +722,9 @@ section { padding: 6rem 1.5rem; }
   align-items: center;
   justify-content: center;
   padding: 3px;
-  border-radius: 6px;
+  border-radius: 4px;
   width: 28px;
   height: 28px;
-  margin-top: 0.25rem;
   flex-shrink: 0;
 }
 
@@ -743,21 +742,24 @@ section { padding: 6rem 1.5rem; }
 
 .roster-badges {
   display: flex;
+  align-items: center;
   gap: 0.4rem;
   flex-wrap: wrap;
-  margin-top: 0.1rem;
+  margin-top: 0.35rem;
 }
 
 .roster-rank {
   display: inline-flex;
   align-items: center;
-  padding: 0.1rem 0.4rem;
-  border-radius: 20px;
+  height: 28px;
+  padding: 0 0.5rem;
+  border-radius: 4px;
   font-size: 0.62rem;
   font-weight: 600;
   background: rgba(255,255,255,0.05);
   color: #888;
   border: 1px solid var(--border);
+  white-space: nowrap;
 }
 
 
