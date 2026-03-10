@@ -133,13 +133,21 @@
     <div class="container" style="text-align:center;">
       <h2 class="section-title">Join the Community</h2>
       <p class="section-sub">Most of our activity happens in Discord. Come hang out and run keys before you even apply.</p>
-      <div style="display:inline-flex;flex-direction:column;align-items:stretch;gap:1.5rem;width:100%;max-width:560px;margin-top:2rem;">
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-          <a href="https://discord.gg/6kDYTZXSxY" class="btn btn-discord" target="_blank" rel="noopener" style="font-size:1rem;padding:0.85rem 2.5rem;">Join Our Discord</a>
-          <a href="apply.html" class="btn btn-primary" style="font-size:1rem;padding:0.85rem 2.5rem;">Apply to Join</a>
-        </div>
-        <iframe src="https://discord.com/widget?id=846470516486963240&theme=dark" width="100%" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="border-radius:8px;border:1px solid var(--border);display:block;"></iframe>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+        <a href="https://discord.gg/6kDYTZXSxY" class="btn btn-discord" target="_blank" rel="noopener" style="font-size:1rem;padding:0.85rem 2.5rem;">Join Our Discord</a>
+        <a href="apply.html" class="btn btn-primary" style="font-size:1rem;padding:0.85rem 2.5rem;">Apply to Join</a>
       </div>
+      <div style="margin-top:1.5rem;display:inline-flex;align-items:center;gap:0.6rem;background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1.5rem;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#23d18b;display:inline-block;flex-shrink:0;"></span>
+        <span id="discordOnlineCount" style="font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--text-lt);">—</span>
+        <span style="font-size:0.85rem;color:#888;">members online in Discord</span>
+      </div>
+      <script>
+        fetch('https://discord.com/api/guilds/846470516486963240/widget.json')
+          .then(r => r.json())
+          .then(d => { document.getElementById('discordOnlineCount').textContent = d.presence_count ?? '—'; })
+          .catch(() => {});
+      </script>
     </div>
   </section>
 
