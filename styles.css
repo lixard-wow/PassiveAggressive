@@ -202,7 +202,7 @@ body {
 
 .hero-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 10vw, 7rem);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
   font-weight: 900;
   color: var(--gold-lt);
   text-shadow: 0 0 18px rgba(200,169,110,0.2), 0 2px 8px rgba(0,0,0,0.8);
@@ -211,7 +211,7 @@ body {
 }
 
 .hero-tagline {
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: #aaa;
   font-style: italic;
   margin-bottom: 2rem;
@@ -291,7 +291,7 @@ body {
 .stat-num {
   display: block;
   font-family: 'Cinzel', serif;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--gold);
 }
@@ -410,7 +410,7 @@ section { padding: 6rem 1.5rem; }
 .section-sub {
   text-align: center;
   color: #888;
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: 3rem;
 }
 
