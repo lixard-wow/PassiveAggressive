@@ -80,19 +80,6 @@ const thumbnailCache = {};
 const statsCache = {};
 const statsPending = {};
 
-function seasonLabel(slug) {
-  if (!slug) return '';
-  const m = slug.match(/-(\d+)$/);
-  return m ? 'S' + m[1] : '';
-}
-
-// Short label for a raid slug — auto-generates from initials.
-function raidShortName(slug) {
-  if (!slug) return '';
-  const skip = new Set(['the', 'of', 'and']);
-  return slug.split('-').filter(w => !skip.has(w)).map(w => w[0].toUpperCase()).join('');
-}
-
 // Format a single raid entry into display text + color.
 function raidText(r) {
   if (!r) return null;
