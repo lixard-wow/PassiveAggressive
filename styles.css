@@ -1490,32 +1490,28 @@ footer {
    ===================== */
 .guide-tab-bar {
   display: flex;
-  border-bottom: 2px solid var(--border);
+  gap: 2rem;
   margin: 2rem 0 2.5rem;
-  gap: 0;
 }
 
 .guide-tab-btn {
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  color: #666;
+  outline: none;
+  padding: 0;
+  color: #555;
   font-family: 'Cinzel', serif;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
-  padding: 0.75rem 2rem;
-  cursor: pointer;
   letter-spacing: 1px;
-  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  transition: color 0.2s;
+  -webkit-appearance: none;
 }
 
-.guide-tab-btn:hover { color: var(--text-lt); }
+.guide-tab-btn:hover { color: var(--text); }
 
-.guide-tab-btn.active {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
-}
+.guide-tab-btn.active { color: var(--gold-lt); }
 
 /* Guide section divider for multiple raids on hub */
 .guide-section-label {
