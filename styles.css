@@ -4,18 +4,21 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --gold:    #c8a96e;
-  --gold-lt: #e8d5a3;
-  --dark:    #0a0a0f;
-  --dark2:   #111118;
-  --dark3:   #181820;
-  --dark4:   #1e1e28;
-  --border:  #2a2a38;
-  --text:    #ccc;
-  --text-lt: #eee;
-  --blue:    #4a90d9;
-  --green:   #52b788;
-  --red:     #e63946;
+  --gold:       #c8a96e;
+  --gold-lt:    #e8d5a3;
+  --purple:     #A855F7;
+  --purple-lt:  #c084fc;
+  --dark:       #0a0a0f;
+  --dark2:      #151520;
+  --dark3:      #181820;
+  --dark4:      #1e1e28;
+  --border:     #2a2a38;
+  --text:       #ccc;
+  --text-lt:    #eee;
+  --text-muted: #888;
+  --blue:       #4a90d9;
+  --green:      #52b788;
+  --red:        #e63946;
 }
 
 html { scroll-behavior: smooth; }
@@ -87,7 +90,7 @@ body {
   transition: color 0.2s;
 }
 
-.nav-links a:hover { color: var(--gold-lt); }
+.nav-links a:hover { color: var(--purple-lt); }
 
 .btn-apply {
   background: var(--gold);
@@ -153,7 +156,10 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--dark);
+  background:
+    radial-gradient(ellipse at 25% 50%, rgba(168,85,247,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 50%, rgba(200,169,110,0.05) 0%, transparent 55%),
+    var(--dark);
   overflow: hidden;
 }
 
@@ -277,7 +283,7 @@ body {
   font-family: 'Cinzel', serif;
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--purple-lt);
   line-height: 1;
 }
 
@@ -306,7 +312,7 @@ section { padding: 6rem 1.5rem; }
 .page-section { padding-top: 8rem; min-height: calc(100vh - 200px); }
 
 /* Active nav link */
-.nav-active { color: var(--gold-lt) !important; border-bottom: 2px solid var(--gold) !important; padding-bottom: 3px; }
+.nav-active { color: var(--gold-lt) !important; border-bottom: 2px solid var(--purple) !important; padding-bottom: 3px; }
 
 #raids, #news { background: var(--dark); }
 
@@ -326,7 +332,7 @@ section { padding: 6rem 1.5rem; }
   display: block;
   width: 60px;
   height: 2px;
-  background: var(--gold);
+  background: var(--purple);
   margin: 0.75rem auto 0;
 }
 
@@ -463,7 +469,8 @@ section { padding: 6rem 1.5rem; }
 
 .filter-select:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--purple);
+  box-shadow: 0 0 0 2px rgba(168,85,247,0.12);
 }
 
 .filter-select option { background: var(--dark3); }
@@ -693,7 +700,8 @@ section { padding: 6rem 1.5rem; }
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--purple);
+  box-shadow: 0 0 0 2px rgba(168,85,247,0.12);
 }
 
 .form-group select option { background: var(--dark3); }
@@ -737,7 +745,7 @@ section { padding: 6rem 1.5rem; }
    ===================== */
 footer {
   background: #050508;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(168,85,247,0.2);
   padding: 3rem 1.5rem;
   text-align: center;
 }
@@ -943,9 +951,12 @@ footer {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: rgba(255,255,255,0.75);
+  color: #e9d5ff;
   font-family: 'Cinzel', serif;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  background: rgba(168,85,247,0.3);
+  border: 1px solid rgba(168,85,247,0.45);
+  border-radius: 3px;
+  padding: 0.1rem 0.45rem;
 }
 
 .guide-card-info {
@@ -1199,9 +1210,9 @@ footer {
   user-select: none;
 }
 
-.guide-tab-btn:hover { color: var(--gold-lt); }
+.guide-tab-btn:hover { color: var(--purple-lt); }
 
-.guide-tab-btn.active { color: var(--gold-lt); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+.guide-tab-btn.active { color: var(--gold-lt); border-bottom: 2px solid var(--purple); padding-bottom: 2px; }
 
 .guide-tab-sep {
   color: #444;

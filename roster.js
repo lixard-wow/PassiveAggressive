@@ -235,7 +235,7 @@ function buildRoster(filter = currentFilter) {
         <div class="roster-class" style="color:${cfg.color}">${member.spec ? member.spec + ' ' : ''}${member.class}</div>
         <div class="roster-badges">
           <span class="roster-role ${roleClass}" title="${member.role}">${ROLE_ICONS[member.role] ? `<img src="${ROLE_ICONS[member.role]}" class="role-icon" alt="${member.role}" />` : `<span class="role-icon-plus">✚</span>`}</span>
-          <span class="roster-rank" title="${rankDesc}">${rankLabel}</span>
+          <span class="roster-rank" title="${rankDesc}" style="${member.rank <= 3 ? 'background:rgba(168,85,247,0.15);color:#c084fc;border-color:rgba(168,85,247,0.4)' : ''}">${rankLabel}</span>
         </div>
         ${statsHtml}
       </a>`;
