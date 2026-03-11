@@ -197,6 +197,40 @@ body {
 }
 
 
+/* =====================
+   BACK TO TOP
+   ===================== */
+#backToTop {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--dark3);
+  border: 1px solid rgba(168,85,247,0.4);
+  color: var(--purple-lt);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#backToTop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#backToTop:hover {
+  background: rgba(168,85,247,0.15);
+  transform: translateY(-2px);
+}
+
 .btn-or-row {
   display: flex;
   flex-direction: column;
