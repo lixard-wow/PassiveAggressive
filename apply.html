@@ -222,24 +222,32 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="classSpec">Class & Spec</label>
-            <input type="text" id="classSpec" list="classSpecList" placeholder="Type to search class & spec..." autocomplete="off" required />
-            <datalist id="classSpecList">
-              <option>Blood Death Knight</option><option>Frost Death Knight</option><option>Unholy Death Knight</option>
-              <option>Havoc Demon Hunter</option><option>Vengeance Demon Hunter</option>
-              <option>Balance Druid</option><option>Feral Druid</option><option>Guardian Druid</option><option>Restoration Druid</option>
-              <option>Devastation Evoker</option><option>Preservation Evoker</option><option>Augmentation Evoker</option>
-              <option>Beast Mastery Hunter</option><option>Marksmanship Hunter</option><option>Survival Hunter</option>
-              <option>Arcane Mage</option><option>Fire Mage</option><option>Frost Mage</option>
-              <option>Brewmaster Monk</option><option>Mistweaver Monk</option><option>Windwalker Monk</option>
-              <option>Holy Paladin</option><option>Protection Paladin</option><option>Retribution Paladin</option>
-              <option>Discipline Priest</option><option>Holy Priest</option><option>Shadow Priest</option>
-              <option>Assassination Rogue</option><option>Outlaw Rogue</option><option>Subtlety Rogue</option>
-              <option>Elemental Shaman</option><option>Enhancement Shaman</option><option>Restoration Shaman</option>
-              <option>Affliction Warlock</option><option>Demonology Warlock</option><option>Destruction Warlock</option>
-              <option>Arms Warrior</option><option>Fury Warrior</option><option>Protection Warrior</option>
-            </datalist>
+            <label for="charClass">Class</label>
+            <select id="charClass" required>
+              <option value="">Select a class</option>
+              <option>Death Knight</option>
+              <option>Demon Hunter</option>
+              <option>Druid</option>
+              <option>Evoker</option>
+              <option>Hunter</option>
+              <option>Mage</option>
+              <option>Monk</option>
+              <option>Paladin</option>
+              <option>Priest</option>
+              <option>Rogue</option>
+              <option>Shaman</option>
+              <option>Warlock</option>
+              <option>Warrior</option>
+            </select>
           </div>
+          <div class="form-group">
+            <label for="charSpec">Spec</label>
+            <select id="charSpec" required>
+              <option value="">Select a class first</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
           <div class="form-group">
             <label for="role">Role</label>
             <select id="role" required>
@@ -247,6 +255,15 @@
               <option>Tank</option>
               <option>Healer</option>
               <option>DPS</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerType">Player Type</label>
+            <select id="playerType" required>
+              <option value="">Select player type</option>
+              <option>Key Pusher</option>
+              <option>Casual Runner</option>
+              <option>Social</option>
             </select>
           </div>
         </div>
@@ -294,13 +311,39 @@
 
   <script src="script.js"></script>
   <script>
+    const specsByClass = {
+      'Death Knight':  ['Blood', 'Frost', 'Unholy'],
+      'Demon Hunter':  ['Havoc', 'Vengeance'],
+      'Druid':         ['Balance', 'Feral', 'Guardian', 'Restoration'],
+      'Evoker':        ['Augmentation', 'Devastation', 'Preservation'],
+      'Hunter':        ['Beast Mastery', 'Marksmanship', 'Survival'],
+      'Mage':          ['Arcane', 'Fire', 'Frost'],
+      'Monk':          ['Brewmaster', 'Mistweaver', 'Windwalker'],
+      'Paladin':       ['Holy', 'Protection', 'Retribution'],
+      'Priest':        ['Discipline', 'Holy', 'Shadow'],
+      'Rogue':         ['Assassination', 'Outlaw', 'Subtlety'],
+      'Shaman':        ['Elemental', 'Enhancement', 'Restoration'],
+      'Warlock':       ['Affliction', 'Demonology', 'Destruction'],
+      'Warrior':       ['Arms', 'Fury', 'Protection'],
+    };
+
+    document.getElementById('charClass').addEventListener('change', function () {
+      const specSelect = document.getElementById('charSpec');
+      const specs = specsByClass[this.value] || [];
+      specSelect.innerHTML = specs.length
+        ? specs.map(s => `<option>${s}</option>`).join('')
+        : '<option value="">Select a class first</option>';
+    });
+
     document.getElementById('applyForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const charName   = document.getElementById('charName').value;
       const realm      = document.getElementById('realm').value;
-      const classSpec  = document.getElementById('classSpec').value;
+      const charClass  = document.getElementById('charClass').value;
+      const charSpec   = document.getElementById('charSpec').value;
       const role       = document.getElementById('role').value;
+      const playerType = document.getElementById('playerType').value;
       const experience = document.getElementById('experience').value;
       const about      = document.getElementById('about').value;
       const discord    = document.getElementById('discord').value;
@@ -310,11 +353,13 @@
           title: `New Application — ${charName} (${realm})`,
           color: 0xC8A96E,
           fields: [
-            { name: 'Class & Spec', value: classSpec, inline: true },
-            { name: 'Role',         value: role,      inline: true },
-            { name: 'Discord',      value: discord,   inline: true },
-            { name: 'Raiding Experience', value: experience },
-            { name: 'About',              value: about },
+            { name: 'Class',        value: charClass,  inline: true },
+            { name: 'Spec',         value: charSpec,   inline: true },
+            { name: 'Role',         value: role,       inline: true },
+            { name: 'Player Type',  value: playerType, inline: true },
+            { name: 'Discord',      value: discord,    inline: true },
+            { name: 'M+ Experience', value: experience },
+            { name: 'About',         value: about },
           ],
           timestamp: new Date().toISOString(),
         }]
