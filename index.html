@@ -74,18 +74,10 @@
       <p class="hero-realm">Mythic+ Guild &mdash; Area 52</p>
       <h1 class="hero-title"><span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span></h1>
       <p class="hero-tagline">Consistent Mythic+ on Area 52. No pug lottery — just keys with people who know what they're doing.</p>
-      <div class="hero-stats">
+      <div class="hero-stats" id="heroStats" style="opacity:0;transition:opacity 0.6s ease;">
         <div class="stat">
           <span class="stat-num" id="statMembers">0</span>
           <span class="stat-label">Members</span>
-        </div>
-        <div class="stat" id="statScoreWrap" style="display:none">
-          <span class="stat-num" id="statScore">0</span>
-          <span class="stat-label">M+ Score</span>
-        </div>
-        <div class="stat" id="statBossesWrap" style="display:none">
-          <span class="stat-num" id="statBosses">0</span>
-          <span class="stat-label">Bosses Slain</span>
         </div>
       </div>
       <div class="countdown-banner" id="countdownBanner" style="display:none">
@@ -239,14 +231,7 @@
 
     Promise.all([rioPromise, blizzPromise]).then(([rio, members]) => {
       animateCount(document.getElementById('statMembers'), members ?? 30);
-      if (rio.score && rio.score > 0) {
-        document.getElementById('statScoreWrap').style.display = '';
-        animateCount(document.getElementById('statScore'), Math.round(rio.score));
-      }
-      if (rio.bosses && rio.bosses > 0) {
-        document.getElementById('statBossesWrap').style.display = '';
-        animateCount(document.getElementById('statBosses'), rio.bosses);
-      }
+      document.getElementById('heroStats').style.opacity = '1';
     });
 
     // Midnight S1 M+ countdown — March 24 2026, 10:00 AM PDT (17:00 UTC)
