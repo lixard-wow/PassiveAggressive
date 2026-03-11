@@ -10,6 +10,23 @@ window.addEventListener('scroll', () => {
 });
 
 // =====================
+// BACK TO TOP
+// =====================
+const backToTopBtn = document.createElement('button');
+backToTopBtn.id = 'backToTop';
+backToTopBtn.setAttribute('aria-label', 'Back to top');
+backToTopBtn.innerHTML = '&#8679;';
+document.body.appendChild(backToTopBtn);
+
+window.addEventListener('scroll', () => {
+  backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+});
+
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// =====================
 // MOBILE MENU
 // =====================
 const hamburger = document.getElementById('hamburger');
