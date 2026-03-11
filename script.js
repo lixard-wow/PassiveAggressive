@@ -55,3 +55,18 @@ document.querySelectorAll('.about-card, .news-card').forEach(el => {
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   revealObserver.observe(el);
 });
+
+// =====================
+// BACK TO TOP
+// =====================
+const backToTopBtn = document.createElement('button');
+backToTopBtn.id = 'backToTop';
+backToTopBtn.setAttribute('aria-label', 'Back to top');
+backToTopBtn.innerHTML = '&#8679;';
+document.body.appendChild(backToTopBtn);
+window.addEventListener('scroll', () => {
+  backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+});
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
