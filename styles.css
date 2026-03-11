@@ -366,10 +366,6 @@ section { padding: 6rem 1.5rem; }
   transform: translateY(-4px);
 }
 
-.about-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
 
 .about-card h3 {
   font-family: 'Cinzel', serif;
