@@ -199,30 +199,19 @@ body {
 
 .btn-or-row {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: nowrap;
+  gap: 0.6rem;
 }
 
 .btn-or-row .btn-or-text {
   color: var(--text-muted);
-  flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
-  .btn-or-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .btn-or-row .btn-or-text {
-    text-align: center;
-  }
-  .btn-or-row .btn,
-  .btn-or-row button {
-    text-align: center;
-    width: 100%;
-  }
+.btn-or-row .btn,
+.btn-or-row button {
+  min-width: 220px;
+  text-align: center;
 }
 
 .btn {
