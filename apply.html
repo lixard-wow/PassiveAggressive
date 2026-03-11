@@ -365,19 +365,15 @@
         }]
       };
 
-      try {
-        await fetch('REMOVED', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (err) {
-        console.error('Failed to send application to Discord:', err);
-      }
-
       document.getElementById('applyForm').style.display = 'none';
       document.getElementById('applySuccess').classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      fetch('REMOVED', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(err => console.error('Failed to send application to Discord:', err));
     });
   </script>
 </body>
