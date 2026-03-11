@@ -47,7 +47,7 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 72px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,8 +69,8 @@ body {
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  height: 48px;
-  width: 48px;
+  height: 64px;
+  width: 64px;
   object-fit: contain;
   border-radius: 6px;
 }
@@ -764,8 +764,8 @@ footer {
 }
 
 .footer-logo-img {
-  height: 48px;
-  width: 48px;
+  height: 80px;
+  width: 80px;
   object-fit: contain;
   border-radius: 8px;
 }
