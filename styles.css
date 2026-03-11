@@ -73,6 +73,7 @@ body {
   width: 64px;
   object-fit: contain;
   border-radius: 6px;
+  aspect-ratio: 1;
 }
 
 .nav-links {
@@ -765,6 +766,7 @@ footer {
   width: 80px;
   object-fit: contain;
   border-radius: 8px;
+  aspect-ratio: 1;
 }
 
 .hero-logo {
