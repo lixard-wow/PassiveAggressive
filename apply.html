@@ -131,10 +131,11 @@
             <label for="charName">Character Name</label>
             <input type="text" id="charName" placeholder="e.g. Thalindra" required />
           </div>
-          <div class="form-group">
+          <div class="form-group" style="position:relative;">
             <label for="realmSearch">Realm</label>
-            <input type="text" id="realmSearch" placeholder="Type to search realm..." autocomplete="off" style="margin-bottom:0.35rem;" />
-            <select id="realm" required size="4" style="height:auto;">
+            <input type="text" id="realmSearch" placeholder="Type to search realm..." autocomplete="off" />
+            <div id="realmDropdown" style="display:none;position:absolute;z-index:200;left:0;right:0;max-height:200px;overflow-y:auto;background:var(--dark4);border:1px solid var(--border);border-radius:0 0 6px 6px;"></div>
+            <select id="realm" required style="display:none;">
               <option value="">Select a realm</option>
               <option>Aegwynn</option><option>Aerie Peak</option><option>Agamaggan</option>
               <option>Aggramar</option><option>Akama</option><option>Alexstrasza</option>
@@ -328,19 +329,32 @@
       'Warrior':       ['Arms', 'Fury', 'Protection'],
     };
 
-    const realmSelect = document.getElementById('realm');
-    const allRealmOptions = Array.from(realmSelect.options).slice(1).map(o => o.value);
-    document.getElementById('realmSearch').addEventListener('input', function () {
-      const q = this.value.toLowerCase();
-      const filtered = allRealmOptions.filter(r => r.toLowerCase().includes(q));
-      realmSelect.innerHTML = filtered.length
-        ? filtered.map(r => `<option value="${r}">${r}</option>`).join('')
-        : '<option value="">No realms found</option>';
-      if (filtered.length === 1) realmSelect.value = filtered[0];
+    const realmSelect   = document.getElementById('realm');
+    const realmSearch   = document.getElementById('realmSearch');
+    const realmDropdown = document.getElementById('realmDropdown');
+    const allRealms     = Array.from(realmSelect.options).slice(1).map(o => o.value);
+
+    function selectRealm(name) {
+      realmSearch.value = name;
+      realmSelect.innerHTML = `<option value="${name}" selected>${name}</option>`;
+      realmDropdown.style.display = 'none';
+    }
+
+    realmSearch.addEventListener('input', function () {
+      const q = this.value.toLowerCase().trim();
+      if (!q) { realmDropdown.style.display = 'none'; realmSelect.innerHTML = '<option value="">Select a realm</option>'; return; }
+      const matches = allRealms.filter(r => r.toLowerCase().includes(q));
+      if (!matches.length) { realmDropdown.innerHTML = '<div style="padding:0.6rem 1rem;color:#888;font-size:0.88rem;">No realms found</div>'; realmDropdown.style.display = 'block'; return; }
+      realmDropdown.innerHTML = matches.map(r => `<div class="realm-opt" data-val="${r}" style="padding:0.5rem 1rem;cursor:pointer;font-size:0.9rem;color:var(--text);">${r}</div>`).join('');
+      realmDropdown.style.display = 'block';
+      realmDropdown.querySelectorAll('.realm-opt').forEach(el => {
+        el.addEventListener('mousedown', () => selectRealm(el.dataset.val));
+        el.addEventListener('mouseover', () => el.style.background = 'rgba(168,85,247,0.15)');
+        el.addEventListener('mouseout',  () => el.style.background = '');
+      });
     });
-    realmSelect.addEventListener('change', function () {
-      document.getElementById('realmSearch').value = this.value;
-    });
+
+    realmSearch.addEventListener('blur', () => setTimeout(() => { realmDropdown.style.display = 'none'; }, 150));
 
     document.getElementById('charClass').addEventListener('change', function () {
       const specSelect = document.getElementById('charSpec');
