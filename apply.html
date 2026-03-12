@@ -132,8 +132,9 @@
             <input type="text" id="charName" placeholder="e.g. Thalindra" required />
           </div>
           <div class="form-group">
-            <label for="realm">Realm</label>
-            <select id="realm" required>
+            <label for="realmSearch">Realm</label>
+            <input type="text" id="realmSearch" placeholder="Type to search realm..." autocomplete="off" style="margin-bottom:0.35rem;" />
+            <select id="realm" required size="4" style="height:auto;">
               <option value="">Select a realm</option>
               <option>Aegwynn</option><option>Aerie Peak</option><option>Agamaggan</option>
               <option>Aggramar</option><option>Akama</option><option>Alexstrasza</option>
@@ -326,6 +327,20 @@
       'Warlock':       ['Affliction', 'Demonology', 'Destruction'],
       'Warrior':       ['Arms', 'Fury', 'Protection'],
     };
+
+    const realmSelect = document.getElementById('realm');
+    const allRealmOptions = Array.from(realmSelect.options).slice(1).map(o => o.value);
+    document.getElementById('realmSearch').addEventListener('input', function () {
+      const q = this.value.toLowerCase();
+      const filtered = allRealmOptions.filter(r => r.toLowerCase().includes(q));
+      realmSelect.innerHTML = filtered.length
+        ? filtered.map(r => `<option value="${r}">${r}</option>`).join('')
+        : '<option value="">No realms found</option>';
+      if (filtered.length === 1) realmSelect.value = filtered[0];
+    });
+    realmSelect.addEventListener('change', function () {
+      document.getElementById('realmSearch').value = this.value;
+    });
 
     document.getElementById('charClass').addEventListener('change', function () {
       const specSelect = document.getElementById('charSpec');
