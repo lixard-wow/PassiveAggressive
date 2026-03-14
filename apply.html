@@ -349,11 +349,15 @@
       const about      = document.getElementById('about').value;
       const discord    = document.getElementById('discord').value;
 
+      const realmSlug = realm.replace(/\s+/g, '').replace(/'/g, '');
+      const playerTag = `${charName}-${realmSlug}`;
+
       const payload = {
         embeds: [{
-          title: `New Application — ${charName} (${realm})`,
+          title: `New Application — ${playerTag}`,
           color: 0xC8A96E,
           fields: [
+            { name: 'Character',    value: `\`${playerTag}\``, inline: true },
             { name: 'Class',        value: charClass,  inline: true },
             { name: 'Spec',         value: charSpec,   inline: true },
             { name: 'Role',         value: role,       inline: true },
