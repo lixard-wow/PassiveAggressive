@@ -338,7 +338,7 @@
       const specSelect = document.getElementById('charSpec');
       const specs = specsByClass[this.value] || [];
       specSelect.innerHTML = specs.length
-        ? specs.map(s => `<option>${s}</option>`).join('')
+        ? `<option value="">Select a spec</option>` + specs.map(s => `<option>${s}</option>`).join('')
         : '<option value="">Select a class first</option>';
     });
 
