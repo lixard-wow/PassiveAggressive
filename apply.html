@@ -275,9 +275,15 @@
           <label for="about">About You</label>
           <textarea id="about" rows="3" placeholder="Why do you want to join PassiveAggressive? What do you bring to the team?" required></textarea>
         </div>
-        <div class="form-group">
-          <label for="discord">Discord Tag</label>
-          <input type="text" id="discord" placeholder="e.g. yourusername" required />
+        <div class="form-row">
+          <div class="form-group">
+            <label for="discord">Discord Tag</label>
+            <input type="text" id="discord" placeholder="e.g. yourusername" required />
+          </div>
+          <div class="form-group">
+            <label for="battletag">BattleTag</label>
+            <input type="text" id="battletag" placeholder="e.g. Name#1234" required />
+          </div>
         </div>
         <div class="form-group" style="flex-direction:row;align-items:center;gap:0.75rem;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;">
           <input type="checkbox" id="rulesAgree" required style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0;cursor:pointer;" />
@@ -348,6 +354,7 @@
       const experience = document.getElementById('experience').value;
       const about      = document.getElementById('about').value;
       const discord    = document.getElementById('discord').value;
+      const battletag  = document.getElementById('battletag').value;
 
       const realmSlug = realm.replace(/\s+/g, '').replace(/'/g, '');
       const playerTag = `${charName}-${realmSlug}`;
@@ -363,6 +370,7 @@
             { name: 'Role',         value: role,       inline: true },
             { name: 'Player Type',  value: playerType, inline: true },
             { name: 'Discord',      value: discord,    inline: true },
+            { name: 'BattleTag',    value: `\`${battletag}\``, inline: true },
             { name: 'M+ Experience', value: experience },
             { name: 'About',         value: about },
           ],
