@@ -8,6 +8,12 @@
 const POSTS = [
   {
     date: "2026-03-15",
+    title: "Hazelnuttygames Raid Boss Guides Added to All Raid Pages",
+    content: "We have added links to Hazelnuttygames video guides on each of our raid boss pages. If you have not watched her content before, she puts out some of the clearest and most thorough raid guides in the game — role-by-role breakdowns, clean visuals, and no fluff. Full credit to her for the work she puts into these. We are just making them easy to find. Head to any raid page and you will see her guide linked directly on each boss. Highly recommend watching before your first pull.",
+    tag: "Update"
+  },
+  {
+    date: "2026-03-15",
     title: "Tactyks Video Guides Added to All Dungeon Pages",
     content: "We have added links to Tactyks video guides on each of our dungeon pages. If you are not familiar with Tactyks, he is one of the best Mythic+ educators in the game — his guides are clear, efficient, and actually explain the mechanics that matter rather than just listing abilities. Full credit to him for putting these together. We are just making it easier for our members to find them. Head to any dungeon guide page and you will see the link at the top. Highly recommend watching before the season kicks off on March 24.",
     tag: "Update"
