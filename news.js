@@ -7,6 +7,12 @@
 
 const POSTS = [
   {
+    date: "2026-03-15",
+    title: "Mythic 0 World Tours — Free Champion Gear Before You Touch a Key",
+    content: "One of the best things about Season 1 is that Mythic 0 dungeons now drop Champion gear (246 ilvl) with a daily lockout — meaning you can run each of the eight dungeons once per day and walk away with a full set of upgrades before you even touch a Mythic+ key. The strategy is simple: do a full M0 world tour in the first few days, hitting all eight dungeons in one session. Pair that with Bountiful Delves and Nightmare Preys for extra slots and you will have a solid baseline to push from. Once you have filled your Champion slots, move straight into low keys (M+2 to M+5) to start stacking Hero gear. There is no reason to wait on score — the faster you get your Champion gear sorted, the faster you are pushing real keys with the group.",
+    tag: "Update"
+  },
+  {
     date: "2026-03-09",
     title: "Midnight Season 1 M+ Launches March 24 — We're Ready",
     content: "Two weeks out and we're locked in. PassiveAggressive has been preparing routes, reviewing dungeon mechanics, and getting comps sorted ahead of the Midnight Season 1 M+ launch on March 24. We'll be running keys from day one across all eight dungeons — four new (Maisara Caverns, Windrunner Spire, Nexus-Point Xenas, Murder Row) and four returning (Magister's Terrace, Pit of Saron, Seat of the Triumvirate, Skyreach). If you want to push score with a group that actually knows the routes, now is a good time to get in. Drop by Discord or hit the Apply page.",
