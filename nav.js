@@ -40,6 +40,7 @@
 
   // Highlight the active page link
   var page = location.pathname.split('/').pop().replace('.html', '') || 'index';
+  if (page.startsWith('mplus-') || page.startsWith('raid-')) page = 'guides';
   document.querySelectorAll('#navbar [data-page]').forEach(function(a) {
     if (a.dataset.page === page) a.classList.add('nav-active');
   });
