@@ -1,7 +1,7 @@
 // =====================
 // WORKER PROXY URL — replace with your deployed Cloudflare Worker URL
 // =====================
-const WORKER_URL = 'https://pa-proxy.YOUR_CF_ACCOUNT.workers.dev';
+const WORKER_URL = 'https://pa-proxy.pnutjr-lw.workers.dev';
 
 const BLIZZ_CLASS_MAP = {
   1: 'Warrior', 2: 'Paladin', 3: 'Hunter', 4: 'Rogue',
