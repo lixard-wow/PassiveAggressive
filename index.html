@@ -34,39 +34,7 @@
 <body>
 
 
-  <nav id="navbar">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
-        <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />
-        <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>
-      </a>
-            <ul class="nav-links">
-        <li><a href="index.html" class="nav-active">Home</a></li>
-        <li><a href="roster.html">Roster</a></li>
-        <li><a href="raids.html">Mythic+</a></li>
-        <li><a href="raid.html">Raid</a></li>
-        <li><a href="guides.html">Guides</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="rules.html">Rules</a></li>
-        <li><a href="https://discord.gg/6kDYTZXSxY" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>
-        <li><a href="apply.html" class="btn-apply">Apply Now</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger">&#9776;</button>
-    </div>
-        <ul class="mobile-menu" id="mobileMenu">
-      <li><a href="index.html" class="nav-active">Home</a></li>
-      <li><a href="roster.html">Roster</a></li>
-      <li><a href="raids.html">Mythic+</a></li>
-      <li><a href="raid.html">Raid</a></li>
-      <li><a href="guides.html">Guides</a></li>
-      <li><a href="news.html">News</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="rules.html">Rules</a></li>
-      <li><a href="https://discord.gg/6kDYTZXSxY" target="_blank" rel="noopener">Discord</a></li>
-      <li><a href="apply.html">Apply Now</a></li>
-    </ul>
-  </nav>
+  <script src="nav.js"></script>
 
 
   <section id="hero">
@@ -193,9 +161,6 @@
         if (start >= target) clearInterval(timer);
       }, 16);
     }
-    const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
-    const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
-
     const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression,mythic_plus_scores_by_season:current')
       .then(r => r.json())
       .then(data => {
@@ -212,14 +177,7 @@
       })
       .catch(() => ({ bosses: null, score: null }));
 
-    const blizzPromise = fetch('https://oauth.battle.net/token', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Basic ${btoa(`${BLIZZ_CLIENT_ID}:${BLIZZ_CLIENT_SECRET}`)}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: 'grant_type=client_credentials',
-    })
+    const blizzPromise = fetch('https://pa-proxy.pnutjr-lw.workers.dev/blizzard-token', { method: 'POST' })
       .then(r => r.json())
       .then(({ access_token }) => fetch(
         'https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US',
