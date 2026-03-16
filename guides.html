@@ -237,14 +237,27 @@
   </section>
 
   <script>
+    function showTab(tab) {
+      document.querySelectorAll('.guide-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.guide-tab-panel').forEach(p => p.style.display = 'none');
+      var btn = document.querySelector('.guide-tab-btn[data-tab="' + tab + '"]');
+      if (btn) btn.classList.add('active');
+      var panel = document.getElementById('guide-panel-' + tab);
+      if (panel) panel.style.display = '';
+    }
+
     document.querySelectorAll('.guide-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.guide-tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.guide-tab-panel').forEach(p => p.style.display = 'none');
-        btn.classList.add('active');
-        document.getElementById('guide-panel-' + btn.dataset.tab).style.display = '';
+        location.hash = btn.dataset.tab;
+        showTab(btn.dataset.tab);
       });
     });
+
+    // On load, restore tab from hash (e.g. after back button)
+    var hash = location.hash.replace('#', '');
+    if (hash === 'raid' || hash === 'mplus') {
+      showTab(hash);
+    }
   </script>
 
 
