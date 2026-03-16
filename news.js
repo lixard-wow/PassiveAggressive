@@ -8,6 +8,12 @@
 const POSTS = [
   {
     date: "2026-03-15",
+    title: "Tactyks Video Guides Added to All Dungeon Pages",
+    content: "We have added links to Tactyks video guides on each of our dungeon pages. If you are not familiar with Tactyks, he is one of the best Mythic+ educators in the game — his guides are clear, efficient, and actually explain the mechanics that matter rather than just listing abilities. Full credit to him for putting these together. We are just making it easier for our members to find them. Head to any dungeon guide page and you will see the link at the top. Highly recommend watching before the season kicks off on March 24.",
+    tag: "Update"
+  },
+  {
+    date: "2026-03-15",
     title: "Mythic 0 World Tours — Free Champion Gear Before You Touch a Key",
     content: "One of the best things about Season 1 is that Mythic 0 dungeons now drop Champion gear (246 ilvl) with a daily lockout — meaning you can run each of the eight dungeons once per day and walk away with a full set of upgrades before you even touch a Mythic+ key. The strategy is simple: do a full M0 world tour in the first few days, hitting all eight dungeons in one session. Pair that with Bountiful Delves and Nightmare Preys for extra slots and you will have a solid baseline to push from. Once you have filled your Champion slots, move straight into low keys (M+2 to M+5) to start stacking Hero gear. There is no reason to wait on score — the faster you get your Champion gear sorted, the faster you are pushing real keys with the group.",
     tag: "Update"
