@@ -1,8 +1,7 @@
 // =====================
-// BLIZZARD API CONFIG
+// WORKER PROXY URL — replace with your deployed Cloudflare Worker URL
 // =====================
-const BLIZZ_CLIENT_ID     = 'ee56dd6d524d4fb7a1deca9715c375f0';
-const BLIZZ_CLIENT_SECRET = 'TwRZKDB2R74lXqGlOXyVbUeZuCme1a6n';
+const WORKER_URL = 'https://pa-proxy.YOUR_CF_ACCOUNT.workers.dev';
 
 const BLIZZ_CLASS_MAP = {
   1: 'Warrior', 2: 'Paladin', 3: 'Hunter', 4: 'Rogue',
@@ -11,12 +10,7 @@ const BLIZZ_CLASS_MAP = {
 };
 
 async function getBlizzardToken() {
-  const creds = btoa(`${BLIZZ_CLIENT_ID}:${BLIZZ_CLIENT_SECRET}`);
-  const res = await fetch('https://oauth.battle.net/token', {
-    method: 'POST',
-    headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'grant_type=client_credentials',
-  });
+  const res = await fetch(`${WORKER_URL}/blizzard-token`, { method: 'POST' });
   const data = await res.json();
   return data.access_token;
 }
