@@ -382,11 +382,12 @@
       document.getElementById('applySuccess').classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      fetch('https://discord.com/api/webhooks/1481389740073947177/WHD1vYnW1Ck651vpi3CCbdED3PMGru6h_TthSXGvbucc4jV1kQivf9UzpQGnq6tfriUK', {
+      const WORKER_URL = 'https://pa-proxy.YOUR_CF_ACCOUNT.workers.dev';
+      fetch(`${WORKER_URL}/apply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-      }).catch(err => console.error('Failed to send application to Discord:', err));
+      }).catch(err => console.error('Failed to send application:', err));
     });
   </script>
 </body>
