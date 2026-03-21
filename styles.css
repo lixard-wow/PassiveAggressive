@@ -1081,7 +1081,7 @@ footer {
 }
 
 .boss-header {
-  padding: 1.75rem 2rem;
+  padding: 1.75rem 7rem 1.75rem 2rem;
   position: relative;
 }
 
@@ -1115,8 +1115,7 @@ footer {
 .boss-portrait {
   position: absolute;
   right: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 1.75rem;
   width: 88px;
   height: 88px;
   border-radius: 8px;
