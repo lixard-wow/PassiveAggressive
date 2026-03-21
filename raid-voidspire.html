@@ -381,118 +381,8 @@
 
 
       <div class="boss-section">
-        <div class="boss-header bh-void">
-          <div class="boss-number">Boss 4 of 6</div>
-          <h2>Lightblinded Vanguard</h2>
-          <a href="https://www.youtube.com/watch?v=yaUBiT5gXIs" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,0,0,0.08);border:1px solid rgba(255,0,0,0.25);border-radius:6px;padding:0.4rem 0.85rem;color:#ff4444;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:1px;text-decoration:none;margin-top:0.5rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,0,0,0.15)'" onmouseout="this.style.background='rgba(255,0,0,0.08)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>Hazelnuttygames — Lightblinded Vanguard</a>
-          <p class="boss-tagline">Three Paladin bosses fought simultaneously &mdash; Lightblood, Bellamy, and Senn. Each has an independent energy bar. When any paladin hits 100 energy they cast an <strong>Aura</strong> that buffs the other two. Move all three bosses out of the active Aura's 40-yard radius immediately. On expiration, the casting paladin <strong>Consecrates</strong> the ground beneath their feet permanently.</p>
-        </div>
-        <div class="diff-panel active" data-diff="normal">
-          <div class="boss-body">
-            <div class="role-grid">
-              <div class="role-card tank">
-                <div class="role-card-title">&#128737; Tank</div>
-                <ul>
-                  <li>Assign one tank to Lightblood and one to Bellamy. Pre-position Senn so his <strong>Execution Sentence</strong> soak circles can be handled safely by DPS.</li>
-                  <li>Watch all three energy bars simultaneously &mdash; when any paladin reaches 100 energy, all three bosses must be moved 40+ yards away from the casting paladin before the Aura lands.</li>
-                  <li>During <strong>Aura of Peace</strong> (Senn's Aura): direct attacks on Senn pacify the attacker for 5 seconds. Tanks must not directly strike Senn during this window &mdash; coordinate with DPS on safe targeting.</li>
-                  <li>Consecration puddles are permanent &mdash; keep track of all Consecrate locations and never reposition bosses back into old puddles.</li>
-                </ul>
-              </div>
-              <div class="role-card healer">
-                <div class="role-card-title">&#10010; Healer</div>
-                <ul>
-                  <li><strong>Aura of Wrath</strong> (Lightblood at 100 energy) buffs the other two paladins with 100% increased Holy damage for 15 seconds &mdash; this is the highest incoming damage window. Pre-stage a major cooldown.</li>
-                  <li><strong>Aura of Devotion</strong> (Bellamy at 100 energy) reduces damage taken by the other two paladins by 75% for 25 seconds &mdash; DPS drops significantly during this window. Focus on raid health recovery.</li>
-                  <li>Stagger cooldowns across the fight &mdash; the trio's Aura cycle means constant pressure windows with no long downtime.</li>
-                  <li>Consecration puddles from expired Auras shrink the safe healing area over time &mdash; call safe positioning updates as puddles accumulate.</li>
-                </ul>
-              </div>
-              <div class="role-card dps">
-                <div class="role-card-title">&#9876; DPS</div>
-                <ul>
-                  <li>Kill order: Bellamy first (Aura of Devotion locks out DPS for 25 seconds &mdash; removing her removes the longest downtime window), then Lightblood, Senn last.</li>
-                  <li><strong>Execution Sentence</strong> (Lightblood): marks several players and executes them 3 seconds later &mdash; 8+ players must stack within 8 yards of each marked player to split the damage. Pre-assign soak groups.</li>
-                  <li><strong>Divine Hammers</strong> spiral outward from each Execution Sentence impact &mdash; dodge them after the soak resolves.</li>
-                  <li>During <strong>Aura of Peace</strong> (Senn at 100 energy): do not directly attack Senn while his Aura is active &mdash; direct attacks on him pacify the attacker for 5 seconds. Swap to Lightblood or Bellamy.</li>
-                  <li>When any Aura activates, immediately move all three bosses 40+ yards away from the casting paladin to escape the Aura radius.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="diff-panel" data-diff="heroic">
-          <div class="boss-body">
-            <div class="role-grid">
-              <div class="role-card tank">
-                <div class="role-card-title">&#128737; Tank</div>
-                <ul>
-                  <li>All three paladins generate energy faster on Heroic &mdash; watch all three bars more vigilantly and call repositions earlier.</li>
-                  <li>Consecration puddles from expired Auras are larger on Heroic &mdash; plan boss positions carefully to avoid denying too much arena space early.</li>
-                  <li>Aura of Peace's pacify window is longer on Heroic &mdash; pre-agree with DPS on exactly when to resume attacking Senn after the Aura expires.</li>
-                  <li>Execution Sentence soak grouping is more time-sensitive &mdash; soak groups must be pre-assigned and in position before the mark resolves, not scrambling after.</li>
-                </ul>
-              </div>
-              <div class="role-card healer">
-                <div class="role-card-title">&#10010; Healer</div>
-                <ul>
-                  <li>Aura of Wrath deals 100% increased damage for 15 seconds on Heroic with more frequent energy generation &mdash; these windows hit harder and faster. Reserve a dedicated cooldown specifically for Aura of Wrath windows.</li>
-                  <li>Aura of Devotion completely locks DPS for 25 seconds &mdash; use this window to top the raid aggressively and recover before the next Aura of Wrath.</li>
-                  <li>Stagger both major cooldowns at least 30 seconds apart &mdash; Aura pressure windows overlap more frequently on Heroic.</li>
-                  <li>Consecration area limits your movement on Heroic &mdash; pre-plan healer positioning paths that avoid accumulating puddles.</li>
-                </ul>
-              </div>
-              <div class="role-card dps">
-                <div class="role-card-title">&#9876; DPS</div>
-                <ul>
-                  <li>Energy generation is faster on Heroic &mdash; Aura repositions happen more frequently. Practice boss movement paths before the pull so repositions are clean.</li>
-                  <li>Execution Sentence soak window is tighter on Heroic &mdash; soak groups must be staged and moving before the mark appears, not after.</li>
-                  <li>Kill order Bellamy &rarr; Lightblood &rarr; Senn remains the same &mdash; Bellamy's Aura of Devotion 25-second lockout is still the most disruptive on Heroic.</li>
-                  <li>Divine Hammers from Execution Sentence are harder to dodge on Heroic due to faster rotation speed &mdash; practice the dodge pattern before engaging.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="diff-panel" data-diff="mythic">
-          <div class="boss-body">
-            <div class="role-grid">
-              <div class="role-card tank">
-                <div class="role-card-title">&#128737; Tank</div>
-                <ul>
-                  <li><strong>Synchronized Surge</strong> triggers when any two targets' energy bars hit 100 simultaneously &mdash; the resulting combined ability wipes the group.</li>
-                  <li>Tanks must manipulate threat and positioning to stagger energy generation &mdash; actively slow one target's energy by breaking contact briefly.</li>
-                  <li>Call energy percentages continuously via voice &mdash; at 85% on any target, the other tank must force a gap to avoid synchronization.</li>
-                  <li>Prioritize energy staggering over damage optimization &mdash; a clean kill beats a fast wipe every time.</li>
-                </ul>
-              </div>
-              <div class="role-card healer">
-                <div class="role-card-title">&#10010; Healer</div>
-                <ul>
-                  <li>Synchronized Surge cannot be healed through &mdash; it requires damage mitigation. Pre-assign 2 DPS to defensive cooldowns exclusively for this window.</li>
-                  <li>Communicate Surge risk windows to the assigned defensive DPS at 80% energy on any two targets simultaneously.</li>
-                  <li>During intentional energy staggering, the raid takes increased sustained damage &mdash; maintain throughput even during lower-intensity phases.</li>
-                  <li>Keep a cooldown available at all times in case energy staggering fails and a surprise Surge occurs.</li>
-                </ul>
-              </div>
-              <div class="role-card dps">
-                <div class="role-card-title">&#9876; DPS</div>
-                <ul>
-                  <li>Bellamy now channels Holy Volley twice consecutively with no recovery time &mdash; 4 dedicated interrupters required rotating every single cast.</li>
-                  <li>Two DPS must hold a defensive cooldown on standby exclusively for Synchronized Surge &mdash; do not use them offensively.</li>
-                  <li>Kill order still Bellamy &rarr; Lightblood &rarr; Senn, but Bellamy's interrupt demand means fewer DPS available for Lightblood shield breaking.</li>
-                  <li>Communicate loudly when your energy staggering assignment is near the cap &mdash; everyone needs to know before a Surge window opens.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="boss-section">
         <div class="boss-header bh-void2">
-          <div class="boss-number">Boss 5 of 6</div>
+          <div class="boss-number">Boss 4 of 6</div>
           <h2>Vaelgor &amp; Ezzorak</h2>
           <a href="https://www.youtube.com/watch?v=DPwPA5vIQmQ" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,0,0,0.08);border:1px solid rgba(255,0,0,0.25);border-radius:6px;padding:0.4rem 0.85rem;color:#ff4444;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:1px;text-decoration:none;margin-top:0.5rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,0,0,0.15)'" onmouseout="this.style.background='rgba(255,0,0,0.08)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>Hazelnuttygames — Vaelgor &amp; Ezzorak</a>
           <p class="boss-tagline">Twin draconic siblings corrupted by Xal'atath. <strong>Twilight Bond</strong> enrages both dragons if their HP diverges by 10%+ OR if they come within 15 yards of each other. Keep their HP even and keep them separated. No exceptions.</p>
@@ -592,6 +482,116 @@
                   <li>Pre-plan final burst per target before the bond forms &mdash; assign kill team A and kill team B, one per dragon.</li>
                   <li>Use Heroism/Lust at the Draconic Bond formation &mdash; the fused form takes amplified damage during the entire 12-second window.</li>
                   <li>The HP caller role becomes critical in the final 4 seconds after bond breaks &mdash; communicate gap instantly and swap if needed.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="boss-section">
+        <div class="boss-header bh-void">
+          <div class="boss-number">Boss 5 of 6</div>
+          <h2>Lightblinded Vanguard</h2>
+          <a href="https://www.youtube.com/watch?v=yaUBiT5gXIs" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,0,0,0.08);border:1px solid rgba(255,0,0,0.25);border-radius:6px;padding:0.4rem 0.85rem;color:#ff4444;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:1px;text-decoration:none;margin-top:0.5rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,0,0,0.15)'" onmouseout="this.style.background='rgba(255,0,0,0.08)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>Hazelnuttygames — Lightblinded Vanguard</a>
+          <p class="boss-tagline">Three Paladin bosses fought simultaneously &mdash; Lightblood, Bellamy, and Senn. Each has an independent energy bar. When any paladin hits 100 energy they cast an <strong>Aura</strong> that buffs the other two. Move all three bosses out of the active Aura's 40-yard radius immediately. On expiration, the casting paladin <strong>Consecrates</strong> the ground beneath their feet permanently.</p>
+        </div>
+        <div class="diff-panel active" data-diff="normal">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>Assign one tank to Lightblood and one to Bellamy. Pre-position Senn so his <strong>Execution Sentence</strong> soak circles can be handled safely by DPS.</li>
+                  <li>Watch all three energy bars simultaneously &mdash; when any paladin reaches 100 energy, all three bosses must be moved 40+ yards away from the casting paladin before the Aura lands.</li>
+                  <li>During <strong>Aura of Peace</strong> (Senn's Aura): direct attacks on Senn pacify the attacker for 5 seconds. Tanks must not directly strike Senn during this window &mdash; coordinate with DPS on safe targeting.</li>
+                  <li>Consecration puddles are permanent &mdash; keep track of all Consecrate locations and never reposition bosses back into old puddles.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li><strong>Aura of Wrath</strong> (Lightblood at 100 energy) buffs the other two paladins with 100% increased Holy damage for 15 seconds &mdash; this is the highest incoming damage window. Pre-stage a major cooldown.</li>
+                  <li><strong>Aura of Devotion</strong> (Bellamy at 100 energy) reduces damage taken by the other two paladins by 75% for 25 seconds &mdash; DPS drops significantly during this window. Focus on raid health recovery.</li>
+                  <li>Stagger cooldowns across the fight &mdash; the trio's Aura cycle means constant pressure windows with no long downtime.</li>
+                  <li>Consecration puddles from expired Auras shrink the safe healing area over time &mdash; call safe positioning updates as puddles accumulate.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Kill order: Bellamy first (Aura of Devotion locks out DPS for 25 seconds &mdash; removing her removes the longest downtime window), then Lightblood, Senn last.</li>
+                  <li><strong>Execution Sentence</strong> (Lightblood): marks several players and executes them 3 seconds later &mdash; 8+ players must stack within 8 yards of each marked player to split the damage. Pre-assign soak groups.</li>
+                  <li><strong>Divine Hammers</strong> spiral outward from each Execution Sentence impact &mdash; dodge them after the soak resolves.</li>
+                  <li>During <strong>Aura of Peace</strong> (Senn at 100 energy): do not directly attack Senn while his Aura is active &mdash; direct attacks on him pacify the attacker for 5 seconds. Swap to Lightblood or Bellamy.</li>
+                  <li>When any Aura activates, immediately move all three bosses 40+ yards away from the casting paladin to escape the Aura radius.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="heroic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li>All three paladins generate energy faster on Heroic &mdash; watch all three bars more vigilantly and call repositions earlier.</li>
+                  <li>Consecration puddles from expired Auras are larger on Heroic &mdash; plan boss positions carefully to avoid denying too much arena space early.</li>
+                  <li>Aura of Peace's pacify window is longer on Heroic &mdash; pre-agree with DPS on exactly when to resume attacking Senn after the Aura expires.</li>
+                  <li>Execution Sentence soak grouping is more time-sensitive &mdash; soak groups must be pre-assigned and in position before the mark resolves, not scrambling after.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Aura of Wrath deals 100% increased damage for 15 seconds on Heroic with more frequent energy generation &mdash; these windows hit harder and faster. Reserve a dedicated cooldown specifically for Aura of Wrath windows.</li>
+                  <li>Aura of Devotion completely locks DPS for 25 seconds &mdash; use this window to top the raid aggressively and recover before the next Aura of Wrath.</li>
+                  <li>Stagger both major cooldowns at least 30 seconds apart &mdash; Aura pressure windows overlap more frequently on Heroic.</li>
+                  <li>Consecration area limits your movement on Heroic &mdash; pre-plan healer positioning paths that avoid accumulating puddles.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Energy generation is faster on Heroic &mdash; Aura repositions happen more frequently. Practice boss movement paths before the pull so repositions are clean.</li>
+                  <li>Execution Sentence soak window is tighter on Heroic &mdash; soak groups must be staged and moving before the mark appears, not after.</li>
+                  <li>Kill order Bellamy &rarr; Lightblood &rarr; Senn remains the same &mdash; Bellamy's Aura of Devotion 25-second lockout is still the most disruptive on Heroic.</li>
+                  <li>Divine Hammers from Execution Sentence are harder to dodge on Heroic due to faster rotation speed &mdash; practice the dodge pattern before engaging.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="diff-panel" data-diff="mythic">
+          <div class="boss-body">
+            <div class="role-grid">
+              <div class="role-card tank">
+                <div class="role-card-title">&#128737; Tank</div>
+                <ul>
+                  <li><strong>Synchronized Surge</strong> triggers when any two targets' energy bars hit 100 simultaneously &mdash; the resulting combined ability wipes the group.</li>
+                  <li>Tanks must manipulate threat and positioning to stagger energy generation &mdash; actively slow one target's energy by breaking contact briefly.</li>
+                  <li>Call energy percentages continuously via voice &mdash; at 85% on any target, the other tank must force a gap to avoid synchronization.</li>
+                  <li>Prioritize energy staggering over damage optimization &mdash; a clean kill beats a fast wipe every time.</li>
+                </ul>
+              </div>
+              <div class="role-card healer">
+                <div class="role-card-title">&#10010; Healer</div>
+                <ul>
+                  <li>Synchronized Surge cannot be healed through &mdash; it requires damage mitigation. Pre-assign 2 DPS to defensive cooldowns exclusively for this window.</li>
+                  <li>Communicate Surge risk windows to the assigned defensive DPS at 80% energy on any two targets simultaneously.</li>
+                  <li>During intentional energy staggering, the raid takes increased sustained damage &mdash; maintain throughput even during lower-intensity phases.</li>
+                  <li>Keep a cooldown available at all times in case energy staggering fails and a surprise Surge occurs.</li>
+                </ul>
+              </div>
+              <div class="role-card dps">
+                <div class="role-card-title">&#9876; DPS</div>
+                <ul>
+                  <li>Bellamy now channels Holy Volley twice consecutively with no recovery time &mdash; 4 dedicated interrupters required rotating every single cast.</li>
+                  <li>Two DPS must hold a defensive cooldown on standby exclusively for Synchronized Surge &mdash; do not use them offensively.</li>
+                  <li>Kill order still Bellamy &rarr; Lightblood &rarr; Senn, but Bellamy's interrupt demand means fewer DPS available for Lightblood shield breaking.</li>
+                  <li>Communicate loudly when your energy staggering assignment is near the cap &mdash; everyone needs to know before a Surge window opens.</li>
                 </ul>
               </div>
             </div>
