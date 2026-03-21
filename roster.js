@@ -47,8 +47,6 @@ const RANK_LABELS = {
   3: 'Veteran',
   4: 'Member',
   5: 'Recruit',
-  6: "It's Fine",
-  7: 'Fresh Prospect',
 };
 
 const RANK_DESCRIPTIONS = {
@@ -58,8 +56,6 @@ const RANK_DESCRIPTIONS = {
   3: 'Veteran',
   4: 'Member',
   5: 'Recruit',
-  6: 'Social / Casual Member',
-  7: 'Initiate / New Recruit',
 };
 
 // =====================
