@@ -43,10 +43,10 @@ const ROLE_ICONS = {
 const RANK_LABELS = {
   0: 'Guild Master',
   1: 'Doc Jesus',
-  2: 'Calm Direction',
-  3: 'Subtle Pressure',
-  4: 'Firm Suggestion',
-  5: 'Learning Curve',
+  2: 'Officer',
+  3: 'Veteran',
+  4: 'Member',
+  5: 'Recruit',
   6: "It's Fine",
   7: 'Fresh Prospect',
 };
@@ -55,9 +55,9 @@ const RANK_DESCRIPTIONS = {
   0: 'Guild Master',
   1: 'Officer (Co-GM)',
   2: 'Officer',
-  3: 'Officer',
-  4: 'Veteran / Raider',
-  5: 'Member',
+  3: 'Veteran',
+  4: 'Member',
+  5: 'Recruit',
   6: 'Social / Casual Member',
   7: 'Initiate / New Recruit',
 };
