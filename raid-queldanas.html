@@ -57,7 +57,7 @@
           <div class="boss-number">Boss 1 of 2</div>
           <h2>Belo'ren, Child of Al'ar</h2>
           <a href="https://www.youtube.com/watch?v=DHbvVQZtQeQ" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,0,0,0.08);border:1px solid rgba(255,0,0,0.25);border-radius:6px;padding:0.4rem 0.85rem;color:#ff4444;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:1px;text-decoration:none;margin-top:0.5rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,0,0,0.15)'" onmouseout="this.style.background='rgba(255,0,0,0.08)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>Hazelnuttygames — Belo'ren, Child of Al'ar</a>
-          <p class="boss-tagline">A phoenix raised to guard the Sunwell. Alternates between Light-dominant and Void-dominant phases. The fight doesn't end when his health drops to zero.</p>
+          <p class="boss-tagline">A phoenix raised to guard the Sunwell. Every player is assigned a Light or Void Feather at the start &mdash; absorb only your matching color or suffer heavy penalties. The fight is a repeating phoenix-and-egg cycle that gets harder to heal with every resurrection.</p>
         </div>
         <div class="diff-panel active" data-diff="normal">
           <div class="boss-body">
@@ -65,31 +65,30 @@
               <div class="role-card tank">
                 <div class="role-card-title">&#128737; Tank</div>
                 <ul>
-                  <li>Position the phoenix away from the raid during grounded phases &mdash; wing slam cleaves a wide frontal.</li>
-                  <li>When Belo'ren retreats into the Ashen Egg at 0 HP, maintain threat on the egg and pop a defensive.</li>
-                  <li>Coordinate positioning with healers during Voidlight Convergence &mdash; tanks absorb the highest burst.</li>
-                  <li>After Belo'ren resurrects from the egg, taunt immediately &mdash; he resets to full energy on rebirth.</li>
-                  <li>During Light phases, stand in Light zones; during Void phases, stand in Void zones to reduce personal damage.</li>
+                  <li><strong>Guardian's Edict</strong>: Belo'ren emits a Light cone and a Void cone simultaneously &mdash; the Light-assigned tank must absorb the Light cone, the Void-assigned tank absorbs the Void cone. Missing your cone gives Belo'ren a stacking damage buff. This is a wipe condition if it accumulates.</li>
+                  <li>Confirm Feather color assignments with your co-tank before the pull and re-confirm after every Voidlight Convergence reset.</li>
+                  <li><strong>Burning Heart</strong> deals constant passive fire damage throughout &mdash; communicate incoming spikes to healers during high-pressure moments.</li>
+                  <li>On <strong>Death Drop</strong> (Belo'ren crashes at 0 HP), use Warlock Gateway immediately to reset position for the Rebirth phase. Pre-place the Gateway before the pull.</li>
                 </ul>
               </div>
               <div class="role-card healer">
                 <div class="role-card-title">&#10010; Healer</div>
                 <ul>
-                  <li>A strong dispel bench is mandatory &mdash; Voidlight Convergence misaligns players; dispel wrong assignments fast.</li>
-                  <li>Light phase: holy burst damage incoming. Void phase: sustained shadow damage. Switch your healing focus accordingly.</li>
-                  <li>During the Ashen Egg phase, top everyone off &mdash; Rebirth triggers a full raid burst on reemergence.</li>
-                  <li>Mass Dispel (Priest) is ideal for clearing multiple misaligned players simultaneously.</li>
-                  <li>Assign dispel priority list before the pull &mdash; tanks first, then DPS with wrong color alignment.</li>
+                  <li><strong>Ashen Benediction</strong> applies a stacking 10% healing reduction per egg cycle &mdash; healing becomes progressively harder each resurrection. Plan cooldown usage for later cycles specifically.</li>
+                  <li>Burning Heart ramps up significantly during egg burn phases &mdash; pre-ramp healing before each Rebirth, do not react after it starts.</li>
+                  <li><strong>Heroism/Bloodlust on egg burn phases</strong>, not during the phoenix phase &mdash; the Rebirth window is the actual damage check of the fight.</li>
+                  <li>Ember add puddles are permanent and expand over time &mdash; keep track of safe space and heal around it as the arena shrinks.</li>
                 </ul>
               </div>
               <div class="role-card dps">
                 <div class="role-card-title">&#9876; DPS</div>
                 <ul>
-                  <li><strong>Strictly follow color assignments</strong> &mdash; absorb only the feather matching your assigned element (Light or Void).</li>
-                  <li>Designate one caller before the pull to announce color assignments each phase; confusion here causes instant wipes.</li>
-                  <li>When Belo'ren reaches 0 HP, pivot ALL damage to the Ashen Egg within 3 seconds.</li>
-                  <li>Destroy the egg fast enough to reduce Immortal Flame stacks before Rebirth &mdash; too slow equals a full reset.</li>
-                  <li>If Belo'ren resurrects, re-establish color assignments before re-engaging.</li>
+                  <li><strong>Strictly follow color assignments</strong> &mdash; only absorb Light or Void mechanics that match your assigned Feather. Wrong-color absorption applies a 20-second damage debuff.</li>
+                  <li><strong>Light/Void Dive</strong>: soak circles spawn Ember adds and create permanent expanding puddles. Position soak circles on designated markers or the puddles deny arena space permanently.</li>
+                  <li><strong>Kill Ember adds before they die naturally</strong> &mdash; dead Embers become <strong>Ember Rebirth</strong> eggs that revive after 15 seconds if not destroyed. Prioritize eggs immediately.</li>
+                  <li><strong>Light/Void Eruption</strong>: only players of the matching color can successfully interrupt it &mdash; assign color-specific interrupters before the pull.</li>
+                  <li><strong>Radiant Echoes</strong>: moving orbs that create gaps when popped &mdash; only pop them if you are the correct matching color. Wrong color = 20-second damage-taken debuff.</li>
+                  <li>Use Heroism/Bloodlust during the Rebirth egg burn phase &mdash; that is when the boss is stationary and most vulnerable.</li>
                 </ul>
               </div>
             </div>
@@ -101,28 +100,28 @@
               <div class="role-card tank">
                 <div class="role-card-title">&#128737; Tank</div>
                 <ul>
-                  <li>Wing Slam now applies a 6-second bleed to the active tank &mdash; taunt timing must account for bleed duration, not just direct exposure.</li>
-                  <li>Voidlight Convergence hits the tank for 40% more than on Normal &mdash; defensive must be active when it lands, not after.</li>
-                  <li>Ashen Egg phase is shorter &mdash; repositioning for Rebirth must begin immediately when the egg forms, not after you finish healing.</li>
-                  <li>Belo'ren resets to full energy faster on Heroic after Rebirth &mdash; taunt within 1 second of reemergence or he charges a random player.</li>
+                  <li>Guardian's Edict fires faster and the stacking damage buff from missed cones applies more aggressively &mdash; zero tolerance for misabsorption on Heroic.</li>
+                  <li>Death Drop knockback is significantly harder &mdash; Warlock Gateway is effectively required to handle repositioning, not just recommended.</li>
+                  <li>Voidlight Convergence reassigns Feathers more frequently &mdash; both tanks must confirm color re-assignments after every reset, not just the first.</li>
+                  <li>Burning Heart during egg phases ramps harder &mdash; pop a defensive pre-emptively before each Rebirth, not after taking damage.</li>
                 </ul>
               </div>
               <div class="role-card healer">
                 <div class="role-card-title">&#10010; Healer</div>
                 <ul>
-                  <li>Color phase switches happen every 45 seconds instead of 60 &mdash; dispel windows are shorter and require faster reaction.</li>
-                  <li>Light phase burst damage now hits multiple players simultaneously &mdash; AoE healing cooldowns are more effective than single-target on Heroic.</li>
-                  <li>Ashen Egg phase is your only real downtime &mdash; use it to top the raid fully and pre-position for Rebirth.</li>
-                  <li>Assign a second dispeller specifically for Voidlight Convergence misalignment &mdash; one dispeller cannot keep up with the increased frequency on Heroic.</li>
+                  <li>Ashen Benediction healing reduction accumulates faster per cycle &mdash; later egg phases are significantly harder. Plan and save major cooldowns for cycles 3+ specifically.</li>
+                  <li>Burning Heart spike during egg phases is more extreme &mdash; pre-ramp cooldowns before Rebirth, do not react to the spike after it lands.</li>
+                  <li>Ember adds spawn in higher volume &mdash; puddle spread happens faster, shrinking the safe area more aggressively each cycle.</li>
+                  <li>Voidlight Convergence resets happen more frequently &mdash; dispel assignments must be re-communicated and ready every phase.</li>
                 </ul>
               </div>
               <div class="role-card dps">
                 <div class="role-card-title">&#9876; DPS</div>
                 <ul>
-                  <li>The Ashen Egg gains a Sunfire Shield on Heroic that must be burst through before egg damage can land &mdash; assign your 3 highest burst DPS to this window exclusively.</li>
-                  <li>Egg destruction time window is tighter &mdash; DPS must pivot within 2 seconds of Belo'ren hitting 0 HP, not 3.</li>
-                  <li>Color switch frequency is higher &mdash; the phase caller must announce every switch immediately; delayed calls cause mass misalignment.</li>
-                  <li>Absorbing the wrong feather on Heroic applies a 12-second damage-taken debuff rather than just damage &mdash; it cascades through the rest of the phase.</li>
+                  <li>Two Ember adds spawn simultaneously from later Dives &mdash; Ember Rebirth egg pressure doubles. Assign add kill priority before the pull.</li>
+                  <li>Eggs must be destroyed faster &mdash; egg revival window is effectively shorter due to increased Ember spawn overlap in later cycles.</li>
+                  <li>Wrong-color Radiant Echo absorption on Heroic applies a longer and more punishing debuff &mdash; zero improvisation on echo assignments.</li>
+                  <li>Light/Void Eruption interrupt windows are tighter &mdash; color-specific interrupters must be staged and ready at all times, not reactively assigned.</li>
                 </ul>
               </div>
             </div>
@@ -134,28 +133,25 @@
               <div class="role-card tank">
                 <div class="role-card-title">&#128737; Tank</div>
                 <ul>
-                  <li><strong>Eternal Flame on Mythic</strong>: Belo'ren resurrects from the egg with a rotating fire line sweeping the arena. Both tanks must anchor at opposite ends to keep the path predictable.</li>
-                  <li>The fire line rotates continuously for 20 seconds after Rebirth &mdash; maintain your anchor position for the full duration, do not chase the boss.</li>
-                  <li>After Eternal Flame ends, Belo'ren enrages briefly &mdash; defensives must be stacked for the first 5 seconds post-flame.</li>
-                  <li>Pre-position at your anchor point before the egg phase begins &mdash; reacting to Eternal Flame's start is too slow.</li>
+                  <li>Guardian's Edict timing becomes irregular on Mythic &mdash; cannot be predicted by cast order alone. Both tanks must watch for visual and audio cues rather than counting casts.</li>
+                  <li>Missing any cone on Mythic accelerates the damage buff exponentially &mdash; even a single missed absorption can end the attempt within the same cycle.</li>
+                  <li>Death Drop requires Warlock Gateway AND tank-specific positioning pre-agreement &mdash; improvised Gateway placement causes knockback deaths.</li>
                 </ul>
               </div>
               <div class="role-card healer">
                 <div class="role-card-title">&#10010; Healer</div>
                 <ul>
-                  <li>Eternal Flame deals 20% max HP per second to anyone in its rotating path &mdash; zero tolerance for mispositioned players. Pre-position the raid strictly before the egg forms.</li>
-                  <li>The raid cannot spread freely during Eternal Flame due to the sweeping fire &mdash; position healers at the anchor points alongside the tanks.</li>
-                  <li>Healing cooldowns used during the egg phase cannot be available for Eternal Flame &mdash; save one major cooldown specifically for the post-Rebirth window.</li>
-                  <li>After Eternal Flame ends, resume standard phase healing immediately &mdash; Belo'ren re-enters combat with high energy and color switches resume instantly.</li>
+                  <li>Ashen Benediction stacks faster and healing reduction is steeper &mdash; plan the full cooldown roster mapped to expected cycle count before the pull. Later cycles may be nearly unhealable without perfect cooldown timing.</li>
+                  <li>Ember puddle spread is aggressive &mdash; call safe healing positions proactively as the arena shrinks each cycle.</li>
+                  <li>Keep a cooldown available at all times for surprise Guardian's Edict misses &mdash; the damage buff spike from a missed cone is lethal without mitigation.</li>
                 </ul>
               </div>
               <div class="role-card dps">
                 <div class="role-card-title">&#9876; DPS</div>
                 <ul>
-                  <li>On Mythic, destroying the egg does not reduce Immortal Flame stacks. Instead, egg damage charges a Sunwell Surge meter &mdash; fill it fully before Rebirth or the resurrection wipes the group.</li>
-                  <li>The Sunwell Surge meter requires more total damage than the egg has HP on lower difficulties &mdash; burst DPS assignment to the egg is mandatory, not optional.</li>
-                  <li>During Eternal Flame, DPS must navigate the sweeping fire while maintaining damage on Belo'ren &mdash; use the safe zones between anchor points to maintain uptime.</li>
-                  <li>Use Heroism/Lust at the Sunwell Surge meter activation &mdash; amplified damage during egg phase fills the meter faster and reduces Eternal Flame duration.</li>
+                  <li>Ember Rebirth eggs on Mythic spawn with a brief invulnerability window &mdash; burst them immediately the moment it expires. Do not preemptively dump cooldowns before the window ends.</li>
+                  <li>Radiant Echo wrong-color absorption on Mythic is near-lethal &mdash; pre-assign echo responsibilities strictly by Feather color. No freelancing.</li>
+                  <li>Heroism/Bloodlust timing is critical &mdash; coordinate with healers to ensure it lands at an egg phase where healing reduction is manageable, not at peak Ashen Benediction stacks.</li>
                 </ul>
               </div>
             </div>
@@ -168,7 +164,7 @@
         <div class="boss-header bh-final">
           <div class="boss-number">Boss 2 of 2 &mdash; Season Finale</div>
           <h2>Midnight Falls</h2>
-          <p class="boss-tagline">The hardest encounter of Midnight Season 1. Escalating chaos with no ceiling. The Light &amp; Void system from Belo'ren carries forward &mdash; come in knowing your assignment. Required utilities: Priest Mass Dispel, interrupt coverage on Termination Prism, and a designated Void/Light caller.</p>
+          <p class="boss-tagline">The hardest encounter of Midnight Season 1. L'ura, a corrupted Naaru, fights across three distinct stages with two intermissions. Stage 1 centers on a musical rune puzzle and crystal management. The intermission pulls the entire raid inside the Darkwell. Stage 3 is a movement-and-DPS race against stacking Darkness. Come prepared with a Death's Dirge caller and a crystal management plan.</p>
         </div>
         <div class="diff-panel active" data-diff="normal">
           <div class="boss-body">
@@ -176,31 +172,31 @@
               <div class="role-card tank">
                 <div class="role-card-title">&#128737; Tank</div>
                 <ul>
-                  <li>The most mechanically demanding tank fight of Season 1 &mdash; positioning rotates constantly as zones shift.</li>
-                  <li>Assign one tank to Light phases, one to Void phases &mdash; coordinate transitions cleanly.</li>
-                  <li>Stack defensives on every Midnight Surge &mdash; each one hits harder than the last as damage amps stack.</li>
-                  <li>Off-tank takes doubled damage during their phase element &mdash; communicate spike windows to healers.</li>
-                  <li>When adds spawn during Surge windows, hold them immediately &mdash; loose adds wipe the group.</li>
+                  <li><strong>Heaven's Lance</strong>: stacking Impaled debuff (50% increased damage taken per stack) &mdash; swap tanks frequently before stacks become lethal. Do not wait for the co-tank to call it; watch the debuff yourself.</li>
+                  <li>Position L'ura away from <strong>The Darkwell</strong> beam at all times &mdash; players caught in it are killed instantly.</li>
+                  <li><strong>Safeguard Matrices</strong> revolve around L'ura, each reducing her damage taken by 33% (up to 3 active) &mdash; keep L'ura positioned to allow DPS line of sight to break them. Communicate matrix count to DPS.</li>
+                  <li>During the <strong>Total Eclipse</strong> intermission, all players are pulled into the Darkwell &mdash; stack with the group and survive the Eclipsed healing absorb. No tanking mechanics during this phase, focus on positioning.</li>
                 </ul>
               </div>
               <div class="role-card healer">
                 <div class="role-card-title">&#10010; Healer</div>
                 <ul>
-                  <li><strong>Mandatory:</strong> bring at least one Priest. Mass Dispel is required for Termination Prism debuff cleanse.</li>
-                  <li>Pre-assign interrupt rotations between healers for Termination Prism &mdash; do not rely on DPS alone.</li>
-                  <li>Use major cooldowns at fixed phase intervals &mdash; do not save them. Chaos phases can last minutes.</li>
-                  <li>Assign one healer to monitor the off-tank continuously &mdash; Void phase doubles their incoming damage.</li>
-                  <li>Keep the raid above 75% entering each Surge &mdash; Midnight Falls checks group health at detonation.</li>
+                  <li><strong>Dusk Crystals</strong> fade and begin taking increasing Shadow damage &mdash; convert them into <strong>Dawn Crystals</strong> by healing them. Dawn Crystals generate a Torchbearer aura (12-yard damage reduction for nearby players). This is a primary raid survival mechanic, not optional.</li>
+                  <li><strong>Midnight Crystals</strong> are DPS priority and detonate for heavy raid-wide damage if not destroyed &mdash; call them out immediately when they appear so DPS can respond.</li>
+                  <li><strong>Shattered Sky</strong>: 25-second Shadow damage rain &mdash; maintain sustained throughput throughout this window without dropping off.</li>
+                  <li>During the <strong>Total Eclipse</strong> intermission: all players receive the Eclipsed healing absorb debuff &mdash; pour throughput into breaking the absorb before players die. This is your most intensive healing window.</li>
+                  <li>In Stage 3: <strong>Darkness</strong> stacks reduce movement speed and deal escalating damage &mdash; this is the enrage equivalent. Map your final cooldowns to this stage before the pull.</li>
                 </ul>
               </div>
               <div class="role-card dps">
                 <div class="role-card-title">&#9876; DPS</div>
                 <ul>
-                  <li><strong>Interrupt Termination Prism at all costs</strong> &mdash; it applies a lethal stacking debuff to the entire raid.</li>
-                  <li>Assign interrupts by cooldown rotation, not volunteers &mdash; there is no margin for human error here.</li>
-                  <li>Maintain your Light/Void alignment from the Belo'ren fight &mdash; it carries over and affects damage taken.</li>
-                  <li>Save Heroism/Lust for the final phase when Midnight's damage amp reaches maximum stacks.</li>
-                  <li>During Surge windows, pivot to priority adds immediately before returning to boss &mdash; adds left up wipe the group.</li>
+                  <li><strong>Death's Dirge</strong>: L'ura marks players with musical note runes, then a laser activates each in sequence. Correct order = localized damage. Wrong order = 5 seconds of raid-wide Cosmic damage. Designate one caller before the pull to announce the sequence every time.</li>
+                  <li>Destroy <strong>Midnight Crystals</strong> immediately &mdash; they detonate for heavy raid-wide damage if ignored. Always top priority over boss damage.</li>
+                  <li>Break <strong>Safeguard Matrices</strong> orbiting L'ura &mdash; each one reduces her damage taken by 33%. With 3 active she takes 99% less damage. Break them to restore full damage.</li>
+                  <li><strong>Heaven's Glaives</strong>: whirling blades ricocheting around the arena &mdash; constant movement required. Do not tunnel boss and stand still during this mechanic.</li>
+                  <li>In <strong>Stage 2 (Dark Reactor inside the Darkwell)</strong>: use Galvanize beams on Void Cores. Prevent <strong>Core Harvest</strong> &mdash; if L'ura absorbs cores she regenerates energy. Cores are the add-equivalent of this stage.</li>
+                  <li>Use Heroism/Bloodlust at the start of Stage 3 when Darkness stacks begin ramping &mdash; this is the enrage phase and the fight must be killed quickly.</li>
                 </ul>
               </div>
             </div>
@@ -212,28 +208,27 @@
               <div class="role-card tank">
                 <div class="role-card-title">&#128737; Tank</div>
                 <ul>
-                  <li>Midnight Surge now strikes 3 times in quick succession &mdash; 3 separate defensive cooldowns required per Surge window, not one.</li>
-                  <li>Coordinate with your co-tank to never overlap defensive windows &mdash; at least one tank must have a defensive available at all times during Surge.</li>
-                  <li>Adds spawning during Surge windows are more numerous on Heroic &mdash; AoE taunt immediately rather than picking them up individually.</li>
-                  <li>Phase transition timing is faster &mdash; both tanks must call and execute alignment swaps within 2 seconds of each transition.</li>
+                  <li>Heaven's Lance stacks apply faster on Heroic &mdash; tank swaps must happen earlier. Do not wait for the co-tank to call &mdash; swap proactively at lower stack counts than on Normal.</li>
+                  <li>Safeguard Matrices are harder to break &mdash; assign dedicated matrix breakers and keep L'ura positioned consistently to maintain DPS line of sight on them.</li>
+                  <li>The Darkwell beam hitbox is wider on Heroic &mdash; give The Darkwell significantly more clearance when positioning L'ura.</li>
                 </ul>
               </div>
               <div class="role-card healer">
                 <div class="role-card-title">&#10010; Healer</div>
                 <ul>
-                  <li>Termination Prism now applies to 3 players simultaneously instead of 1 &mdash; Mass Dispel becomes mandatory, not just recommended.</li>
-                  <li>3-target Termination Prism means the Priest must be held in reserve for this dispel exclusively during Prism windows.</li>
-                  <li>Triple Midnight Surge means 3 cooldowns consumed per Surge &mdash; map out your full cooldown roster before the pull.</li>
-                  <li>Off-tank damage during Void phase is extreme on Heroic &mdash; assign a dedicated healer to them for the duration of each Void phase.</li>
+                  <li>Death's Dirge melody complexity increases each cycle &mdash; wrong-order detonations are more likely as the fight progresses. Keep Shattered Sky cooldowns available for error recovery.</li>
+                  <li><strong>Tears of L'ura</strong> spawn from crystals on Heroic &mdash; additional movement hazards during crystal management. Healing while moving is more demanding; pre-ramp before crystal phases.</li>
+                  <li>Midnight Crystals detonate for significantly more damage on Heroic &mdash; one missed crystal can cascade into a wipe. Call them out immediately and firmly.</li>
+                  <li>Eclipsed absorb during the intermission is larger &mdash; more throughput is required to break through it. Major cooldown during the intermission is mandatory on Heroic.</li>
                 </ul>
               </div>
               <div class="role-card dps">
                 <div class="role-card-title">&#9876; DPS</div>
                 <ul>
-                  <li>Adds during Surge windows now spawn with a Void Shield &mdash; burst through it within 6 seconds or the add permanently links to Midnight and increases her damage dealt.</li>
-                  <li>Assign 2 DPS exclusively to add Void Shield breaking during Surge windows; they drop boss immediately when adds spawn.</li>
-                  <li>Interrupt rotation for Termination Prism must account for 3 simultaneous dispels &mdash; interrupters and the Priest must coordinate without stepping on each other.</li>
-                  <li>Light/Void alignment carries harder penalties on Heroic &mdash; being in the wrong zone during a Surge amplifies the damage taken by 40%.</li>
+                  <li>Death's Dirge melody complexity increases each cycle on Heroic &mdash; later iterations of the mechanic require faster reaction. Practice the Dirge order early and build habit.</li>
+                  <li>Tears of L'ura create additional movement hazards during crystal phases &mdash; plan movement paths around both Tears and Glaive patterns simultaneously.</li>
+                  <li>Safeguard Matrices on Heroic require dedicated breakers &mdash; assign 2 DPS to matrix priority. Do not rely on incidental damage.</li>
+                  <li>Stage 2 Void Core management is more demanding &mdash; Galvanize beam coordination requires pre-assigned beam users. Improvised assignment in Stage 2 causes Core Harvest.</li>
                 </ul>
               </div>
             </div>
@@ -245,28 +240,25 @@
               <div class="role-card tank">
                 <div class="role-card-title">&#128737; Tank</div>
                 <ul>
-                  <li><strong>Eclipse Collapse at 30% HP</strong> forces both tanks into their opposite alignment for the remainder of the fight. All defensive strategies built around your original element must be rebuilt immediately.</li>
-                  <li>The Light tank becomes Void-aligned and the Void tank becomes Light-aligned &mdash; both now take increased damage from their new element. Communicate immediately and swap all positioning assumptions.</li>
-                  <li>Eclipse Collapse also resets all phase assignments &mdash; the caller must re-announce zone assignments for every player within 5 seconds of the collapse.</li>
-                  <li>After Eclipse Collapse, Midnight Surge fires at double frequency &mdash; defensive cooldown management becomes critical for the final burn.</li>
+                  <li>Heaven's Lance Impaled stacks apply at a significantly higher rate on Mythic &mdash; both tanks must communicate every swap and have defensives pre-staged before taunting.</li>
+                  <li>The Darkwell beam rotates on Mythic &mdash; L'ura positioning requires constant adjustment. Coordinate repositions with DPS to avoid interrupting matrix-breaking.</li>
                 </ul>
               </div>
               <div class="role-card healer">
                 <div class="role-card-title">&#10010; Healer</div>
                 <ul>
-                  <li>Eclipse Collapse applies Termination Prism to 8 players simultaneously &mdash; hold the Priest's Mass Dispel exclusively for this moment. Do not use it for anything else before 30% HP.</li>
-                  <li>After Eclipse Collapse, both tanks take increased damage from their new element &mdash; double the healing attention on both tanks during the realignment window.</li>
-                  <li>Healing cooldowns must be available for Eclipse Collapse &mdash; plan the entire cooldown roster backward from the 30% HP trigger point.</li>
-                  <li>Post-collapse Midnight Surge frequency doubles &mdash; you will burn through cooldowns rapidly. Communicate cooldown availability loudly and continuously.</li>
+                  <li><strong>Severance</strong> splits players across alternate dimensions &mdash; healers must cover their assigned dimension and cannot rely on cross-dimension support. Pre-assign healer-per-group before the pull.</li>
+                  <li>Grim Symphony / Death's Requiem layer additional escalation mechanics on top of Death's Dirge &mdash; healing cooldown usage must be mapped to the full fight timeline including these Mythic-specific windows.</li>
+                  <li>Darkness stacks in Stage 3 accumulate significantly faster &mdash; the final phase is extremely compressed. Heroism timing must be precise to the second.</li>
                 </ul>
               </div>
               <div class="role-card dps">
                 <div class="role-card-title">&#9876; DPS</div>
                 <ul>
-                  <li>After Eclipse Collapse, all DPS alignment assignments flip as well &mdash; every player is now in the wrong zone. The caller must immediately re-announce all assignments.</li>
-                  <li>Use Heroism/Lust within the first 10 seconds of Eclipse Collapse &mdash; misalignment debuffs compound over time and the fight becomes unwinnable if the kill does not happen quickly.</li>
-                  <li>Shield-breaking DPS on adds must continue through the Eclipse Collapse transition without pausing &mdash; adds do not stop spawning during the alignment flip.</li>
-                  <li>The 30% HP kill window is the defining execution challenge of the tier &mdash; every major cooldown must be held for the Eclipse Collapse and used within 15 seconds of it triggering.</li>
+                  <li><strong>Severance</strong> splits players across alternate dimensions on Mythic &mdash; coordinate which players go where before the pull. DPS must maintain crystal and Midnight Crystal management in both dimensions simultaneously.</li>
+                  <li><strong>Grim Symphony / Death's Requiem</strong>: Mythic-exclusive escalation added on top of existing Death's Dirge complexity. The Dirge caller must handle both systems without confusion &mdash; use callout software and WeakAuras.</li>
+                  <li>Darkness stacks in Stage 3 accumulate far faster &mdash; use Heroism/Bloodlust at the precise start of Stage 3 to kill L'ura before the enrage becomes unbeatable.</li>
+                  <li>Every major DPS cooldown must be held for Stage 3 &mdash; nothing used during Stage 1 or 2 unless absolutely necessary for crystal management emergencies.</li>
                 </ul>
               </div>
             </div>
