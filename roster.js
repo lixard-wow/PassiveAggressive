@@ -59,29 +59,44 @@ const RANK_DESCRIPTIONS = {
 };
 
 // =====================
-// SORT PREFERENCE (persisted per-viewer via localStorage)
+// SORT / FILTER PREFERENCES (persisted per-viewer via localStorage)
 // =====================
+function loadSaved(key, validValues, fallback) {
+  try {
+    const saved = localStorage.getItem(key);
+    if (saved !== null && validValues.includes(saved)) return saved;
+  } catch (e) { /* localStorage unavailable (private browsing, etc) */ }
+  return fallback;
+}
+
+function savePref(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* ignore */ }
+}
+
 const SORT_STORAGE_KEY = 'pa-roster-sort';
 const VALID_SORTS = ['rank', 'name-asc', 'name-desc', 'score', 'raid'];
+const loadSavedSort = () => loadSaved(SORT_STORAGE_KEY, VALID_SORTS, 'score'); // no saved pref yet — default to M+ Score
+const saveSort = (v) => savePref(SORT_STORAGE_KEY, v);
 
-function loadSavedSort() {
-  try {
-    const saved = localStorage.getItem(SORT_STORAGE_KEY);
-    if (saved && VALID_SORTS.includes(saved)) return saved;
-  } catch (e) { /* localStorage unavailable (private browsing, etc) */ }
-  return 'score'; // no saved preference yet — default to M+ Score
-}
+const ROLE_STORAGE_KEY = 'pa-roster-role';
+const VALID_ROLES = ['all', 'Tank', 'Healer', 'DPS'];
+const loadSavedRole = () => loadSaved(ROLE_STORAGE_KEY, VALID_ROLES, 'all');
+const saveRole = (v) => savePref(ROLE_STORAGE_KEY, v);
 
-function saveSort(sort) {
-  try { localStorage.setItem(SORT_STORAGE_KEY, sort); } catch (e) { /* ignore */ }
-}
+const RANK_STORAGE_KEY = 'pa-roster-rank-filter';
+const VALID_RANK_FILTERS = ['all', '0', '1', '2', '3', '4', '5'];
+const loadSavedRankFilter = () => {
+  const v = loadSaved(RANK_STORAGE_KEY, VALID_RANK_FILTERS, 'all');
+  return v === 'all' ? 'all' : parseInt(v);
+};
+const saveRankFilter = (v) => savePref(RANK_STORAGE_KEY, String(v));
 
 // =====================
 // ROSTER STATE
 // =====================
 let liveRoster = [];
-let currentFilter = 'all';
-let currentRankFilter = 'all';
+let currentFilter = loadSavedRole();
+let currentRankFilter = loadSavedRankFilter();
 let currentSort = loadSavedSort();
 let blizzToken = null;
 const thumbnailCache = {};
@@ -481,11 +496,13 @@ async function fetchRoster() {
 // =====================
 document.getElementById('roleFilter')?.addEventListener('change', e => {
   currentFilter = e.target.value;
+  saveRole(currentFilter);
   buildRoster(currentFilter);
 });
 
 document.getElementById('rankFilter')?.addEventListener('change', e => {
   currentRankFilter = e.target.value === 'all' ? 'all' : parseInt(e.target.value);
+  saveRankFilter(currentRankFilter);
   buildRoster(currentFilter);
 });
 
@@ -503,4 +520,8 @@ document.getElementById('sortSelect')?.addEventListener('change', async e => {
 // =====================
 const sortSelectEl = document.getElementById('sortSelect');
 if (sortSelectEl) sortSelectEl.value = currentSort;
+const roleFilterEl = document.getElementById('roleFilter');
+if (roleFilterEl) roleFilterEl.value = currentFilter;
+// rankFilter's <select> is rebuilt dynamically in buildRankButtons(), which
+// already syncs its value from currentRankFilter — no init needed here.
 fetchRoster();
