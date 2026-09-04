@@ -19,6 +19,12 @@
   --blue:       #4a90d9;
   --green:      #52b788;
   --red:        #e63946;
+
+  /* Season accent (12.1 Curse of Ula'tek) — jungle/venom green, kept separate
+     from --green (used for role/farm semantics) so it reads as "current patch". */
+  --venom:      #8bc34a;
+  --venom-lt:   #b3e07a;
+  --venom-dk:   #33691e;
 }
 
 html { scroll-behavior: smooth; }
@@ -160,6 +166,7 @@ body {
   background:
     radial-gradient(ellipse at 25% 50%, rgba(168,85,247,0.07) 0%, transparent 55%),
     radial-gradient(ellipse at 75% 50%, rgba(200,169,110,0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(139,195,74,0.04) 0%, transparent 60%),
     var(--dark);
   overflow: hidden;
 }
@@ -439,6 +446,8 @@ section { padding: 6rem 1.5rem; }
 .tag-prog   { background: rgba(163,90,200,0.2);  color: #c984e8;       border: 1px solid rgba(163,90,200,0.4); }
 .tag-farm   { background: rgba(82,183,136,0.2);  color: var(--green);  border: 1px solid rgba(82,183,136,0.4); }
 .tag-return { background: rgba(74,144,217,0.15); color: #7db8e8;       border: 1px solid rgba(74,144,217,0.3); }
+.tag-live   { background: rgba(139,195,74,0.15); color: var(--venom-lt); border: 1px solid rgba(139,195,74,0.4); }
+.tag-archived { background: rgba(255,255,255,0.04); color: #666;       border: 1px solid var(--border); }
 
 /* =====================
    ROSTER
@@ -1206,6 +1215,29 @@ footer {
 .bh-naaru   { background: linear-gradient(135deg, #181400, #0e0c00); }
 .bh-arakkoa { background: linear-gradient(135deg, #081800, #040e00); }
 
+/* Venomous Abyss (12.1) — Amani troll / venom-corruption boss headers */
+.bh-venom1  { background: linear-gradient(135deg, #16300c, #081806); }
+.bh-venom2  { background: linear-gradient(135deg, #1e3a12, #0c1f08); }
+.bh-venom3  { background: linear-gradient(135deg, #26260a, #141404); }
+.bh-venom4  { background: linear-gradient(135deg, #0c2e20, #061810); }
+
+/* New-content guide card art (12.1) — gradient only, no hotlinked images,
+   so cards can't silently break if an external URL 404s. Visually flags
+   "this is new Season 2 content" against the photo-backed returning cards. */
+.art-venom-a, .art-venom-b, .art-venom-c, .art-venom-d,
+.art-venom-e, .art-venom-f, .art-venom-g, .art-venom-abyss {
+  background-size: cover;
+  background-position: center;
+}
+.art-venom-a     { background: radial-gradient(ellipse at 30% 20%, rgba(139,195,74,0.18), transparent 60%), linear-gradient(135deg, #16300c, #081806); }
+.art-venom-b     { background: radial-gradient(ellipse at 70% 20%, rgba(139,195,74,0.18), transparent 60%), linear-gradient(135deg, #1e3a12, #0c1f08); }
+.art-venom-c     { background: radial-gradient(ellipse at 30% 80%, rgba(139,195,74,0.18), transparent 60%), linear-gradient(135deg, #26260a, #141404); }
+.art-venom-d     { background: radial-gradient(ellipse at 70% 80%, rgba(139,195,74,0.18), transparent 60%), linear-gradient(135deg, #0c2e20, #061810); }
+.art-venom-e     { background: radial-gradient(ellipse at 50% 30%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #16300c, #0c1f08); }
+.art-venom-f     { background: radial-gradient(ellipse at 50% 70%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #1e3a12, #081806); }
+.art-venom-g     { background: radial-gradient(ellipse at 40% 50%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #0c2e20, #141404); }
+.art-venom-abyss { background: radial-gradient(ellipse at 50% 40%, rgba(139,195,74,0.22), transparent 65%), linear-gradient(135deg, #1e3a12, #081806); }
+
 /* =====================
    GUIDE TABS
    ===================== */
@@ -1380,3 +1412,33 @@ footer {
 }
 #backToTop.visible { opacity: 1; pointer-events: auto; }
 #backToTop:hover { background: rgba(168,85,247,0.15); transform: translateY(-2px); }
+
+/* =====================
+   12.1 SEASON TEXTURE
+   ===================== */
+/* Faint temple step-glyph pattern (Curse of Ula'tek) behind guide hub/detail
+   pages — a subtle nod to the Coiled Isle architecture, low-opacity so it
+   never competes with the gold/purple brand. */
+.guide-hub-section,
+.guide-detail-section {
+  background-image:
+    radial-gradient(ellipse at 15% 0%, rgba(139,195,74,0.05) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%238bc34a' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M0 32h12M52 32h12M32 0v12M32 52v12'/%3E%3Crect x='24' y='24' width='16' height='16'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+}
+
+.season-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--venom-lt);
+  background: rgba(139,195,74,0.08);
+  border: 1px solid rgba(139,195,74,0.3);
+  border-radius: 20px;
+  padding: 0.3rem 0.85rem;
+  margin-bottom: 0.75rem;
+}
