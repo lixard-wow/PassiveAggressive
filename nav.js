@@ -26,7 +26,7 @@
     '    <li><a href="roster.html" data-page="roster">Roster</a></li>',
     '    <li><a href="raids.html" data-page="raids">Mythic+</a></li>',
     '    <li style="display:none"><a href="raid.html" data-page="raid">Raid</a></li>',
-    '    <li style="display:none"><a href="guides.html" data-page="guides">Guides</a></li>',
+    '    <li><a href="guides.html" data-page="guides">Guides</a></li>',
     '    <li style="display:none"><a href="news.html" data-page="news">News</a></li>',
     '    <li><a href="about.html" data-page="about">About</a></li>',
     '    <li><a href="rules.html" data-page="rules">Rules</a></li>',
