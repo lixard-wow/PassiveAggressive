@@ -59,12 +59,30 @@ const RANK_DESCRIPTIONS = {
 };
 
 // =====================
+// SORT PREFERENCE (persisted per-viewer via localStorage)
+// =====================
+const SORT_STORAGE_KEY = 'pa-roster-sort';
+const VALID_SORTS = ['rank', 'name-asc', 'name-desc', 'score', 'raid'];
+
+function loadSavedSort() {
+  try {
+    const saved = localStorage.getItem(SORT_STORAGE_KEY);
+    if (saved && VALID_SORTS.includes(saved)) return saved;
+  } catch (e) { /* localStorage unavailable (private browsing, etc) */ }
+  return 'score'; // no saved preference yet — default to M+ Score
+}
+
+function saveSort(sort) {
+  try { localStorage.setItem(SORT_STORAGE_KEY, sort); } catch (e) { /* ignore */ }
+}
+
+// =====================
 // ROSTER STATE
 // =====================
 let liveRoster = [];
 let currentFilter = 'all';
 let currentRankFilter = 'all';
-let currentSort = 'rank';
+let currentSort = loadSavedSort();
 let blizzToken = null;
 const thumbnailCache = {};
 const statsCache = {};
@@ -473,6 +491,7 @@ document.getElementById('rankFilter')?.addEventListener('change', e => {
 
 document.getElementById('sortSelect')?.addEventListener('change', async e => {
   currentSort = e.target.value;
+  saveSort(currentSort);
   if (currentSort === 'score' || currentSort === 'raid') {
     await fetchAllStats();
   }
@@ -482,4 +501,6 @@ document.getElementById('sortSelect')?.addEventListener('change', async e => {
 // =====================
 // INIT
 // =====================
+const sortSelectEl = document.getElementById('sortSelect');
+if (sortSelectEl) sortSelectEl.value = currentSort;
 fetchRoster();
