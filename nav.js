@@ -21,6 +21,7 @@
     '    </ul>',
     '    <button class="hamburger" id="hamburger">&#9776;</button>',
     '  </div>',
+    '  <div class="brand-bar"></div>',
     '  <ul class="mobile-menu" id="mobileMenu">',
     '    <li><a href="index.html" data-page="index">Home</a></li>',
     '    <li><a href="roster.html" data-page="roster">Roster</a></li>',
