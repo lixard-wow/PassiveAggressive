@@ -211,7 +211,7 @@ function buildRoster(filter = currentFilter) {
 
     const statsHtml = `
       <div class="roster-stat-line">
-        <span class="rs-mp-score" style="color:${mpScore ? mpColor : '#555'}">${mpScore !== null ? Math.round(mpScore) : '0'} M+</span>
+        <span class="rs-mp-score" style="${mpScoreLineStyle(mpScore, mpColor, mpPrev, mpPrevColor)}">${mpScoreLineText(mpScore, mpPrev)}</span>
         <span class="rs-raid-part"${!raidCurr ? ' style="display:none"' : ''}> &bull; <span class="rs-raid-text" style="color:${raidCurr ? raidCurr.color : '#555'}">${raidCurr ? raidCurr.text : ''}</span></span>
       </div>`;
 
@@ -237,6 +237,21 @@ function buildRoster(filter = currentFilter) {
 // =====================
 // STATS HELPERS
 // =====================
+// Season 2 just started, so most members' current-season score is still near
+// zero. Fall back to last season's score (labeled) rather than showing a
+// blank/0 card for everyone until scores build back up.
+function mpScoreLineText(mpScore, mpPrev) {
+  if (mpScore) return `${Math.round(mpScore)} M+`;
+  if (mpPrev)  return `${Math.round(mpPrev)} M+ <span style="color:#555;font-size:0.75em">(last season)</span>`;
+  return '0 M+';
+}
+
+function mpScoreLineStyle(mpScore, mpColor, mpPrev, mpPrevColor) {
+  if (mpScore) return `color:${mpColor}`;
+  if (mpPrev)  return `color:${mpPrevColor}`;
+  return 'color:#555';
+}
+
 function getBestScore(season) {
   let best = 0, bestColor = '#888';
   for (const k of ['all', 'dps', 'healer', 'tank']) {
@@ -341,7 +356,7 @@ const thumbObserver = new IntersectionObserver((entries) => {
         const mpEl       = card.querySelector('.rs-mp-score');
         const raidPart   = card.querySelector('.rs-raid-part');
         const raidTextEl = card.querySelector('.rs-raid-text');
-        if (mpEl) { mpEl.textContent = `${s.mpScore !== null ? Math.round(s.mpScore) : '0'} M+`; mpEl.style.color = s.mpScore ? s.mpColor : '#555'; }
+        if (mpEl) { mpEl.innerHTML = mpScoreLineText(s.mpScore, s.mpPrev); mpEl.setAttribute('style', mpScoreLineStyle(s.mpScore, s.mpColor, s.mpPrev, s.mpPrevColor)); }
         if (s.raidCurr && raidPart) {
           raidPart.style.display = '';
           if (raidTextEl) { raidTextEl.textContent = s.raidCurr.text; raidTextEl.style.color = s.raidCurr.color; }
