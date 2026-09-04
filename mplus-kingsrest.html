@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="M+ guide for Kings' Rest. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 2." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://passiveaggressive.us/mplus-kingsrest.html" />
+  <meta property="og:title" content="Kings' Rest Guide – PassiveAggressive" />
+  <meta property="og:description" content="M+ guide for Kings' Rest. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 2." />
+  <meta property="og:image" content="https://passiveaggressive.us/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Kings' Rest Guide – PassiveAggressive" />
+  <meta name="twitter:description" content="M+ guide for Kings' Rest. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 2." />
+  <meta name="twitter:image" content="https://passiveaggressive.us/logo.png" />
+  <title>Kings' Rest – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="shortcut icon" href="logo.png" />
+  <style>html,body{background:#0a0a0f;color:#ccc}</style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6P9NYS2P5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6P9NYS2P5');
+  </script>
+</head>
+<body>
+
+  <script src="nav.js"></script>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="guides.html">&#8592; Back to Guides</a>
+
+      <div class="guide-detail-header">
+        <span class="season-badge">Season 2 &bull; Returning</span>
+        <h1>Kings' Rest</h1>
+        <p>4 Bosses &bull; Zuldazar, Zandalar &bull; The burial tombs of every Zandalari king who ever ruled &mdash; ending with the resurrected First King himself.</p>
+      </div>
+
+
+      <div class="trash-section">
+        <h3>&#9876; Trash Pull Notes</h3>
+        <div class="trash-grid">
+          <div class="trash-card">
+            <div class="trash-card-title priority">&#128246; Priority Targets</div>
+            <ul>
+              <li><strong>Seneschal M'bara</strong> &mdash; a healer-type caster keeping the pack topped. Kill first to stop the sustain race.</li>
+              <li><strong>Risen Hexer</strong> &mdash; hex/curse caster that chains crowd control onto the party. High priority alongside M'bara.</li>
+              <li><strong>Guard Captain Atu</strong> &mdash; buffs nearby allies with a defensive shield. Kill next once the casters are down.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title kick">&#9889; Must Kick</div>
+            <ul>
+              <li><strong>Unholy Mending</strong> (Seneschal M'bara) &mdash; undoes pull progress if left uninterrupted. Top priority every cast.</li>
+              <li><strong>Hex Volley</strong> (Risen Hexer) &mdash; chains a hex effect across the party. Kick every cast.</li>
+              <li><strong>Hex</strong> (Phantom Hex Priest) &mdash; single-target polymorph-style CC on a random player. Interrupt on sight.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title cc">&#128274; CC Targets</div>
+            <ul>
+              <li><strong>Phantom Hex Priest</strong> &amp; <strong>Risen Hexer</strong> &mdash; standard caster/humanoid CC, Polymorph or Hex both work.</li>
+              <li><strong>Animated Guardian</strong> and <strong>Shadow-Borne Champion</strong> are CC-immune &mdash; don't waste cooldowns on them, just kill or kite.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title util">&#128302; Purge / Soothe</div>
+            <ul>
+              <li><strong>Captain's Bulwark</strong> (Guard Captain Atu buff) &mdash; Purge or Spellsteal it off before it stacks.</li>
+              <li><strong>Minion of Zul</strong> shields &mdash; strip with Purge/Devour Magic to speed the kill.</li>
+              <li><strong>Shadow of Zul</strong> debuff effects are dispellable &mdash; clear them off affected players promptly.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="boss-section">
+        <div class="boss-header bh-troll">
+          <div class="boss-number">Boss 1 of 4</div>
+          <h2>The Golden Serpent</h2>
+          <p class="boss-tagline">A molten-gold guardian. Spit Gold puddles hatch into Animated Gold adds if left to sit &mdash; clear them fast or they overwhelm the room.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Track cooldowns for <strong>Tail Thrash</strong> &mdash; a steady tank buster, not lethal alone but adds up over the pull.</li>
+                <li>Keep the boss away from <strong>Spit Gold</strong> puddles so Animated Gold adds don't spawn on top of the group.</li>
+                <li>Hold major cooldowns for <strong>Luster</strong> &mdash; the boss shields itself and gains +50% damage until the shield drops.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Pre-cooldown for <strong>Serpentine Gust</strong> &mdash; a channeled AoE that also knocks players back.</li>
+                <li>Top the two players hit by <strong>Spit Gold</strong> before the puddle spreads and hatches.</li>
+                <li>Hold burst healing in reserve for when Animated Gold adds reach the group during <strong>Lucre's Call</strong>.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Burn down <strong>Animated Gold</strong> adds immediately &mdash; slow or CC them to buy cleave time if they spawn in numbers.</li>
+                <li><strong>Kick:</strong> Serpentine Gust is an unkickable channel &mdash; use movement and defensives instead of an interrupt to get through it.</li>
+                <li>Save cooldowns for after <strong>Luster</strong> drops &mdash; the +50% damage shield makes burn windows before that wasteful.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-troll">
+          <div class="boss-number">Boss 2 of 4</div>
+          <h2>Mchimba the Embalmer</h2>
+          <p class="boss-tagline">A death-priest whose Entomb mechanic seals a teammate away &mdash; find and free them quickly while managing add cleave and fire zones.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Stack <strong>Half-Finished Mummy</strong> adds on the boss the moment they spawn for cleave.</li>
+                <li>Hold boss position so <strong>Burning Ground</strong> puddles don't cut off group positioning.</li>
+                <li>Watch the <strong>Drain Fluids</strong> target &mdash; be ready to peel or use a defensive to support them.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Focus-heal whoever is targeted by <strong>Drain Fluids</strong> &mdash; it's a self-damaging channel on that player.</li>
+                <li>The <strong>Entombed</strong> player takes no damage while sealed &mdash; keep healing focused on the rest of the group during that window.</li>
+                <li>Keep the group topped through <strong>Half-Finished Mummy</strong> cleave damage.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Spread out for <strong>Burning Ground</strong> &mdash; don't stand in the fire puddles.</li>
+                <li>Free the <strong>Entombed</strong> teammate quickly &mdash; every second they're sealed is lost DPS and more add pressure on the group.</li>
+                <li><strong>Kick:</strong> Wretched Discharge from Half-Finished Mummy adds &mdash; interrupt on cast.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-troll">
+          <div class="boss-number">Boss 3 of 4</div>
+          <h2>The Council of Tribes</h2>
+          <p class="boss-tagline">A gauntlet of Zandalari king and queen spirits fought together, capped by an elemental totem-destruction phase. Season 2 fixed the encounter order &mdash; it's no longer randomized.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Position to avoid <strong>Debilitating Backhand</strong> &mdash; a knockback plus debuff.</li>
+                <li>Keep the fight away from patrolling <strong>Whirling Axes</strong>.</li>
+                <li>Line up adds/totems for cleave during <strong>Call the Elements</strong>.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Hold a big cooldown for every <strong>Severing Axe</strong> cast.</li>
+                <li>Spot-heal the bleed applied by <strong>Whirling Axes</strong>.</li>
+                <li>Sustain the group through ongoing <strong>Arc Lightning</strong> damage.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Stack together for the <strong>Barrel Through</strong> soak mechanic.</li>
+                <li>During <strong>Call the Elements</strong>, destroy totems in priority order: <strong>Explosive &rarr; Thundering &rarr; Torrent</strong>.</li>
+                <li><strong>Kick:</strong> Poison Nova &mdash; every single cast. A missed interrupt here wipes the group.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-troll">
+          <div class="boss-number">Boss 4 of 4 &mdash; Final</div>
+          <h2>Dazar, The First King</h2>
+          <p class="boss-tagline">A two-phase fight against the resurrected king &mdash; first on foot, then mounted on his raptor for a faster, higher-damage finale once either side drops to roughly 40&ndash;50%.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Mitigate <strong>Blade Combo</strong> &mdash; a ramping tank-buster channel. Use a defensive early in the channel, not after.</li>
+                <li>Coordinate cooldown timing for <strong>Savage Maul</strong>.</li>
+                <li>Sidestep <strong>Impaling Spear</strong> and <strong>Quaking Leap</strong> &mdash; both punish standing still.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Save major cooldowns for <strong>Gilded Destruction</strong> &mdash; the fight's highest-damage moment.</li>
+                <li>Heal through <strong>Aerial Smash</strong> spread damage &mdash; hits 2 players on foot, expands to 4 once mounted.</li>
+                <li>Expect a jump in healing demand once the <strong>mount phase</strong> begins around 80%.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Spread for <strong>Aerial Smash</strong> to avoid overlapping the splash damage.</li>
+                <li>Keep the boss angled away from the group during <strong>Gilded Destruction</strong>.</li>
+                <li><strong>Kick:</strong> Deathly Roar, cast by the summoned ally &mdash; interrupt every cast.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
