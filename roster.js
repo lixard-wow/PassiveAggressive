@@ -199,8 +199,11 @@ function buildRoster(filter = currentFilter) {
       case 'name-asc':  return a.name.localeCompare(b.name);
       case 'name-desc': return b.name.localeCompare(a.name);
       case 'score': {
-        const va = Math.max(sa?.mpScore ?? 0, sa?.mpPrev ?? 0);
-        const vb = Math.max(sb?.mpScore ?? 0, sb?.mpPrev ?? 0);
+        // Rank by confirmed current-season score. Only fall back to last
+        // season when current is truly unknown (null) — a confirmed 0 this
+        // season must sort as 0, not get boosted by a stale prior number.
+        const va = sa?.mpScore !== null && sa?.mpScore !== undefined ? sa.mpScore : (sa?.mpPrev ?? 0);
+        const vb = sb?.mpScore !== null && sb?.mpScore !== undefined ? sb.mpScore : (sb?.mpPrev ?? 0);
         return vb - va || a.name.localeCompare(b.name);
       }
       case 'raid': {
@@ -270,18 +273,18 @@ function buildRoster(filter = currentFilter) {
 // =====================
 // STATS HELPERS
 // =====================
-// Season 2 just started, so most members' current-season score is still near
-// zero. Fall back to last season's score (labeled) rather than showing a
-// blank/0 card for everyone until scores build back up.
+// Only fall back to last season's score when Raider.io has no current-season
+// record at all (mpScore === null). A confirmed current-season 0 is real
+// data — show it as 0, don't mask it with a stale prior-season number.
 function mpScoreLineText(mpScore, mpPrev) {
-  if (mpScore) return `${Math.round(mpScore)} M+`;
-  if (mpPrev)  return `${Math.round(mpPrev)} M+ <span style="color:#555;font-size:0.75em">(last season)</span>`;
+  if (mpScore !== null) return `${Math.round(mpScore)} M+`;
+  if (mpPrev)           return `${Math.round(mpPrev)} M+ <span style="color:#555;font-size:0.75em">(last season)</span>`;
   return '0 M+';
 }
 
 function mpScoreLineStyle(mpScore, mpColor, mpPrev, mpPrevColor) {
-  if (mpScore) return `color:${mpColor}`;
-  if (mpPrev)  return `color:${mpPrevColor}`;
+  if (mpScore !== null) return `color:${mpScore ? mpColor : '#555'}`;
+  if (mpPrev)           return `color:${mpPrevColor}`;
   return 'color:#555';
 }
 
@@ -300,7 +303,11 @@ function parseStats(data) {
   const seasons = data.mythic_plus_scores_by_season ?? [];
   const currentSeason  = seasons.find(s => s._source === 'current');
   const previousSeason = seasons.find(s => s._source === 'previous');
-  const curr = currentSeason  ? getBestScore(currentSeason)  : { score: 0, color: '#888', slug: null };
+  // null = Raider.io has no current-season record for this character at all
+  // (fall back to last season below). A real 0 means Raider.io *does* have a
+  // current-season record and confirms they simply haven't logged a run yet
+  // — that 0 is accurate and must not be masked by a stale prior-season number.
+  const curr = currentSeason  ? getBestScore(currentSeason)  : { score: null, color: '#888', slug: null };
   const prev = previousSeason ? getBestScore(previousSeason) : { score: null, color: '#888', slug: null };
   const raids = parseRaidProgress(data.raid_progression);
   return {
