@@ -163,11 +163,13 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background:
+  background-color: var(--dark);
+  background-image:
     radial-gradient(ellipse at 25% 50%, rgba(168,85,247,0.07) 0%, transparent 55%),
     radial-gradient(ellipse at 75% 50%, rgba(200,169,110,0.05) 0%, transparent 55%),
     radial-gradient(ellipse at 50% 100%, rgba(139,195,74,0.04) 0%, transparent 60%),
-    var(--dark);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%238bc34a' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M0 32h12M52 32h12M32 0v12M32 52v12'/%3E%3Crect x='24' y='24' width='16' height='16'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   overflow: hidden;
 }
 
@@ -340,7 +342,7 @@ section { padding: 6rem 1.5rem; }
 .nav-active { color: var(--gold-lt) !important; border-bottom: 2px solid var(--purple) !important; padding-bottom: 3px; }
 .btn-apply.nav-active, .btn-discord.nav-active { border-bottom: none !important; padding-bottom: 0; color: inherit !important; }
 
-#raids, #news { background: var(--dark); }
+#raids, #news { background-color: var(--dark); }
 
 .container { max-width: 1100px; margin: 0 auto; }
 
@@ -1419,9 +1421,14 @@ footer {
 /* Faint temple step-glyph pattern (Curse of Ula'tek) behind guide hub/detail
    pages — a subtle nod to the Coiled Isle architecture, low-opacity so it
    never competes with the gold/purple brand. */
-.guide-hub-section,
-.guide-detail-section,
-.page-section {
+/* Applied to the bare `section` element so every content section on every
+   page picks it up automatically — including one-off inline-styled
+   sections — without depending on a specific class being present. Rules
+   that set a section's own `background:` shorthand (which resets
+   background-image) must use `background-color:` instead so this layer
+   isn't wiped out; #hero has its own richer gradient stack and includes
+   this same pattern directly since its ID selector outranks this rule. */
+section {
   background-image:
     radial-gradient(ellipse at 15% 0%, rgba(139,195,74,0.05) 0%, transparent 45%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%238bc34a' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M0 32h12M52 32h12M32 0v12M32 52v12'/%3E%3Crect x='24' y='24' width='16' height='16'/%3E%3C/g%3E%3C/svg%3E");
