@@ -4,7 +4,9 @@
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   if (!nav) return;
-  nav.style.background = window.scrollY > 50
+  // backgroundColor only — `background` shorthand would reset the
+  // texture image set in CSS back to none on every scroll event.
+  nav.style.backgroundColor = window.scrollY > 50
     ? 'rgba(5,5,10,0.98)'
     : 'rgba(10,10,15,0.92)';
 });
