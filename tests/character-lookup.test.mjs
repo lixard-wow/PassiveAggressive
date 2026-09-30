@@ -50,6 +50,8 @@ async function setup({ fetchProfile = async () => response(profile), fetchRealms
   };
   const option = new Element('Area 52'); option.dataset.slug = 'area-52'; get('realm').appendChild(option);
   const calls = [];
+  let timerID = 0;
+  const timers = new Map();
   const fetch = async (url, options) => {
     calls.push({ url, options });
     if (url.endsWith('/blizzard-token')) return response({ access_token: 'mock-token' }, tokenStatus);
@@ -60,13 +62,19 @@ async function setup({ fetchProfile = async () => response(profile), fetchRealms
   const document = { getElementById: get, createElement: () => new Element(),
     createDocumentFragment: () => Object.assign(new Element(), { fragment: true }) };
   const context = vm.createContext({ document, fetch, AbortSignal, AbortController, DOMException, Event,
+    setTimeout: (fn, delay) => { timers.set(++timerID, { fn, delay }); return timerID; },
+    clearTimeout: id => timers.delete(id),
     window: { matchMedia: () => ({ matches: true }) }, TypeError, console });
   vm.runInContext(formSource, context);
   vm.runInContext(lookupSource, context);
   for (let i = 0; i < 10 && get('realmListStatus').textContent === 'Updating the US realm list…'; i++) {
     await new Promise(setImmediate);
   }
-  return { get, calls, lookup: () => get('characterLookup').listeners.get('click')[0]() };
+  return { get, calls, timers, lookup: () => get('characterLookup').listeners.get('click')[0](),
+    runTimers: async () => {
+      for (const [id, timer] of [...timers]) { timers.delete(id); timer.fn(); }
+      for (let i = 0; i < 10; i++) await new Promise(setImmediate);
+    } };
 }
 
 test('loads Blizzard realm names and slugs while keeping the selected realm', async () => {
@@ -144,4 +152,64 @@ test('refreshes an expired Blizzard token once and then completes the lookup', a
   assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
   assert.equal(form.calls.filter(c => c.url.endsWith('/blizzard-token')).length, 2);
   assert.equal(attempt, 2);
+});
+
+test('looks up once after a pause in typing, using the latest complete name', async () => {
+  const form = await setup();
+  for (const name of ['Th', 'Thà', 'Thàlindra']) {
+    form.get('charName').value = name;
+    form.get('charName').dispatchEvent(new Event('input'));
+  }
+  assert.equal(form.timers.size, 1);
+  assert.equal([...form.timers.values()][0].delay, 700);
+  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 0);
+  await form.runTimers();
+  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 1);
+  assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
+  assert.equal(form.get('charName').value, 'Thàlindra');
+});
+
+test('skips short names and waits for IME composition to finish', async () => {
+  const form = await setup();
+  for (const name of ['', 'T']) {
+    form.get('charName').value = name;
+    form.get('charName').dispatchEvent(new Event('input'));
+    assert.equal(form.timers.size, 0);
+  }
+  form.get('charName').dispatchEvent(new Event('compositionstart'));
+  form.get('charName').value = 'Thàlindra';
+  form.get('charName').dispatchEvent(new Event('input'));
+  assert.equal(form.timers.size, 0);
+  form.get('charName').dispatchEvent(new Event('compositionend'));
+  assert.equal(form.timers.size, 1);
+  await form.runTimers();
+  assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
+});
+
+test('changing the realm triggers an automatic lookup on the new realm', async () => {
+  const form = await setup();
+  form.get('realm').value = "Kel'Thuzad";
+  form.get('realm').dispatchEvent(new Event('change'));
+  await form.runTimers();
+  assert.match(form.calls.find(c => c.url.includes('/profile/wow/character/')).url, /\/kelthuzad\//);
+});
+
+test('manual lookup cancels the debounce timer rather than duplicating the request', async () => {
+  const form = await setup();
+  form.get('charName').dispatchEvent(new Event('input'));
+  assert.equal(form.timers.size, 1);
+  await form.lookup();
+  assert.equal(form.timers.size, 0);
+  await form.runTimers();
+  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 1);
+});
+
+test('editing class/spec manually cancels queued automatic autofill', async () => {
+  const form = await setup();
+  form.get('charName').dispatchEvent(new Event('input'));
+  form.get('charClass').value = 'Priest';
+  form.get('charClass').dispatchEvent(new Event('change'));
+  assert.equal(form.timers.size, 0);
+  await form.runTimers();
+  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 0);
 });
