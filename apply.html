@@ -15,8 +15,8 @@
   <meta name="twitter:description" content="Apply to join PassiveAggressive. All roles open. We're looking for active Mythic+ players on US-Area 52. Cross-faction friendly." />
   <meta name="twitter:image" content="https://passiveaggressive.us/logo.png" />
   <title>Apply – PassiveAggressive</title>
-  <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="shortcut icon" href="logo.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.png" />
   <style>html,body{background:#0a0a0f;color:#ccc}</style>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,8 +44,9 @@
         <p style="margin:0 0 0.75rem;color:var(--text);font-size:0.92rem;">Before applying, please read the <strong style="color:var(--gold-lt);">Guild Rules</strong>. You'll be asked to confirm you've read them.</p>
         <a href="rules.html" class="btn btn-secondary" style="padding:0.5rem 1.25rem;font-size:0.85rem;">Read the Rules</a>
       </div>
-      <p class="section-sub">We're looking for Mythic+ players who want consistent groups, enjoy Discord, and care about getting better. Score matters less than attitude — if you show up, pull your weight, and want to push keys with people who actually know what they're doing, you'll fit in.</p>
+      <p class="section-sub">We're looking for Mythic+ players who want consistent groups, enjoy Discord, and care about getting better. Score matters less than attitude — come prepared, communicate, and be willing to learn. You don't need to have every dungeon mastered to get started.</p>
       <p class="section-sub" style="margin-top:1rem;">We typically run keys in the 10–15 range. Players still working their way up are welcome as long as you're willing to learn and put in the effort.</p>
+      <p class="section-sub">Our usual hours are Monday–Friday, 5:30–10:30 p.m. Eastern / Area 52 server time, with activity throughout the day on weekends.</p>
 
       <div style="max-width:680px;margin:0 auto 2.5rem;display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
         <div style="flex:1;background:var(--dark3);padding:1.25rem 1.5rem;text-align:center;border-right:1px solid var(--border);">
@@ -88,16 +89,20 @@
           <li>&#10003;&nbsp; Active Mythic+ player — keys are your main content</li>
           <li>&#10003;&nbsp; Comfortable in Discord and willing to communicate</li>
           <li>&#10003;&nbsp; Knows their class well enough to flex specs when needed</li>
-          <li>&#10003;&nbsp; Shows up consistently and doesn't need to be carried</li>
+          <li>&#10003;&nbsp; Shows up prepared, contributes, and learns from mistakes</li>
           <li>&#10003;&nbsp; Cross-faction friendly — Alliance and Horde both welcome</li>
         </ul>
       </div>
 
       <form class="apply-form" id="applyForm">
+        <div class="form-honeypot" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
         <div class="form-row">
           <div class="form-group">
             <label for="charName">Character Name <span style="color:var(--text-muted);font-size:0.8rem;font-weight:400;">(include special characters if any)</span></label>
-            <input type="text" id="charName" placeholder="e.g. Thalindra or Thàlindra" required />
+            <input type="text" id="charName" maxlength="50" placeholder="e.g. Thalindra or Thàlindra" required />
           </div>
           <div class="form-group">
             <label for="realm">Realm</label>
@@ -237,20 +242,20 @@
         </div>
         <div class="form-group">
           <label for="experience">M+ Experience</label>
-          <textarea id="experience" rows="3" placeholder="Tell us about your M+ experience, highest key, current score, preferred dungeons, etc." required></textarea>
+          <textarea id="experience" maxlength="1000" rows="3" placeholder="Tell us about your M+ experience, highest key, current score, preferred dungeons, etc." required></textarea>
         </div>
         <div class="form-group">
           <label for="about">About You</label>
-          <textarea id="about" rows="3" placeholder="Why do you want to join PassiveAggressive? What do you bring to the team?" required></textarea>
+          <textarea id="about" maxlength="1000" rows="3" placeholder="Why do you want to join PassiveAggressive? What do you bring to the team?" required></textarea>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="discord">Discord Tag</label>
-            <input type="text" id="discord" placeholder="e.g. yourusername" required />
+            <input type="text" id="discord" maxlength="100" placeholder="e.g. yourusername" required />
           </div>
           <div class="form-group">
             <label for="battletag">BattleTag</label>
-            <input type="text" id="battletag" placeholder="e.g. Name#1234" required />
+            <input type="text" id="battletag" maxlength="100" placeholder="e.g. Name#1234" required />
           </div>
         </div>
         <div class="form-group" style="flex-direction:row;align-items:center;gap:0.75rem;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;">
@@ -258,12 +263,14 @@
           <label for="rulesAgree" style="font-size:0.88rem;color:var(--text);cursor:pointer;margin:0;">I have read and agree to the <a href="rules.html" target="_blank" style="color:var(--gold);text-decoration:underline;">Guild Rules</a></label>
         </div>
         <div class="btn-or-row" style="margin-top:0.5rem;">
-          <button type="submit" class="btn btn-primary" style="flex:1;">Submit Application</button>
+          <button type="submit" id="applySubmit" class="btn btn-primary" style="flex:1;">Submit Application</button>
           <span class="btn-or-text">or</span>
           <a href="https://discord.gg/Dvw5UAqQgC" target="_blank" rel="noopener" class="btn btn-discord" style="flex:1;text-align:center;">Join our Discord</a>
         </div>
+        <p class="form-status" id="applyStatus" role="status" aria-live="polite" hidden></p>
+        <p class="form-privacy">Your application and contact details are sent to guild officers through Discord.</p>
       </form>
-      <div class="apply-success" id="applySuccess">
+      <div class="apply-success" id="applySuccess" tabindex="-1" role="status">
         <div class="success-icon">&#10003;</div>
         <h3>Application Received!</h3>
         <p>We got it. An officer will take a look and reach out within 24–48 hours. In the meantime, <a href="https://discord.gg/Dvw5UAqQgC" target="_blank" rel="noopener" style="color:#5865F2;text-decoration:underline;">jump in our Discord</a> — that's where most of the guild hangs out anyway.</p>
@@ -276,7 +283,7 @@
     <div class="brand-bar"></div>
     <div class="container footer-inner">
       <div class="footer-logo">
-        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <img src="logo-small.webp" alt="PassiveAggressive" class="footer-logo-img" width="128" height="128" loading="lazy" />
         <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>
       </div>
       <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
@@ -285,79 +292,6 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    const specsByClass = {
-      'Death Knight':  ['Blood', 'Frost', 'Unholy'],
-      'Demon Hunter':  ['Havoc', 'Vengeance'],
-      'Druid':         ['Balance', 'Feral', 'Guardian', 'Restoration'],
-      'Evoker':        ['Augmentation', 'Devastation', 'Preservation'],
-      'Hunter':        ['Beast Mastery', 'Marksmanship', 'Survival'],
-      'Mage':          ['Arcane', 'Fire', 'Frost'],
-      'Monk':          ['Brewmaster', 'Mistweaver', 'Windwalker'],
-      'Paladin':       ['Holy', 'Protection', 'Retribution'],
-      'Priest':        ['Discipline', 'Holy', 'Shadow'],
-      'Rogue':         ['Assassination', 'Outlaw', 'Subtlety'],
-      'Shaman':        ['Elemental', 'Enhancement', 'Restoration'],
-      'Warlock':       ['Affliction', 'Demonology', 'Destruction'],
-      'Warrior':       ['Arms', 'Fury', 'Protection'],
-    };
-
-
-    document.getElementById('charClass').addEventListener('change', function () {
-      const specSelect = document.getElementById('charSpec');
-      const specs = specsByClass[this.value] || [];
-      specSelect.innerHTML = specs.length
-        ? `<option value="">Select a spec</option>` + specs.map(s => `<option>${s}</option>`).join('')
-        : '<option value="">Select a class first</option>';
-    });
-
-    document.getElementById('applyForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const charName   = document.getElementById('charName').value;
-      const realm      = document.getElementById('realm').value;
-      const charClass  = document.getElementById('charClass').value;
-      const charSpec   = document.getElementById('charSpec').value;
-      const role       = document.getElementById('role').value;
-      const playerType = document.getElementById('playerType').value;
-      const experience = document.getElementById('experience').value;
-      const about      = document.getElementById('about').value;
-      const discord    = document.getElementById('discord').value;
-      const battletag  = document.getElementById('battletag').value;
-
-      const realmSlug = realm.replace(/\s+/g, '').replace(/'/g, '');
-      const playerTag = `${charName}-${realmSlug}`;
-
-      const payload = {
-        embeds: [{
-          title: `New Application — ${playerTag}`,
-          color: 0xC8A96E,
-          fields: [
-            { name: 'Character',    value: `\`${playerTag}\``, inline: true },
-            { name: 'Class',        value: charClass,  inline: true },
-            { name: 'Spec',         value: charSpec,   inline: true },
-            { name: 'Role',         value: role,       inline: true },
-            { name: 'Player Type',  value: playerType, inline: true },
-            { name: 'Discord',      value: discord,    inline: true },
-            { name: 'BattleTag',    value: `\`${battletag}\``, inline: true },
-            { name: 'M+ Experience', value: experience },
-            { name: 'About',         value: about },
-          ],
-          timestamp: new Date().toISOString(),
-        }]
-      };
-
-      document.getElementById('applyForm').style.display = 'none';
-      document.getElementById('applySuccess').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      const WORKER_URL = 'https://pa-proxy.pnutjr-lw.workers.dev';
-      fetch(`${WORKER_URL}/apply`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      }).catch(err => console.error('Failed to send application:', err));
-    });
-  </script>
+  <script src="apply.js"></script>
 </body>
 </html>

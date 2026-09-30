@@ -17,13 +17,23 @@ window.addEventListener('scroll', () => {
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
-
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
+function setMenuOpen(open) {
+  if (!hamburger || !mobileMenu) return;
+  mobileMenu.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  hamburger.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+}
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => setMenuOpen(!mobileMenu.classList.contains('open')));
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      setMenuOpen(false);
+      hamburger.focus();
+    }
+  });
+  window.matchMedia('(max-width: 1100px)').addEventListener('change', () => setMenuOpen(false));
+}
 
 // =====================
 // DIFFICULTY TOGGLE
@@ -42,6 +52,7 @@ document.querySelectorAll('.diff-tab').forEach(btn => {
 // =====================
 // SCROLL REVEAL
 // =====================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -52,6 +63,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.about-card, .news-card').forEach(el => {
+  if (prefersReducedMotion.matches) return;
   el.style.opacity = '0';
   el.style.transform = 'translateY(24px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -70,5 +82,5 @@ window.addEventListener('scroll', () => {
   backToTopBtn.classList.toggle('visible', window.scrollY > 400);
 });
 backToTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' });
 });

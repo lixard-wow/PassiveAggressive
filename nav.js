@@ -4,7 +4,7 @@
     '<nav id="navbar">',
     '  <div class="nav-inner">',
     '    <a class="nav-logo" href="index.html">',
-    '      <img src="logo.png" alt="PassiveAggressive" class="nav-logo-img" />',
+    '      <img src="logo-small.webp" alt="" class="nav-logo-img" width="64" height="64" />',
     '      <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>',
     '    </a>',
     '    <ul class="nav-links">',
@@ -19,7 +19,7 @@
     '      <li><a href="https://discord.gg/Dvw5UAqQgC" class="btn-discord" target="_blank" rel="noopener">Discord</a></li>',
     '      <li><a href="apply.html" class="btn-apply" data-page="apply">Apply Now</a></li>',
     '    </ul>',
-    '    <button class="hamburger" id="hamburger">&#9776;</button>',
+    '    <button type="button" class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">&#9776;</button>',
     '  </div>',
     '  <div class="brand-bar"></div>',
     '  <ul class="mobile-menu" id="mobileMenu">',
@@ -43,6 +43,6 @@
   var page = location.pathname.split('/').pop().replace('.html', '') || 'index';
   if (page.startsWith('mplus-') || page.startsWith('raid-')) page = 'guides';
   document.querySelectorAll('#navbar [data-page]').forEach(function(a) {
-    if (a.dataset.page === page) a.classList.add('nav-active');
+    if (a.dataset.page === page) { a.classList.add('nav-active'); a.setAttribute('aria-current', 'page'); }
   });
 })();

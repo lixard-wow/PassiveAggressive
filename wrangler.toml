@@ -1,0 +1,10 @@
+name = "pa-proxy"
+main = "worker.js"
+compatibility_date = "2026-09-30"
+workers_dev = true
+
+[[ratelimits]]
+name = "APPLICATION_RATE_LIMITER"
+# Keep this namespace unique to the guild application endpoint in your account.
+namespace_id = "846470516"
+simple = { limit = 5, period = 60 }
