@@ -9,7 +9,7 @@ Worker**; pushing to GitHub does not deploy the Worker.
 Use Node.js 22 or newer:
 
 ```sh
-node --test tests/worker.test.mjs tests/application.test.mjs tests/home.test.mjs
+node --test tests/worker.test.mjs tests/application.test.mjs tests/home.test.mjs tests/character-lookup.test.mjs
 ```
 
 The tests mock external services and never send applications to Discord.
@@ -48,7 +48,7 @@ opened forms without the new honeypot/rules properties remain compatible.
 
 ## Content maintenance
 
-- Active hours are Mondayâ€“Friday 5:30â€“10:30 p.m. Eastern / Area 52 server time,
+- Active hours are Monday–Friday 5:30–10:30 p.m. Eastern / Area 52 server time,
   and throughout the day on weekends. Keep Home, About, Mythic+, and Apply aligned.
 - Keep recruitment/key-range facts on the homepage current.
 - A missing member count is shown as unavailable, never replaced by an estimate.
@@ -57,3 +57,14 @@ opened forms without the new honeypot/rules properties remain compatible.
   not claims that every mechanic was independently verified.
 - `logo-small.webp` and `favicon.png` are resized versions of `logo.png`; the
   original is retained for social previews and future artwork exports.
+
+## Application character lookup
+
+The optional lookup uses the existing `/blizzard-token` endpoint, then calls
+Blizzard's public retail-US realm index and character profile endpoints directly.
+No additional Worker route or backend deployment is required for this feature.
+Applicants enter a character name and select a realm (Area 52 is the default).
+A successful lookup fills the official name, realm, class, active spec, and role;
+spec and role remain editable for the application. Manual entry remains available
+when a character is private, absent, or Blizzard is unavailable. This is a public
+profile lookup, not a verification of account ownership.
