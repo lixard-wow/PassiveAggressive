@@ -64,6 +64,11 @@ The optional lookup uses the existing `/blizzard-token` endpoint, then calls
 Blizzard's public retail-US realm index and character profile endpoints directly.
 No additional Worker route or backend deployment is required for this feature.
 Applicants enter a character name and select a realm (Area 52 is the default).
+Lookup runs automatically after 700 ms without typing, and also after a realm
+change. It waits until at least two characters are entered, defers during IME
+composition, and cancels pending requests when details change. Blizzard's public
+profile endpoint requires the complete name; this is not a prefix search across
+all characters. The lookup button remains available for an immediate retry.
 A successful lookup fills the official name, realm, class, active spec, and role;
 spec and role remain editable for the application. Manual entry remains available
 when a character is private, absent, or Blizzard is unavailable. This is a public
