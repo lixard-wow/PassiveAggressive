@@ -102,18 +102,18 @@
         <div class="form-row">
           <div class="form-group">
             <label for="charName">Character Name <span style="color:var(--text-muted);font-size:0.8rem;font-weight:400;">(include special characters if any)</span></label>
-            <input type="text" id="charName" maxlength="50" placeholder="e.g. Thalindra or Thàlindra" required />
+            <input type="text" id="charName" maxlength="50" placeholder="e.g. Thalindra or Thàlindra" aria-describedby="characterLookupHelp" autocomplete="off" required />
           </div>
           <div class="form-group">
             <label for="realm">Realm</label>
-            <select id="realm" required>
+            <select id="realm" aria-describedby="realmListStatus" required>
               <option value="">Select a realm</option>
               <option>Aegwynn</option><option>Aerie Peak</option><option>Agamaggan</option>
               <option>Aggramar</option><option>Akama</option><option>Alexstrasza</option>
               <option>Alleria</option><option>Altar of Storms</option><option>Alterac Mountains</option>
               <option>Aman'Thul</option><option>Andorhal</option><option>Anetheron</option>
               <option>Anub'arak</option><option>Anvilmar</option><option>Antonidas</option>
-              <option>Arathor</option><option>Archimonde</option><option>Area 52</option>
+              <option>Arathor</option><option>Archimonde</option><option selected data-slug="area-52">Area 52</option>
               <option>Argent Dawn</option><option>Arthas</option><option>Arygos</option>
               <option>Auchindoun</option><option>Azgalor</option><option>Azjol-Nerub</option>
               <option>Azralon</option><option>Azshara</option><option>Azuremyst</option>
@@ -192,6 +192,12 @@
               <option>Zangarmarsh</option><option>Zul'jin</option><option>Zuluhed</option>
             </select>
           </div>
+        </div>
+        <div class="character-lookup">
+          <p id="characterLookupHelp">Enter your character’s name and choose their US realm. Blizzard can fill in the official name, realm, class, and active specialization.</p>
+          <p class="realm-list-status" id="realmListStatus" role="status">Area 52 is selected by default. Choose your character’s realm.</p>
+          <button type="button" id="characterLookup" class="btn btn-secondary">Look up Character</button>
+          <p id="characterLookupStatus" class="character-lookup-status" role="status" aria-live="polite" hidden></p>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -293,5 +299,6 @@
 
   <script src="script.js"></script>
   <script src="apply.js"></script>
+  <script src="character-lookup.js"></script>
 </body>
 </html>

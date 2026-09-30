@@ -1493,3 +1493,11 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   *, *::before, *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
   .about-card, .news-card { opacity:1 !important; transform:none !important; }
 }
+
+.character-lookup { background:var(--dark3); border:1px solid var(--border); border-radius:8px; padding:1.25rem; }
+.character-lookup > p { margin-bottom:0.75rem; font-size:0.88rem; color:var(--text); }
+.character-lookup .realm-list-status { font-size:0.8rem; color:var(--text-muted); }
+.character-lookup .character-lookup-status { margin:1rem 0 0; }
+.character-lookup-status[data-state="success"] { color:var(--green); }
+.character-lookup-status[data-state="error"] { color:#ffb4b4; }
+@media (max-width: 560px) { .character-lookup .btn { width:100%; } }
