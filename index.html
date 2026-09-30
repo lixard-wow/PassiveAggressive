@@ -15,8 +15,8 @@
   <meta name="twitter:description" content="A Mythic+ focused WoW guild on US-Area 52. We push keys all week, run an optional casual raid for gear, and hang out in Discord. Cross-faction welcome." />
   <meta name="twitter:image" content="https://passiveaggressive.us/logo.png" />
   <title>PassiveAggressive – WoW Guild</title>
-  <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="shortcut icon" href="logo.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.png" />
   <style>html,body{background:#0a0a0f;color:#ccc}</style>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,10 +41,18 @@
         <div class="hero-content">
       <p class="hero-realm">Mythic+ Guild &mdash; Area 52</p>
       <h1 class="hero-title"><span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span></h1>
-      <p class="hero-tagline">Consistent Mythic+ on Area 52. No pug lottery — just keys with people who know what they're doing.</p>
+      <p class="hero-tagline">Consistent keys. Familiar teammates. A relaxed place to push higher.</p>
+      <div class="hero-fit" aria-label="Guild at a glance">
+        <span>US &bull; Area 52</span><span>Usually +10&ndash;15 keys</span><span>All roles open</span><span>Cross-faction welcome</span>
+      </div>
+      <div class="hero-buttons">
+        <a href="https://discord.gg/Dvw5UAqQgC" class="btn btn-discord" target="_blank" rel="noopener">Join Discord</a>
+        <a href="apply.html" class="btn btn-secondary">Apply to Guild</a>
+      </div>
+      <p class="hero-availability">Active seven days a week: weekdays 5:30–10:30 p.m. Eastern / Area 52 server time, and throughout the day on weekends.</p>
       <div class="hero-stats" id="heroStats" style="opacity:0;transition:opacity 0.6s ease;">
         <div class="stat">
-          <span class="stat-num" id="statMembers">0</span>
+          <span class="stat-num" id="statMembers">&mdash;</span>
           <span class="stat-label">Members</span>
         </div>
       </div>
@@ -140,7 +148,7 @@
     <div class="brand-bar"></div>
     <div class="container footer-inner">
       <div class="footer-logo">
-        <img src="logo.png" alt="PassiveAggressive" class="footer-logo-img" />
+        <img src="logo-small.webp" alt="PassiveAggressive" class="footer-logo-img" width="128" height="128" loading="lazy" />
         <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>
       </div>
       <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
@@ -160,36 +168,29 @@
         if (start >= target) clearInterval(timer);
       }, 16);
     }
-    const rioPromise = fetch('https://raider.io/api/v1/guilds/profile?region=us&realm=area-52&name=PassiveAggressive&fields=raid_progression,mythic_plus_scores_by_season:current')
-      .then(r => r.json())
-      .then(data => {
-        let bosses = 0;
-        if (data.raid_progression) {
-          for (const raid of Object.values(data.raid_progression)) {
-            bosses += (raid.normal_bosses_killed || 0)
-                    + (raid.heroic_bosses_killed || 0)
-                    + (raid.mythic_bosses_killed || 0);
-          }
-        }
-        const score = data.mythic_plus_scores_by_season?.[0]?.scores?.all || null;
-        return { bosses: bosses || null, score };
+    const blizzPromise = fetch('https://pa-proxy.pnutjr-lw.workers.dev/blizzard-token', {
+      method: 'POST', signal: AbortSignal.timeout(10000)
+    })
+      .then(r => { if (!r.ok) throw new Error('Token unavailable'); return r.json(); })
+      .then(({ access_token }) => {
+        if (!access_token) throw new Error('Token unavailable');
+        return fetch('https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US', {
+          headers: { 'Authorization': `Bearer ${access_token}` }, signal: AbortSignal.timeout(10000)
+        });
       })
-      .catch(() => ({ bosses: null, score: null }));
-
-    const blizzPromise = fetch('https://pa-proxy.pnutjr-lw.workers.dev/blizzard-token', { method: 'POST' })
-      .then(r => r.json())
-      .then(({ access_token }) => fetch(
-        'https://us.api.blizzard.com/data/wow/guild/area-52/passiveaggressive/roster?namespace=profile-us&locale=en_US',
-        { headers: { 'Authorization': `Bearer ${access_token}` } }
-      ))
-      .then(r => r.json())
-      .then(data => data.members?.length || null)
-      .catch(() => null);
-
-    Promise.all([rioPromise, blizzPromise]).then(([rio, members]) => {
-      animateCount(document.getElementById('statMembers'), members ?? 30);
-      document.getElementById('heroStats').style.opacity = '1';
-    });
+      .then(r => { if (!r.ok) throw new Error('Roster unavailable'); return r.json(); })
+      .then(data => {
+        if (!Array.isArray(data.members)) throw new Error('Roster unavailable');
+        const el = document.getElementById('statMembers');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) el.textContent = data.members.length;
+        else animateCount(el, data.members.length);
+      })
+      .catch(() => {
+        const el = document.getElementById('statMembers');
+        el.textContent = '—';
+        el.setAttribute('aria-label', 'Member count currently unavailable');
+      })
+      .finally(() => { document.getElementById('heroStats').style.opacity = '1'; });
 
     // Midnight S2 M+ countdown — August 18 2026, 10:00 AM PDT (17:00 UTC)
     (function () {
