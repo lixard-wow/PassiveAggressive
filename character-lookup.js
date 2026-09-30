@@ -18,6 +18,8 @@
   let requestVersion = 0;
   let lookupController = null;
   let fillingProfile = false;
+  let lookupTimer = null;
+  let composingName = false;
 
   function getToken() {
     if (!tokenPromise) {
@@ -96,21 +98,42 @@
 
   function invalidateLookup() {
     if (fillingProfile) return;
+    clearTimeout(lookupTimer);
+    lookupTimer = null;
     requestVersion++;
     lookupController?.abort();
     button.disabled = false;
     button.textContent = 'Look up Character';
     status.hidden = true;
   }
-  nameInput.addEventListener('input', invalidateLookup);
-  realmSelect.addEventListener('change', invalidateLookup);
+  function scheduleLookup() {
+    invalidateLookup();
+    if (composingName || nameInput.value.trim().length < 2 || !realmSelect.value) return;
+    lookupTimer = setTimeout(() => {
+      lookupTimer = null;
+      lookupCharacter(true);
+    }, 700);
+  }
+  nameInput.addEventListener('input', scheduleLookup);
+  nameInput.addEventListener('compositionstart', () => {
+    composingName = true;
+    invalidateLookup();
+  });
+  nameInput.addEventListener('compositionend', () => {
+    composingName = false;
+    scheduleLookup();
+  });
+  realmSelect.addEventListener('change', scheduleLookup);
   // Do not let an in-flight response overwrite a class/spec/role being edited.
   [classSelect, specSelect, roleSelect].forEach(select => select.addEventListener('change', invalidateLookup));
 
-  button.addEventListener('click', async () => {
+  async function lookupCharacter(automatic = false) {
     if (button.disabled) return;
-    if (!nameInput.reportValidity() || !realmSelect.reportValidity()) return;
+    clearTimeout(lookupTimer);
+    lookupTimer = null;
+    if (!automatic && (!nameInput.reportValidity() || !realmSelect.reportValidity())) return;
     const name = nameInput.value.trim().normalize('NFC');
+    if (automatic && (composingName || name.length < 2 || !realmSelect.value || nameInput.validity?.valid === false)) return;
     if (!name) { nameInput.focus(); return; }
     const slug = realmSlug();
     const version = ++requestVersion;
@@ -146,14 +169,17 @@
       if (version !== requestVersion) return;
       status.dataset.state = 'error';
       status.textContent = error.status === 404
-        ? 'Character not found on that realm. Check the spelling, accents, and realm, or fill in your details manually.'
+        ? automatic
+          ? 'No matching character yet on this realm. Finish typing the full name, including accents, or enter your details manually.'
+          : 'Character not found on that realm. Check the spelling, accents, and realm, or fill in your details manually.'
         : 'Blizzard lookup is unavailable right now. You can still fill in your character details and submit your application.';
     } finally {
       if (version === requestVersion) {
         button.disabled = false; button.textContent = 'Look up Character';
       }
     }
-  });
+  }
+  button.addEventListener('click', () => lookupCharacter());
 
   loadRealms();
 })();
