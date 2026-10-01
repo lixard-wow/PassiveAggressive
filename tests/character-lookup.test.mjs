@@ -76,7 +76,10 @@ async function setup({ search = async () => response({ results: found }), fetchP
   for (let i = 0; i < 10 && get('realmListStatus').textContent === 'Updating the US realm list…'; i++) {
     await new Promise(setImmediate);
   }
-  return { get, calls, timers, lookup: () => get('characterLookup').listeners.get('click')[0](),
+  return { get, calls, timers, lookup: async () => {
+      get('charName').dispatchEvent(new Event('blur'));
+      for (let i = 0; i < 10; i++) await new Promise(setImmediate);
+    },
     runTimers: async () => {
       for (const [id, timer] of [...timers]) { timers.delete(id); timer.fn(); }
       for (let i = 0; i < 10; i++) await new Promise(setImmediate);
@@ -101,7 +104,6 @@ test('fills canonical accented name, realm, class, spec, and role from a public 
   assert.equal(form.get('charSpec').value, 'Discipline');
   assert.equal(form.get('role').value, 'Healer');
   assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
-  assert.equal(form.get('characterLookup').disabled, false);
   const call = form.calls.find(c => c.url.includes('/profile/wow/character/'));
   assert.match(call.url, /area-52\/th%C3%A0lindra\?namespace=profile-us/);
   assert.equal(call.options.headers.Authorization, 'Bearer mock-token');
@@ -123,7 +125,6 @@ test('preserves manual details on missing, invalid, or unavailable profiles', as
     assert.equal(form.get('charClass').value, 'Mage');
     assert.equal(form.get('realm').value, 'Area 52');
     assert.equal(form.get('characterLookupStatus').dataset.state, 'error');
-    assert.equal(form.get('characterLookup').disabled, false);
   }
 });
 
@@ -140,14 +141,14 @@ test('ignores an old response after the applicant changes their character or cla
   for (const [id, event] of [['charName', 'input'], ['charClass', 'change']]) {
     let resolve;
     const form = await setup({ fetchProfile: async () => new Promise(r => { resolve = r; }) });
-    const pending = form.lookup();
+    form.get('charName').dispatchEvent(new Event('blur'));
     await new Promise(setImmediate);
-    assert.equal(form.get('characterLookup').disabled, true);
+    const pending = Promise.resolve();
+    assert.equal(form.get('characterLookupStatus').dataset.state, 'loading');
     form.get(id).value = 'New choice'; form.get(id).dispatchEvent(new Event(event));
     resolve(response(profile)); await pending;
     assert.equal(form.get(id).value, 'New choice');
     assert.equal(form.get('characterLookupStatus').hidden, true);
-    assert.equal(form.get('characterLookup').disabled, false);
   }
 });
 
@@ -271,4 +272,22 @@ test('typing never triggers an automatic profile lookup by itself', async () => 
   type(form, 'Thalindra');
   await form.runTimers();
   assert.equal(profileCalls(form).length, 0);
+});
+
+test('shows the green found message and the not-found message without any button', async () => {
+  let form = await setup();
+  await form.lookup();
+  assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
+  assert.equal(form.get('characterLookupStatus').textContent, 'Character found: Thàlindra — Aerie Peak');
+  form = await setup({ fetchProfile: async () => response({}, 404) });
+  await form.lookup();
+  assert.equal(form.get('characterLookupStatus').dataset.state, 'error');
+  assert.match(form.get('characterLookupStatus').textContent, /not found/);
+});
+
+test('leaving the field twice with the same name checks Blizzard only once', async () => {
+  const form = await setup();
+  await form.lookup();
+  await form.lookup();
+  assert.equal(profileCalls(form).length, 1);
 });
