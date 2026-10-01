@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="M+ guide for Murder Row. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 2." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://passiveaggressive.us/mplus-murderrow.html" />
+  <meta property="og:title" content="Murder Row Guide – PassiveAggressive" />
+  <meta property="og:description" content="M+ guide for Murder Row. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 2." />
+  <meta property="og:image" content="https://passiveaggressive.us/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Murder Row Guide – PassiveAggressive" />
+  <meta name="twitter:description" content="M+ guide for Murder Row. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 2." />
+  <meta name="twitter:image" content="https://passiveaggressive.us/logo.png" />
+  <title>Murder Row – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.png" />
+  <style>html,body{background:#0a0a0f;color:#ccc}</style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6P9NYS2P5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6P9NYS2P5');
+  </script>
+</head>
+<body>
+
+  <script src="nav.js"></script>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="guides.html">&#8592; Back to Guides</a>
+
+      <div class="guide-detail-header">
+        <span class="season-badge">Season 2 &bull; New</span>
+        <h1>Murder Row</h1>
+        <p>4 Bosses &bull; Silvermoon City &bull; A fel-smuggling operation run by the warlock Lithiel Cinderfury. Fel-casting trash packs, a barrel-cover boss, an edge-kiting tank fight, and a gateway-timing finale. The 34-minute timer is the longest in the pool, but it is tight if you lose time on trash.</p>
+      </div>
+        <div class="guide-meta">
+          <p>Guide content updated <time datetime="2026-09-30">September 30, 2026</time>. Balance changes may affect these notes.</p>
+          <p>More resources: <a href="https://www.method.gg/guides/dungeons/murder-row" target="_blank" rel="noopener">Method guide</a> &bull; <a href="https://www.wowhead.com/guide/midnight/murder-row-dungeon-overview-location-rewards" target="_blank" rel="noopener">Wowhead overview</a></p>
+        </div>
+
+      <div class="trash-section">
+        <h3>&#9876; Trash Pull Notes</h3>
+        <div class="trash-grid">
+          <div class="trash-card">
+            <div class="trash-card-title priority">&#128246; Priority Targets</div>
+            <ul>
+              <li><strong>Bribed Captain</strong> &mdash; CC immune and buffs its allies, so kill it first in any pack. It also stacks a debuff on the tank and has a glaive frontal.</li>
+              <li><strong>Shivan Punisher</strong> &mdash; CC immune. At 50% it gains Demonic Frenzy (heavy pulsing damage), so focus it down quickly once it drops. Melee should step out of Whirlwind.</li>
+              <li><strong>Corrupted Warlock</strong> &mdash; CC immune. Curse of Doom lands on a random player: dispel it, or stack in it as a group. Drain Life also targets a random player. It gains a shield at 50% from Dark Pact, and if it is ignored it summons a Doomguard on death.</li>
+              <li><strong>Felmaster Lucsei</strong> &mdash; CC immune mini-boss. Blade Dance stacks a DoT on the group (healers use raid cooldowns), and the tank points the Eye Beam frontal away from the group.</li>
+              <li><strong>Defiled Golem</strong> &mdash; CC immune, before the final boss. Defiled Slam is a heavy channel hitting healers; avoid the Fel Beam lines and puddles.</li>
+              <li><strong>Massive Felwyrm</strong> &mdash; sustained AoE damage and adds. Hold defensives and burn it quickly.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title kick">&#9889; Must Kick</div>
+            <ul>
+              <li><strong>Seduction</strong> (Seductive Sayaad) &mdash; channels into a random player. Interrupt or CC it, or someone gets charmed.</li>
+              <li><strong>Fel Missiles</strong> (Felonious Mage) &mdash; interrupt or CC the channel. Assign this one before the pull.</li>
+              <li><strong>Scathing Review</strong> (Influential Reviewer) &mdash; interrupt it so your star rating does not drop.</li>
+              <li><strong>Felfire Burst</strong> (Unleashed Imp) &mdash; hits random players. Use spare interrupts on it.</li>
+              <li><strong>Fel Rage</strong> (Wrathguard Flayer) &mdash; interrupt it, or Soothe the enrage.</li>
+              <li><strong>Health Funnel</strong> (Fel Invoker) &mdash; interrupt or CC it. Avoid the Felfire Bombardment circles.</li>
+              <li><strong>Doom Bolt</strong> (Doomguard) &mdash; CC immune, so interrupt it.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title cc">&#128274; Dispels &amp; Defensives</div>
+            <ul>
+              <li><strong>Flay</strong> (Wrathguard Flayer) and <strong>Sharp Nail</strong> (Warehouse Worker) &mdash; random-target bleeds. Use a defensive or a bleed cleanse.</li>
+              <li><strong>Curse of Doom</strong> (Corrupted Warlock) &mdash; dispel it immediately, or heal through it.</li>
+              <li><strong>Drain Life</strong> (Corrupted Warlock) &mdash; random target. Use a defensive or break line of sight.</li>
+              <li><strong>Shadow Bite</strong> (Trained Felhunter) &mdash; tanks watch for the buff enhancement.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title util">&#128302; Purge / Soothe</div>
+            <ul>
+              <li><strong>Back To Work!</strong> (Keen Taskmaster) &mdash; enrages the nearby Warehouse Workers. Soothe it, or kill the Taskmaster first.</li>
+              <li><strong>Fel Rage</strong> (Wrathguard Flayer) &mdash; Soothe removes the enrage if you miss the interrupt.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Event &bull; Dungeon Start and Between Bosses 1&ndash;2</div>
+          <h2>Snitches, Fel Crystals &amp; the Bar Event</h2>
+          <p class="boss-tagline">Two non-boss mechanics worth planning for. Interact with the four Snitches at the start to progress. In the bar, the group takes random roles to earn a 5-star review buff.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Interact with the four Snitches at the start of the dungeon to progress.</li>
+                <li>Crystalline Fel can be picked up for single-use buffs from vendors, one per player.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Clock In bar event: the group performs random roles (Server, Entertainer, Cleaner, Bouncer) to earn a 5-star review.</li>
+                <li>The 5-star review gives +10% damage and healing for 5 minutes, so it is worth doing cleanly.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Interrupt Scathing Review from Influential Reviewers so the star rating does not drop.</li>
+                <li>Grab your own Crystalline Fel buff while you are collecting.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 1 of 4</div>
+          <h2>Kystia Manaheart</h2>
+          <p class="boss-tagline">Kill her pet Nibbles, not Kystia. Kystia's Felshield stacks make her a bad target. At 20% Nibbles turns friendly and channels Destabilized, a heavy group-damage window.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Face Nibbles away from the group &mdash; Fel Spray is a rotating frontal.</li>
+                <li>Chaos Barrage targets you and then jumps to other players. Use a defensive, especially while Mirror Images are active.</li>
+                <li>Step out of Fel Nova circles.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Dispel Corroding Spittle as soon as it lands. It can take a large chunk of someone's health if it ticks.</li>
+                <li>Plan cooldowns for Destabilized at Nibbles' 20%.</li>
+                <li>Stay out of Fel Spray and Fel Nova while you heal.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Focus Nibbles, not Kystia.</li>
+                <li><strong>Kick / CC:</strong> destroy the 5 Mirror Images when she spawns them. Assign interrupts and stuns before the pull.</li>
+                <li>Burst Nibbles through Destabilized, and use a defensive if Corroding Spittle lands during Mirror Images.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 2 of 4</div>
+          <h2>Zaen Bladesorrow</h2>
+          <p class="boss-tagline">Freight crates are your cover. Each player hides behind their own barrel for Murder In A Row. Handle Fire Bomb away from the crates, and break the green Fel-Infused Freight before it spikes the group.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Envenom puts a poison on you. Use a defensive, and get it dispelled right away if a poison dispel is available.</li>
+                <li>Avoid the barrels that Same-Day Delivery spawns.</li>
+                <li>Keep the boss positioned so the crates stay usable as cover.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Killing Spree is a heavy AoE channel. Have cooldowns ready, especially if Fel-Infused Freight is still up.</li>
+                <li>Dispel Envenom promptly, since it cuts the tank's health.</li>
+                <li>Find your own barrel for Murder In A Row. Do not share one.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Each player hides behind a separate barrel for Murder In A Row.</li>
+                <li>If you get Fire Bomb, take it away from the crates so it does not destroy your cover. Cleave Fel-Infused Freight to remove its group damage.</li>
+                <li>Do not stand in Same-Day Delivery barrels.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 3 of 4</div>
+          <h2>Xathuux the Annihilator</h2>
+          <p class="boss-tagline">The tank kites him slowly along the room's edge, and everyone kills the Legion Axe immediately. The section before this boss is the most dangerous trash in the dungeon.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Legion Strike is a frontal that leaves a healing reduction. Face him away from the group and use a defensive.</li>
+                <li>Demonic Rage: slowly kite him along the edge of the room, using less than half the room per cast, so the puddles stay out of the way.</li>
+                <li>Infernal Crush is a targeted hit &mdash; use a defensive if you are picked.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>The Legion Strike healing reduction means the tank needs big healing right after it lands.</li>
+                <li>Axe Toss spawns a Legion Axe that deals increasing AoE damage &mdash; keep everyone topped while it is up.</li>
+                <li>Stay loosely spread for Infernal Crush.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Swap to the Legion Axe immediately &mdash; it is the top-priority kill. If you are targeted by Axe Toss, spawn it inside cleave range.</li>
+                <li>Loosely spread for Infernal Crush so you do not cleave allies.</li>
+                <li>Save cooldowns for the damage amp that comes with Demonic Rage.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-bloodelf">
+          <div class="boss-number">Boss 4 of 4 &mdash; Final</div>
+          <h2>Lithiel Cinderfury</h2>
+          <p class="boss-tagline">The hardest fight in the dungeon. Searing Fel Flame pulses on the group the whole fight, Chaos Bolt needs a steady interrupt rotation, and Demonic Gateway has to be timed around Malefic Wave.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Her Infernal cannot be killed and fixates on the tank until the boss dies. Touching it is lethal, so keep moving the boss away from it.</li>
+                <li>Pick up the Summon Vilefiend add when it spawns.</li>
+                <li>Do not take Demonic Gateway until the Malefic Wave finishes casting and a safe side is available.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Searing Fel Flame deals constant pulsing group damage throughout the fight &mdash; budget mana and cooldowns for the long haul.</li>
+                <li>Malefic Wave is lethal AoE with a fire vulnerability, so make sure the group takes the gateway only when it is safe.</li>
+                <li>Fingers of Gul'dan circles overlap by design; keep the group healed through the Wild Imp spawns.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li><strong>Kick:</strong> Chaos Bolt hits a random target. Keep a set interrupt rotation.</li>
+                <li>Fingers of Gul'dan spawns Wild Imps that cast Felfire Burst &mdash; use spare interrupts, CC, or AoE on them.</li>
+                <li>Wait for Malefic Wave to finish casting before using Demonic Gateway, and clear the adds first. Adds that reach the wave gain Malefic Empowerment.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand-bar"></div>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo-small.webp" alt="PassiveAggressive" class="footer-logo-img" width="128" height="128" loading="lazy" />
+        <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
