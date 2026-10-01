@@ -172,7 +172,7 @@ test('typing searches once after a pause and shows a popup list', async () => {
   const form = await setup();
   for (const name of ['Th', 'Thà', 'Thàl']) type(form, name);
   assert.equal(form.timers.size, 1);
-  assert.equal([...form.timers.values()][0].delay, 250);
+  assert.equal([...form.timers.values()][0].delay, 120);
   assert.equal(searches(form).length, 0);
   await form.runTimers();
   assert.equal(searches(form).length, 1);
@@ -290,4 +290,21 @@ test('leaving the field twice with the same name checks Blizzard only once', asy
   await form.lookup();
   await form.lookup();
   assert.equal(profileCalls(form).length, 1);
+});
+
+test('typing more letters narrows the open list instantly, then refreshes from the server', async () => {
+  const form = await setup();
+  type(form, 'Thal');
+  await form.runTimers();
+  assert.equal(form.get('charSuggestions').children.length, 2);
+  type(form, 'Thàl');
+  assert.equal(form.get('charSuggestions').hidden, false);
+  assert.equal(form.get('charSuggestions').children.length, 2);
+  type(form, 'Thali');
+  assert.equal(form.get('charSuggestions').children.length, 2);
+  type(form, 'Thaz');
+  assert.equal(form.get('charSuggestions').hidden, true);
+  assert.equal(searches(form).length, 1);
+  await form.runTimers();
+  assert.equal(searches(form).length, 2);
 });

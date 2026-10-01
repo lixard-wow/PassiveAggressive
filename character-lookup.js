@@ -194,13 +194,21 @@
     }
   }
 
-  function scheduleSearch() {
+  const plain = text => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+
+  // keepList: while typing the same realm filter applies, so the current list can be
+  // narrowed instantly instead of blinking empty until the server answers.
+  function scheduleSearch(keepList = false) {
     invalidateLookup();
+    const term = nameInput.value.trim().normalize('NFC');
+    const local = keepList === true && term.length >= 2
+      ? suggestions.filter(item => plain(item.name).startsWith(plain(term))) : [];
     hideSuggestions();
-    if (composingName || nameInput.value.trim().length < 2) return;
-    searchTimer = setTimeout(searchCharacters, 250);
+    if (composingName || term.length < 2) return;
+    if (local.length) showSuggestions(local);
+    searchTimer = setTimeout(searchCharacters, 120);
   }
-  nameInput.addEventListener('input', scheduleSearch);
+  nameInput.addEventListener('input', () => scheduleSearch(true));
   nameInput.addEventListener('compositionstart', () => {
     composingName = true;
     invalidateLookup();
