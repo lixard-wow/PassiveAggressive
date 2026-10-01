@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="M+ guide for Algeth'ar Academy. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 1." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://passiveaggressive.us/mplus-algethar.html" />
+  <meta property="og:title" content="Algeth'ar Academy Guide – PassiveAggressive" />
+  <meta property="og:description" content="M+ guide for Algeth'ar Academy. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 1." />
+  <meta property="og:image" content="https://passiveaggressive.us/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Algeth'ar Academy Guide – PassiveAggressive" />
+  <meta name="twitter:description" content="M+ guide for Algeth'ar Academy. Boss-by-boss Tank, Healer, and DPS breakdown for Midnight Season 1." />
+  <meta name="twitter:image" content="https://passiveaggressive.us/logo.png" />
+  <title>Algeth'ar Academy – M+ Guide – PassiveAggressive</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.png" />
+  <style>html,body{background:#0a0a0f;color:#ccc}</style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6P9NYS2P5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6P9NYS2P5');
+  </script>
+</head>
+<body>
+
+  <script src="nav.js"></script>
+
+  <section class="guide-detail-section">
+    <div class="container">
+
+      <a class="back-btn" href="guides.html">&#8592; Back to Guides</a>
+
+      <div class="guide-detail-header">
+        <h1>Algeth'ar Academy</h1>
+        <p>4 Bosses &bull; Azure Span &bull; The dragonflight's school of magic. The first three bosses can be killed in any order and Echo of Doragosa unlocks after all three. Orb interception, Splinterbark management, and positioning discipline decide the run.</p>
+      </div>
+        <div class="guide-meta">
+          <p>Guide content updated <time datetime="2026-09-30">September 30, 2026</time>. Balance changes may affect these notes.</p>
+          <p>More resources: <a href="https://www.wowhead.com/" target="_blank" rel="noopener">Wowhead</a> &bull; <a href="https://www.method.gg/guides" target="_blank" rel="noopener">Method guides</a></p>
+        </div>
+
+      <div class="trash-section">
+        <h3>&#9876; Trash Pull Notes</h3>
+        <div class="trash-grid">
+          <div class="trash-card">
+            <div class="trash-card-title priority">&#128246; Priority Targets</div>
+            <ul>
+              <li><strong>Spellbound Scepter</strong> &mdash; the most dangerous caster in the dungeon. Its Mystic Blast is a large arcane AoE that hits very hard on Fortified weeks.</li>
+              <li><strong>Arcane Ravager</strong> &mdash; kill early or it gains excessive stacks. Never stand in front of it (Riftbreath).</li>
+              <li><strong>Vile Lasher</strong> &mdash; kill early or it gains excessive stacks. Move out of Seed Detonation impact zones.</li>
+              <li><strong>Guardian Sentry</strong> &mdash; Storm Slash adds moderate extra damage on the tank. Plan a defensive for stacked pulls.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title kick">&#9889; Must Kick</div>
+            <ul>
+              <li><strong>Mystic Blast</strong> (Spellbound Scepter) &mdash; highest interrupt priority in the dungeon. Interrupt it at all costs.</li>
+              <li><strong>Mana Void</strong> (Corrupted Manafang) &mdash; interrupt it, or stay more than 4 yards from other players so the damage and mana drain don't chain.</li>
+              <li><strong>Monotonous Lecture</strong> (Unruly Textbook) &mdash; interrupt it. Once the channel has started it can still be CC'd or dispelled.</li>
+            </ul>
+          </div>
+          <div class="trash-card">
+            <div class="trash-card-title util">&#128302; Positioning</div>
+            <ul>
+              <li><strong>Vicious Ambush</strong> (Arcane Ravager) &mdash; if targeted, stay more than 6 yards from other players so the damage and knockback don't chain.</li>
+              <li><strong>Seed Detonation</strong> (Vile Lasher) &mdash; players hit take moderate damage and are Disoriented. Avoid the impact location.</li>
+              <li><strong>Riftbreath</strong> (Arcane Ravager) &mdash; frontal. Tanks face it away from the group.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="boss-section">
+        <div class="boss-header bh-ethereal">
+          <div class="boss-number">Boss 1 of 4 &bull; Any order</div>
+          <h2>Vexamus</h2>
+          <p class="boss-tagline">Arcane Orbs spawn and travel toward Vexamus. Every orb that reaches him triggers a group-wide Arcane blast and applies Oversurge, which amplifies the next one. Intercept the orbs, and respect your Oversurge stack cap.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Tanks can absorb more Oversurge stacks than anyone else (up to four) &mdash; take the extra orbs so the group stays low on stacks.</li>
+                <li>Arcane Expulsion is Vexamus's tank hit &mdash; save a defensive for stacked pulls or missed orbs.</li>
+                <li>Keep him positioned so orb lanes stay clear for the people intercepting.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Healers and DPS should stay at or under two Oversurge stacks &mdash; do not intercept past that.</li>
+                <li>An orb reaching Vexamus is a group-wide Arcane blast. Pre-heal and cooldown if several slip through.</li>
+                <li>Mana Bombs target players &mdash; move out of the group with the debuff, then top off.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Call out which orbs you are taking, and stop at two Oversurge stacks &mdash; let the tank take the rest.</li>
+                <li>Do not run Mana Bomb into the group &mdash; step away before it detonates.</li>
+                <li>Burn Vexamus whenever the orbs are under control; do not let the fight stretch.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-ethereal">
+          <div class="boss-number">Boss 2 of 4 &bull; Any order</div>
+          <h2>Overgrown Ancient</h2>
+          <p class="boss-tagline">Splinterbark stacks pile up on the tank. Killing the Ancient Branch inside the Abundance zone clears the stacks for the entire group at once. Germinate punishes players who scatter.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Splinterbark stacks build on you &mdash; plan defensives, and bring the Ancient Branch into the Abundance zone to get the stacks wiped.</li>
+                <li>Pick up lashers quickly after Germinate so they do not spread to the group.</li>
+                <li>Burst Forth fires at 100 energy &mdash; have cooldowns ready if lashers are still alive.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Stand in the Abundance zone when the Ancient Branch dies &mdash; the stack removal is a large group heal in itself.</li>
+                <li>During Germinate stack tightly and move together, so lashers spawn in one place instead of several.</li>
+                <li>Save a big cooldown for Burst Forth if dormant lashers are still up.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Kill the Ancient Branch fast and call the Abundance zone location. Everyone benefits from the stack removal.</li>
+                <li>During Germinate, do not move independently &mdash; every player who wanders spawns lashers in a new spot.</li>
+                <li>Kill dormant lashers before Burst Forth reaches 100 energy whenever possible.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-ethereal">
+          <div class="boss-number">Boss 3 of 4 &bull; Any order</div>
+          <h2>Crawth</h2>
+          <p class="boss-tagline">A goal-scoring fight. After each goal, steady damage hits the group, and Ruinous Winds phases arrive at 75% and 45% health. Spread before Deafening Screech lands.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Savage Peck is the tank hit &mdash; use a defensive when it overlaps with other damage.</li>
+                <li>Hold Crawth steady during goal phases and keep him clear of the group's positioning for Deafening Screech.</li>
+                <li>Line up personal cooldowns for the 75% and 45% Ruinous Winds phases.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Constant damage starts after each goal is scored &mdash; spread your cooldowns between the Fire goal stun burst window and the Ruinous Winds phases.</li>
+                <li>Do not burn everything on the first goal; the damage ramps through the fight.</li>
+                <li>Spread before Deafening Screech lands to keep sonic eruptions from overlapping, which lowers the healing needed.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Spread out before Deafening Screech lands &mdash; overlapping eruption zones are avoidable damage.</li>
+                <li>Use burst during the Fire goal stun window.</li>
+                <li>Move out of Ruinous Winds promptly at 75% and 45%.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-section">
+        <div class="boss-header bh-ethereal">
+          <div class="boss-number">Boss 4 of 4</div>
+          <h2>Echo of Doragosa</h2>
+          <p class="boss-tagline">Unlocks after the first three bosses. Every ability that hits a player applies Overwhelming Power; at four stacks it clears by spawning arcane portals that fire more orbs across the platform. Avoiding hits is the whole fight.</p>
+        </div>
+        <div class="boss-body">
+          <div class="role-grid">
+            <div class="role-card tank">
+              <div class="role-card-title">&#128737; Tank</div>
+              <ul>
+                <li>Astral Breath is a frontal &mdash; keep Doragosa facing away from the group at all times.</li>
+                <li>Each hit you take applies Overwhelming Power. Use mitigation so tank hits do not push you toward four stacks.</li>
+                <li>Portals spawn when someone reaches four stacks &mdash; stay clear of orb lanes.</li>
+              </ul>
+            </div>
+            <div class="role-card healer">
+              <div class="role-card-title">&#10010; Healer</div>
+              <ul>
+                <li>Do not take avoidable hits yourself &mdash; Overwhelming Power stacks apply to you as well.</li>
+                <li>When portals open, heal through orb damage but keep moving out of their paths.</li>
+                <li>Use cooldowns when a portal wave coincides with a boss cast.</li>
+              </ul>
+            </div>
+            <div class="role-card dps">
+              <div class="role-card-title">&#9876; DPS</div>
+              <ul>
+                <li>Avoid every avoidable ability &mdash; any hit adds an Overwhelming Power stack, and four stacks spawn portals for the whole group.</li>
+                <li>Never stand in front of Astral Breath or in orb paths from Arcane Rift portals.</li>
+                <li>Burn the boss during clean stretches; recover positioning right after a portal wave.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand-bar"></div>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="logo-small.webp" alt="PassiveAggressive" class="footer-logo-img" width="128" height="128" loading="lazy" />
+        <span style="white-space:nowrap"><span style="color:var(--purple)">Passive</span><span style="color:#F4B800">Aggressive</span></span>
+      </div>
+      <p class="footer-sub">World of Warcraft Guild &bull; Est. 2026</p>
+      <p class="footer-copy">&copy; 2026 PassiveAggressive. Not affiliated with Blizzard Entertainment.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

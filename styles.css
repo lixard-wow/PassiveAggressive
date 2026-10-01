@@ -1243,6 +1243,7 @@ footer {
 .art-venom-e     { background: radial-gradient(ellipse at 50% 30%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #16300c, #0c1f08); }
 .art-venom-f     { background: radial-gradient(ellipse at 50% 70%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #1e3a12, #081806); }
 .art-venom-g     { background: radial-gradient(ellipse at 40% 50%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #0c2e20, #141404); }
+.art-algethar    { background: radial-gradient(ellipse at 50% 30%, rgba(90,160,230,0.22), transparent 60%), linear-gradient(135deg, #0e2240, #07101f); }
 .art-venom-abyss { background: radial-gradient(ellipse at 50% 40%, rgba(139,195,74,0.22), transparent 65%), linear-gradient(135deg, #1e3a12, #081806); }
 
 /* =====================
