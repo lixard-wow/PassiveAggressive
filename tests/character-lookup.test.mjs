@@ -19,12 +19,12 @@ class Element {
   constructor(value = '') {
     this.value = value; this.textContent = ''; this.dataset = {}; this.attrs = {};
     this.children = []; this.listeners = new Map(); this.style = {}; this.hidden = true;
-    this.disabled = false; this.classList = { add() {} };
+    this.disabled = false; this.classList = { add() {}, toggle() {} };
   }
   get options() { return this.children; }
   get selectedOptions() { return this.children.filter(option => option.value === this.value); }
   appendChild(node) { this.children.push(...(node.fragment ? node.children : [node])); }
-  replaceChildren(node) { this.children = []; this.appendChild(node); }
+  replaceChildren(node) { this.children = []; if (node) this.appendChild(node); }
   addEventListener(type, fn) {
     if (!this.listeners.has(type)) this.listeners.set(type, []);
     this.listeners.get(type).push(fn);
@@ -41,7 +41,12 @@ class Element {
   }
 }
 
-async function setup({ fetchProfile = async () => response(profile), fetchRealms = async () => response(realmData), tokenStatus = 200 } = {}) {
+const found = [
+  { name: 'Thàlindra', realm: 'Aerie Peak', realmSlug: 'aerie-peak', className: 'Priest' },
+  { name: 'Thalindra', realm: 'Area 52', realmSlug: 'area-52', className: 'Mage' },
+];
+
+async function setup({ search = async () => response({ results: found }), fetchProfile = async () => response(profile), fetchRealms = async () => response(realmData), tokenStatus = 200 } = {}) {
   const elements = new Map();
   const values = { charName: 'thàlindra', realm: 'Area 52', charClass: 'Mage', charSpec: 'Frost', role: 'DPS' };
   const get = id => {
@@ -54,6 +59,7 @@ async function setup({ fetchProfile = async () => response(profile), fetchRealms
   const timers = new Map();
   const fetch = async (url, options) => {
     calls.push({ url, options });
+    if (url.endsWith('/character-search')) return search(JSON.parse(options.body));
     if (url.endsWith('/blizzard-token')) return response({ access_token: 'mock-token' }, tokenStatus);
     if (url.includes('/realm/index')) return fetchRealms();
     if (url.includes('/profile/wow/character/')) return fetchProfile(url, options);
@@ -154,62 +160,115 @@ test('refreshes an expired Blizzard token once and then completes the lookup', a
   assert.equal(attempt, 2);
 });
 
-test('looks up once after a pause in typing, using the latest complete name', async () => {
+const searches = form => form.calls.filter(c => c.url.endsWith('/character-search'));
+const profileCalls = form => form.calls.filter(c => c.url.includes('/profile/wow/character/'));
+const type = (form, value) => {
+  form.get('charName').value = value;
+  form.get('charName').dispatchEvent(new Event('input'));
+};
+
+test('typing searches once after a pause and shows a popup list', async () => {
   const form = await setup();
-  for (const name of ['Th', 'Thà', 'Thàlindra']) {
-    form.get('charName').value = name;
-    form.get('charName').dispatchEvent(new Event('input'));
-  }
+  for (const name of ['Th', 'Thà', 'Thàl']) type(form, name);
   assert.equal(form.timers.size, 1);
-  assert.equal([...form.timers.values()][0].delay, 700);
-  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 0);
+  assert.equal([...form.timers.values()][0].delay, 250);
+  assert.equal(searches(form).length, 0);
   await form.runTimers();
-  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 1);
-  assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
-  assert.equal(form.get('charName').value, 'Thàlindra');
+  assert.equal(searches(form).length, 1);
+  assert.deepEqual(JSON.parse(searches(form)[0].options.body), { term: 'Thàl' });
+  const list = form.get('charSuggestions');
+  assert.equal(list.hidden, false);
+  assert.equal(list.children.length, 2);
+  assert.equal(list.children[0].children[0].textContent, 'Thàlindra');
+  assert.equal(list.children[0].children[1].textContent, 'Aerie Peak · Priest');
+  assert.equal(form.get('charName').attrs['aria-expanded'], 'true');
+  assert.equal(profileCalls(form).length, 0);
 });
 
 test('skips short names and waits for IME composition to finish', async () => {
   const form = await setup();
-  for (const name of ['', 'T']) {
-    form.get('charName').value = name;
-    form.get('charName').dispatchEvent(new Event('input'));
-    assert.equal(form.timers.size, 0);
-  }
+  for (const name of ['', 'T']) { type(form, name); assert.equal(form.timers.size, 0); }
   form.get('charName').dispatchEvent(new Event('compositionstart'));
-  form.get('charName').value = 'Thàlindra';
-  form.get('charName').dispatchEvent(new Event('input'));
+  type(form, 'Thàlindra');
   assert.equal(form.timers.size, 0);
   form.get('charName').dispatchEvent(new Event('compositionend'));
   assert.equal(form.timers.size, 1);
   await form.runTimers();
-  assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
+  assert.equal(searches(form).length, 1);
 });
 
-test('changing the realm triggers an automatic lookup on the new realm', async () => {
+test('the preselected home realm does not narrow the search, a chosen realm does', async () => {
   const form = await setup();
+  type(form, 'Thal');
+  await form.runTimers();
+  assert.equal('realm' in JSON.parse(searches(form)[0].options.body), false);
   form.get('realm').value = "Kel'Thuzad";
   form.get('realm').dispatchEvent(new Event('change'));
   await form.runTimers();
-  assert.match(form.calls.find(c => c.url.includes('/profile/wow/character/')).url, /\/kelthuzad\//);
+  assert.deepEqual(JSON.parse(searches(form)[1].options.body), { term: 'Thal', realm: 'kelthuzad' });
 });
 
-test('manual lookup cancels the debounce timer rather than duplicating the request', async () => {
+test('clicking a suggestion fills name and realm, closes the list, and fills class and spec', async () => {
   const form = await setup();
-  form.get('charName').dispatchEvent(new Event('input'));
-  assert.equal(form.timers.size, 1);
-  await form.lookup();
-  assert.equal(form.timers.size, 0);
+  type(form, 'Thal');
   await form.runTimers();
-  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 1);
+  form.get('charSuggestions').children[0].dispatchEvent(new Event('click'));
+  for (let i = 0; i < 10; i++) await new Promise(setImmediate);
+  assert.equal(form.get('charSuggestions').hidden, true);
+  assert.equal(form.get('charName').value, 'Thàlindra');
+  assert.equal(form.get('realm').value, 'Aerie Peak');
+  assert.equal(form.get('charClass').value, 'Priest');
+  assert.equal(form.get('charSpec').value, 'Discipline');
+  assert.equal(profileCalls(form).length, 1);
+  assert.match(profileCalls(form)[0].url, /aerie-peak\/th%C3%A0lindra/);
 });
 
-test('editing class/spec manually cancels queued automatic autofill', async () => {
+test('arrow keys, Enter and Escape drive the popup', async () => {
   const form = await setup();
-  form.get('charName').dispatchEvent(new Event('input'));
-  form.get('charClass').value = 'Priest';
-  form.get('charClass').dispatchEvent(new Event('change'));
-  assert.equal(form.timers.size, 0);
+  type(form, 'Thal');
   await form.runTimers();
-  assert.equal(form.calls.filter(c => c.url.includes('/profile/wow/character/')).length, 0);
+  const key = k => {
+    const e = new Event('keydown'); e.key = k; e.preventDefault = () => {};
+    form.get('charName').dispatchEvent(e);
+  };
+  key('ArrowDown'); key('ArrowDown');
+  assert.equal(form.get('charName').attrs['aria-activedescendant'], 'charSuggestion1');
+  key('Escape');
+  assert.equal(form.get('charSuggestions').hidden, true);
+  type(form, 'Thal'); await form.runTimers();
+  key('ArrowUp');
+  assert.equal(form.get('charName').attrs['aria-activedescendant'], 'charSuggestion1');
+  key('Enter');
+  for (let i = 0; i < 10; i++) await new Promise(setImmediate);
+  assert.match(profileCalls(form)[0].url, /area-52\/thalindra\?/);
+});
+
+test('a failed or empty search hides the popup and leaves manual lookup working', async () => {
+  for (const search of [async () => response({}, 404), async () => { throw new TypeError('Network'); },
+    async () => response({ results: [] })]) {
+    const form = await setup({ search });
+    type(form, 'Thal');
+    await form.runTimers();
+    assert.equal(form.get('charSuggestions').hidden, true);
+    await form.lookup();
+    assert.equal(form.get('characterLookupStatus').dataset.state, 'success');
+  }
+});
+
+test('an old search response cannot reopen the popup after the name changes', async () => {
+  let resolve;
+  const form = await setup({ search: () => new Promise(r => { resolve = r; }) });
+  type(form, 'Thal');
+  await form.runTimers();
+  type(form, 'T');
+  resolve(response({ results: found }));
+  for (let i = 0; i < 5; i++) await new Promise(setImmediate);
+  assert.equal(form.get('charSuggestions').hidden, true);
+});
+
+test('typing never triggers an automatic profile lookup by itself', async () => {
+  const form = await setup();
+  type(form, 'Thalindra');
+  await form.runTimers();
+  assert.equal(profileCalls(form).length, 0);
 });

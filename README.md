@@ -40,6 +40,8 @@ If sustained abuse occurs, add a verified challenge such as Turnstile.
 Rate limiter documentation:
 https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/.
 
+The Worker also serves `POST /character-search`, which powers the name popup on the Apply page. Blizzard has no character-name search, so it proxies Raider.io's public (undocumented) search endpoint, keeps US results only, and caches them for 5 minutes. If it is not deployed or Raider.io is down, the popup stays hidden and the manual "Look up Character" button still works. Deploy the Worker (`npx wrangler deploy`) for the popup to work after pushing the site.
+
 The frontend retains the existing embed request format so it continues to work
 while the Worker deployment is pending. The new Worker extracts only the nine
 validated application fields, rebuilds the message, disables Discord mentions,
