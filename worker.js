@@ -96,7 +96,7 @@ async function characterSearch(request) {
       data?.region?.slug === 'us' && typeof data.name === 'string' && typeof data.realm?.name === 'string' &&
       typeof data.realm.slug === 'string' && typeof data.class?.name === 'string' &&
       plain(data.name).startsWith(prefix) && (!realm || data.realm.slug === realm)
-    ).slice(0, 8).map(data => ({
+    ).slice(0, 25).map(data => ({
       name: data.name, realm: data.realm.name, realmSlug: data.realm.slug, className: data.class.name,
     }));
     return json({ results });

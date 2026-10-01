@@ -188,7 +188,7 @@
       if (!response.ok) throw new Error('Search unavailable');
       const data = await response.json();
       if (version !== searchVersion) return;
-      showSuggestions(Array.isArray(data.results) ? data.results.slice(0, 8) : []);
+      showSuggestions(Array.isArray(data.results) ? data.results.slice(0, 25) : []);
     } catch {
       // Suggestions are a convenience; typing a name and using the lookup button still works.
       if (version === searchVersion) hideSuggestions();
