@@ -3,9 +3,8 @@
 (function () {
   const nameInput = document.getElementById('charName');
   const realmSelect = document.getElementById('realm');
-  const button = document.getElementById('characterLookup');
   const status = document.getElementById('characterLookupStatus');
-  if (!nameInput || !realmSelect || !button || !status || !document.getElementById('charSuggestions')) return;
+  if (!nameInput || !realmSelect || !status || !document.getElementById('charSuggestions')) return;
 
   const classSelect = document.getElementById('charClass');
   const specSelect = document.getElementById('charSpec');
@@ -25,6 +24,7 @@
   let suggestions = [];
   let activeIndex = -1;
   let realmChosen = false;
+  let lastLookupKey = '';
   const list = document.getElementById('charSuggestions');
 
   function getToken() {
@@ -106,8 +106,7 @@
     if (fillingProfile) return;
     requestVersion++;
     lookupController?.abort();
-    button.disabled = false;
-    button.textContent = 'Look up Character';
+    lastLookupKey = '';
     status.hidden = true;
   }
 
@@ -168,7 +167,7 @@
     nameInput.value = choice.name;
     ensureOption(realmSelect, choice.realm, choice.realmSlug);
     realmChosen = true;
-    lookupCharacter(true);
+    lookupCharacter();
   }
 
   async function searchCharacters() {
@@ -190,7 +189,7 @@
       if (version !== searchVersion) return;
       showSuggestions(Array.isArray(data.results) ? data.results.slice(0, 25) : []);
     } catch {
-      // Suggestions are a convenience; typing a name and using the lookup button still works.
+      // Suggestions are a convenience; typing a full name still gets checked when you leave the field.
       if (version === searchVersion) hideSuggestions();
     }
   }
@@ -211,7 +210,10 @@
     composingName = false;
     scheduleSearch();
   });
-  nameInput.addEventListener('blur', hideSuggestions);
+  nameInput.addEventListener('blur', () => {
+    hideSuggestions();
+    lookupCharacter();
+  });
   nameInput.addEventListener('keydown', event => {
     if (list.hidden || !suggestions.length) return;
     if (event.key === 'ArrowDown') { event.preventDefault(); setActive((activeIndex + 1) % suggestions.length); }
@@ -222,23 +224,24 @@
   realmSelect.addEventListener('change', () => {
     realmChosen = !!realmSelect.value;
     scheduleSearch();
+    lookupCharacter();
   });
   // Do not let an in-flight response overwrite a class/spec/role being edited.
   [classSelect, specSelect, roleSelect].forEach(select => select.addEventListener('change', invalidateLookup));
 
-  async function lookupCharacter(automatic = false) {
-    if (button.disabled) return;
-    if (!automatic && (!nameInput.reportValidity() || !realmSelect.reportValidity())) return;
+  async function lookupCharacter() {
     const name = nameInput.value.trim().normalize('NFC');
-    if (automatic && (composingName || name.length < 2 || !realmSelect.value || nameInput.validity?.valid === false)) return;
-    if (!name) { nameInput.focus(); return; }
+    if (composingName || name.length < 2 || !realmSelect.value || nameInput.validity?.valid === false) return;
     const slug = realmSlug();
+    const key = `${slug}/${name.toLowerCase()}`;
+    if (key === lastLookupKey) return;
+    lastLookupKey = key;
     const version = ++requestVersion;
+    lookupController?.abort();
     lookupController = new AbortController();
     const signal = AbortSignal.any([lookupController.signal, AbortSignal.timeout(15000)]);
-    button.disabled = true; button.textContent = 'Looking up…';
     status.hidden = false; status.dataset.state = 'loading';
-    status.textContent = 'Checking your character with Blizzard…';
+    status.textContent = 'Checking Blizzard…';
     try {
       const path = `/profile/wow/character/${encodeURIComponent(slug)}/${encodeURIComponent(name.toLowerCase())}?namespace=profile-us&locale=en_US`;
       const data = await blizzard(path, signal);
@@ -261,22 +264,17 @@
           : healerSpecs.has(data.active_spec.id) ? 'Healer' : 'DPS';
       }
       status.hidden = false; status.dataset.state = 'success';
-      status.textContent = `Found ${data.name} — ${data.realm.name}. Name, realm, and class filled from Blizzard${data.active_spec?.name ? ', along with your active spec and role' : ''}. You can change spec or role for this application.`;
+      lastLookupKey = `${data.realm.slug}/${data.name.toLowerCase()}`;
+      status.textContent = `Character found: ${data.name} — ${data.realm.name}`;
     } catch (error) {
       if (version !== requestVersion) return;
       status.dataset.state = 'error';
+      lastLookupKey = '';
       status.textContent = error.status === 404
-        ? automatic
-          ? 'No matching character yet on this realm. Finish typing the full name, including accents, or enter your details manually.'
-          : 'Character not found on that realm. Check the spelling, accents, and realm, or fill in your details manually.'
+        ? 'Character not found on that realm. Check the spelling, accents, and realm, or fill in your details manually.'
         : 'Blizzard lookup is unavailable right now. You can still fill in your character details and submit your application.';
-    } finally {
-      if (version === requestVersion) {
-        button.disabled = false; button.textContent = 'Look up Character';
-      }
     }
   }
-  button.addEventListener('click', () => lookupCharacter());
 
   loadRealms();
 })();
