@@ -1222,6 +1222,20 @@ footer {
 .bh-naaru   { background: linear-gradient(135deg, #181400, #0e0c00); }
 .bh-arakkoa { background: linear-gradient(135deg, #081800, #040e00); }
 
+/* Season dungeon card art (Wowhead guide headers, same source as the Season 1 cards) */
+.art-altar, .art-nalorakk, .art-vale, .art-voidscar, .art-ruby, .art-kingsrest, .art-temple, .art-algethar {
+  background-size: cover;
+  background-position: center;
+}
+.art-altar     { background-image: url('https://wow.zamimg.com/uploads/guide/header/11c702265ad6f3432b6bc76bef19f5240b89b3f2.jpg'); }
+.art-nalorakk  { background-image: url('https://wow.zamimg.com/uploads/guide/header/4bb1873c1337bf96894e1550415413ac9971b8be.jpg'); }
+.art-vale      { background-image: url('https://wow.zamimg.com/uploads/guide/seo/33193.jpg'); }
+.art-voidscar  { background-image: url('https://wow.zamimg.com/uploads/guide/header/6fb807eef5c20427802397324585e56c166d6555.jpg'); }
+.art-ruby      { background-image: url('https://wow.zamimg.com/uploads/guide/header/861750fe3cbf403821c43173d434f53aa1d90598.jpg'); }
+.art-kingsrest { background-image: url('https://wow.zamimg.com/uploads/guide/header/8ef12737a9541bc98b3c079e4c2e1095525a5ec7.jpg'); }
+.art-temple    { background-image: url('https://wow.zamimg.com/uploads/guide/header/53b6b49adb58de413ce2fe6dd04e8088bf39c1e6.jpg'); }
+.art-algethar  { background-image: url('https://wow.zamimg.com/uploads/guide/seo/17750.jpg'); }
+
 /* Venomous Abyss (12.1) — Amani troll / venom-corruption boss headers */
 .bh-venom1  { background: linear-gradient(135deg, #16300c, #081806); }
 .bh-venom2  { background: linear-gradient(135deg, #1e3a12, #0c1f08); }
@@ -1243,7 +1257,6 @@ footer {
 .art-venom-e     { background: radial-gradient(ellipse at 50% 30%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #16300c, #0c1f08); }
 .art-venom-f     { background: radial-gradient(ellipse at 50% 70%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #1e3a12, #081806); }
 .art-venom-g     { background: radial-gradient(ellipse at 40% 50%, rgba(139,195,74,0.14), transparent 60%), linear-gradient(135deg, #0c2e20, #141404); }
-.art-algethar    { background: radial-gradient(ellipse at 50% 30%, rgba(90,160,230,0.22), transparent 60%), linear-gradient(135deg, #0e2240, #07101f); }
 .art-venom-abyss { background: radial-gradient(ellipse at 50% 40%, rgba(139,195,74,0.22), transparent 65%), linear-gradient(135deg, #1e3a12, #081806); }
 
 /* =====================
