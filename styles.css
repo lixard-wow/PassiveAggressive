@@ -1017,7 +1017,8 @@ footer {
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
-  margin-top: 0.25rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 
 /* Raid / dungeon art */
