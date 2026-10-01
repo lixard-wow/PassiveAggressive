@@ -344,7 +344,8 @@ section { padding: 6rem 1.5rem; }
 
 /* Active nav link */
 .nav-active { color: var(--gold-lt) !important; border-bottom: 2px solid var(--purple) !important; padding-bottom: 3px; }
-.btn-apply.nav-active, .btn-discord.nav-active { border-bottom: none !important; padding-bottom: 0; color: inherit !important; }
+.btn-apply.nav-active, .btn-discord.nav-active { border-bottom: none !important; padding-bottom: 0.45rem; color: inherit !important; }
+.btn-apply.nav-active { background: var(--gold-lt); color: #000 !important; }
 
 #raids, #news { background-color: var(--dark); }
 
