@@ -73,14 +73,49 @@ function applicationFields(body) {
   }));
 }
 
+const plain = text => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+
+// Blizzard offers no character-name search, so suggestions come from Raider.io's
+// public search endpoint. Only US characters are returned, trimmed to what the form needs.
+async function characterSearch(request) {
+  let body;
+  try { body = await readBody(request); } catch { return json({ error: 'invalid_json' }, 400); }
+  const term = typeof body?.term === 'string' ? body.term.trim().normalize('NFC') : '';
+  const realm = typeof body?.realm === 'string' ? body.realm : '';
+  if (term.length < 2 || term.length > 50 || /[-\u0000-\u001f]/.test(term) ||
+      (realm && !/^[a-z0-9-]{1,40}$/.test(realm))) return json({ error: 'invalid_search' }, 400);
+  const query = new URLSearchParams({ term: realm ? `${term}-${realm}` : term, type: 'character' });
+  try {
+    const res = await fetch(`https://raider.io/api/search?${query}`, {
+      signal: AbortSignal.timeout(8000), cf: { cacheTtl: 300, cacheEverything: true },
+    });
+    if (!res.ok) return json({ error: 'search_unavailable' }, 502);
+    const { matches } = await res.json();
+    const prefix = plain(term);
+    const results = (Array.isArray(matches) ? matches : []).map(match => match?.data).filter(data =>
+      data?.region?.slug === 'us' && typeof data.name === 'string' && typeof data.realm?.name === 'string' &&
+      typeof data.realm.slug === 'string' && typeof data.class?.name === 'string' &&
+      plain(data.name).startsWith(prefix) && (!realm || data.realm.slug === realm)
+    ).slice(0, 8).map(data => ({
+      name: data.name, realm: data.realm.name, realmSlug: data.realm.slug, className: data.class.name,
+    }));
+    return json({ results });
+  } catch { return json({ error: 'search_unavailable' }, 502); }
+}
+
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
-    if (!['/apply', '/blizzard-token'].includes(pathname)) return json({ error: 'not_found' }, 404);
+    if (!['/apply', '/blizzard-token', '/character-search'].includes(pathname)) return json({ error: 'not_found' }, 404);
     // CORS alone restricts browsers; explicitly reject off-site requests too.
     if (request.headers.get('Origin') !== ALLOWED_ORIGIN) return json({ error: 'origin_not_allowed' }, 403);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
     if (request.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, { Allow: 'POST, OPTIONS' });
+
+    if (pathname === '/character-search') {
+      if (!request.headers.get('Content-Type')?.toLowerCase().startsWith('application/json')) return json({ error: 'invalid_content_type' }, 415);
+      return characterSearch(request);
+    }
 
     if (pathname === '/blizzard-token') {
       if (!env.BLIZZ_CLIENT_ID || !env.BLIZZ_CLIENT_SECRET) return json({ error: 'service_unavailable' }, 503);

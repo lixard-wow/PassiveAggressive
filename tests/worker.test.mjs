@@ -115,3 +115,41 @@ test('retains Blizzard token behavior and safely handles provider errors', async
   globalThis.fetch = async () => new Response(null, { status: 401 });
   assert.equal((await worker.fetch(tokenRequest(), env)).status, 502);
 });
+
+test('character search returns only US prefix matches, trimmed, and narrows by realm', async t => {
+  const hit = (name, region, realm, cls = 'Mage') => ({ type: 'character', name,
+    data: { name, region: { slug: region }, realm: { name: realm, slug: realm.toLowerCase().replace(' ', '-') },
+      class: { name: cls }, extra: 'dropped' } });
+  const urls = [];
+  mockFetch(t, async url => {
+    urls.push(String(url));
+    return Response.json({ matches: [hit('Thàlindra', 'us', 'Area 52'), hit('Thalindra', 'eu', 'Area 52'),
+      hit('Neanderthal', 'us', 'Area 52'), hit('Thalor', 'us', 'Aerie Peak')] });
+  });
+  const search = body => new Request('https://proxy.test/character-search', { method: 'POST',
+    headers: { Origin: origin, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  let res = await worker.fetch(search({ term: 'Thal' }), {});
+  assert.equal(res.headers.get('Access-Control-Allow-Origin'), origin);
+  assert.deepEqual((await res.json()).results.map(r => r.name), ['Thàlindra', 'Thalor']);
+  assert.match(urls[0], /term=Thal&type=character/);
+  res = await worker.fetch(search({ term: 'Thal', realm: 'area-52' }), {});
+  assert.deepEqual(await res.json(), { results: [
+    { name: 'Thàlindra', realm: 'Area 52', realmSlug: 'area-52', className: 'Mage' }] });
+  assert.match(urls[1], /term=Thal-area-52/);
+});
+
+test('character search validates input, origin and upstream failures', async t => {
+  const search = (body, headers = {}) => new Request('https://proxy.test/character-search', { method: 'POST',
+    headers: { Origin: origin, 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(body) });
+  mockFetch(t, async () => { throw new Error('should not be called'); });
+  for (const body of [{ term: 'T' }, { term: 'Th-al' }, { term: 'x'.repeat(51) },
+    { term: 'Thal', realm: 'Bad Realm!' }, {}]) {
+    assert.equal((await worker.fetch(search(body), {})).status, 400);
+  }
+  assert.equal((await worker.fetch(search({ term: 'Thal' }, { Origin: 'https://evil.test' }), {})).status, 403);
+  assert.equal((await worker.fetch(search({ term: 'Thal' }, { 'Content-Type': 'text/plain' }), {})).status, 415);
+  globalThis.fetch = async () => new Response(null, { status: 500 });
+  assert.equal((await worker.fetch(search({ term: 'Thal' }), {})).status, 502);
+  globalThis.fetch = async () => { throw new TypeError('Network'); };
+  assert.equal((await worker.fetch(search({ term: 'Thal' }), {})).status, 502);
+});

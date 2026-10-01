@@ -102,7 +102,10 @@
         <div class="form-row">
           <div class="form-group">
             <label for="charName">Character Name <span style="color:var(--text-muted);font-size:0.8rem;font-weight:400;">(include special characters if any)</span></label>
-            <input type="text" id="charName" maxlength="50" placeholder="e.g. Thalindra or Thàlindra" aria-describedby="characterLookupHelp" autocomplete="off" required />
+            <div class="suggest-wrap">
+              <input type="text" id="charName" maxlength="50" placeholder="e.g. Thalindra or Thàlindra" aria-describedby="characterLookupHelp" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="charSuggestions" required />
+              <ul id="charSuggestions" class="suggestions" role="listbox" aria-label="Matching characters" hidden></ul>
+            </div>
           </div>
           <div class="form-group">
             <label for="realm">Realm</label>
@@ -194,7 +197,7 @@
           </div>
         </div>
         <div class="character-lookup">
-          <p id="characterLookupHelp">Type your character’s full name and choose their US realm. After a short pause, Blizzard automatically fills in the official name, realm, class, and active specialization when it finds a match.</p>
+          <p id="characterLookupHelp">Start typing your character’s name and pick yourself from the list to fill in the name and realm. Choosing a realm first narrows the list faster. Blizzard then fills in your class and active specialization.</p>
           <p class="realm-list-status" id="realmListStatus" role="status">Area 52 is selected by default. Choose your character’s realm.</p>
           <button type="button" id="characterLookup" class="btn btn-secondary">Look up Character</button>
           <p id="characterLookupStatus" class="character-lookup-status" role="status" aria-live="polite" hidden></p>
