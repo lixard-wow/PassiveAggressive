@@ -5,7 +5,7 @@
   const realmSelect = document.getElementById('realm');
   const button = document.getElementById('characterLookup');
   const status = document.getElementById('characterLookupStatus');
-  if (!nameInput || !realmSelect || !button || !status) return;
+  if (!nameInput || !realmSelect || !button || !status || !document.getElementById('charSuggestions')) return;
 
   const classSelect = document.getElementById('charClass');
   const specSelect = document.getElementById('charSpec');
@@ -18,8 +18,14 @@
   let requestVersion = 0;
   let lookupController = null;
   let fillingProfile = false;
-  let lookupTimer = null;
   let composingName = false;
+  let searchTimer = null;
+  let searchVersion = 0;
+  let searchController = null;
+  let suggestions = [];
+  let activeIndex = -1;
+  let realmChosen = false;
+  const list = document.getElementById('charSuggestions');
 
   function getToken() {
     if (!tokenPromise) {
@@ -98,39 +104,130 @@
 
   function invalidateLookup() {
     if (fillingProfile) return;
-    clearTimeout(lookupTimer);
-    lookupTimer = null;
     requestVersion++;
     lookupController?.abort();
     button.disabled = false;
     button.textContent = 'Look up Character';
     status.hidden = true;
   }
-  function scheduleLookup() {
-    invalidateLookup();
-    if (composingName || nameInput.value.trim().length < 2 || !realmSelect.value) return;
-    lookupTimer = setTimeout(() => {
-      lookupTimer = null;
-      lookupCharacter(true);
-    }, 700);
+
+  function hideSuggestions() {
+    clearTimeout(searchTimer);
+    searchTimer = null;
+    searchVersion++;
+    searchController?.abort();
+    suggestions = [];
+    activeIndex = -1;
+    list.replaceChildren();
+    list.hidden = true;
+    nameInput.setAttribute('aria-expanded', 'false');
+    nameInput.removeAttribute('aria-activedescendant');
   }
-  nameInput.addEventListener('input', scheduleLookup);
+
+  function setActive(index) {
+    activeIndex = index;
+    Array.from(list.children).forEach((item, i) => {
+      item.setAttribute('aria-selected', String(i === index));
+      item.classList.toggle('active', i === index);
+    });
+    if (index >= 0) {
+      nameInput.setAttribute('aria-activedescendant', list.children[index].id);
+      list.children[index].scrollIntoView?.({ block: 'nearest' });
+    } else nameInput.removeAttribute('aria-activedescendant');
+  }
+
+  function showSuggestions(results) {
+    suggestions = results;
+    activeIndex = -1;
+    const items = document.createDocumentFragment();
+    results.forEach((result, index) => {
+      const item = document.createElement('li');
+      item.id = `charSuggestion${index}`;
+      item.setAttribute('role', 'option');
+      item.setAttribute('aria-selected', 'false');
+      const name = document.createElement('span');
+      name.className = 'suggestion-name'; name.textContent = result.name;
+      const meta = document.createElement('span');
+      meta.className = 'suggestion-meta'; meta.textContent = `${result.realm} · ${result.className}`;
+      item.appendChild(name); item.appendChild(meta);
+      // mousedown keeps focus in the input so its blur handler doesn't close the list first.
+      item.addEventListener('mousedown', event => event.preventDefault());
+      item.addEventListener('click', () => chooseSuggestion(index));
+      items.appendChild(item);
+    });
+    list.replaceChildren(items);
+    list.hidden = !results.length;
+    nameInput.setAttribute('aria-expanded', String(results.length > 0));
+    nameInput.removeAttribute('aria-activedescendant');
+  }
+
+  function chooseSuggestion(index) {
+    const choice = suggestions[index];
+    if (!choice) return;
+    hideSuggestions();
+    nameInput.value = choice.name;
+    ensureOption(realmSelect, choice.realm, choice.realmSlug);
+    realmChosen = true;
+    lookupCharacter(true);
+  }
+
+  async function searchCharacters() {
+    searchTimer = null;
+    const term = nameInput.value.trim().normalize('NFC');
+    if (composingName || term.length < 2) return;
+    const version = ++searchVersion;
+    searchController?.abort();
+    searchController = new AbortController();
+    // The realm only narrows the search once the applicant has chosen one; the preselected home realm doesn't.
+    const body = { term, ...(realmChosen && realmSelect.value ? { realm: realmSlug() } : {}) };
+    try {
+      const response = await fetch(`${workerURL}/character-search`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+        signal: AbortSignal.any([searchController.signal, AbortSignal.timeout(8000)]),
+      });
+      if (!response.ok) throw new Error('Search unavailable');
+      const data = await response.json();
+      if (version !== searchVersion) return;
+      showSuggestions(Array.isArray(data.results) ? data.results.slice(0, 8) : []);
+    } catch {
+      // Suggestions are a convenience; typing a name and using the lookup button still works.
+      if (version === searchVersion) hideSuggestions();
+    }
+  }
+
+  function scheduleSearch() {
+    invalidateLookup();
+    hideSuggestions();
+    if (composingName || nameInput.value.trim().length < 2) return;
+    searchTimer = setTimeout(searchCharacters, 250);
+  }
+  nameInput.addEventListener('input', scheduleSearch);
   nameInput.addEventListener('compositionstart', () => {
     composingName = true;
     invalidateLookup();
+    hideSuggestions();
   });
   nameInput.addEventListener('compositionend', () => {
     composingName = false;
-    scheduleLookup();
+    scheduleSearch();
   });
-  realmSelect.addEventListener('change', scheduleLookup);
+  nameInput.addEventListener('blur', hideSuggestions);
+  nameInput.addEventListener('keydown', event => {
+    if (list.hidden || !suggestions.length) return;
+    if (event.key === 'ArrowDown') { event.preventDefault(); setActive((activeIndex + 1) % suggestions.length); }
+    else if (event.key === 'ArrowUp') { event.preventDefault(); setActive(activeIndex <= 0 ? suggestions.length - 1 : activeIndex - 1); }
+    else if (event.key === 'Enter' && activeIndex >= 0) { event.preventDefault(); chooseSuggestion(activeIndex); }
+    else if (event.key === 'Escape') { event.preventDefault(); hideSuggestions(); }
+  });
+  realmSelect.addEventListener('change', () => {
+    realmChosen = !!realmSelect.value;
+    scheduleSearch();
+  });
   // Do not let an in-flight response overwrite a class/spec/role being edited.
   [classSelect, specSelect, roleSelect].forEach(select => select.addEventListener('change', invalidateLookup));
 
   async function lookupCharacter(automatic = false) {
     if (button.disabled) return;
-    clearTimeout(lookupTimer);
-    lookupTimer = null;
     if (!automatic && (!nameInput.reportValidity() || !realmSelect.reportValidity())) return;
     const name = nameInput.value.trim().normalize('NFC');
     if (automatic && (composingName || name.length < 2 || !realmSelect.value || nameInput.validity?.valid === false)) return;
